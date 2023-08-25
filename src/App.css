@@ -1,0 +1,14 @@
+/* src/App.css */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  margin-bottom: 20px;
+}
