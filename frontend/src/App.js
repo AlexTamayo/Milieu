@@ -1,12 +1,18 @@
+//frontend\src\App.js
 import React from 'react';
 import './App.css';
+import GoogleMapComponent from './components/GoogleMapComponent';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
-const App = () => {
+library.add(faMapPin);
+
+function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* add content here */}
-      </header>
+      {/* Other components */}
+      <GoogleMapComponent />
+      {/* Other components */}
     </div>
   );
 }
