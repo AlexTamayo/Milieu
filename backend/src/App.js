@@ -1,25 +1,15 @@
-import React from 'react';
-import './App.css';
-import './MapContainer.css'; // Import the CSS file
-import GoogleMapComponent from './GoogleMapComponent';
-import LeafletMap from './LeafletMap'; // Import the LeafletMap component
+const express = require('express');
+const cors = require('cors');
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Maps Test</h1>
-      </header>
-      <div className="map-container">
-        <h2>Google Map</h2>
-        <GoogleMapComponent />
-      </div>
-      <div className="map-container">
-        <h2>Leaflet Map</h2>
-        {/* <LeafletMap /> */}
-      </div>
-    </div>
-  );
-}
+const app = express();
 
-export default App;
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Add routes here
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
