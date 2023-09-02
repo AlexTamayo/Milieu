@@ -166,29 +166,6 @@ searchBox.addListener('places_changed', () => {
                         map.controls[window.google.maps.ControlPosition.TOP_CENTER].push(input);
                     }}
                 >
-                    {markers
-                        .filter(marker => visibleTopic === 'all' || marker.metadata.topic === visibleTopic)
-                        .map((marker, idx) => (
-                            <Marker
-                                key={idx}
-                                position={marker.position}
-                                icon={marker.icon}
-                                onMouseOver={() => {
-                                    if (hideTimeout) {
-                                        clearTimeout(hideTimeout);
-                                        setHideTimeout(null);
-                                    }
-                                    setSelectedMarker(marker);
-                                    setInfoWindowVisible(true);
-                                }}
-                                onMouseOut={() => {
-                                    const timeout = setTimeout(() => {
-                                        setInfoWindowVisible(false);
-                                    }, 1300);  // Delay. Adjust as needed.
-                                    setHideTimeout(timeout);
-                                }}
-                            />
-                        ))}
 
                     {infoWindowVisible && selectedMarker && (
                         <InfoWindow
@@ -201,18 +178,36 @@ searchBox.addListener('places_changed', () => {
                         </InfoWindow>
                     )}
                     <MarkerClusterer
-        options={{
-            imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-        }}
-    >
-        {clusterer => markers.map((marker, index) => (
+    options={{
+        imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+    }}
+>
+    {clusterer => markers
+        .filter(marker => visibleTopic === 'all' || marker.metadata.topic === visibleTopic)
+        .map((marker, index) => (
             <Marker
                 key={index}
                 position={marker.position}
+                icon={marker.icon}
                 clusterer={clusterer}
+                onMouseOver={() => {
+                    if (hideTimeout) {
+                        clearTimeout(hideTimeout);
+                        setHideTimeout(null);
+                    }
+                    setSelectedMarker(marker);
+                    setInfoWindowVisible(true);
+                }}
+                onMouseOut={() => {
+                    const timeout = setTimeout(() => {
+                        setInfoWindowVisible(false);
+                    }, 1300);  // Delay. Adjust as needed.
+                    setHideTimeout(timeout);
+                }}
             />
-        ))}
-    </MarkerClusterer>
+        ))
+    }
+</MarkerClusterer>
                 </GoogleMap>
             )}
 
