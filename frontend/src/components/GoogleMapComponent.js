@@ -5,7 +5,7 @@ import mapStyles from './mapStyles';
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
+  height: '800px',
 };
 
 const GoogleMapComponent = () => {
@@ -90,19 +90,19 @@ const GoogleMapComponent = () => {
         </select>
 
         {center && (
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={15}
-            onLoad={onLoad}
-            options={{ styles: mapStyles }}
-            onClick={(event) => {
-              const topic = prompt("Enter topic (business, garage, gathering):");
-              if (topic) {
-                addMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() }, topic);
-              }
-            }}
-          />
+         <GoogleMap
+         mapContainerStyle={containerStyle}
+         center={center}
+         zoom={15}
+         onLoad={onLoad}
+         options={{ styles: mapStyles }}
+         onClick={(event) => {
+           const topic = prompt("Enter topic (business, garage, gathering):");
+           if (topic) {
+             addMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() }, topic);
+           }
+         }}
+       />
         )}
       </div>
     </LoadScript>
