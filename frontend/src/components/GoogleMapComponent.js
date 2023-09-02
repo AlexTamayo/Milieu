@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
+import { MarkerClusterer } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -199,6 +200,19 @@ searchBox.addListener('places_changed', () => {
                             </div>
                         </InfoWindow>
                     )}
+                    <MarkerClusterer
+        options={{
+            imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+        }}
+    >
+        {clusterer => markers.map((marker, index) => (
+            <Marker
+                key={index}
+                position={marker.position}
+                clusterer={clusterer}
+            />
+        ))}
+    </MarkerClusterer>
                 </GoogleMap>
             )}
 
