@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
-import mapStyles from './mapStyles';
+import { lightModeStyles, darkModeStyles } from './mapStyles';
 import { MarkerClusterer } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -31,6 +31,7 @@ const GoogleMapComponent = () => {
   const [hideTimeout, setHideTimeout] = useState(null);
   const [searchBox, setSearchBox] = useState(null);
   const mapRef = useRef(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -70,6 +71,8 @@ const GoogleMapComponent = () => {
     setMarkers(prevMarkers => [...prevMarkers, marker]);
   };
 
+  const mapStyle = isDarkMode ? darkModeStyles : lightModeStyles;
+
   const onPlacesChanged = () => {
     const places = searchBox.getPlaces();
     if (places && places.length === 1) {
@@ -102,6 +105,9 @@ const handleMapClick = event => {
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY} libraries={['places']}>
         <div>
+        <button onClick={() => setIsDarkMode(prev => !prev)}>
+                {isDarkMode ? "Light Mode" : "Dark Mode"}
+            </button>
             <select
                 value={visibleTopic}
                 onChange={(e) => setVisibleTopic(e.target.value)}
@@ -118,7 +124,7 @@ const handleMapClick = event => {
                     mapContainerStyle={containerStyle}
                     center={center}
                     zoom={15}
-                    options={{ styles: mapStyles }}
+                    options={{ styles: mapStyle }}
                     onClick={handleMapClick}
                     onLoad={map => {
                         mapRef.current = map;
