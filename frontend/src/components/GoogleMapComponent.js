@@ -7,6 +7,17 @@ const containerStyle = {
   height: '800px',
 };
 
+/**
+ * `GoogleMapComponent` is a React component that renders an interactive Google Map.
+ *
+ * The map initializes to the user's geolocation (if available) and allows for markers
+ * to be added by clicking on any location. These markers can be filtered based on
+ * predefined topics. Interactions with the map are handled in a declarative manner
+ * using React's state management, ensuring optimal DOM updates.
+ *
+ * @returns {JSX.Element} A Google Map wrapped within UI controls for topic filtering and marker addition.
+ */
+
 const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [selectedMarker, setSelectedMarker] = useState(null);
