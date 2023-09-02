@@ -36,25 +36,39 @@ const GoogleMapComponent = () => {
       disableDefaultUI: true,
     });
   };
-
   const addMarker = (location, topic) => {
     if (mapRef.current) {
-      const markerColor = getMarkerColorByTopic(topic);
+      const iconURL = '/static/logo.png';
       const marker = new window.google.maps.Marker({
         position: location,
         map: mapRef.current,
         icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          fillColor: markerColor,
-          fillOpacity: 1,
-          strokeWeight: 0,
-          scale: 10,
+          url: iconURL,
+          scaledSize: new window.google.maps.Size(40, 40)  // Here, the icon will be scaled to 40x40 pixels on the map
         },
         metadata: { topic }
       });
       markersRef.current.push(marker);
     }
   };
+  // const addMarker = (location, topic) => {
+  //   if (mapRef.current) {
+  //     const markerColor = getMarkerColorByTopic(topic);
+  //     const marker = new window.google.maps.Marker({
+  //       position: location,
+  //       map: mapRef.current,
+  //       icon: {
+  //         path: window.google.maps.SymbolPath.CIRCLE,
+  //         fillColor: markerColor,
+  //         fillOpacity: 1,
+  //         strokeWeight: 0,
+  //         scale: 10,
+  //       },
+  //       metadata: { topic }
+  //     });
+  //     markersRef.current.push(marker);
+  //   }
+  // };
 
   const getMarkerColorByTopic = (topic) => {
     const topicColors = {
