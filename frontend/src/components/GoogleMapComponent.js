@@ -1,6 +1,5 @@
-//frontend\src\components\GoogleMapComponent.js
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, InfoWindow } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 
 const containerStyle = {
@@ -10,6 +9,8 @@ const containerStyle = {
 
 const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [infoWindowVisible, setInfoWindowVisible] = useState(false);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
   const [visibleTopic, setVisibleTopic] = useState('all');
@@ -30,55 +31,6 @@ const GoogleMapComponent = () => {
     }
   }, []);
 
-  const onLoad = map => {
-    mapRef.current = map;
-    map.setOptions({
-      disableDefaultUI: true,
-    });
-  };
-  const addMarker = (location, topic) => {
-    if (mapRef.current) {
-      const iconURL = '/static/logo.png';
-      const marker = new window.google.maps.Marker({
-        position: location,
-        map: mapRef.current,
-        icon: {
-          url: iconURL,
-          scaledSize: new window.google.maps.Size(40, 40)  // Here, the icon will be scaled to 40x40 pixels on the map
-        },
-        metadata: { topic }
-      });
-      markersRef.current.push(marker);
-    }
-  };
-  // const addMarker = (location, topic) => {
-  //   if (mapRef.current) {
-  //     const markerColor = getMarkerColorByTopic(topic);
-  //     const marker = new window.google.maps.Marker({
-  //       position: location,
-  //       map: mapRef.current,
-  //       icon: {
-  //         path: window.google.maps.SymbolPath.CIRCLE,
-  //         fillColor: markerColor,
-  //         fillOpacity: 1,
-  //         strokeWeight: 0,
-  //         scale: 10,
-  //       },
-  //       metadata: { topic }
-  //     });
-  //     markersRef.current.push(marker);
-  //   }
-  // };
-
-  const getMarkerColorByTopic = (topic) => {
-    const topicColors = {
-      business: 'blue',
-      garage: 'green',
-      gathering: 'red',
-    };
-    return topicColors[topic] || 'black';
-  };
-
   useEffect(() => {
     markersRef.current.forEach(marker => {
       if (visibleTopic === 'all' || marker.metadata.topic === visibleTopic) {
@@ -88,6 +40,43 @@ const GoogleMapComponent = () => {
       }
     });
   }, [visibleTopic]);
+
+  const onLoad = map => {
+    mapRef.current = map;
+    map.setOptions({
+      disableDefaultUI: true,
+    });
+  };
+
+  const addMarker = (location, topic) => {
+    if (mapRef.current) {
+      const marker = new window.google.maps.Marker({
+        position: location,
+        map: mapRef.current,
+        icon: {
+          url: './static/logo.png',
+          scaledSize: new window.google.maps.Size(50, 50)
+        },
+        metadata: { topic }
+      });
+
+      marker.addListener('click', () => {
+        setSelectedMarker(marker);
+        setInfoWindowVisible(true);
+      });
+
+      marker.addListener('mouseover', () => {
+        setSelectedMarker(marker);
+        setInfoWindowVisible(true);
+      });
+
+      // marker.addListener('mouseout', () => {
+      //   setInfoWindowVisible(false);
+      // });
+
+      markersRef.current.push(marker);
+    }
+  };
 
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY}>
@@ -104,19 +93,31 @@ const GoogleMapComponent = () => {
         </select>
 
         {center && (
-         <GoogleMap
-         mapContainerStyle={containerStyle}
-         center={center}
-         zoom={15}
-         onLoad={onLoad}
-         options={{ styles: mapStyles }}
-         onClick={(event) => {
-           const topic = prompt("Enter topic (business, garage, gathering):");
-           if (topic) {
-             addMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() }, topic);
-           }
-         }}
-       />
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={15}
+            onLoad={onLoad}
+            options={{ styles: mapStyles }}
+            onClick={(event) => {
+              const topic = prompt("Enter topic (business, garage, gathering):");
+              if (topic) {
+                addMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() }, topic);
+              }
+            }}
+          >
+            {infoWindowVisible && selectedMarker && (
+              <InfoWindow
+                position={selectedMarker.getPosition()}
+                onCloseClick={() => setInfoWindowVisible(false)}
+              >
+                <div>
+                  <h4>{selectedMarker.metadata.topic}</h4>
+                  {/* Add more details about the marker here */}
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
         )}
       </div>
     </LoadScript>
