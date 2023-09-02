@@ -1,0 +1,4 @@
+.infoWindowContent {
+  border: 15px solid transparent;  /* acts as padding */
+  background-color: white;  /* assuming white is your InfoWindow's bg color */
+}

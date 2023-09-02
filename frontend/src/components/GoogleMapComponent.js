@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript, InfoWindow } from '@react-google-maps/api';
+import React, { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, InfoWindow, Marker } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 
 const containerStyle = {
@@ -11,9 +11,12 @@ const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [infoWindowVisible, setInfoWindowVisible] = useState(false);
-  const mapRef = useRef(null);
-  const markersRef = useRef([]);
+  const [markers, setMarkers] = useState([]);
   const [visibleTopic, setVisibleTopic] = useState('all');
+  const [inputValue, setInputValue] = useState('');
+  const [showInputForm, setShowInputForm] = useState(false);
+  const [clickedLocation, setClickedLocation] = useState(null);
+  const [hideTimeout, setHideTimeout] = useState(null);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -23,58 +26,48 @@ const GoogleMapComponent = () => {
           setCenter({ lat: latitude, lng: longitude });
         },
         error => {
-          console.error("Error getting geolocation:", error);
+          // Handle your error appropriately
         }
       );
     } else {
-      console.error("Geolocation is not available in this browser.");
+      // Handle the error that geolocation is not available
     }
   }, []);
 
   useEffect(() => {
-    markersRef.current.forEach(marker => {
-      if (visibleTopic === 'all' || marker.metadata.topic === visibleTopic) {
-        marker.setMap(mapRef.current);
-      } else {
-        marker.setMap(null);
+    return () => {
+      if (hideTimeout) {
+        clearTimeout(hideTimeout);
       }
-    });
-  }, [visibleTopic]);
+    };
+  }, [hideTimeout]);
 
-  const onLoad = map => {
-    mapRef.current = map;
-    map.setOptions({
-      disableDefaultUI: true,
-    });
-  };
 
   const addMarker = (location, topic) => {
-    if (mapRef.current) {
-      const marker = new window.google.maps.Marker({
-        position: location,
-        map: mapRef.current,
-        icon: {
-          url: './static/logo.png',
-          scaledSize: new window.google.maps.Size(50, 50)
-        },
-        metadata: { topic }
-      });
+    const marker = {
+      position: location,
+      icon: {
+        url: './static/logo.png',
+        scaledSize: new window.google.maps.Size(50, 50)
+      },
+      metadata: { topic }
+    };
 
-      marker.addListener('click', () => {
-        setSelectedMarker(marker);
-        setInfoWindowVisible(true);
-      });
+    setMarkers(prevMarkers => [...prevMarkers, marker]);
+  };
 
-      marker.addListener('mouseover', () => {
-        setSelectedMarker(marker);
-        setInfoWindowVisible(true);
-      });
+  const handleMapClick = event => {
+    const pixelX = event.pixel.x;
+    const pixelY = event.pixel.y;
+    setClickedLocation({ lat: event.latLng.lat(), lng: event.latLng.lng(), pixelX, pixelY });
+    setShowInputForm(true);
+};
 
-      // marker.addListener('mouseout', () => {
-      //   setInfoWindowVisible(false);
-      // });
-
-      markersRef.current.push(marker);
+  const handleSubmit = () => {
+    if (inputValue) {
+      addMarker(clickedLocation, inputValue);
+      setInputValue('');
+      setShowInputForm(false);
     }
   };
 
@@ -97,27 +90,73 @@ const GoogleMapComponent = () => {
             mapContainerStyle={containerStyle}
             center={center}
             zoom={15}
-            onLoad={onLoad}
             options={{ styles: mapStyles }}
-            onClick={(event) => {
-              const topic = prompt("Enter topic (business, garage, gathering):");
-              if (topic) {
-                addMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() }, topic);
-              }
-            }}
+            onClick={handleMapClick}
           >
+            {markers
+              .filter(marker => visibleTopic === 'all' || marker.metadata.topic === visibleTopic)
+              .map((marker, idx) => (
+                <Marker
+                key={idx}
+                position={marker.position}
+                icon={marker.icon}
+                onMouseOver={() => {
+                  if (hideTimeout) {
+                    clearTimeout(hideTimeout);
+                    setHideTimeout(null);
+                  }
+                  setSelectedMarker(marker);
+                  setInfoWindowVisible(true);
+                }}
+                onMouseOut={() => {
+                  const timeout = setTimeout(() => {
+                    setInfoWindowVisible(false);
+                  }, 1300);  // Delay. Adjust as needed.
+                  setHideTimeout(timeout);
+                }}
+              />
+            ))}
+
             {infoWindowVisible && selectedMarker && (
               <InfoWindow
-                position={selectedMarker.getPosition()}
+                position={selectedMarker.position}
                 onCloseClick={() => setInfoWindowVisible(false)}
               >
                 <div>
                   <h4>{selectedMarker.metadata.topic}</h4>
-                  {/* Add more details about the marker here */}
                 </div>
               </InfoWindow>
             )}
           </GoogleMap>
+        )}
+
+{showInputForm && clickedLocation && (
+          <div
+            style={{
+              position: 'absolute',
+              top: `${clickedLocation.pixelY}px`,
+              left: `${clickedLocation.pixelX}px`,
+              background: 'white',
+              padding: '10px'
+            }}
+          >
+            <label>
+              Enter topic (business, garage, gathering):
+              <input
+                type="text"
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                list="topics"
+              />
+            </label>
+            <datalist id="topics">
+              <option value="business" />
+              <option value="garage" />
+              <option value="gathering" />
+            </datalist>
+            <button onClick={handleSubmit}>Add Marker</button>
+            <button onClick={() => setShowInputForm(false)}>Cancel</button>
+          </div>
         )}
       </div>
     </LoadScript>
