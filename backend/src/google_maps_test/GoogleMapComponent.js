@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import mapStyles from './mapStyles';
+import MapStyles from './MapStyles';
 
 const containerStyle = {
   width: '50vw',

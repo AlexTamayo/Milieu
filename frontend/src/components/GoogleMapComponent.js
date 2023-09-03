@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
-import { lightModeStyles, darkModeStyles } from './mapStyles';
+import { lightModeStyles, darkModeStyles } from './MapStyles';
 import { MarkerClusterer } from '@react-google-maps/api';
 
 const containerStyle = {
