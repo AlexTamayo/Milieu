@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import { lightModeStyles, darkModeStyles } from './MapStyles';
 import { MarkerClusterer } from '@react-google-maps/api';
+import { FaLinkedin } from 'react-icons/fa';
 
 const containerStyle = {
   width: '100%',
@@ -19,6 +20,7 @@ const containerStyle = {
  *
  * @returns {JSX.Element} The main GoogleMapComponent and associated components.
  */
+
 const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -58,14 +60,15 @@ const GoogleMapComponent = () => {
   }, [hideTimeout]);
 
 
-  const addMarker = (location, topic) => {
+  const addMarker = (location, topic, link = '') => {
     const marker = {
+      id: Date.now(),  // temporary unique ID
       position: location,
       icon: {
         url: './static/logo.png',
         scaledSize: new window.google.maps.Size(50, 50)
       },
-      metadata: { topic }
+      metadata: { topic, link }  // link can be a social media page or website
     };
 
     setMarkers(prevMarkers => [...prevMarkers, marker]);
@@ -101,6 +104,15 @@ const handleMapClick = event => {
       setShowInputForm(false);
     }
   };
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    alert("Link copied to clipboard!");  // Notify the user
+  };
 
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY} libraries={['places']}>
@@ -124,7 +136,11 @@ const handleMapClick = event => {
                     mapContainerStyle={containerStyle}
                     center={center}
                     zoom={15}
-                    options={{ styles: mapStyle }}
+                    options={{
+                      styles: mapStyle,
+                      mapTypeControl: false, // Disables satellite view
+                      streetViewControl: false // Disables Street View
+                    }}
                     onClick={handleMapClick}
                     onLoad={map => {
                         mapRef.current = map;
@@ -173,16 +189,21 @@ searchBox.addListener('places_changed', () => {
                     }}
                 >
 
-                    {infoWindowVisible && selectedMarker && (
-                        <InfoWindow
-                            position={selectedMarker.position}
-                            onCloseClick={() => setInfoWindowVisible(false)}
-                        >
-                            <div>
-                                <h4>{selectedMarker.metadata.topic}</h4>
-                            </div>
-                        </InfoWindow>
-                    )}
+{infoWindowVisible && selectedMarker && (
+  <InfoWindow
+    position={selectedMarker.position}
+    onCloseClick={() => setInfoWindowVisible(false)}
+  >
+    <div>
+      <h4>{selectedMarker.metadata.topic}</h4>
+      <p><a href={selectedMarker.metadata.link || "https://www.linkedin.com/in/fmoscovo/"} target="_blank" rel="noopener noreferrer">
+  <FaLinkedin size={24} />
+
+</a></p>
+      <button onClick={() => copyToClipboard(`https://yourwebsite.com/map?marker=${selectedMarker.id}`)}>Share</button>
+    </div>
+  </InfoWindow>
+)}
                     <MarkerClusterer
     options={{
         imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
