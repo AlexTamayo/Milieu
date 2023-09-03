@@ -1,7 +1,7 @@
 //frontend/src/components/GoogleMapComponent.test.js
 import React from 'react';
 import { render } from '@testing-library/react';
-import GoogleMapComponent from './GoogleMapComponent';
+import GoogleMapComponent from '../GoogleMapComponent';
 
 // Mock the Google Maps API
 jest.mock('@react-google-maps/api');
