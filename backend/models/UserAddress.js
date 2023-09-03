@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
   const UserAddress = sequelize.define('UserAddress', {
     street: DataTypes.STRING,
@@ -19,3 +18,4 @@ module.exports = (sequelize, DataTypes) => {
 
   return UserAddress;
 };
+

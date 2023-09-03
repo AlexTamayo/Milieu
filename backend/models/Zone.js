@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
   const Zone = sequelize.define('Zone', {
     name: DataTypes.STRING,
@@ -6,10 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     latitude: DataTypes.DOUBLE
   });
 
-  // Define associations
-  Zone.hasMany(models.PostBoard, {
-    foreignKey: 'zone_id',
-    as: 'postBoards', // Optional alias for the association
-  });
+  /////////////////// Define associations or any other model-specific logic here
+  Zone.associate = (models) => {
+    Zone.hasMany(models.PostBoard, {
+      foreignKey: 'zone_id',
+      as: 'postBoards',
+    });
+  };
+
   return Zone;
 };
