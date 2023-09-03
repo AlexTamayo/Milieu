@@ -1,3 +1,4 @@
+// frontend\src\components\MapStyles.js
 const lightModeStyles = [
   {
     "featureType": "poi",
