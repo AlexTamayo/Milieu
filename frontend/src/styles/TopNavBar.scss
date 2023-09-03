@@ -1,0 +1,14 @@
+.top-nav-bar {
+  display: flex;
+  color: white;
+  background-color: #808080;
+  justify-content: space-around;
+  align-items: center;
+  height: 5em;
+
+  &:hover {
+    background-color: #000;
+  }
+  
+}
+
