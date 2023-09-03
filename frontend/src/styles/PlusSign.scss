@@ -1,0 +1,10 @@
+@import '_variables.scss';
+
+.plus-sign {
+
+  path {
+    fill: $grey-1;
+    transform: translate(150px, 150px) scale(0.6);
+  }
+
+}
