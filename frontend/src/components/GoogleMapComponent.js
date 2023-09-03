@@ -1,27 +1,77 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import ReactDOM from 'react-dom';
+import {
+  GoogleMap,
+  LoadScript,
+  InfoWindow,
+  Marker,
+  StandaloneSearchBox,
+  MarkerClusterer
+} from '@react-google-maps/api';
+import { FaLinkedin, FaBusinessTime, FaCar, FaUsers } from 'react-icons/fa';
 import { lightModeStyles, darkModeStyles } from './MapStyles';
-import { MarkerClusterer } from '@react-google-maps/api';
-import { FaLinkedin } from 'react-icons/fa';
 
 const containerStyle = {
   width: '100%',
   height: '800px',
 };
 
+
 /**
- * Renders a Google Map component with the following features:
- * 1. Displays markers filtered by topics.
- * 2. Adds new markers by clicking on the map.
- * 3. Shows an info window on marker hover.
- * 4. Provides a search box to search and center the map on specific addresses or points of interest.
- *
- * Interacts with the DOM primarily through React's virtual DOM, with effects causing direct DOM mutations.
- *
- * @returns {JSX.Element} The main GoogleMapComponent and associated components.
+ * The Legend component displays clickable categories that can affect which markers are shown.
  */
+function Legend({ onCategoryClick, activeCategory }) {
+  const activeStyle = {
+    backgroundColor: '#e6f7ff',
+    border: '2px solid blue',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    margin: '5px',
+    padding: '10px',
+    borderRadius: '5px',
+    display: 'flex',
+    alignItems: 'center'
+  };
+
+  const defaultStyle = {
+    cursor: 'pointer',
+    margin: '5px',
+    padding: '10px',
+    borderRadius: '5px',
+    display: 'flex',
+    alignItems: 'center'
+  };
+
+  const renderCategory = (name, label, icon) => {
+    const style = activeCategory === name ? activeStyle : defaultStyle;
+    return (
+      <div style={{ ...style, ...categoryStyles[name] }} onClick={() => onCategoryClick(name)}>
+        {React.createElement(icon, { size: 24, style: { marginRight: '5px' } })}
+        {label}
+      </div>
+    );
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', background: 'white', padding: '10px', borderRadius: '5px' }}>
+      {renderCategory('all', 'All', FaUsers)}
+      {renderCategory('business', 'Business', FaBusinessTime)}
+      {renderCategory('garage', 'Garage', FaCar)}
+      {renderCategory('gathering', 'Gathering', FaUsers)}
+    </div>
+  );
+}
+
+const categoryStyles = {
+  'business': { backgroundColor: 'orange' },
+  'garage': { backgroundColor: 'blue' },
+  'gathering': { backgroundColor: 'red' },
+};
+
+
 
 const GoogleMapComponent = () => {
+  // State declarations
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [infoWindowVisible, setInfoWindowVisible] = useState(false);
@@ -34,7 +84,10 @@ const GoogleMapComponent = () => {
   const [searchBox, setSearchBox] = useState(null);
   const mapRef = useRef(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [legendAttached, setLegendAttached] = useState(false);
 
+
+ // UseEffects
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -58,6 +111,19 @@ const GoogleMapComponent = () => {
       }
     };
   }, [hideTimeout]);
+
+  useEffect(() => {
+    if (mapRef.current && !legendAttached) {
+        const legend = document.createElement('div');
+        ReactDOM.render(<Legend onCategoryClick={(category) => {
+          setVisibleTopic(category);
+          console.log("Active Category:", category);  // <-- Add this
+      }} activeCategory={visibleTopic} />, legend);
+        mapRef.current.controls[window.google.maps.ControlPosition.TOP_LEFT].push(legend);
+        setLegendAttached(true);
+    }
+}, [mapRef.current, visibleTopic]);
+
 
 
   const addMarker = (location, topic, link = '') => {
@@ -114,22 +180,14 @@ const handleMapClick = event => {
     alert("Link copied to clipboard!");  // Notify the user
   };
 
+
+
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY} libraries={['places']}>
         <div>
         <button onClick={() => setIsDarkMode(prev => !prev)}>
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
-            <select
-                value={visibleTopic}
-                onChange={(e) => setVisibleTopic(e.target.value)}
-                style={{ marginBottom: '10px' }}
-            >
-                <option value="all">Show All</option>
-                <option value="business">Business</option>
-                <option value="garage">Garage</option>
-                <option value="gathering">Gathering</option>
-            </select>
 
             {center && (
                 <GoogleMap
