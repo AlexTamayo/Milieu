@@ -1,5 +1,5 @@
 
-const { User } = require('./models');
+const { User } = require('../models');
 // const config = require('../config/config.js').development;
 
 async function createFriendship(userId1, userId2) {
