@@ -23,6 +23,7 @@ package-lock.json
 .env.development
 /backend/config/.env.development
 /backend/config/.env
+/backend/.env
 /frontend/.env.development
 /frontend/.env
 
