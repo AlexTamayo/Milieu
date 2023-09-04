@@ -2,31 +2,86 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users', [{
-      firstName: 'John',
-      lastName: 'Doe',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }, {
-      firstName: 'Jane',
-      lastName: 'Smith',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }, {
-      firstName: 'Billy',
-      lastName: 'Johnson',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
+    await queryInterface.bulkInsert('Users', [
+      {
+        username: 'user1',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'user1@example.com',
+        passwordHash: 'hashed_password_1',
+        dateOfBirth: '1990-01-15',
+        gender: 'Male',
+        phoneNumber: '123-456-7890',
+        status: 'active',
+        role: 'user',
+        lastLogin: '2023-08-15 10:30:00',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'user2',
+        firstName: 'Jane',
+        lastName: 'Smith',
+        email: 'user2@example.com',
+        passwordHash: 'hashed_password_2',
+        dateOfBirth: '1995-05-20',
+        gender: 'Female',
+        phoneNumber: '987-654-3210',
+        status: 'inactive',
+        role: 'user',
+        lastLogin: '2023-08-10 15:45:00',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'user3',
+        firstName: 'Alice',
+        lastName: 'Johnson',
+        email: 'user3@example.com',
+        passwordHash: 'hashed_password_3',
+        dateOfBirth: '1988-12-05',
+        gender: 'Female',
+        phoneNumber: '555-123-7890',
+        status: 'active',
+        role: 'admin',
+        lastLogin: '2023-08-20 09:15:00',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'user4',
+        firstName: 'Bob',
+        lastName: 'Wilson',
+        email: 'user4@example.com',
+        passwordHash: 'hashed_password_4',
+        dateOfBirth: '1980-03-25',
+        gender: 'Male',
+        phoneNumber: '111-222-3333',
+        status: 'active',
+        role: 'user',
+        lastLogin: '2023-08-05 12:00:00',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'user5',
+        firstName: 'Eva',
+        lastName: 'Brown',
+        email: 'user5@example.com',
+        passwordHash: 'hashed_password_5',
+        dateOfBirth: '1998-07-10',
+        gender: 'Female',
+        phoneNumber: '777-888-9999',
+        status: 'active',
+        role: 'user',
+        lastLogin: '2023-08-25 18:20:00',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
   },
-  
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+  async down(queryInterface, Sequelize) {
+    // Add commands to revert seed data here if needed.
+  },
 };
