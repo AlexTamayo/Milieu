@@ -29,6 +29,9 @@ module.exports = {
           isEmail: true
         }
       },
+      profileImage:{
+        type: Sequelize.STRING
+      },
       passwordHash: {
         type: Sequelize.STRING
       },

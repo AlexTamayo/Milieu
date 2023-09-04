@@ -21,12 +21,15 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true, // Ensure that email follows a valid email format
       },
     },
+    profileImage: {
+      type: DataTypes.STRING
+    },
     passwordHash: {
       type: DataTypes.STRING,
     },
     dateOfBirth: {
       type: DataTypes.DATE
-      },
+    },
     gender: {
       type: DataTypes.STRING,
     },
@@ -35,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
     status: {
-      type: DataTypes.ENUM('active', 'inactive', 'suspended'), 
+      type: DataTypes.ENUM('active', 'inactive', 'suspended'),
       defaultValue: 'active',
     },
     role: {
@@ -46,35 +49,47 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-
-  User.associate = function(models) {
-    // Define association here
+  User.associate = function (models) {
+    // Define associations here
 
     User.belongsToMany(models.User, {
       through: 'Friendships',
       as: 'friends',
-      foreignKey: 'user_1_id',
-      otherKey: 'user_2_id' });
-
-    User.hasMany(models.Message, {
-      foreignKey: 'sender_id',
-      as: 'sent_messages',
+      foreignKey: 'user1Id',
+      otherKey: 'user2Id'
     });
 
     User.hasMany(models.Message, {
-      foreignKey: 'receiver_id',
-      as: 'received_messages',
+      foreignKey: 'senderId',
+      as: 'sentMessages',
+    });
+
+    User.hasMany(models.Message, {
+      foreignKey: 'receiverId',
+      as: 'receivedMessages',
     });
 
     User.hasMany(models.Post, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       as: 'posts',
     });
 
     User.hasMany(models.UserAddress, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       as: 'addresses',
     });
+
+    // Add associations to Events and Businesses
+    User.hasMany(models.Event, {
+      foreignKey: 'ownerId',
+      as: 'events',
+    });
+
+    User.hasMany(models.Business, {
+      foreignKey: 'ownerId',
+      as: 'businesses',
+    });
   };
+
   return User;
 };

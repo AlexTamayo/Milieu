@@ -2,29 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('MessageChains', {
+    await queryInterface.createTable('BusinessCategories', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
       },
-      subject: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('MessageChains');
+    await queryInterface.dropTable('BusinessCategories');
   },
 };
