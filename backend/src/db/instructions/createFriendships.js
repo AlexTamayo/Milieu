@@ -23,7 +23,7 @@ async function createFriendship(userId1, userId2) {
   }
 }
 
-const userA = 1;
+const userA = 4;
 const userB = 2;
 
 createFriendship(userA, userB);
