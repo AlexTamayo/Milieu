@@ -2,33 +2,47 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('PostBoards', {
+    await queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
-      description: {
+      content: {
         type: Sequelize.TEXT,
-        allowNull: true,
+      },
+      post_type: {
+        type: Sequelize.STRING,
+      },
+      image_url: {
+        type: Sequelize.STRING,
+      },
+      contact_info: {
+        type: Sequelize.STRING,
       },
       created_at: {
-        allowNull: false,
         type: Sequelize.DATE,
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE,
       },
-      zone_id: {
+      postboard_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Zones',
+          model: 'PostBoards',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -38,7 +52,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('PostBoards');
+    await queryInterface.dropTable('Posts');
   },
 };
-
