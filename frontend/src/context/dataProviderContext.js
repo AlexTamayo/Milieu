@@ -12,20 +12,24 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     // Fetch data when the component mounts
     getAllEvents()
-      .then((data) => setEventData(data))
+      .then((data) => {
+        // console.log(data.data);
+        // console.log(data);
+        setEventData(data.data);
+        })
       .catch((error) => {
         console.error('Error fetching event data:', error);
       });
 
     getAllBusinesses()
-      .then((data) => setBusinessData(data))
+      .then((data) => setBusinessData(data.data))
       .catch((error) => {
         console.error('Error fetching business data:', error);
       });
 
       getAllUsers()
       .then((data) => {
-        console.log('Fetched userData:', data);
+        console.log('Fetched userData:', data.data);
         setUserData(data);
       })
       .catch((error) => {

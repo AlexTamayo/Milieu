@@ -29,8 +29,8 @@ function App() {
         < UserModal userDivRef={userDivRef} />
         < SearchBar />
         < TopNavBar userDivRef={userDivRef} />
-        < GoogleMapComponent2 />
-        < TopNavBar />
+        {/* < GoogleMapComponent2 /> */}
+        {/* < TopNavBar /> */}
         < GoogleMapComponent />
         <TestComponent />
           {/* Other components */}
