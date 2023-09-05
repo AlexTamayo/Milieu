@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../../models');
 
 async function updateUser(id, updates) {
   try {
@@ -25,5 +25,7 @@ const updates = {
   lastName: 'Neasdme',
   // Add other fields you want to update here
 };
+module.exports = updateUser;
+
 
 updateUser(userIdToUpdate, updates);

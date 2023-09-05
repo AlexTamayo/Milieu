@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../../models');
 
 async function addUser(userData) {
   try {
@@ -27,4 +27,5 @@ const newUserDetails = {
   // Add other user data fields here
 };
 
+module.exports = addUser;
 addUser(newUserDetails);

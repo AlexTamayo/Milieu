@@ -8,11 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     region: DataTypes.STRING,
     postalCode: DataTypes.STRING,
     country: DataTypes.STRING,
-    eventId: DataTypes.INTEGER, // Foreign key for Event
   });
 
   EventLocation.associate = (models) => {
-    EventLocation.hasOne(models.Event, {
+    EventLocation.belongsTo(models.Event, {
       as: 'event',
     });
   };

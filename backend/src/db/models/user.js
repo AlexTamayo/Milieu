@@ -62,32 +62,38 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Message, {
       foreignKey: 'senderId',
       as: 'sentMessages',
+      onDelete: 'CASCADE'
     });
 
     User.hasMany(models.Message, {
       foreignKey: 'receiverId',
       as: 'receivedMessages',
+      onDelete: 'CASCADE'
     });
 
     User.hasMany(models.Post, {
       foreignKey: 'userId',
       as: 'posts',
+      onDelete: 'CASCADE'
     });
 
     User.hasMany(models.UserAddress, {
       foreignKey: 'userId',
       as: 'addresses',
+      onDelete: 'CASCADE'
     });
 
     // Add associations to Events and Businesses
     User.hasMany(models.Event, {
       foreignKey: 'ownerId',
       as: 'events',
+      onDelete: 'CASCADE'
     });
 
     User.hasMany(models.Business, {
       foreignKey: 'ownerId',
       as: 'businesses',
+      onDelete: 'CASCADE'
     });
   };
 

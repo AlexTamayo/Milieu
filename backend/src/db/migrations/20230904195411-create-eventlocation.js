@@ -1,58 +1,36 @@
 'use strict';
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('EventLocations', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('EventLocations', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      longitude: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      latitude: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      streetAddress: {
-        type: Sequelize.STRING,
-      },
-      city: {
-        type: Sequelize.STRING,
-      },
-      region: {
-        type: Sequelize.STRING,
-      },
-      postalCode: {
-        type: Sequelize.STRING,
-      },
-      country: {
-        type: Sequelize.STRING,
-      },
+      longitude: Sequelize.DOUBLE,
+      latitude: Sequelize.DOUBLE,
+      streetAddress: Sequelize.STRING,
+      city: Sequelize.STRING,
+      region: Sequelize.STRING,
+      postalCode: Sequelize.STRING,
+      country: Sequelize.STRING,
+      // Add foreign key for event
       eventId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'Events', // This should match the actual table name for the Event model
+          model: 'Events',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE,
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('EventLocations');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('EventLocations');
   },
 };
-

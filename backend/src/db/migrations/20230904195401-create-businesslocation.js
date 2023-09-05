@@ -1,11 +1,13 @@
 'use strict';
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('BusinessLocations', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('BusinessLocations', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       longitude: {
         type: Sequelize.DOUBLE,
@@ -17,41 +19,47 @@ module.exports = {
       },
       streetAddress: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       city: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       region: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       postalCode: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       country: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      eventId: {
+      // Add a foreign key for the association with Business
+      businessId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Businesses', // This should match the actual table name for the Event model
+          model: 'Businesses', // Make sure this matches the actual table name for Business
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('BusinessLocations');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('BusinessLocations');
   },
 };

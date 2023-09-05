@@ -1,11 +1,13 @@
 'use strict';
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Events', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Events', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       title: {
         type: Sequelize.STRING,
@@ -27,46 +29,31 @@ module.exports = {
       },
       ownerId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'Users', // Replace 'Users' with the actual table name of the User model
+          model: 'Users',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       eventCategoryId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'EventCategories', // Replace 'EventCategories' with the actual table name of the EventCategory model
+          model: 'EventCategories',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      locationId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'EventLocations', // Replace 'EventLocations' with the actual table name of the EventLocation model
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Events');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Events');
   },
 };

@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../../models');
 
 async function deleteUserById(userId) {
   try {
@@ -19,6 +19,7 @@ async function deleteUserById(userId) {
   }
 }
 
+module.exports = deleteUserById;
 // Example usage:
-const userIdToDelete = 1; // Replace with the user ID you want to delete
+const userIdToDelete = 6; // Replace with the user ID you want to delete
 deleteUserById(userIdToDelete);

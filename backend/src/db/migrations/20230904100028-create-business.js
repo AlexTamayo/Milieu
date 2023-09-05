@@ -9,10 +9,10 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false, 
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT, 
       },
       status: {
         type: Sequelize.STRING,
@@ -50,7 +50,6 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,

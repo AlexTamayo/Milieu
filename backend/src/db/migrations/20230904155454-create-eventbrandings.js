@@ -1,50 +1,45 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('EventBrandings', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('EventBrandings', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       logoUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       bannerUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       pinUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       eventId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Events',
+          model: 'Events', // Make sure this matches the actual table name for Event
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
-
-    // Add any additional constraints or indexes here if needed
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('EventBrandings');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('EventBrandings');
   },
 };
-

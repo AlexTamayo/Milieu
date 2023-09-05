@@ -26,15 +26,19 @@ module.exports = (sequelize, DataTypes) => {
 
     Event.belongsTo(models.EventCategory, {
       foreignKey: 'eventCategoryId',
-      as: 'category'
+      as: 'eventCategory',
     });
 
     Event.hasOne(models.EventBranding, {
-      as: 'branding'
+      foreignKey: 'eventId',
+      as: 'eventBranding',
+      onDelete: 'CASCADE'
     });
 
     Event.hasOne(models.EventLocation, {
-      as: 'eventLocation'
+      foreignKey: 'eventId',
+      as: 'eventLocation',
+      onDelete: 'CASCADE'
     });
   };
 

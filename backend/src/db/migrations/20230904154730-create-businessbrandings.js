@@ -1,48 +1,45 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('BusinessBrandings', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('BusinessBrandings', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       logoUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       bannerUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       pinUrl: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       businessId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Businesses',
+          model: 'Businesses', // Make sure this matches the actual table name for Business
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('BusinessBrandings');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('BusinessBrandings');
   },
 };
-

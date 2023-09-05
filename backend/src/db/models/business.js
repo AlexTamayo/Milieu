@@ -30,22 +30,28 @@ module.exports = (sequelize, DataTypes) => {
 
     Business.belongsTo(models.BusinessCategory, {
       foreignKey: 'businessCategoryId',
-      as: 'category',
+      as: 'businessCategory',
     }); 
 
     Business.hasMany(models.SocialMedia, {
       foreignKey: 'businessId',
       as: 'socialMedia',
+      onDelete: 'CASCADE'
     });
 
     Business.hasOne(models.BusinessBranding, {
-      as: 'branding',
+      foreignKey: 'businessId',
+      as: 'businessBranding',
+      onDelete: 'CASCADE'
     });
 
     Business.hasOne(models.BusinessLocation, {
+      foreignKey: 'businessId',
       as: 'businessLocation',
+      onDelete: 'CASCADE'
     }); 
   };
 
   return Business;
 };
+

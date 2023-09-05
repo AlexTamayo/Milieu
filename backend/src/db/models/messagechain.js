@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     MessageChain.hasMany(models.Message, {
       foreignKey: 'chainId',
       as: 'messageChain',
+      onDelete: 'CASCADE'
     });
   };
 
