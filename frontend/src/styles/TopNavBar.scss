@@ -8,7 +8,7 @@
   align-items: center;
   overflow: hidden;
   border-bottom: 1px solid $grey-1;
-  height: 5em;
+  height: 3.5em;
   
 }
 
@@ -19,7 +19,7 @@
   align-items: center;
 
   img {
-    height: 55px;
+    height: 40px;
     max-width: 100%;
   }
 }
@@ -44,14 +44,14 @@
 
   img {
     transform: scale(1.2);
-    height: 50px;
+    height: 40px;
     max-width: 100%;
   }
 
 }
 
 .right__add {
-  $dimension: 50px;
+  $dimension: 40px;
 
   display: flex;
   justify-content: center;
@@ -61,8 +61,13 @@
   height: $dimension;
   width: $dimension ;
   // margin-right: 2vw;
-  margin-right: 40px;
+  margin-right: 20px;
   overflow: hidden;
+
+  path {
+    fill: $grey-1;
+  }
+
 
   &:hover {
     background-color: #1d8aff;

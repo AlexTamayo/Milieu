@@ -1,0 +1,39 @@
+@import '_variables.scss';
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 45%;
+  top: 150px;
+  z-index: 9999;
+}
+
+.search-box__input {
+  display: flex;
+  // flex-direction: row;
+  // position: relative;
+  align-items: center;
+  background-color: black;
+  border: 1px solid magenta;
+  border-right: none;
+  border-radius: 40px 0 0 40px;
+  box-shadow: inset 0 1px 2px black;
+  caret-color: white;
+  color: black;
+  // padding: 0px 4px 0px 16px;
+  // margin-left: 32px;
+  // flex: 1;
+  flex-basis: 1e-9px;
+
+}
+
+.search-box__button {
+  border: 1px solid magenta;
+  background-color: black;
+  border-radius: 0 40px 40px 0;
+  cursor: pointer;
+  height: 40px;
+  width: 64px;
+  margin: 0;
+}
