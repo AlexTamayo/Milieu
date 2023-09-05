@@ -1,0 +1,67 @@
+const db = require('../models'); // Import your Sequelize instance
+
+async function getBusinessesAndEventsWithDetails() {
+  try {
+    // Fetch businesses with associated data
+    const businesses = await db.Business.findAll({
+      include: [
+        {
+          model: db.BusinessBranding,
+          as: 'businessBranding',
+        },
+        {
+          model: db.BusinessCategory,
+          as: 'businessCategory',
+        },
+        {
+          model: db.SocialMedia,
+          as: 'socialMedia',
+        },
+        {
+          model: db.BusinessLocation,
+          as: 'businessLocation',
+        },
+      ],
+    });
+
+    // Fetch events with associated data
+    const events = await db.Event.findAll({
+      include: [
+        {
+          model: db.EventBranding,
+          as: 'eventBranding',
+        },
+        {
+          model: db.EventCategory,
+          as: 'eventCategory',
+        },
+        {
+          model: db.EventLocation,
+          as: 'eventLocation',
+        },
+      ],
+    });
+
+    return {
+      businesses,
+      events,
+    };
+  } catch (error) {
+    console.error('Error:', error);
+    throw error; // Optionally re-throw the error for handling elsewhere
+  }
+}
+
+module.exports = getBusinessesAndEventsWithDetails;
+
+// Example usage:
+getBusinessesAndEventsWithDetails()
+  .then(({ businesses, events }) => {
+    // Handle the businesses and events arrays here
+    console.log('Businesses:', businesses);
+    console.log('Events:', events);
+  })
+  .catch((error) => {
+    // Handle errors here
+    console.error('Error:', error);
+  });
