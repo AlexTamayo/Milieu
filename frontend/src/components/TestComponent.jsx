@@ -4,9 +4,6 @@ import { DataContext } from '../context/dataProviderContext'; // Ensure the corr
 function TestComponent() {
   const { eventData, businessData, userData } = useContext(DataContext);
 
-  // Ensure userData.data is an array before mapping
-  // Now users is an array of user objects
-
   const eventArray = eventData.map((event) => (
     <li key={event.id}>{event.title}</li>
   ));
@@ -15,7 +12,7 @@ function TestComponent() {
   ));
   const userArray = userData.map((user) => (
     <li key={user.id}>{user.username}</li>
-  ))
+  ));
 
   return (
     <div>
