@@ -1,24 +1,23 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
-    created_at: DataTypes.DATE,
-    received_at: DataTypes.DATE,
-    read_at: DataTypes.DATE,
+    receivedAt: DataTypes.DATE,
+    readAt: DataTypes.DATE,
     message: DataTypes.TEXT
   });
 
   // Define associations
   Message.associate = (models) => {
     Message.belongsTo(models.MessageChain, {
-      foreignKey: 'chain_id', 
-      as: 'message_chain', 
+      foreignKey: 'chainId', 
+      as: 'messageChain', 
     });
     Message.belongsTo(models.User, {
-      foreignKey: 'sender_id', 
+      foreignKey: 'senderId', 
       as: 'sender'
     });
     Message.belongsTo(models.User, {
-      foreignKey: 'receiver_id', 
+      foreignKey: 'receiverId', 
       as: 'receiver'
     });
   };

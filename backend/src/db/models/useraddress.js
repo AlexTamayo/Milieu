@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     city: {
       type: DataTypes.STRING,
     },
-    postalcode: {
+    postalCode: {
       type: DataTypes.STRING,
     },
     region: {
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   UserAddress.associate = (models) => {
     // UserAddress belongs to a User (many-to-one relationship)
     UserAddress.belongsTo(models.User, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       onDelete: 'CASCADE', // Optional: Define the deletion behavior
     });
   };

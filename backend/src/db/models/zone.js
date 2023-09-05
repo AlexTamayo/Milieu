@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   /////////////////// Define associations or any other model-specific logic here
   Zone.associate = (models) => {
     Zone.hasMany(models.PostBoard, {
-      foreignKey: 'zone_id',
+      foreignKey: 'zoneId',
       as: 'postBoards',
     });
   };

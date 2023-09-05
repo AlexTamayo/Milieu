@@ -7,45 +7,45 @@ module.exports = {
       {
         street: "123 Main Street",
         city: "New York",
-        postalcode: "10001",
+        postalCode: "10001",
         region: "NY",
-        user_id: 1, // Replace with the actual user ID
+        userId: 1, // Replace with the actual user ID
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         street: "456 Elm Avenue",
         city: "Los Angeles",
-        postalcode: "90001",
+        postalCode: "90001",
         region: "CA",
-        user_id: 2, // Replace with the actual user ID
+        userId: 2, // Replace with the actual user ID
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         street: "789 Oak Road",
         city: "Chicago",
-        postalcode: "60601",
+        postalCode: "60601",
         region: "IL",
-        user_id: 3, // Replace with the actual user ID
+        userId: 3, // Replace with the actual user ID
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         street: "101 Pine Lane",
         city: "San Francisco",
-        postalcode: "94101",
+        postalCode: "94101",
         region: "CA",
-        user_id: 4, // Replace with the actual user ID
+        userId: 4, // Replace with the actual user ID
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         street: "202 Maple Drive",
         city: "Miami",
-        postalcode: "33101",
+        postalCode: "33101",
         region: "FL",
-        user_id: 5, // Replace with the actual user ID
+        userId: 5, // Replace with the actual user ID
         createdAt: new Date(),
         updatedAt: new Date(),
       },
