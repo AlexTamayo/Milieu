@@ -1,0 +1,44 @@
+@import '_variables.scss';
+
+
+.search-filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: space-evenly;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+
+.filter {
+  display: flex;
+  line-height: 1.45;
+  justify-content: center;
+
+  border-radius: 40px;
+
+  color: white;
+
+
+  height: 25px;
+  width: 115px;
+
+  background-color: gray;
+
+  &--businesses {
+    background-color: #ED1F24;
+  }
+
+  &--events {
+    background-color: #3F7CBF;
+  }
+
+  &--test {
+    background-color: #5ABA47;
+  }
+
+  &--test2 {
+    background-color: #F36F21;
+  }
+}

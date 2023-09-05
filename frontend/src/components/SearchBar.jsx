@@ -1,16 +1,33 @@
+import React, { useState } from 'react';
 import '../styles/SearchBar.scss';
+import SearchFilters from './SearchFilters';
 
 function SearchBar() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    
+    
+    console.log(`Searching for: ${searchTerm}`);
+  };
+
+
   return (
-    <div className="search-box">
-      <form  className="search-box__form" action="">
-        <input className="search-box__input"
-               type="search"
-               name="query"
-               placeholder="Search..."
-        />
-      <button className="search-box__button" > S </button>
-      </form>
+    <div className="search-complex">
+      < SearchFilters />
+      <div className="search-box">
+        <form  className="search-box__form" onSubmit={handleSearch}>
+          <input className="search-box__input"
+                type="search"
+                name="query"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        <button className="search-box__button" type="submit"> S </button>
+        </form>
+      </div>
     </div>
   );
 }
