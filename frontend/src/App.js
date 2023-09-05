@@ -11,7 +11,7 @@ import GoogleMapComponent from './components/GoogleMapComponent';
 import GoogleMapComponent2 from './components/GoogleMapComponent2';
 import TopNavBar from './components/TopNavBar';
 import SearchBar from './components/SearchBar';
-import ParseBusinessAndEventData from './hooks/parseBusinessAndEventData';
+import ParseBusinessAndEventData from './hooks/useParseBusinessAndEventData';
 
 
 
