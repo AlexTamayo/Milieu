@@ -12,19 +12,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a single business by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const business = await Business.findByPk(req.params.id);
-    if (business) {
-      res.status(200).json(business);
-    } else {
-      res.status(404).json({ error: 'Business not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+// // Get a single business by ID
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const business = await Business.findByPk(req.params.id);
+//     if (business) {
+//       res.status(200).json(business);
+//     } else {
+//       res.status(404).json({ error: 'Business not found' });
+//     }
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 
 // Create a new business
 router.post('/', async (req, res) => {

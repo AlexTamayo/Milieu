@@ -9,69 +9,70 @@ const apiClient = axios.create({
   },
 });
 
-export const getBusinessesAndEvents = () => {
-  return apiClient.get('/businessandevents');
-};
-
-export const createUser = (userData) => {
-  return apiClient.post('/users', userData);
-};
 
 export const getAllUsers = () => {
   return apiClient.get('/users');
-};
-
-export const getUserById = (userId) => {
-  return apiClient.get(`/users/${userId}`);
-};
-
-export const updateUserById = (userId, userData) => {
-  return apiClient.put(`/users/${userId}`, userData);
-}
-
-export const deleteUserById = (userId) => {
-  return apiClient.delete(`/users/${userId}`);
-}
-
-export const createBusiness = (businessData) => {
-  return apiClient.post('/businesses', businessData);
 };
 
 export const getAllBusinesses = () => {
   return apiClient.get('/businesses');
 };
 
-export const getBusinessById = (businessId) => {
-  return apiClient.get(`/businesses/${businessId}`);
+export const getAllEvents = () => {
+  return apiClient.get('/events');
+}
+
+
+
+export const createUser = (userData) => {
+  return apiClient.post('/users', userData);
 };
 
-export const updateBusinessById = (businessId, businessData) => {
-  return apiClient.put(`/businesses/${businessId}`, businessData);
-};
-
-export const deleteBusinessById = (businessId) => {
-  return apiClient.delete(`/businesses/${businessId}`);
+export const createBusiness = (businessData) => {
+  return apiClient.post('/businesses', businessData);
 };
 
 export const createEvent = (eventData) => {
   return apiClient.post('/events', eventData);
 }
 
-export const getAllEvents = () => {
-  return apiClient.get('/events');
-}
+
+export const getUserById = (userId) => {
+  return apiClient.get(`/users/${userId}`);
+};
+
+export const getBusinessById = (businessId) => {
+  return apiClient.get(`/businesses/${businessId}`);
+};
 
 export const getEventById = (eventId) => {
   return apiClient.get(`/events/${eventId}`);
 }
 
-export const updateEventById = (eventId, eventData) => {
-  return apiClient.put(`/events/${eventId}`, eventData);
+export const deleteUserById = (userId) => {
+  return apiClient.delete(`/users/${userId}`);
 }
+
+export const deleteBusinessById = (businessId) => {
+  return apiClient.delete(`/businesses/${businessId}`);
+};
 
 export const deleteEventById = (eventId) => {
   return apiClient.delete(`/events/${eventId}`);
 }
+
+
+export const updateUserById = (userId, userData) => {
+  return apiClient.put(`/users/${userId}`, userData);
+}
+export const updateBusinessById = (businessId, businessData) => {
+  return apiClient.put(`/businesses/${businessId}`, businessData);
+};
+
+export const updateEventById = (eventId, eventData) => {
+  return apiClient.put(`/events/${eventId}`, eventData);
+}
+
 
 export const createBusinessBranding = (businessBrandingData) => {
   return apiClient.post('/business-brandings', businessBrandingData);
@@ -124,5 +125,4 @@ export const getAllBusinessCategories = () => {
 export const getBusinessCategoryById = (businessCategoryId) => {
   return apiClient.get(`/business-categories/${businessCategoryId}`);
 }
-
 
