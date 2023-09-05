@@ -1,15 +1,21 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const routes = require("./db/routes");
-require('dotenv').config();
+const userRoutes = require("./db/routes/userRoutes"); // Import userRoutes module
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Integrate the routes
-app.use('/api', routes); // Assuming your routes are defined in the "routes" module
+// Use the imported route modules
+app.use("/api/users", userRoutes);
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 const PORT = 3001;
 app.listen(PORT, () => {
