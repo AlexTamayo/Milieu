@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import './App.scss';
 
-import { UserModalProvider } from "./utils/UserModalContext";
+import { UserModalProvider } from "./context/UserModalContext";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';

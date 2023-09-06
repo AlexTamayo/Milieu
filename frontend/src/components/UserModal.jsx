@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import '../styles/UserModal.scss';
 
-import { UserModalContext } from '../utils/UserModalContext';
+import { UserModalContext } from '../context/UserModalContext';
 
 
 function UserModal({ children, userDivRef }) {

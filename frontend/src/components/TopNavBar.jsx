@@ -1,5 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { UserModalContext } from "../utils/UserModalContext";
+import { UserModalContext } from "../context/UserModalContext";
 
 import '../styles/TopNavBar.scss';
 
