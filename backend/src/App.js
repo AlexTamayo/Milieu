@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const userRoutes = require("./db/routes/userRoutes"); // Import userRoutes module
+const businessRoutes = require("./db/routes/businessRoutes"); // Import businessRoutes
 require("dotenv").config();
 
 app.use(cors());
@@ -10,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use the imported route modules
 app.use("/api/users", userRoutes);
+app.use("/api/businesses", businessRoutes);
+
 
 // Error-handling middleware
 app.use((err, req, res, next) => {

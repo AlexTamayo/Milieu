@@ -5,11 +5,11 @@ import {
   LoadScript,
   InfoWindow,
   Marker,
-  StandaloneSearchBox,
   MarkerClusterer
 } from '@react-google-maps/api';
 import { FaLinkedin, FaBusinessTime, FaCar, FaUsers } from 'react-icons/fa';
 import { lightModeStyles, darkModeStyles } from './MapStyles';
+import useBusinessData from '../utils/useBusinessMapData';
 
 const containerStyle = {
   width: '100%',
@@ -69,7 +69,6 @@ const categoryStyles = {
 };
 
 
-
 const GoogleMapComponent = () => {
   // State declarations
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
@@ -81,13 +80,20 @@ const GoogleMapComponent = () => {
   const [showInputForm, setShowInputForm] = useState(false);
   const [clickedLocation, setClickedLocation] = useState(null);
   const [hideTimeout, setHideTimeout] = useState(null);
-  const [searchBox, setSearchBox] = useState(null);
   const mapRef = useRef(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [legendAttached, setLegendAttached] = useState(false);
 
+  const { businessData } = useBusinessData();
 
- // UseEffects
+  useEffect(() => {
+    if (businessData.length > 0) {
+      setMarkers(prevMarkers => [...prevMarkers, ...businessData]);
+    }
+  }, [businessData]);
+
+
+
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -122,7 +128,7 @@ const GoogleMapComponent = () => {
         mapRef.current.controls[window.google.maps.ControlPosition.TOP_LEFT].push(legend);
         setLegendAttached(true);
     }
-}, [mapRef.current, visibleTopic]);
+  }, [visibleTopic, legendAttached]);
 
 
 
@@ -142,18 +148,6 @@ const GoogleMapComponent = () => {
 
   const mapStyle = isDarkMode ? darkModeStyles : lightModeStyles;
 
-  const onPlacesChanged = () => {
-    const places = searchBox.getPlaces();
-    if (places && places.length === 1) {
-      const place = places[0];
-      const location = place.geometry.location;
-      setCenter({
-        lat: location.lat(),
-        lng: location.lng(),
-      });
-      mapRef.current.panTo(location);
-    }
-};
 
 
 const handleMapClick = event => {

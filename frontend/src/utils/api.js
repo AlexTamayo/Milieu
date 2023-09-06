@@ -17,18 +17,34 @@ export const getAllUsers = () => {
   return apiClient.get('/users');
 };
 
-export const getMarkers = () => {
-  return apiClient.get('/markers'); // still need markers route in backend
+export const getUserById = (userId) => {
+  return apiClient.get(`/users/${userId}`);
 };
 
-export const addMarker = (markerData) => {
-  return apiClient.post('/markers', markerData);
+export const updateUserById = (userId, userData) => {
+  return apiClient.put(`/users/${userId}`, userData);
+}
+
+export const deleteUserById = (userId) => {
+  return apiClient.delete(`/users/${userId}`);
+}
+
+export const createBusiness = (businessData) => {
+  return apiClient.post('/businesses', businessData);
 };
 
-export const updateMarker = (markerId, updatedData) => {
-  return apiClient.put(`/markers/${markerId}`, updatedData);
+export const getAllBusinesses = () => {
+  return apiClient.get('/businesses');
 };
 
-export const deleteMarker = (markerId) => {
-  return apiClient.delete(`/markers/${markerId}`);
+export const getBusinessById = (businessId) => {
+  return apiClient.get(`/businesses/${businessId}`);
+};
+
+export const updateBusinessById = (businessId, businessData) => {
+  return apiClient.put(`/businesses/${businessId}`, businessData);
+};
+
+export const deleteBusinessById = (businessId) => {
+  return apiClient.delete(`/businesses/${businessId}`);
 };
