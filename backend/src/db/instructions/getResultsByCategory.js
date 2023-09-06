@@ -59,7 +59,7 @@ async function getResultsByCategory(categoryId, type) {
   }
 }
 
-module.exports =getResultsByCategory;
+module.exports = getResultsByCategory;
 // Example usage for getting events by category (categoryId = 1) as search results
 getResultsByCategory(1, 'events')
   .then((events) => {
