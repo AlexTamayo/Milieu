@@ -33,42 +33,37 @@
 
   transition: background-color 0.1s, transform 0.3s;
 
-  &:hover {
-    background-color: darken(gray, 10%);
-  }
-
-  &:active {
-    transform: scale(0.90);
+  &.not-selected {
+    background-color: gray;
+    &:hover {
+      background-color: darken(gray, 10%);
+    }
   }
 
   &--businesses {
     background-color: $milieu-red;
-
-    &:hover{
+    &:hover {
       background-color: saturate( $milieu-red, 50%);
     }
   }
 
   &--events {
     background-color: $milieu-blue;
-
-    &:hover{
+    &:hover {
       background-color: saturate( $milieu-blue, 50%);
     }
   }
 
   &--test {
     background-color: $milieu-green;
-
-    &:hover{
+    &:hover {
       background-color: saturate( $milieu-green, 20%);
     }
   }
 
   &--test2 {
     background-color: $milieu-orange;
-
-    &:hover{
+    &:hover {
       background-color: saturate( $milieu-orange, 70%);
     }
   }

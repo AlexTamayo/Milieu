@@ -1,0 +1,33 @@
+@import '_variables.scss';
+
+.user-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+
+  top: 53px;
+  right: 20px;
+
+  border: 1px solid $grey-1;
+
+  background: $bg-color;
+  padding: 20px;
+  border-radius: 8px;
+
+  width: 180px;
+  height: 270px;
+
+  overflow: auto;
+
+  z-index: 9991;
+}
+
+.user-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  background-color: red;
+}
