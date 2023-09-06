@@ -5,7 +5,7 @@ import './App.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
-import GoogleMapComponent from './components/GoogleMapComponent';
+import GoogleMapComponent2 from './components/GoogleMapComponent2';
 import TopNavBar from './components/TopNavBar';
 import SearchBar from './components/SearchBar';
 import UserList from './components/UserList';
@@ -17,13 +17,9 @@ library.add(faMapPin);
 function App() {
   return (
     <div className="App">
-      {/* Other components */}
       < SearchBar />
       < TopNavBar />
-      < UserList />
-      < UserForm />
-      < GoogleMapComponent />
-      {/* Other components */}
+      < GoogleMapComponent2 />
     </div>
   );
 }
