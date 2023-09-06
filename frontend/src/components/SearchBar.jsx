@@ -28,30 +28,25 @@ function SearchBar() {
     handleOnSearch(string, results);
     // Your additional logic here
   };
-
   const handleHover = (result) => {
     // Call the handleOnHover function from the hook
     handleOnHover(result);
     // Your additional logic here
   };
-
   const handleSelect = (item) => {
     // Call the handleOnSelect function from the hook
     handleOnSelect(item);
     // Your additional logic here
   };
-
   const handleFocus = () => {
     // Call the handleOnFocus function from the hook
     handleOnFocus();
     // Your additional logic here
   };
-
   const resultFormatter = (item) => {
     // Call the formatResult function from the hook
     return formatResult(item);
   };
-
 
   return (
     <div className="search-complex">
