@@ -6,9 +6,10 @@ const ROUTES = {
   USERS: "/users",
   BUSINESSES: "/businesses",
   EVENTS: "/events",
-  BUSINESS_BRANDINGS: "/business-brandings",
-  EVENT_BRANDINGS: "/event-brandings",
-  BUSINESS_CATEGORIES: "/business-categories"
+  BUSINESS_BRANDINGS: "/businesses/brandings",
+  EVENT_BRANDINGS: "/events/brandings",
+  BUSINESS_CATEGORIES: "/businesses/categories",
+  EVENT_CATEGORIES: "/events/categories"
 }
 
 const apiClient = axios.create({
@@ -29,6 +30,12 @@ export const getAllBusinesses = () => {
 
 export const getAllEvents = () => {
   return apiClient.get(ROUTES.EVENTS);
+}
+export const getBusinessCategories = () => {
+  return apiClient.get(ROUTES.BUSINESS_CATEGORIES);
+}
+export const getEventCategories = () => {
+  return apiClient.get(ROUTES.EVENT_CATEGORIES);
 }
 
 

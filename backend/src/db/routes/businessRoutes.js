@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Business } = require('../models');
 const getBusinessesWithDetails = require('../instructions/businesses/getBusinessesWithDetails');
+const getBusinessCategories = require('../instructions/businesses/getBusinessCategories');
 
 
 router.get('/', async (req, res) => {
@@ -13,17 +14,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/categories', async (req, res) => {
+  try {
+    const businessCategories = await getBusinessCategories();
+    res.status(200).json(businessCategories);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 
-// // Get all businesses
-// router.get('/', async (req, res) => {
-//   try {
-//     const businesses = await Business.findAll();
-//     res.status(200).json(businesses);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
 
 // Get a single business by ID
 router.get('/:id', async (req, res) => {

@@ -17,7 +17,12 @@ export const DataProvider = ({ children }) => {
     setVenueType,
     handleButtonClick,
     setUser,
-    signOut
+    signOut,
+    handleOnSearch,     
+    handleOnHover,      
+    handleOnSelect,     
+    handleOnFocus,      
+    formatResult 
   } = useApplicationData();
 
   return (
@@ -34,7 +39,12 @@ export const DataProvider = ({ children }) => {
                                   setVenueType,
                                   handleButtonClick,
                                   setUser,
-                                  signOut
+                                  signOut,
+                                  handleOnSearch,    
+                                  handleOnHover,      
+                                  handleOnSelect,     
+                                  handleOnFocus,      
+                                  formatResult
                                 }}>
       {children}
     </DataContext.Provider>

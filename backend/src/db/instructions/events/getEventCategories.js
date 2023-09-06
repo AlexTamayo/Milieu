@@ -4,7 +4,7 @@ async function getEventCategories() {
   try {
     const eventCategories = await db.EventCategory.findAll();
 
-    console.log(eventCategories);
+    //console.log(eventCategories);
     // 'eventCategories' will contain an array of EventCategory instances
     return eventCategories;
   } catch (error) {

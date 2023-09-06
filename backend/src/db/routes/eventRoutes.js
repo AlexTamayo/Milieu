@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Event } = require('../models');
 const getEventsWithDetails = require('../instructions/events/getEventsWithDetails');
+const getEventCategories = require('../instructions/events/getEventCategories');
 
 router.get('/', async (req, res) => {
   try {
@@ -13,15 +14,14 @@ router.get('/', async (req, res) => {
 });
 
 
-// // Get all events
-// router.get('/', async (req, res) => {
-//   try {
-//     const events = await Event.findAll();
-//     res.status(200).json(events);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
+router.get('/categories', async (req, res) => {
+  try {
+    const eventCategories = await getEventCategories();
+    res.status(200).json(eventCategories);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 //Get a single event by ID
 router.get('/:id', async (req, res) => {

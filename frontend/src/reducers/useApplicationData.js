@@ -1,8 +1,10 @@
 import { useEffect, useReducer } from 'react';
-import { getAllEvents, getAllBusinesses, getAllUsers } from '../routes/api';
+import { getAllEvents, getAllBusinesses, getAllUsers,getBusinessCategories,getEventCategories } from '../routes/api';
 
 const actionTypes = {
   SET_EVENT_DATA: 'SET_EVENT_DATA',
+  SET_EVENT_CATEGORY_DATA: 'SET_EVENT_CATEGORY_DATA',
+  SET_BUSINESS_CATEGORY_DATA: 'SET_BUSINESS_CATEGORY_DATA',
   SET_BUSINESS_DATA: 'SET_BUSINESS_DATA',
   SET_USER_DATA: 'SET_USER_DATA',
   TOGGLE_USER_MODAL: 'TOGGLE_USER_MODAL',
@@ -25,6 +27,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.SET_EVENT_DATA:
       return { ...state, eventData: action.payload };
+
+    case actionTypes.SET_EVENT_CATEGORY_DATA:
+      return { ...state, eventCategoryData: action.payload };
+
+    case actionTypes.SET_BUSINESS_CATEGORY_DATA:
+      return { ...state, businessCategoryData: action.payload };
 
     case actionTypes.SET_BUSINESS_DATA:
       return { ...state, businessData: action.payload };
@@ -78,6 +86,8 @@ export default function useApplication() {
   const [state, dispatch] = useReducer(reducer, {
     eventData: [],
     businessData: [],
+    eventCategoryData: [],
+    businessCategoryData: [],
     userData: [],
     isUserModalOpen: false,
     isVenueModalOpen: false,
@@ -91,14 +101,16 @@ export default function useApplication() {
   });
 
   useEffect(() => {
-    Promise.all([getAllEvents(), getAllBusinesses(), getAllUsers()])
-      .then(([eventData, businessData, userData]) => {
+    Promise.all([getAllEvents(), getAllBusinesses(), getAllUsers(),getBusinessCategories(),getEventCategories()])
+      .then(([eventData, businessData, userData,businessCategoryData,eventCategoryData]) => {
         dispatch({ type: actionTypes.SET_EVENT_DATA, payload: eventData.data });
         dispatch({
           type: actionTypes.SET_BUSINESS_DATA,
           payload: businessData.data,
         });
         dispatch({ type: actionTypes.SET_USER_DATA, payload: userData.data });
+        dispatch({ type: actionTypes.SET_EVENT_CATEGORY_DATA, payload: eventCategoryData.data });
+        dispatch({ type: actionTypes.SET_BUSINESS_CATEGORY_DATA, payload: businessCategoryData.data });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -170,6 +182,44 @@ export default function useApplication() {
     dispatch({ type: actionTypes.SIGN_OUT });
   };
 
+  //Search bar functions.
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+      </>
+    )
+  }
+
+
+
+
+
+
+
+
+
   return {
     state,
     toggleUserModal,
@@ -183,6 +233,11 @@ export default function useApplication() {
     setVenueType,
     handleButtonClick,
     setUser,
-    signOut
+    signOut,
+    handleOnSearch,     // Add this line to access the function
+    handleOnHover,      // Add this line to access the function
+    handleOnSelect,     // Add this line to access the function
+    handleOnFocus,      // Add this line to access the function
+    formatResult    
   };
 }

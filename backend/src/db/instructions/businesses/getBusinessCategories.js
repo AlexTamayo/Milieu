@@ -4,7 +4,7 @@ async function getBusinessCategories() {
   try {
     const businessCategories = await db.BusinessCategory.findAll();
 
-    console.log(businessCategories);
+    //console.log(businessCategories);
     // 'businessCategories' will contain an array of BusinessCategory instances
     return businessCategories;
   } catch (error) {
@@ -14,4 +14,3 @@ async function getBusinessCategories() {
 }
 
 module.exports = getBusinessCategories;
-
