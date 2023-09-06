@@ -20,8 +20,8 @@ function App() {
       {/* Other components */}
       < SearchBar />
       < TopNavBar />
-      {/* < UserList /> */}
-      {/* < UserForm /> */}
+      < UserList />
+      < UserForm />
       < GoogleMapComponent />
       {/* Other components */}
     </div>
