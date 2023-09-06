@@ -37,9 +37,11 @@
   box-shadow: 0 0 0 1px $grey-1;
   overflow: hidden;
 
+  cursor: pointer;
+
 
   &:hover {
-    box-shadow: 0 0 5px 1px $grey-1;
+    box-shadow: 0 0 2px 1px $grey-2;
   }
 
   img {
@@ -56,13 +58,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 100%;
   height: $dimension;
   width: $dimension ;
-  // margin-right: 2vw;
   margin-right: 20px;
-  overflow: hidden;
+
+  cursor: pointer;
 
   path {
     fill: $grey-1;
@@ -70,7 +70,9 @@
 
 
   &:hover {
-    background-color: #1d8aff;
+    background-color: $grey-1;
+    overflow: hidden;
+    border-radius: 100%;
 
     path {
       fill: white;

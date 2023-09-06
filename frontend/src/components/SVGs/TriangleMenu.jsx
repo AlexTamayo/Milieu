@@ -1,4 +1,4 @@
-import '../styles/TriangleMenu.scss';
+// import '../styles/TriangleMenu.scss';
 
 // className="triangle-menu"
 // className="plus-sign"

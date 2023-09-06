@@ -8,6 +8,8 @@
   transform: translateX(-50%);
   top: 150px;
   z-index: 9999;
+
+  
 }
 
 $bar-height: 37px;
@@ -39,6 +41,8 @@ $bar-height: 37px;
   flex-basis: 1e-9px;
   width: 35em;
 
+  outline-color: $grey-1;
+
   &::placeholder {
     color: $grey-2;
   }
@@ -46,6 +50,10 @@ $bar-height: 37px;
 }
 
 .search-box__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: 1px solid $grey-1;
   background-color: $bg-color;
   border-radius: 0 $bar-height $bar-height 0;
@@ -53,4 +61,29 @@ $bar-height: 37px;
   height: $bar-height;
   width: 64px;
   color: $grey-2;
+
+  outline-color: $grey-1;
+
+
+  
+  svg {
+    $dimension: 25px;
+
+    width: $dimension;
+    height: $dimension;
+
+    &:hover {
+      transform: scale(1.05);
+
+      path {
+        stroke: $grey-1;
+
+      }
+    }
+
+    path {
+      stroke: $grey-2;
+
+    }
+  }
 }

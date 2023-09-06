@@ -5,7 +5,7 @@ import logo_and_name from '../assets/logo/logo-and-name.svg'
 
 import profile from '../assets/temp/profile_pics_6.png'
 
-import PlusSign from './PlusSign';
+import PlusSign from './SVGs/PlusSign';
 
 
 function TopNavBar() {

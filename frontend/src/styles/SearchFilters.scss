@@ -5,20 +5,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  // justify-content: space-evenly;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  // justify-content: space-around;
   margin-bottom: 10px;
 }
 
 
 .filter {
   display: flex;
-  line-height: 1.45;
+  line-height: 1.6;
   justify-content: center;
 
   border-radius: 40px;
 
   color: white;
+
+  outline-color: $outline-blue;
+
+  border: 1px solid $grey-1;
+  cursor: pointer;
 
 
   height: 25px;
@@ -26,19 +31,45 @@
 
   background-color: gray;
 
+  transition: background-color 0.1s, transform 0.3s;
+
+  &:hover {
+    background-color: darken(gray, 10%);
+  }
+
+  &:active {
+    transform: scale(0.90);
+  }
+
   &--businesses {
-    background-color: #ED1F24;
+    background-color: $milieu-red;
+
+    &:hover{
+      background-color: saturate( $milieu-red, 50%);
+    }
   }
 
   &--events {
-    background-color: #3F7CBF;
+    background-color: $milieu-blue;
+
+    &:hover{
+      background-color: saturate( $milieu-blue, 50%);
+    }
   }
 
   &--test {
-    background-color: #5ABA47;
+    background-color: $milieu-green;
+
+    &:hover{
+      background-color: saturate( $milieu-green, 20%);
+    }
   }
 
   &--test2 {
-    background-color: #F36F21;
+    background-color: $milieu-orange;
+
+    &:hover{
+      background-color: saturate( $milieu-orange, 70%);
+    }
   }
 }
