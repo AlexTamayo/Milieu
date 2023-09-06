@@ -16,7 +16,6 @@ const containerStyle = {
   height: '800px',
 };
 
-
 /**
  * The Legend component displays clickable categories that can affect which markers are shown.
  */
@@ -102,11 +101,9 @@ const GoogleMapComponent = () => {
           setCenter({ lat: latitude, lng: longitude });
         },
         error => {
-          // Handle your error appropriately
         }
       );
     } else {
-      // Handle the error that geolocation is not available
     }
   }, []);
 

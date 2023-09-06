@@ -22,3 +22,5 @@ function SearchFilters() {
 }
 
 export default SearchFilters;
+
+

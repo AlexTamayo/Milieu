@@ -8,8 +8,8 @@ import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import GoogleMapComponent from './components/GoogleMapComponent';
 import TopNavBar from './components/TopNavBar';
 import SearchBar from './components/SearchBar';
-import UserList from './components/UserList';
-import UserForm from './components/UserForm';
+import ParseBusinessAndEventData from './utils/parseBusinessAndEventData';
+
 
 
 library.add(faMapPin);
@@ -20,9 +20,8 @@ function App() {
       {/* Other components */}
       < SearchBar />
       < TopNavBar />
-      < UserList />
-      < UserForm />
       < GoogleMapComponent />
+      < ParseBusinessAndEventData />
       {/* Other components */}
     </div>
   );
