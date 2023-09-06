@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
 function ParseBusinessAndEventData() {
-  const [businessData, setBusinessData] = useState(null);
+
 
   useEffect(() => {
     const fetchBusinessAndEventData = async () => {
@@ -11,7 +11,7 @@ function ParseBusinessAndEventData() {
 
         const result = await response.json();
 
-        setBusinessData(result);
+        return (result);
       } catch (error) {
 
         console.log('error', error);
@@ -20,16 +20,6 @@ function ParseBusinessAndEventData() {
 
     fetchBusinessAndEventData();
   }, []);
-
-  return (
-    <div>
-      {businessData ? (
-        <pre>{JSON.stringify(businessData, null, 2)}</pre>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
 }
 
 export default ParseBusinessAndEventData;
