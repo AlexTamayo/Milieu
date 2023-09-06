@@ -9,7 +9,7 @@ import {
 } from '@react-google-maps/api';
 import { FaLinkedin, FaBusinessTime, FaCar, FaUsers } from 'react-icons/fa';
 import { lightModeStyles, darkModeStyles } from './MapStyles';
-import useBusinessData from '../utils/useBusinessMapData';
+import useBusinessData from '../hooks/useBusinessMapData';
 
 const containerStyle = {
   width: '100%',

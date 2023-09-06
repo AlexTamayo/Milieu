@@ -7,10 +7,11 @@ import { UserModalProvider } from "./context/UserModalContext";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
+import GoogleMapComponent from './components/GoogleMapComponent';
 import GoogleMapComponent2 from './components/GoogleMapComponent2';
 import TopNavBar from './components/TopNavBar';
 import SearchBar from './components/SearchBar';
-import ParseBusinessAndEventData from './utils/parseBusinessAndEventData';
+import ParseBusinessAndEventData from './hooks/parseBusinessAndEventData';
 
 
 
