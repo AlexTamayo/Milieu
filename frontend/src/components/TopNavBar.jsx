@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useContext, useState, useRef } from "react";
+import { UserModalContext } from "../utils/UserModalContext";
 
 import '../styles/TopNavBar.scss';
-import logo_and_name from '../assets/logo/logo-and-name.svg'
 
+import logo_and_name from '../assets/logo/logo-and-name.svg'
 import profile from '../assets/temp/profile_pics_6.png'
+
 
 import PlusSign from './SVGs/PlusSign';
 
 
-function TopNavBar() {
+function TopNavBar({ userDivRef }) {
+  const { toggleUserModal } = useContext(UserModalContext);
 
   const [logged, setlogged] = useState(true);
 
+  
 
   return (
     <div className="top-nav-bar">
@@ -23,11 +27,13 @@ function TopNavBar() {
 
       {logged ?
         <div className='top-nav-bar__right'>
-
           <div className='right__add'>
             < PlusSign />
           </div>
-          <div className='right__user'>
+          <div className='right__user'
+               ref={userDivRef}
+               onClick={toggleUserModal}
+          >
             <img src={profile} alt="" /> 
           </div>
         </div>

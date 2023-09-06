@@ -13,61 +13,10 @@ import { lightModeStyles, darkModeStyles } from './MapStyles';
 
 const containerStyle = {
   width: '100%',
-  height: '800px',
+  height: '1260px',
+  margin: 0,
+  // height: '90%',
 };
-
-
-/**
- * The Legend component displays clickable categories that can affect which markers are shown.
- */
-function Legend({ onCategoryClick, activeCategory }) {
-  const activeStyle = {
-    backgroundColor: '#e6f7ff',
-    border: '2px solid blue',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    margin: '5px',
-    padding: '10px',
-    borderRadius: '5px',
-    display: 'flex',
-    alignItems: 'center'
-  };
-
-  const defaultStyle = {
-    cursor: 'pointer',
-    margin: '5px',
-    padding: '10px',
-    borderRadius: '5px',
-    display: 'flex',
-    alignItems: 'center'
-  };
-
-  const renderCategory = (name, label, icon) => {
-    const style = activeCategory === name ? activeStyle : defaultStyle;
-    return (
-      <div style={{ ...style, ...categoryStyles[name] }} onClick={() => onCategoryClick(name)}>
-        {React.createElement(icon, { size: 24, style: { marginRight: '5px' } })}
-        {label}
-      </div>
-    );
-  };
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', background: 'white', padding: '10px', borderRadius: '5px' }}>
-      {renderCategory('all', 'All', FaUsers)}
-      {renderCategory('business', 'Business', FaBusinessTime)}
-      {renderCategory('garage', 'Garage', FaCar)}
-      {renderCategory('gathering', 'Gathering', FaUsers)}
-    </div>
-  );
-}
-
-const categoryStyles = {
-  'business': { backgroundColor: 'orange' },
-  'garage': { backgroundColor: 'blue' },
-  'gathering': { backgroundColor: 'red' },
-};
-
 
 
 const GoogleMapComponent = () => {
@@ -84,7 +33,6 @@ const GoogleMapComponent = () => {
   const [searchBox, setSearchBox] = useState(null);
   const mapRef = useRef(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [legendAttached, setLegendAttached] = useState(false);
 
 
  // UseEffects
@@ -111,18 +59,6 @@ const GoogleMapComponent = () => {
       }
     };
   }, [hideTimeout]);
-
-  useEffect(() => {
-    if (mapRef.current && !legendAttached) {
-        const legend = document.createElement('div');
-        ReactDOM.render(<Legend onCategoryClick={(category) => {
-          setVisibleTopic(category);
-          console.log("Active Category:", category);  // <-- Add this
-      }} activeCategory={visibleTopic} />, legend);
-        mapRef.current.controls[window.google.maps.ControlPosition.TOP_LEFT].push(legend);
-        setLegendAttached(true);
-    }
-}, [mapRef.current, visibleTopic]);
 
 
 
