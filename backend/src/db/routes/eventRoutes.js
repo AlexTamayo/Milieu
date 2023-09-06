@@ -3,6 +3,7 @@ const router = express.Router();
 const { Event } = require('../models');
 const getEventsWithDetails = require('../instructions/events/getEventsWithDetails');
 const getEventCategories = require('../instructions/events/getEventCategories');
+const createEvent = require('../instructions/events/createEvent');
 
 router.get('/', async (req, res) => {
   try {
@@ -40,7 +41,7 @@ router.get('/:id', async (req, res) => {
 // Create a new event
 router.post('/', async (req, res) => {
   try {
-    const event = await Event.create(req.body);
+    const event = await createEvent(req.body);
     res.status(201).json(event);
   } catch (error) {
     res.status(400).json({ error: error.message });

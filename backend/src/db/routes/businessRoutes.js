@@ -3,6 +3,7 @@ const router = express.Router();
 const { Business } = require('../models');
 const getBusinessesWithDetails = require('../instructions/businesses/getBusinessesWithDetails');
 const getBusinessCategories = require('../instructions/businesses/getBusinessCategories');
+const createBusiness = require('../instructions/businesses/createBusiness');
 
 
 router.get('/', async (req, res) => {
@@ -42,7 +43,7 @@ router.get('/:id', async (req, res) => {
 // Create a new business
 router.post('/', async (req, res) => {
   try {
-    const business = await Business.create(req.body);
+    const business = await createBusiness(req.body);
     res.status(201).json(business);
   } catch (error) {
     res.status(400).json({ error: error.message });
