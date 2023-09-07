@@ -4,6 +4,7 @@ const { Event } = require('../models');
 const getEventsWithDetails = require('../instructions/events/getEventsWithDetails');
 const getEventCategories = require('../instructions/events/getEventCategories');
 const createEvent = require('../instructions/events/createEvent');
+const findEventsByUser = require('../instructions/events/findEventsByUser');
 
 router.get('/', async (req, res) => {
   try {
@@ -14,6 +15,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get("/user/:id", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const businesses = await findEventsByUser(userId);
+    if (businesses) {
+      res.status(200).json(businesses);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 router.get('/categories', async (req, res) => {
   try {

@@ -3,6 +3,8 @@ const router = express.Router();
 const { User } = require("../models");
 const jwt = require('jsonwebtoken');
 const secret = "fmERAnC8SZqAn8uPdgES";
+const getAllUserData = require('../instructions/users/getAllUserData');
+
 
 const addUser = require("../instructions/users/createUser");
 const loginUser = require('../instructions/users/loginUser');
@@ -95,7 +97,7 @@ router.get("/test/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   console.log(`GET /api/users/${req.params.id} route hit`); // Logging to know the route has been hit
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await getAllUserData(req.params.id);
     if (user) {
       console.log("User found:", user); // Log the found user
       res.status(200).json(user);
@@ -138,7 +140,6 @@ router.get("/username/:username", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
 
 
 // Update a user by ID
