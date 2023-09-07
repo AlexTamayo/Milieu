@@ -9,14 +9,14 @@ import profile from '../assets/temp/profile_pics_6.png'
 import PlusSign from './SVGs/PlusSign';
 
 function TopNavBar({ userDivRef }) {
-  const { toggleUserModal } = useContext(DataContext);
+  const { toggleUserModal, toggleVenueModal } = useContext(DataContext);
 
   const [logged, setlogged] = useState(true);
 
   return (
-    <div className="top-nav-bar">
+    <div className="top-nav-bar"  >
       <div className='top-nav-bar__left'>
-        <div className='left__logo'>
+        <div className='left__logo' onClick={toggleVenueModal}>
         <img src={logo_and_name} alt="logo" />
         </div>
       </div>

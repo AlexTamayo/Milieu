@@ -16,6 +16,14 @@ export const DataProvider = ({ children }) => {
     setIsUserModalOpen(prevState => !prevState);
   };
 
+  // Venue details modal opening and closing logic
+  // Remember that I put part of the toggle logic in the milieu logo of nav bar.
+  const [isVenueModalOpen, setVenueModalOpen] = useState(true);
+
+  const toggleVenueModal = () => {
+    setVenueModalOpen(!isVenueModalOpen);
+  }
+
   useEffect(() => {
     // Fetch data when the component mounts
     getAllEvents()
@@ -41,6 +49,8 @@ export const DataProvider = ({ children }) => {
     <DataContext.Provider value={{ eventData,
                                    businessData,
                                    userData,
+                                   isVenueModalOpen,
+                                   toggleVenueModal,
                                    isUserModalOpen,
                                    toggleUserModal
                                    }}>

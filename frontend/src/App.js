@@ -1,4 +1,3 @@
-//frontend\src\App.js
 import React, { useState, useRef } from 'react';
 import './App.scss';
 
@@ -16,17 +15,15 @@ import SearchBar from './components/SearchBar';
 import UserModal from './components/UserModal';
 import VenueModal from './components/VenueModal';
 
-
 library.add(faMapPin);
-
 
 function App() {
   const userDivRef = useRef(null);
-  
+
   return (
     < DataProvider >
       <div className="App">
-        < VenueModal />
+        <VenueModal />
         < UserModal userDivRef={userDivRef} />
         < SearchBar />
         < TopNavBar userDivRef={userDivRef} />
