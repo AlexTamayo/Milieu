@@ -21,7 +21,7 @@ function App() {
   const [isUserModalOpen, setisUserModalOpen] = useState(false);
 
   const userDivRef = useRef(null);
-  
+
   return (
     <DataProvider >
       < UserModalProvider >
