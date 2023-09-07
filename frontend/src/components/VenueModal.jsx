@@ -7,15 +7,19 @@ function VenueModal() {
 
   const { isVenueModalOpen, toggleVenueModal, eventData, businessData } = useContext(DataContext);
 
-  const [isCopied, setIsCopied] = useState(false);
-  
   const venueModalRef = useRef(null);
+
+
+  // Copy to clipboard logic
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
   };
+
+  // vvv FORMATTERS vvv
 
   function formatPhoneNumber(phone) {
     const parts = phone.split('-');
@@ -30,19 +34,10 @@ function VenueModal() {
     return inputString.replace(/\D/g, '');
   }
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        console.log('Text copied to clipboard');
-        // Optionally, you could add logic here to show a short "Copied!" tooltip or message.
-      })
-      .catch(err => {
-        console.error('Could not copy text: ', err);
-      });
-  }
-  
-  
+  // ^^^ FORMATTERS ^^^
 
+
+  // logic to have the modal close when clicking outside (tentative, not in use right now)
   useEffect(() => {
     function handleClickOutside(event) {
       if (venueModalRef.current && !venueModalRef.current.contains(event.target)) {
@@ -56,7 +51,7 @@ function VenueModal() {
     };
   }, []);
 
-  const arrNum = 3;
+  const arrNum = 0;
 
   const bgImageUrl = [
     "https://www.utsc.utoronto.ca/food/sites/utsc.utoronto.ca.food/files/styles/4_1_hero_1x_extra_large/public/images/page/Programs%20Images%20%2847%29.v1.jpg", 
@@ -103,7 +98,7 @@ function VenueModal() {
       <hr />
 
       <div className="venue-modal__description">
-          {businessData[arrNum].description}
+          {businessData[arrNum].description} Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
       </div>
 
       <hr />
