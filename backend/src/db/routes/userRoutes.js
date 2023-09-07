@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models");
+const findUserByEmail = require('../instructions/users/findUserByEmail');
+const findUserByUsername = require('../instructions/users/findUserByUsername');
 
 // Create a new user
 router.post("/", async (req, res) => {
@@ -24,22 +26,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/test/:id", async (req, res) => {
-  console.log(`GET /api/users/test/${req.params.id} route hit`); // Logging to know the route has been hit
-  try {
-    const user = await User.findByPk(req.params.id);
-    if (user) {
-      console.log("User found:", user);
-      res.status(200).json(user);
-    } else {
-      console.log("User not found");
-      res.status(404).json({ error: "User not found" });
-    }
-  } catch (error) {
-    console.log("An error occurred:", error.message);
-    res.status(400).json({ error: error.message });
-  }
-});
 
 // Get a single user by ID
 router.get("/:id", async (req, res) => {
@@ -58,6 +44,38 @@ router.get("/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Get a user by email
+router.get("/email/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await findUserByEmail(email);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Get a user by username
+router.get("/username/:username", async (req, res) => {
+  const { username } = req.params;
+  try {
+    const user = await findUserByUsername(username);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+
 
 // Update a user by ID
 router.put("/:id", async (req, res) => {
