@@ -1,24 +1,22 @@
 import React, { useContext } from 'react';
-import { DataContext } from '../context/dataProviderContext'; // Ensure the correct import path
+import { DataContext } from '../context/dataProviderContext';
 
 function TestComponent() {
   const { eventData, businessData, userData } = useContext(DataContext);
 
-  // Ensure userData.data is an array before mapping
-  // Now users is an array of user objects
-
   const eventArray = eventData.map((event) => (
-    <li key={event.id}>{event.title}</li>
+    <li key={event.id}> {event.title}</li>
   ));
   const businessArray = businessData.map((business) => (
-    <li key={business.id}>{business.name}</li>
+    <li key={business.id}> {business.name}</li>
   ));
   const userArray = userData.map((user) => (
-    <li key={user.id}>{user.username}</li>
+    <li key={user.id}> {user.username}</li>
   ))
 
   return (
     <div>
+
        <h2>Events</h2>
       <ul>
         {eventArray}
