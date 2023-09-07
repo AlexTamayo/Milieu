@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { getAllEvents, getAllBusinesses, getAllUsers,getBusinessCategories,getEventCategories } from '../routes/api';
+import { getAllEvents, getAllBusinesses, getAllUsers,getBusinessCategories,getEventCategories,getUserByEmail,getUserByUsername } from '../routes/api';
 
 const actionTypes = {
   SET_EVENT_DATA: 'SET_EVENT_DATA',

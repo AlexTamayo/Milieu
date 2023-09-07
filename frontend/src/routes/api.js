@@ -43,6 +43,13 @@ export const getAllBusinesses = () => {
   return apiClient.get(ROUTES.BUSINESSES);
 };
 
+export const getUserByEmail = (email) => {
+  return apiClient.get(ROUTES.USERS + `/email/${email}`);
+}
+export const getUserByUsername = (username) => {
+  return apiClient.get(ROUTES.USERS + `/username/${username}`);
+}
+
 export const getAllEvents = () => {
   return apiClient.get(ROUTES.EVENTS);
 }
@@ -52,6 +59,7 @@ export const getBusinessCategories = () => {
 export const getEventCategories = () => {
   return apiClient.get(ROUTES.EVENT_CATEGORIES);
 }
+
 
 export const createUser = (userData) => {
   return apiClient.post(ROUTES.USERS, userData);

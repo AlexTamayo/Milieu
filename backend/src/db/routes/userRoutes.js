@@ -6,6 +6,8 @@ const secret = "fmERAnC8SZqAn8uPdgES";
 
 const addUser = require("../instructions/users/createUser");
 const loginUser = require('../instructions/users/loginUser');
+const findUserByEmail = require('../instructions/users/findUserByEmail');
+const findUserByUsername = require('../instructions/users/findUserByUsername');
 
 /* CREATE USER */
 router.post("/", async (req, res) => {
@@ -106,6 +108,38 @@ router.get("/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Get a user by email
+router.get("/email/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await findUserByEmail(email);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Get a user by username
+router.get("/username/:username", async (req, res) => {
+  const { username } = req.params;
+  try {
+    const user = await findUserByUsername(username);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+
 
 // Update a user by ID
 router.put("/:id", async (req, res) => {
