@@ -1,5 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { UserModalContext } from "../context/UserModalContext";
+import { DataContext } from "../context/dataProviderContext";
 
 import '../styles/TopNavBar.scss';
 
@@ -9,7 +9,7 @@ import profile from '../assets/temp/profile_pics_6.png'
 import PlusSign from './SVGs/PlusSign';
 
 function TopNavBar({ userDivRef }) {
-  const { toggleUserModal } = useContext(UserModalContext);
+  const { toggleUserModal } = useContext(DataContext);
 
   const [logged, setlogged] = useState(true);
 

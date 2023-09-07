@@ -9,6 +9,13 @@ export const DataProvider = ({ children }) => {
   const [businessData, setBusinessData] = useState([]);
   const [userData, setUserData] = useState([]);
 
+  // User modal opening and closing logic
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  
+  const toggleUserModal = () => {
+    setIsUserModalOpen(prevState => !prevState);
+  };
+
   useEffect(() => {
     // Fetch data when the component mounts
     getAllEvents()
@@ -31,7 +38,12 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ eventData, businessData, userData }}>
+    <DataContext.Provider value={{ eventData,
+                                   businessData,
+                                   userData,
+                                   isUserModalOpen,
+                                   toggleUserModal
+                                   }}>
       {children}
     </DataContext.Provider>
   );

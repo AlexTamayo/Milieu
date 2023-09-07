@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef } from 'react';
 import '../styles/UserModal.scss';
 
-import { UserModalContext } from '../context/UserModalContext';
+import { DataContext  } from '../context/dataProviderContext';
 
 
 function UserModal({ children, userDivRef }) {
-  const { isUserModalOpen, toggleUserModal } = useContext(UserModalContext);
+  const { isUserModalOpen, toggleUserModal } = useContext(DataContext);
 
   const modalRef = useRef(null);
 

@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import './App.scss';
 
-import { UserModalProvider } from "./context/UserModalContext";
 import { DataProvider } from './context/dataProviderContext';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -22,23 +21,21 @@ library.add(faMapPin);
 
 
 function App() {
-  const [isUserModalOpen, setisUserModalOpen] = useState(false);
-
   const userDivRef = useRef(null);
   
   return (
-    < UserModalProvider >
-    <div className="App">
-      < VenueModal />
-      < UserModal userDivRef={userDivRef} />
-      < SearchBar />
-      < TopNavBar userDivRef={userDivRef} />
-      < GoogleMapComponent2 />
-      {/* < TopNavBar /> */}
-      {/* < GoogleMapComponent /> */}
-      {/* < ParseBusinessAndEventData /> */}
-    </div>
-    </ UserModalProvider >
+    < DataProvider >
+      <div className="App">
+        < VenueModal />
+        < UserModal userDivRef={userDivRef} />
+        < SearchBar />
+        < TopNavBar userDivRef={userDivRef} />
+        < GoogleMapComponent2 />
+        {/* < TopNavBar /> */}
+        {/* < GoogleMapComponent /> */}
+        {/* < ParseBusinessAndEventData /> */}
+      </div>
+    </ DataProvider >
   );
 }
 
