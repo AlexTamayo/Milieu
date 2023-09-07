@@ -8,6 +8,8 @@ const secret = "fmERAnC8SZqAn8uPdgES";
 
 const addUser = require("../instructions/users/createUser");
 const loginUser = require('../instructions/users/loginUser');
+const findUserByEmail = require('../instructions/users/findUserByEmail');
+const findUserByUsername = require('../instructions/users/findUserByUsername');
 
 /* CREATE USER */
 router.post("/", async (req, res) => {
