@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const secret = "fmERAnC8SZqAn8uPdgES";
 const getAllUserData = require('../instructions/users/getAllUserData');
 
-
 const addUser = require("../instructions/users/createUser");
 const loginUser = require('../instructions/users/loginUser');
 const findUserByEmail = require('../instructions/users/findUserByEmail');
@@ -76,23 +75,6 @@ router.post("/validate-token", async (req, res) => {
   }
 });
 
-router.get("/test/:id", async (req, res) => {
-  console.log(`GET /api/users/test/${req.params.id} route hit`); // Logging to know the route has been hit
-  try {
-    const user = await User.findByPk(req.params.id);
-    if (user) {
-      console.log("User found:", user);
-      res.status(200).json(user);
-    } else {
-      console.log("User not found");
-      res.status(404).json({ error: "User not found" });
-    }
-  } catch (error) {
-    console.log("An error occurred:", error.message);
-    res.status(400).json({ error: error.message });
-  }
-});
-
 /* GET USER BY ID */
 router.get("/:id", async (req, res) => {
   console.log(`GET /api/users/${req.params.id} route hit`); // Logging to know the route has been hit
@@ -140,7 +122,6 @@ router.get("/username/:username", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
 
 // Update a user by ID
 router.put("/:id", async (req, res) => {
