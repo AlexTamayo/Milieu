@@ -24,10 +24,7 @@ export const DataProvider = ({ children }) => {
       });
 
       getAllUsers()
-      .then((data) => {
-        console.log('Fetched userData:', data.data);
-        setUserData(data.data);
-      })
+      .then((data) => setUserData(data.data))
       .catch((error) => {
         console.error('Error fetching user data:', error);
       });
