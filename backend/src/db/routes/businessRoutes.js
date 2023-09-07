@@ -1,30 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const { Business } = require('../models');
+const getBusinessesWithDetails = require('../instructions/businesses/getBusinessesWithDetails');
 
-// Get all businesses
+
 router.get('/', async (req, res) => {
   try {
-    const businesses = await Business.findAll();
+    const businesses = await getBusinessesWithDetails();
     res.status(200).json(businesses);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-// // Get a single business by ID
-// router.get('/:id', async (req, res) => {
+
+
+// // Get all businesses
+// router.get('/', async (req, res) => {
 //   try {
-//     const business = await Business.findByPk(req.params.id);
-//     if (business) {
-//       res.status(200).json(business);
-//     } else {
-//       res.status(404).json({ error: 'Business not found' });
-//     }
+//     const businesses = await Business.findAll();
+//     res.status(200).json(businesses);
 //   } catch (error) {
 //     res.status(400).json({ error: error.message });
 //   }
 // });
+
+// Get a single business by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const business = await Business.findByPk(req.params.id);
+    if (business) {
+      res.status(200).json(business);
+    } else {
+      res.status(404).json({ error: 'Business not found' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // Create a new business
 router.post('/', async (req, res) => {

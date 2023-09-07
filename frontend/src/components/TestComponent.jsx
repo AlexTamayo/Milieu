@@ -4,33 +4,36 @@ import { DataContext } from '../context/dataProviderContext';
 function TestComponent() {
   const { eventData, businessData, userData } = useContext(DataContext);
 
-  const eventArray = eventData.map((event) => (
-    <li key={event.id}> {event.title}</li>
-  ));
-  const businessArray = businessData.map((business) => (
-    <li key={business.id}> {business.name}</li>
-  ));
+
+
+  // const eventArray = eventData.map((event) => (
+  //   <li key={event.id}> {event.eventLocation.longitude}</li>
+  // ));
+  // const businessArray = businessData.map((business) => (
+  //   <li key={business.id}> {business.businessLocation.longitude}</li>
+  // ));
   const userArray = userData.map((user) => (
     <li key={user.id}> {user.username}</li>
   ))
+
 
   return (
     <div>
 
        <h2>Events</h2>
       <ul>
-        {eventArray}
+        {/* {eventArray} */}
       </ul>
-      
+
       <h2>Businesses</h2>
       <ul>
-        {businessArray}
+        {/* {businessArray} */}
       </ul>
 
       <h2>Users</h2>
       <ul>
         {userArray}
-      </ul> 
+      </ul>
     </div>
   );
 }
