@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('EventLocations', [
       {
         longitude: -114.0719, // Replace with the actual longitude
-        latitude: 51.0447,  // Replace with the actual latitude
+        latitude: 50.861811,  // Replace with the actual latitude
         streetAddress: '123 Main Street',
         city: 'Calgary',
         region: 'AB',
@@ -16,8 +16,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0710, // Replace with the actual longitude
-        latitude: 51.0455,  // Replace with the actual latitude
+        longitude: 119.274220, // Replace with the actual longitude
+        latitude: 50.263821,  // Replace with the actual latitude
         streetAddress: '456 Elm Street',
         city: 'Calgary',
         region: 'AB',
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         longitude: -114.0680, // Replace with the actual longitude
-        latitude: 51.0440,  // Replace with the actual latitude
+        latitude: 50.263621,  // Replace with the actual latitude
         streetAddress: '789 Oak Avenue',
         city: 'Calgary',
         region: 'AB',
