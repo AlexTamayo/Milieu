@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 import { DataContext } from '../context/MainContext';
 
@@ -7,10 +8,26 @@ import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
     const { state, closeUserAddVenue } = useContext(DataContext);
-    const { isUserAddVenueOpen } = state;
-    
+    const { isUserAddVenueOpen,eventCategoryData,businessCategoryData } = state;
     const [userAddVenueType, setUserAddVenueType] = useState('business');
     const [formData, setFormData] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const eventCategoryOptions = eventCategoryData.map((category) => ({
+      value: category.id,
+      label: category.name,
+    }));
+
+    const businessCategoryOptions = businessCategoryData.map((category) => ({
+      value: category.id,
+      label: category.name,
+    }));
+
+    const handleCategoryChange = (selectedOption) => {
+      setSelectedCategory(selectedOption);
+      // You can perform any other actions here when a category is selected
+    };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -43,12 +60,6 @@ function UserAddVenue() {
           );
       }
   };
-
-  // Temp business category
-  const businessCategories = [
-    { id: 1, name: "Restaurant" },
-    { id: 2, name: "Retail" },
-  ];
   
 
     if (!isUserAddVenueOpen) return null;
@@ -57,8 +68,15 @@ function UserAddVenue() {
       <div className="modal-overlay">
         <div className="user-add-venue-modal">
           <div className="venue-type-toggle">
-            <button onClick={() => setUserAddVenueType("business")}>Business</button>
-            <button onClick={() => setUserAddVenueType("event")}>Event</button>
+            <button onClick={() => {
+              setUserAddVenueType("business");
+              setSelectedCategory(null);
+              }}>Business</button>
+            <button onClick={() =>{ 
+              setUserAddVenueType("event");
+              setSelectedCategory(null);
+            }}
+            >Event</button>
           </div>
 
           {userAddVenueType === "business" ? (
@@ -89,15 +107,23 @@ function UserAddVenue() {
                 placeholder="Website"
                 onChange={handleInputChange}
               />
-
-              <select name="businessCategoryId" onChange={handleInputChange}>
-                <option value="">Select a category...</option>
-                {businessCategories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+              
+              <div>
+                <h5>Select an Business Category:</h5>
+                <Select
+                  options={businessCategoryOptions}
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                  placeholder="Select a business category..."
+                />
+                {selectedCategory && (
+                  <div>
+                    <h4>Selected Category:</h4>
+                    <p>{selectedCategory.label}</p>
+                  </div>
+                )}  
+              </div>
+            
 
               <div className="branding-section">
                 <h4>Branding</h4>
@@ -191,10 +217,21 @@ function UserAddVenue() {
                 onChange={handleInputChange}
               />
 
-              <select name="eventCategoryId" onChange={handleInputChange}>
-                <option value="">Select an Event Category...</option>
-                {/* You should populate this dropdown with available event categories from your API or static list */}
-              </select>
+              <div>
+                <h5>Select an Event Category:</h5>
+                <Select
+                  options={eventCategoryOptions}
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                  placeholder="Select an event category..."
+                />
+                {selectedCategory && (
+                  <div>
+                    <h4>Selected Category:</h4>
+                    <p>{selectedCategory.label}</p>
+                  </div>
+                )}  
+              </div>
 
               <div className="branding-section">
                 <h4>Branding</h4>
