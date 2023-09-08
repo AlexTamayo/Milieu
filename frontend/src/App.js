@@ -32,7 +32,6 @@ function App() {
         < SearchBar />
         < TopNavBar userDivRef={userDivRef} />
         < GoogleMapComponent2 />
-        {/* < TopNavBar /> */}
         {/* < GoogleMapComponent /> */}
         {/* < ParseBusinessAndEventData /> */}
       </div>
