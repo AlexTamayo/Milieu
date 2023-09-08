@@ -2,15 +2,16 @@ import React, { useState, useContext } from 'react';
 
 import '../styles/UserLogRegModal.scss';
 
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
 
 const UserLogRegModal = () => {
   const {
-    loginModalType,
-    isLoginModalVisible,
+    state,
     openLoginModal,
     closeLoginModal,
   } = useContext(DataContext);
+
+  const { loginModalType, isLoginModalVisible } = state;
 
   const [formData, setFormData] = useState({
     firstName: "",

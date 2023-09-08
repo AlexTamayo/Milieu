@@ -1,22 +1,26 @@
 import { useContext, useEffect, useRef } from 'react';
 import '../styles/VenueModal.scss';
 
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
 import VenueModalBusiness from './VenueModalBusiness';
 import VenueModalEvent from './VenueModalEvent';
 
 function VenueModal() {
 
   const { 
-    isVenueModalOpen,
     openVenueModal,
     closeVenueModal,
-    venueType,
     setVenueType,
-    eventData,
-    businessData,
-    userData,
+    state
   } = useContext(DataContext);
+
+  const {
+    userData,
+    businessData,
+    eventData,
+    isVenueModalOpen,
+    venueType
+  } = state;
 
   const venueModalRef = useRef(null);
 

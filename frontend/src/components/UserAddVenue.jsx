@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
 
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
-    const { isUserAddVenueOpen, closeUserAddVenue } = useContext(DataContext);
-    const [venueType, setVenueType] = useState('business');
+    const { state, closeUserAddVenue } = useContext(DataContext);
+    const { isUserAddVenueOpen } = state;
+    
+    const [userAddVenueType, setUserAddVenueType] = useState('business');
     const [formData, setFormData] = useState({});
 
     const handleInputChange = (e) => {
@@ -21,22 +23,22 @@ function UserAddVenue() {
     const handleSubmit = async () => {
       try {
           let response;
-          if (venueType === "business") {
+          if (userAddVenueType === "business") {
               response = await axios.post(
                   "http://localhost:3001/api/businesses",
                   formData
               );
-          } else if (venueType === "event") {
+          } else if (userAddVenueType === "event") {
               response = await axios.post(
                   "http://localhost:3001/api/events", // Assuming the endpoint for events is this, you can replace with the actual one
                   formData
               );
           }
-          console.log(`${venueType.charAt(0).toUpperCase() + venueType.slice(1)} added:`, response.data);
+          console.log(`${userAddVenueType.charAt(0).toUpperCase() + userAddVenueType.slice(1)} added:`, response.data);
           closeUserAddVenue(); // Close the modal after a successful submission
       } catch (error) {
           console.error(
-              `There was an error submitting the ${venueType}:`,
+              `There was an error submitting the ${userAddVenueType}:`,
               error.response ? error.response.data : error.message
           );
       }
@@ -55,11 +57,11 @@ function UserAddVenue() {
       <div className="modal-overlay">
         <div className="user-add-venue-modal">
           <div className="venue-type-toggle">
-            <button onClick={() => setVenueType("business")}>Business</button>
-            <button onClick={() => setVenueType("event")}>Event</button>
+            <button onClick={() => setUserAddVenueType("business")}>Business</button>
+            <button onClick={() => setUserAddVenueType("event")}>Event</button>
           </div>
 
-          {venueType === "business" ? (
+          {userAddVenueType === "business" ? (
             // Business form fields
             <>
               <input
@@ -248,7 +250,7 @@ function UserAddVenue() {
 
           <button
             onClick={() => {
-              setVenueType("business");
+              setUserAddVenueType("business");
               closeUserAddVenue();
             }}
           >

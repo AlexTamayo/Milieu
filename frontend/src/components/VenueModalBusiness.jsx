@@ -1,5 +1,11 @@
 import { useContext} from 'react';
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
+import {
+  formatPhoneNumber,
+  formatURL,
+  extractNumbers,
+  addressFormatter
+} from '../utils/helpers';
 
 function VenueModalBusiness(props) {
 
@@ -8,10 +14,6 @@ function VenueModalBusiness(props) {
   const { 
     closeVenueModal,
     handleCopy,
-    formatPhoneNumber,
-    formatURL,
-    extractNumbers,
-    addressFormatter
   } = useContext(DataContext);
 
   const bgImageUrl = [

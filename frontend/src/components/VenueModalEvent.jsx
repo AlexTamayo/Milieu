@@ -1,5 +1,6 @@
 import { useContext} from 'react';
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
+import { addressFormatter } from '../utils/helpers';
 
 function VenueModalEvent(props) {
 
@@ -10,8 +11,7 @@ function VenueModalEvent(props) {
 
   const { 
     closeVenueModal,
-    handleCopy,
-    addressFormatter
+    handleCopy
   } = useContext(DataContext);
 
   const bgImageUrl = [

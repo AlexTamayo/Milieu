@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
 
 function TestComponent() {
-  const { eventData, businessData, userData } = useContext(DataContext);
+  // const { eventData, businessData, userData } = useContext(DataContext);
+  const { state } = useContext(DataContext);
+
+  const { eventData, businessData, userData } = state;
 
 
 

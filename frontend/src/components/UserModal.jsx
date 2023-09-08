@@ -4,11 +4,13 @@ import '../styles/UserModal.scss';
 
 import useAuth from '../hooks/useAuth';
 
-import { DataContext  } from '../context/dataProviderContext';
+import { DataContext  } from '../context/MainContext';
 
 
 function UserModal({ userDivRef }) {
-  const { isUserModalOpen, toggleUserModal } = useContext(DataContext);
+  const { state , toggleUserModal } = useContext(DataContext);
+
+  const { isUserModalOpen } = state;
 
   const userModalRef = useRef(null);
 

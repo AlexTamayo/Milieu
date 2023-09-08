@@ -1,5 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { DataContext } from "../context/dataProviderContext";
+import { DataContext } from "../context/MainContext";
 
 import '../styles/TopNavBar.scss';
 
@@ -11,13 +11,14 @@ import PlusSign from './SVGs/PlusSign';
 function TopNavBar({ userDivRef }) {
   const {
     toggleUserModal,
-    toggleVenueModal,
     openLoginModal,
     openUserAddVenue,
     openVenueModal,
     setVenueType,
-    isCopied
+    state
   } = useContext(DataContext);
+
+  const { isCopied } = state;
 
   const [logged, setlogged] = useState(true);
 

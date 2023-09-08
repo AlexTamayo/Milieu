@@ -9,7 +9,7 @@
 // } from '@react-google-maps/api';
 // import { FaLinkedin, FaBusinessTime, FaCar, FaUsers } from 'react-icons/fa';
 // import { lightModeStyles, darkModeStyles } from './MapStyles';
-// import { DataContext } from '../context/dataProviderContext';
+// import { DataContext } from '../context/MainContext';
 
 // const containerStyle = {
 //   width: '100%',

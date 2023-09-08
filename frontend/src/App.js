@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './App.scss';
 
-import { DataProvider } from './context/dataProviderContext';
+import { DataProvider } from './context/MainContext';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';

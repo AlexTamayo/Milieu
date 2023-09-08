@@ -4,7 +4,7 @@ import {
   LoadScript,
   Marker,
 } from '@react-google-maps/api';
-import { DataContext } from '../context/dataProviderContext';
+import { DataContext } from '../context/MainContext';
 
 const containerStyle = {
   width: '100%',
@@ -14,7 +14,8 @@ const containerStyle = {
 const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [markers, setMarkers] = useState([]);
-  const { eventData, businessData } = useContext(DataContext);
+  const { state } = useContext(DataContext);
+  const { eventData, businessData } = state;
 
   useEffect(() => {
     const newMarkers = [];
