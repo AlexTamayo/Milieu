@@ -24,6 +24,50 @@ export const DataProvider = ({ children }) => {
     setVenueModalOpen(!isVenueModalOpen);
   }
 
+  const openVenueModal = () => {
+    setVenueModalOpen(true);
+  }
+
+  const closeVenueModal = () => {
+      setVenueModalOpen(false);
+  }
+
+
+  // Copy to clipboard script
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 3000);
+  };
+
+  // Marker venue type
+  const [venueType, setVenueType] = useState(null);
+
+  // vvv FORMATTERS vvv
+
+  function formatPhoneNumber(phone) {
+    const parts = phone.split('-');
+    return `(${parts[0]}) ${parts[1]}-${parts[2]}`;
+  }
+
+  function formatURL(url) {
+    return url.replace(/^https?:\/\/(www\.)?/, '');
+  }
+
+  function extractNumbers(inputString) {
+    return inputString.replace(/\D/g, '');
+  }
+
+  function addressFormatter(location) {
+    return `${location.streetAddress}, ${location.city}, ${location.region} ${location.postalCode}`
+  }
+
+  // ^^^ FORMATTERS ^^^
+
+
+
   useEffect(() => {
     // Fetch data when the component mounts
     getAllEvents()
@@ -57,8 +101,18 @@ export const DataProvider = ({ children }) => {
                                    userData,
                                    isVenueModalOpen,
                                    toggleVenueModal,
+                                   openVenueModal,
+                                   closeVenueModal,
                                    isUserModalOpen,
-                                   toggleUserModal
+                                   toggleUserModal,
+                                   venueType,
+                                   setVenueType,
+                                   isCopied,
+                                   handleCopy,
+                                   formatPhoneNumber,
+                                   formatURL,
+                                   extractNumbers,
+                                   addressFormatter
                                    }}>
       {children}
     </DataContext.Provider>

@@ -9,17 +9,47 @@ import profile from '../assets/temp/profile_pics_6.png'
 import PlusSign from './SVGs/PlusSign';
 
 function TopNavBar({ userDivRef }) {
-  const { toggleUserModal, toggleVenueModal } = useContext(DataContext);
+  const {
+    toggleUserModal,
+    toggleVenueModal,
+    openVenueModal,
+    setVenueType,
+    isCopied
+  } = useContext(DataContext);
 
   const [logged, setlogged] = useState(true);
 
   return (
     <div className="top-nav-bar"  >
+
+      {isCopied && <div className="copied-message">Copied to clipboard</div>}
+
       <div className='top-nav-bar__left'>
-        <div className='left__logo' onClick={toggleVenueModal}>
+        <div className='left__logo'>
         <img src={logo_and_name} alt="logo" />
         </div>
       </div>
+    
+      <button onClick={() => {
+          setVenueType('business');
+          openVenueModal();
+      }}>
+          Business
+      </button>
+
+      <button onClick={() => {
+        setVenueType('event');
+        openVenueModal();
+      }}>
+        Event
+      </button>
+
+      <button onClick={() => {
+        setVenueType(null);
+        openVenueModal();
+      }}>
+        Null
+      </button>
 
       {logged ?
         <div className='top-nav-bar__right'>

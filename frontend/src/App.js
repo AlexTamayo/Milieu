@@ -23,7 +23,7 @@ function App() {
   return (
     < DataProvider >
       <div className="App">
-        <VenueModal />
+        < VenueModal />
         < UserModal userDivRef={userDivRef} />
         < SearchBar />
         < TopNavBar userDivRef={userDivRef} />
