@@ -1,0 +1,62 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9981; /* Ensure it's above other elements on the page */
+}
+
+.user-add-venue-modal {
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: #fff; /* White background for the modal */
+  padding: 20px;
+  border-radius: 20px;
+
+  width: 615px;
+  // max-width: 500px;
+
+  height: 700px;
+
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow for the modal */
+}
+
+.venue-type-toggle button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  background-color: #e0e0e0; /* Gray background */
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.venue-type-toggle button:hover {
+  background-color: #d0d0d0; /* Darker gray on hover */
+}
+
+.branding-section,
+.location-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    h4 {
+        margin-top: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+    }
+
+    input {
+        margin-top: 10px;
+    }
+}

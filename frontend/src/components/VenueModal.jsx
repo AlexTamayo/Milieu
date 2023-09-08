@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef } from 'react';
 import '../styles/VenueModal.scss';
 
 import { DataContext } from '../context/dataProviderContext';
-import BusinessVenueModal from './BusinessVenueModal';
-import EventVenueModal from './EventVenueModal';
+import VenueModalBusiness from './VenueModalBusiness';
+import VenueModalEvent from './VenueModalEvent';
 
 function VenueModal() {
 
@@ -67,9 +67,9 @@ function VenueModal() {
   return (
     <div ref={venueModalRef} className="venue-modal">
 
-      {venueType === 'business' && < BusinessVenueModal currentBusiness={currentBusiness} arrNum={arrNum}/>}
+      {venueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum}/>}
 
-      {venueType === 'event' && < EventVenueModal currentEvent={currentEvent} arrNum={arrNum}/>}
+      {venueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum}/>}
 
     </div>
   );

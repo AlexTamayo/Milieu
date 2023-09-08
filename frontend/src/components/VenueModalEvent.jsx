@@ -1,16 +1,16 @@
 import { useContext} from 'react';
 import { DataContext } from '../context/dataProviderContext';
 
-function BusinessVenueModal(props) {
+function VenueModalEvent(props) {
 
-  const { currentBusiness, arrNum } = props;
+  const {
+    currentEvent,
+    arrNum
+  } = props;
 
   const { 
     closeVenueModal,
     handleCopy,
-    formatPhoneNumber,
-    formatURL,
-    extractNumbers,
     addressFormatter
   } = useContext(DataContext);
 
@@ -28,13 +28,18 @@ function BusinessVenueModal(props) {
     "https://imgs.search.brave.com/k6E-LQWwgXbalXiTpyGoIiNRcb9Qe7nHuDEuBaPp--0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzc2Lzg5Lzc3/LzM2MF9GXzc2ODk3/NzU3X0NQc0x5VVhR/YkdNYzZ4WjlQZ05O/TmlrWDJac0hnYzlp/LmpwZw"
   ];
 
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()} @ ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+    return formattedDate;
+  };
 
 
   return (
     <div>
       <div className="venue-modal__bg-image">
         <img src={bgImageUrl[arrNum]} alt="Venue background" />
-        {/* <img src={currentBusiness.businessBranding.bannerUrl} alt="Venue background" /> */}
+        {/* <img src={currentEvent.eventBranding.bannerUrl} alt="Venue background" /> */}
       </div>
 
       <div className="venue-modal__bagde-image">
@@ -43,23 +48,19 @@ function BusinessVenueModal(props) {
           alt="Venue badge"
           className="venue-badge"
         />
-        {/* <img src={currentBusiness.businessBranding.logoUrl} alt="Venue background" /> */}
+        {/* <img src={currentEvent.eventBranding.logoUrl} alt="Venue background" /> */}
       </div>
 
-      <div className="venue-modal__title">{currentBusiness.name}</div>
+      <div className="venue-modal__title">{currentEvent.title}</div>
 
       <div className="venue-modal__category">
-        {currentBusiness.businessCategory.name}
-      </div>
-
-      <div className="venue-modal__rating">
-        {currentBusiness.rating} / 5 rating ({currentBusiness.reviewCount})
+        {currentEvent.eventCategory.name}
       </div>
 
       <hr />
 
       <div className="venue-modal__description">
-        {currentBusiness.description} Lorem Ipsum is simply dummy text of the
+        {currentEvent.description} Lorem Ipsum is simply dummy text of the
         printing and typesetting industry. Lorem Ipsum has been the industry's
         standard dummy text ever since the 1500s, when an unknown printer took a
         galley of type and scrambled it to make a type specimen book. It has
@@ -72,68 +73,48 @@ function BusinessVenueModal(props) {
 
       <hr />
 
+      <div className="vm-container__time">
+        
+        <div className="vm-left__time">
+          <div className="vm-time-icon">
+            <i className="fas fa-clock"></i>
+          </div>
+          <div className="vm-time-icon">
+            <i className="fas fa-clock"></i>
+          </div>
+        </div>
+
+        <div className="vm-center__time">
+          <div className="vm-time-label">
+            Start
+          </div>
+          <div className="vm-time-label">
+            End
+          </div>
+        </div>
+
+        <div className="vm-right__time">
+          <div className="vm-time-value">
+            {formatDateTime(currentEvent.startTime)}
+          </div>
+          <div className="vm-time-value">
+            {formatDateTime(currentEvent.endTime)}
+          </div>
+        </div>
+      </div>
+
       <div className="vm-container__address">
         <div className="vm-left__address">
           <i className="fas fa-map-marker-alt"></i>
         </div>
 
         <div className="vm-right__address">
-          {addressFormatter(currentBusiness.businessLocation)}
+          {addressFormatter(currentEvent.eventLocation)}
         </div>
 
         <div
           onClick={() =>
-            handleCopy(addressFormatter(currentBusiness.businessLocation))
-          }
-          className="copy-icon-button"
-        >
-          <i className="fas fa-copy"></i>
-        </div>
-      </div>
-
-      <div className="vm-container__operating-hours">
-        <div className="vm-left__operating-hours">
-          <i className="fas fa-clock"></i>
-        </div>
-
-        <div className="vm-right__operating-hours">Thursday 11h - 19h</div>
-      </div>
-
-      <div className="vm-container__website">
-        <div className="vm-left__website">
-          <i className="fas fa-globe"></i>
-        </div>
-
-        <div className="vm-right__website">
-          <a
-            href={currentBusiness.website}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {formatURL(currentBusiness.website)}
-          </a>
-        </div>
-
-        <div
-          onClick={() => handleCopy(currentBusiness.website)}
-          className="copy-icon-button"
-        >
-          <i className="fas fa-copy"></i>
-        </div>
-      </div>
-
-      <div className="vm-container__phoneNumber">
-        <div className="vm-left__phoneNumber">
-          <i className="fas fa-phone"></i>
-        </div>
-
-        <div className="vm-right__phoneNumber">
-          {formatPhoneNumber(currentBusiness.phoneNumber)}
-        </div>
-
-        <div
-          onClick={() =>
-            handleCopy(extractNumbers(currentBusiness.phoneNumber))
+            handleCopy(addressFormatter(currentEvent.eventLocation))
           }
           className="copy-icon-button"
         >
@@ -148,4 +129,4 @@ function BusinessVenueModal(props) {
   );
 }
 
-export default BusinessVenueModal;
+export default VenueModalEvent;

@@ -12,6 +12,7 @@ function TopNavBar({ userDivRef }) {
   const {
     toggleUserModal,
     toggleVenueModal,
+    openUserAddVenue,
     openVenueModal,
     setVenueType,
     isCopied
@@ -53,7 +54,9 @@ function TopNavBar({ userDivRef }) {
 
       {logged ?
         <div className='top-nav-bar__right'>
-          <div className='right__add'>
+          <div className='right__add'
+               onClick={openUserAddVenue}
+          >
             < PlusSign />
           </div>
           <div className='right__user'

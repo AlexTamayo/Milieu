@@ -14,6 +14,7 @@ import TopNavBar from './components/TopNavBar';
 import SearchBar from './components/SearchBar';
 import UserModal from './components/UserModal';
 import VenueModal from './components/VenueModal';
+import UserAddVenue from './components/UserAddVenue';
 
 library.add(faMapPin);
 
@@ -23,6 +24,7 @@ function App() {
   return (
     < DataProvider >
       <div className="App">
+        < UserAddVenue />
         < VenueModal />
         < UserModal userDivRef={userDivRef} />
         < SearchBar />

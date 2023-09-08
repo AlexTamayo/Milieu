@@ -17,7 +17,7 @@ export const DataProvider = ({ children }) => {
   };
 
   // Venue details modal opening and closing logic
-  // Remember that I put part of the toggle logic in the milieu logo of nav bar.
+  // Remember that I put part of the toggle logic in the nav bar.
   const [isVenueModalOpen, setVenueModalOpen] = useState(false);
 
   const toggleVenueModal = () => {
@@ -32,6 +32,16 @@ export const DataProvider = ({ children }) => {
       setVenueModalOpen(false);
   }
 
+  // UserAdd modal opening and closing logic
+  const [isUserAddVenueOpen, setIsUserAddVenueOpen] = useState(false);
+
+  const openUserAddVenue = () => {
+      setIsUserAddVenueOpen(true);
+  };
+
+  const closeUserAddVenue = () => {
+      setIsUserAddVenueOpen(false);
+  };
 
   // Copy to clipboard script
   const [isCopied, setIsCopied] = useState(false);
@@ -103,6 +113,9 @@ export const DataProvider = ({ children }) => {
                                    toggleVenueModal,
                                    openVenueModal,
                                    closeVenueModal,
+                                   isUserAddVenueOpen,
+                                   openUserAddVenue,
+                                   closeUserAddVenue,
                                    isUserModalOpen,
                                    toggleUserModal,
                                    venueType,
