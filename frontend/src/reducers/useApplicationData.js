@@ -14,7 +14,9 @@ const actionTypes = {
   SET_LOGIN_MODAL_TYPE: 'SET_LOGIN_MODAL_TYPE',
   SET_LOGIN_MODAL_VISBILITY: 'SET_LOGIN_MODAL_VISBILITY',
   SET_VENUE_TYPE: 'SET_VENUE_TYPE',
-  // ... Add other actions as needed
+  SET_SELECTED_FILTER: 'SET_SELECTED_FILTER',
+  SET_USER: 'SET_USER',
+  SIGN_OUT: 'SIGN_OUT',
 };
 
 
@@ -57,7 +59,15 @@ const reducer = (state, action) => {
     case actionTypes.SET_VENUE_TYPE:
       return { ...state, venueType: action.payload };
 
-    // ... Add other cases as needed
+    case actionTypes.SET_SELECTED_FILTER:
+      return { ...state, selectedFilter: action.payload };
+
+    case actionTypes.SET_USER:
+      return { ...state, currentUser: action.payload };
+
+    case actionTypes.SIGN_OUT:
+      return { ...state, currentUser: null };
+
     default:
       return state;
   }
@@ -76,6 +86,8 @@ export default function useApplication() {
     loginModalType: null,
     isLoginModalVisible: false,
     venueType: null,
+    selectedFilter: '',
+    currentUser: null,
   });
 
   useEffect(() => {
@@ -137,9 +149,25 @@ export default function useApplication() {
   };
 
   // Marker venue type
-  // const [venueType, setVenueType] = useState(null);
   const setVenueType = (type) => {
     dispatch({ type: actionTypes.SET_VENUE_TYPE, payload: type });
+  };
+
+  const handleButtonClick = (buttonType) => {
+    if (state.selectedFilter === buttonType) {
+      dispatch({ type: actionTypes.SET_SELECTED_FILTER, payload: '' });
+    } else {
+      dispatch({ type: actionTypes.SET_SELECTED_FILTER, payload: buttonType });
+    }
+  };
+
+  // Logged user functionality
+  const setUser = (userDetails) => {
+    dispatch({ type: actionTypes.SET_USER, payload: userDetails });
+  };
+  
+  const signOut = () => {
+    dispatch({ type: actionTypes.SIGN_OUT });
   };
 
   return {
@@ -152,6 +180,9 @@ export default function useApplication() {
     handleCopy,
     openLoginModal,
     closeLoginModal,
-    setVenueType
+    setVenueType,
+    handleButtonClick,
+    setUser,
+    signOut
   };
 }

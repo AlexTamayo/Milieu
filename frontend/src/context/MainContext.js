@@ -14,22 +14,28 @@ export const DataProvider = ({ children }) => {
     handleCopy,
     openLoginModal,
     closeLoginModal,
-    setVenueType
+    setVenueType,
+    handleButtonClick,
+    setUser,
+    signOut
   } = useApplicationData();
 
   return (
     <DataContext.Provider value={{ 
-                                   openLoginModal,
-                                   closeLoginModal,
-                                   openVenueModal,
-                                   closeVenueModal,
-                                   openUserAddVenue,
-                                   closeUserAddVenue,
-                                   toggleUserModal,
-                                   setVenueType,
-                                   handleCopy,
-                                   state
-                                   }}>
+                                  state,
+                                  toggleUserModal,
+                                  openVenueModal,
+                                  closeVenueModal,
+                                  openUserAddVenue,
+                                  closeUserAddVenue,
+                                  handleCopy,
+                                  openLoginModal,
+                                  closeLoginModal,
+                                  setVenueType,
+                                  handleButtonClick,
+                                  setUser,
+                                  signOut
+                                }}>
       {children}
     </DataContext.Provider>
   );

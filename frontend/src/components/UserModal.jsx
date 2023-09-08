@@ -2,20 +2,19 @@ import { useContext, useEffect, useRef } from 'react';
 
 import '../styles/UserModal.scss';
 
-import useAuth from '../hooks/useAuth';
-
 import { DataContext  } from '../context/MainContext';
 
 
 function UserModal({ userDivRef }) {
-  const { state , toggleUserModal } = useContext(DataContext);
+  const {
+    state ,
+    toggleUserModal,
+    signOut
+  } = useContext(DataContext);
 
-  const { isUserModalOpen } = state;
+  const { isUserModalOpen, currentUser } = state;
 
   const userModalRef = useRef(null);
-
-  const { user, signOut } = useAuth();
-
 
   // This useEffect checks if there was a click outside of the modal and the user div that opened the menu.
   useEffect(() => {
@@ -34,17 +33,17 @@ function UserModal({ userDivRef }) {
   }, [userDivRef]);
 
 
-  if (!isUserModalOpen || !user) return null;
+  if (!isUserModalOpen || !currentUser) return null;
 
 return (
   <div ref={userModalRef} className="user-modal">
     <div className="user-modal__profile-pic">
-      <img src={user.profileImage} alt={`${user.firstName}'s profile`} />
+      <img src={currentUser.profileImage} alt={`${currentUser.firstName}'s profile`} />
     </div>
 
-    <div className="user-modal__greeting">Hi, {user.firstName}!</div>
+    <div className="user-modal__greeting">Hi, {currentUser.firstName}!</div>
 
-    <div className="user-modal__username">@{user.username}</div>
+    <div className="user-modal__username">@{currentUser.username}</div>
 
     <div className="user-modal__venues-btn">Venues</div>
 

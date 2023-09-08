@@ -10,7 +10,6 @@ function SearchBar() {
   const handleSearch = (event) => {
     event.preventDefault();
     
-    
     console.log(`Searching for: ${searchTerm}`);
   };
 

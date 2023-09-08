@@ -10,17 +10,16 @@ import PlusSign from './SVGs/PlusSign';
 
 function TopNavBar({ userDivRef }) {
   const {
+    state,
     toggleUserModal,
     openLoginModal,
     openUserAddVenue,
     openVenueModal,
     setVenueType,
-    state
+    setUser
   } = useContext(DataContext);
 
-  const { isCopied } = state;
-
-  const [logged, setlogged] = useState(true);
+  const { isCopied, currentUser, userData } = state;
 
   return (
     <div className="top-nav-bar">
@@ -59,7 +58,13 @@ function TopNavBar({ userDivRef }) {
         Null
       </button>
 
-      {logged ? (
+      <button
+        onClick={() => setUser(userData[0])}
+      >
+        Test User
+      </button>
+
+      {currentUser ? (
         <div className="top-nav-bar__right">
           <div className="right__add" onClick={openUserAddVenue}>
             <PlusSign />
