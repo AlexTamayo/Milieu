@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/SearchFilters.scss';
+import { useContext } from 'react';
+import { DataContext } from '../context/dataProviderContext';
 
 function SearchFilters() {
-  const [selectedButton, setSelectedButton] = useState('');
+  const { selectedFilter, setSelectedFilter } = useContext(DataContext);
 
   const handleButtonClick = (buttonType) => {
-    if (selectedButton === buttonType) {
-      setSelectedButton('');
+    if (selectedFilter === buttonType) {
+      setSelectedFilter('');
     } else {
-      setSelectedButton(buttonType);
+      setSelectedFilter(buttonType);
     }
   };
 
   return (
     <div className="search-filters">
-      <button 
-        className={`filter filter--businesses ${selectedButton && selectedButton !== 'businesses' ? 'not-selected' : ''}`}
+      <button
+        className={`filter filter--businesses ${selectedFilter && selectedFilter !== 'businesses' ? 'not-selected' : ''}`}
         onClick={() => handleButtonClick('businesses')}
       >
         Businesses
       </button>
-      <button 
-        className={`filter filter--events ${selectedButton && selectedButton !== 'events' ? 'not-selected' : ''}`}
+      <button
+        className={`filter filter--events ${selectedFilter && selectedFilter !== 'events' ? 'not-selected' : ''}`}
         onClick={() => handleButtonClick('events')}
       >
         Events
       </button>
-      {/* <button 
-        className={`filter filter--test ${selectedButton && selectedButton !== 'test' ? 'not-selected' : ''}`}
+      {/* <button
+        className={`filter filter--test ${selectedFilter && selectedFilter !== 'test' ? 'not-selected' : ''}`}
         onClick={() => handleButtonClick('test')}
       >
         Test 1
       </button>
-      <button 
-        className={`filter filter--test2 ${selectedButton && selectedButton !== 'test2' ? 'not-selected' : ''}`}
+      <button
+        className={`filter filter--test2 ${selectedFilter && selectedFilter !== 'test2' ? 'not-selected' : ''}`}
         onClick={() => handleButtonClick('test2')}
       >
         Test 2
@@ -43,5 +45,3 @@ function SearchFilters() {
 }
 
 export default SearchFilters;
-
-

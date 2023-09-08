@@ -1,13 +1,21 @@
-// DataProvider.js
+//frontend/src/context/dataProviderContext.js
 import { createContext, useEffect, useState } from 'react';
 import { getAllEvents, getAllBusinesses, getAllUsers } from '../routes/api'; // Ensure correct import paths
 
-export const DataContext = createContext();
+export const DataContext = createContext({
+  eventData: [],
+  businessData: [],
+  userData: [],
+  selectedFilter: '',
+  setSelectedFilter: () => {},
+  });
 
 export const DataProvider = ({ children }) => {
   const [eventData, setEventData] = useState([]);
   const [businessData, setBusinessData] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('');
+
 
   useEffect(() => {
     // Fetch data when the component mounts
@@ -37,7 +45,7 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ eventData, businessData, userData }}>
+    <DataContext.Provider value={{ eventData, businessData, userData, selectedFilter, setSelectedFilter }}>
       {children}
     </DataContext.Provider>
   );
