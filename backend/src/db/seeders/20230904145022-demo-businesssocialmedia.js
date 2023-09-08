@@ -6,7 +6,7 @@ module.exports = {
     const socialMediaData = [
       {
         platform: 'Facebook',
-        link: 'https://facebook.com/business1',
+        link: 'https://facebook.com/sushiyazo',
         businessId: 1, // Replace with the actual business ID
         createdAt: new Date(),
         updatedAt: new Date(),

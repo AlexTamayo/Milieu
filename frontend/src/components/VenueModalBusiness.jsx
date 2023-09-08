@@ -62,26 +62,25 @@ function VenueModalBusiness(props) {
 
   return (
     <div>
+      {/* BACKGROUND IMAGE */}
       <div className="venue-modal__bg-image">
-        <img src={bgImageUrl[arrNum]} alt="Venue background" />
-        {/* <img src={currentBusiness.businessBranding.bannerUrl} alt="Venue background" /> */}
+        <img src={currentBusiness.businessBranding.bannerUrl} alt="Venue background" />
       </div>
 
+      {/* BADGE IMAGE */}
       <div className="venue-modal__bagde-image">
-        <img
-          src={badgeImageUrl[arrNum]}
-          alt="Venue badge"
-          className="venue-badge"
-        />
-        {/* <img src={currentBusiness.businessBranding.logoUrl} alt="Venue background" /> */}
+        <img src={currentBusiness.businessBranding.logoUrl} alt="Venue badge" className="venue-badge"/>
       </div>
 
+      {/* NAME */}
       <div className="venue-modal__title">{currentBusiness.name}</div>
 
+      {/* CATEGORY */}
       <div className="venue-modal__category">
         {currentBusiness.businessCategory.name}
       </div>
 
+      {/* RATING */}
       <div className="venue-modal__rating">
         {currentBusiness.rating} / 5 rating ({currentBusiness.reviewCount})
       </div>

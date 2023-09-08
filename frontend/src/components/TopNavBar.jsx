@@ -59,7 +59,7 @@ function TopNavBar({ userDivRef }) {
       </button>
 
       <button
-        onClick={() => setUser(userData[1])}
+        onClick={() => setUser(userData[0])}
       >
         Test User
       </button>

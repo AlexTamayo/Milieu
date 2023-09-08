@@ -4,14 +4,14 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Businesses', [
       {
-        name: 'Business 1',
-        description: 'Description for Business 1',
+        name: 'Sushiyazo',
+        description: `Dive into Sushiyazo's world of fresh, vibrant sushi, where traditional flavors meet modern elegance. Expert chefs, prime ingredients, and a cozy ambiance ensure every visit is a taste adventure. Discover sushi reimagined at Sushiyazo.`,
         status: 'Active',
-        rating: 4.5,
-        reviewCount: 10,
-        phoneNumber: '123-456-7890',
-        email: 'business1@example.com',
-        website: 'https://www.business1.com',
+        rating: 4.7,
+        reviewCount: 456,
+        phoneNumber: '604-555-7890',
+        email: 'sushiyazo@example.com',
+        website: 'https://www.sushiyazo.com',
         ownerId: 1, // Replace with actual ownerId
         businessCategoryId: 1, // Replace with actual categoryId
         createdAt: new Date(),

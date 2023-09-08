@@ -5,7 +5,7 @@ module.exports = {
     // Define the business category data
     const businessCategoryData = [
       {
-        name: 'Category 1',
+        name: 'Restaurant',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

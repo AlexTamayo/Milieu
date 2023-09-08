@@ -5,9 +5,9 @@ module.exports = {
     // Define the business branding data
     const businessBrandingData = [
       {
-        logoUrl: 'logo1.jpg',
-        bannerUrl: 'banner1.jpg',
-        pinUrl: 'pin1.jpg',
+        logoUrl: 'https://static.vecteezy.com/system/resources/previews/003/016/264/large_2x/colorful-sushi-icon-ilustration-free-vector.jpg',
+        bannerUrl: 'https://th.bing.com/th/id/R.70e894a9ef389bdd04250d7e552cbdb3?rik=pUvKGMV38lryEQ&pid=ImgRaw&r=0',
+        pinUrl: 'https://static.vecteezy.com/system/resources/previews/003/016/264/large_2x/colorful-sushi-icon-ilustration-free-vector.jpg',
         businessId: 1, // Replace with the actual business ID
         createdAt: new Date(),
         updatedAt: new Date(),
