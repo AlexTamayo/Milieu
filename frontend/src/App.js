@@ -15,6 +15,7 @@ import SearchBar from './components/SearchBar';
 import UserModal from './components/UserModal';
 import VenueModal from './components/VenueModal';
 import UserAddVenue from './components/UserAddVenue';
+import UserLogRegModal from './components/UserLogRegModal';
 
 library.add(faMapPin);
 
@@ -24,6 +25,7 @@ function App() {
   return (
     < DataProvider >
       <div className="App">
+        < UserLogRegModal />
         < UserAddVenue />
         < VenueModal />
         < UserModal userDivRef={userDivRef} />

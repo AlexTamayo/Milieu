@@ -12,67 +12,72 @@ function TopNavBar({ userDivRef }) {
   const {
     toggleUserModal,
     toggleVenueModal,
+    openLoginModal,
     openUserAddVenue,
     openVenueModal,
     setVenueType,
     isCopied
   } = useContext(DataContext);
 
-  const [logged, setlogged] = useState(true);
+  const [logged, setlogged] = useState(false);
 
   return (
-    <div className="top-nav-bar"  >
-
+    <div className="top-nav-bar">
       {isCopied && <div className="copied-message">Copied to clipboard</div>}
 
-      <div className='top-nav-bar__left'>
-        <div className='left__logo'>
-        <img src={logo_and_name} alt="logo" />
+      <div className="top-nav-bar__left">
+        <div className="left__logo">
+          <img src={logo_and_name} alt="logo" />
         </div>
       </div>
-    
-      <button onClick={() => {
-          setVenueType('business');
+
+      <button
+        onClick={() => {
+          setVenueType("business");
           openVenueModal();
-      }}>
-          Business
+        }}
+      >
+        Business
       </button>
 
-      <button onClick={() => {
-        setVenueType('event');
-        openVenueModal();
-      }}>
+      <button
+        onClick={() => {
+          setVenueType("event");
+          openVenueModal();
+        }}
+      >
         Event
       </button>
 
-      <button onClick={() => {
-        setVenueType(null);
-        openVenueModal();
-      }}>
+      <button
+        onClick={() => {
+          setVenueType(null);
+          openVenueModal();
+        }}
+      >
         Null
       </button>
 
-      {logged ?
-        <div className='top-nav-bar__right'>
-          <div className='right__add'
-               onClick={openUserAddVenue}
-          >
-            < PlusSign />
+      {logged ? (
+        <div className="top-nav-bar__right">
+          <div className="right__add" onClick={openUserAddVenue}>
+            <PlusSign />
           </div>
-          <div className='right__user'
-               ref={userDivRef}
-               onClick={toggleUserModal}
+          <div
+            className="right__user"
+            ref={userDivRef}
+            onClick={toggleUserModal}
           >
-            <img src={profile} alt="" /> 
+            <img src={profile} alt="" />
           </div>
         </div>
-      : <div className='top-nav-bar__right'>
-          <div>
-            <strong>Log In</strong>
-          </div>
+      ) : (
+        <div className="top-nav-bar__right">
+          <button className="login-btn" onClick={() => openLoginModal('login')}>
+            <strong>Sign In</strong>
+          </button>
         </div>
-      }
-
+      )}
     </div>
   );
 }

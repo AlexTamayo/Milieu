@@ -52,6 +52,20 @@ export const DataProvider = ({ children }) => {
     setTimeout(() => setIsCopied(false), 3000);
   };
 
+  // Login/Registration modal
+  const [loginModalType, setLoginModalType] = useState(null); // 'login', 'register', or null
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+
+  const openLoginModal = (type) => {
+      setLoginModalType(type);
+      setIsLoginModalVisible(true);
+  };
+
+  const closeLoginModal = () => {
+      setIsLoginModalVisible(false);
+      setLoginModalType(null);
+  };
+
   // Marker venue type
   const [venueType, setVenueType] = useState(null);
 
@@ -109,6 +123,10 @@ export const DataProvider = ({ children }) => {
     <DataContext.Provider value={{ eventData,
                                    businessData,
                                    userData,
+                                   loginModalType,
+                                   isLoginModalVisible,
+                                   openLoginModal,
+                                   closeLoginModal,
                                    isVenueModalOpen,
                                    toggleVenueModal,
                                    openVenueModal,
