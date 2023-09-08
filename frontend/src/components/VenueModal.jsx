@@ -34,6 +34,10 @@ function VenueModal() {
     return inputString.replace(/\D/g, '');
   }
 
+  function addressFormatter(location) {
+    return `${location.streetAddress}, ${location.city}, ${location.region} ${location.postalCode}`
+  }
+
   // ^^^ FORMATTERS ^^^
 
 
@@ -51,7 +55,7 @@ function VenueModal() {
     };
   }, []);
 
-  const arrNum = 0;
+  const arrNum = 3;
 
   const bgImageUrl = [
     "https://www.utsc.utoronto.ca/food/sites/utsc.utoronto.ca.food/files/styles/4_1_hero_1x_extra_large/public/images/page/Programs%20Images%20%2847%29.v1.jpg", 
@@ -79,7 +83,9 @@ function VenueModal() {
       {isCopied && <div className="copied-message">Copied to clipboard</div>}
       
       <div className="venue-modal__bg-image">
+
         <img src={bgImageUrl[arrNum]} alt="Venue background" />
+        {/* <img src={bgImageUrl[arrNum].businessBranding.bannerUrl} alt="Venue background" /> */}
       </div>
 
       <div className="venue-modal__bagde-image">
@@ -93,7 +99,6 @@ function VenueModal() {
       <div className="venue-modal__rating">
           {businessData[arrNum].rating} / 5 rating ({businessData[arrNum].reviewCount})
       </div>
-
 
       <hr />
 
@@ -109,11 +114,10 @@ function VenueModal() {
         </div>
 
         <div className="vm-right__address">
-            650 W 41st Ave, Vanouver, BC V5Z 2M9
-
+            {addressFormatter(businessData[arrNum].businessLocation)}
         </div>
 
-        <div onClick={() => handleCopy('650 W 41st Ave, Vanouver, BC V5Z 2M9')} className="copy-icon-button">
+        <div onClick={() => handleCopy(addressFormatter(businessData[arrNum].businessLocation))} className="copy-icon-button">
               <i className="fas fa-copy"></i>
         </div>
 

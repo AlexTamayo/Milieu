@@ -18,7 +18,7 @@ export const DataProvider = ({ children }) => {
 
   // Venue details modal opening and closing logic
   // Remember that I put part of the toggle logic in the milieu logo of nav bar.
-  const [isVenueModalOpen, setVenueModalOpen] = useState(true);
+  const [isVenueModalOpen, setVenueModalOpen] = useState(false);
 
   const toggleVenueModal = () => {
     setVenueModalOpen(!isVenueModalOpen);
@@ -28,7 +28,7 @@ export const DataProvider = ({ children }) => {
     // Fetch data when the component mounts
     getAllEvents()
     .then((data) => {
-      console.log('Fetched Event Data:', data.data); // Log fetched data
+      // console.log('Fetched Event Data:', data.data); // Log fetched data
       setEventData(data.data)
     })
     .catch((error) => {
@@ -37,7 +37,7 @@ export const DataProvider = ({ children }) => {
 
     getAllBusinesses()
     .then((data) => {
-      console.log('Fetched Business Data:', data.data); // Log fetched data
+      // console.log('Fetched Business Data:', data.data); // Log fetched data
       setBusinessData(data.data)
     })
     .catch((error) => {
