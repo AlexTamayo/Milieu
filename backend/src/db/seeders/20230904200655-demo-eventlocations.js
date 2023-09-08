@@ -4,8 +4,8 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('EventLocations', [
       {
-        longitude: -114.0719, // Replace with the actual longitude
-        latitude: 52.0447,  // Replace with the actual latitude
+        longitude: -114.010914,
+        latitude: 50.861811,
         streetAddress: '123 Main Street',
         city: 'Calgary',
         region: 'AB',
@@ -16,8 +16,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0710, // Replace with the actual longitude
-        latitude: 52.0455,  // Replace with the actual latitude
+        longitude: -119.274220,
+        latitude: 50.263821,
         streetAddress: '456 Elm Street',
         city: 'Calgary',
         region: 'AB',
@@ -28,8 +28,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0680, // Replace with the actual longitude
-        latitude: 52.0440,  // Replace with the actual latitude
+        longitude: -119.273220,
+        latitude: 50.263621,
         streetAddress: '789 Oak Avenue',
         city: 'Calgary',
         region: 'AB',
@@ -40,8 +40,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0705, // Replace with the actual longitude
-        latitude: 52.0432,  // Replace with the actual latitude
+        longitude: -119.273220,
+        latitude: 50.263621,
         streetAddress: '1011 Maple Lane',
         city: 'Calgary',
         region: 'AB',
@@ -52,8 +52,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0692, // Replace with the actual longitude
-        latitude: 52.0458,  // Replace with the actual latitude
+        longitude: -122.983000,
+        latitude: 49.244570,
         streetAddress: '1313 Cedar Road',
         city: 'Calgary',
         region: 'AB',
