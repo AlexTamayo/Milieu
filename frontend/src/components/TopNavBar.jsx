@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from "react";
+import { useContext } from "react";
 import { DataContext } from "../context/MainContext";
 
 import '../styles/TopNavBar.scss';
@@ -59,7 +59,7 @@ function TopNavBar({ userDivRef }) {
       </button>
 
       <button
-        onClick={() => setUser(userData[0])}
+        onClick={() => setUser(userData[1])}
       >
         Test User
       </button>
