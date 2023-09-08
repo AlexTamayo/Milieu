@@ -19,7 +19,7 @@ function TopNavBar({ userDivRef }) {
     isCopied
   } = useContext(DataContext);
 
-  const [logged, setlogged] = useState(false);
+  const [logged, setlogged] = useState(true);
 
   return (
     <div className="top-nav-bar">
