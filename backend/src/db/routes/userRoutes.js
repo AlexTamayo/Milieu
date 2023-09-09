@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models");
-const findUserByEmail = require('../instructions/users/findUserByEmail');
-const findUserByUsername = require('../instructions/users/findUserByUsername');
 const jwt = require('jsonwebtoken');
 const secret = "fmERAnC8SZqAn8uPdgES";
 
