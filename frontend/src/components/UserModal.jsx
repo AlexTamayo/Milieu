@@ -3,16 +3,18 @@ import { useContext, useEffect, useRef } from 'react';
 import '../styles/UserModal.scss';
 
 import { DataContext  } from '../context/MainContext';
+import { useAuth } from '../context/AuthContext';
 
 
 function UserModal({ userDivRef }) {
   const {
     state ,
     toggleUserModal,
-    signOut
   } = useContext(DataContext);
 
-  const { isUserModalOpen, currentUser } = state;
+  const { isUserModalOpen } = state;
+
+  const { currentUser, signOut } = useAuth();
 
   const userModalRef = useRef(null);
 

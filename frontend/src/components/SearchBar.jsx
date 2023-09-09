@@ -9,12 +9,6 @@ import MagGlass from './SVGs/MagGlass';
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-    
-  //   console.log(`Searching for: ${searchTerm}`);
-  // };
-
   const { state } = useContext(DataContext);
   const { eventCategoryData, businessCategoryData } = state;
   const categoryItems = [...eventCategoryData, ...businessCategoryData];
@@ -28,7 +22,6 @@ function SearchBar() {
     formatResult,
   } = useContext(DataContext);
 
-  console.log(categoryItems);
   //Search Bar Functions.
   const handleSearch = (string, results) => {
     // Call the handleOnSearch function from the hook

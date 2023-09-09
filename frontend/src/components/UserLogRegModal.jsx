@@ -1,33 +1,44 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import '../styles/UserLogRegModal.scss';
 
+import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
+
+import { createUser, loginUser, getUserById } from '../routes/api';
+
 
 const UserLogRegModal = () => {
   const {
     state,
     openLoginModal,
     closeLoginModal,
+    setLoading,
+    clearLoading,
   } = useContext(DataContext);
 
   const { loginModalType, isLoginModalVisible } = state;
 
+  const { setCurrentUser, currentUser } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    username: "",
     email: "",
-    profileImageUrl: "",
-    password: "",
+    profileImage: "",
+    passwordHash: "",
     dateOfBirth: "",
     gender: "",
-    phoneNumber: "",
+    phoneNumber: ""
   });
 
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,30 +54,95 @@ const UserLogRegModal = () => {
       }));
     }
   };
-  
-  const handleModalSubmit = (e) => {
-    e.preventDefault();
+
+  const handleModalSubmit = async (e) => {
+    
     const lastLogin = new Date().toISOString();
+    e.preventDefault();
     if (loginModalType === 'login') {
-      // Insert your logic for logging in here.
-      // For instance, an API call to your backend to validate the email and password.
-  
-      // Update the user's lastLogin timestamp in your backend.
-      // updateLastLoginInBackend({ lastLogin });
-  
+      try {
+        const response = await loginUser({
+          email: loginData.email,
+          password: loginData.password
+        });
+
+        
+        if (response.data && response.data.token) {
+          localStorage.setItem('authToken', response.data.token);
+
+          const userProfile = await getUserById(response.data.userId);
+
+          if (userProfile && userProfile.data) {
+            const { passwordHash, ...userWithoutPassword } = userProfile.data;
+            setCurrentUser(userWithoutPassword);
+          }
+
+          closeLoginModal();
+        } else {
+          throw new Error('Invalid login credentials.');
+        }
+      
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("An error occurred during login. Please try again.");
+        }
+      }
+      
     } else {
-      const createdAt = lastLogin;  // Set to current date-time
-      const updatedAt = lastLogin;  // Set to current date-time
-  
-      // Assuming you'll have a function or API call to send data
-      // sendDataToBackend({
-      //   ...formData,
-      //   createdAt,
-      //   updatedAt,
-      //   lastLogin
-      // });
+      const createdAt = lastLogin;
+      const updatedAt = lastLogin;
+      const role = "user";
+
+      // Inside handleModalSubmit before the try block
+      if (!formData.username || !formData.email || !formData.passwordHash) {
+        setErrorMessage("Username, email, and password are required fields!");
+        return;
+      }
+
+      try {
+
+        await createUser({
+          ...formData,
+          createdAt,
+          updatedAt,
+          lastLogin,
+          role,
+        });
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          username: "",
+          email: "",
+          profileImage: "",
+          passwordHash: "",
+          dateOfBirth: "",
+          gender: "",
+          phoneNumber: "",
+        });
+
+        closeLoginModal();
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("An error occurred. Please try again later.");
+          console.error(error);
+        }
+      }
     }
   };
+
   
 
   if (!isLoginModalVisible) return null;
@@ -74,6 +150,10 @@ const UserLogRegModal = () => {
   return (
     <div className="overlay">
       <div className="modal-container">
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+
         <div className="modal-header">
           <button className="close-btn" onClick={closeLoginModal}>
             &times;
@@ -129,6 +209,14 @@ const UserLogRegModal = () => {
             />
             <input
               className="input-field"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleInputChange}
+            />
+            <input
+              className="input-field"
               type="email"
               name="email"
               placeholder="Email"
@@ -138,17 +226,17 @@ const UserLogRegModal = () => {
             <input
               className="input-field"
               type="text"
-              name="profileImageUrl"
+              name="profileImage"
               placeholder="Profile Image URL"
-              value={formData.profileImageUrl}
+              value={formData.profileImage}
               onChange={handleInputChange}
             />
             <input
               className="input-field"
               type="password"
-              name="password"
+              name="passwordHash"
               placeholder="Password"
-              value={formData.password}
+              value={formData.passwordHash}
               onChange={handleInputChange}
             />
             <input

@@ -19,6 +19,8 @@ const actionTypes = {
   SET_SELECTED_FILTER: 'SET_SELECTED_FILTER',
   SET_USER: 'SET_USER',
   SIGN_OUT: 'SIGN_OUT',
+  SET_LOADING: "SET_LOADING",
+  CLEAR_LOADING: "CLEAR_LOADING"
 };
 
 
@@ -76,6 +78,12 @@ const reducer = (state, action) => {
     case actionTypes.SIGN_OUT:
       return { ...state, currentUser: null };
 
+    case actionTypes.SET_LOADING:
+      return { ...state, isLoading: true };
+
+    case actionTypes.CLEAR_LOADING:
+      return { ...state, isLoading: false };
+
     default:
       return state;
   }
@@ -98,6 +106,7 @@ export default function useApplication() {
     venueType: null,
     selectedFilter: '',
     currentUser: null,
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -111,9 +120,11 @@ export default function useApplication() {
         dispatch({ type: actionTypes.SET_USER_DATA, payload: userData.data });
         dispatch({ type: actionTypes.SET_EVENT_CATEGORY_DATA, payload: eventCategoryData.data });
         dispatch({ type: actionTypes.SET_BUSINESS_CATEGORY_DATA, payload: businessCategoryData.data });
+        dispatch({ type: actionTypes.CLEAR_LOADING });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        dispatch({ type: actionTypes.CLEAR_LOADING });
       });
   }, []);
 
@@ -182,6 +193,16 @@ export default function useApplication() {
     dispatch({ type: actionTypes.SIGN_OUT });
   };
 
+  // Loading
+
+  const setLoading = () => {
+    dispatch({ type: actionTypes.SET_LOADING });
+  };
+
+  const clearLoading = () => {
+    dispatch({ type: actionTypes.CLEAR_LOADING });
+  };
+
   //Search bar functions.
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
@@ -200,7 +221,7 @@ export default function useApplication() {
   }
 
   const handleOnFocus = () => {
-    console.log('Focused')
+    // console.log('Focused')
   }
 
   const formatResult = (item) => {
@@ -211,14 +232,6 @@ export default function useApplication() {
       </>
     )
   }
-
-
-
-
-
-
-
-
 
   return {
     state,
@@ -238,6 +251,8 @@ export default function useApplication() {
     handleOnHover,      // Add this line to access the function
     handleOnSelect,     // Add this line to access the function
     handleOnFocus,      // Add this line to access the function
-    formatResult    
+    formatResult,
+    setLoading,
+    clearLoading,
   };
 }
