@@ -5,6 +5,7 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import { DataContext } from '../context/MainContext';
+import mapStyles from '../styles/mapStyles.js';
 
 const containerStyle = {
   width: '100%',
@@ -27,7 +28,7 @@ const GoogleMapComponent = () => {
             position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
             metadata: { topic: 'event', name: event.title, link: event.link },
             icon: {
-              url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green icon for events
+              url: "http://maps.google.com/mapfiles/ms/micons/sportvenue.png" // New icon for events
             },
           });
         }
@@ -41,7 +42,7 @@ const GoogleMapComponent = () => {
             position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
             metadata: { topic: 'business', name: business.name, link: business.link },
             icon: {
-              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Blue icon for business
+              url: "http://maps.google.com/mapfiles/kml/pal2/icon10.png" // New icon for business
             },
           });
         }
@@ -68,7 +69,7 @@ const GoogleMapComponent = () => {
               position: { lat: latitude, lng: longitude },
               metadata: { topic: 'user-location', name: 'Current Location', link: '#' },
               icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                url: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png" // New icon for user-location
               },
             },
           ]);
@@ -92,13 +93,7 @@ const GoogleMapComponent = () => {
         zoom={15}
         options={{
           disableDefaultUI: true,
-          styles: [
-            {
-              featureType: "poi",
-              elementType: "labels",
-              stylers: [{ visibility: "off" }],
-            },
-          ],
+          styles: mapStyles,
         }}
       >
         {markers.map((marker, index) => (
