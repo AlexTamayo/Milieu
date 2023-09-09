@@ -97,15 +97,16 @@ const GoogleMapComponent = () => {
         }}
       >
         {markers.map((marker, index) => (
-          <Marker
-            key={index}
-            position={marker.position}
-            icon={marker.icon}
-            onClick={() => {
-              console.log(marker.metadata);
-            }}
-          />
-        ))}
+  <Marker
+    key={index}
+    position={marker.position}
+    icon={marker.icon}
+    onClick={() => {
+      console.log(marker.metadata);
+    }}
+  />
+))}
+
       </GoogleMap>
     </LoadScript>
   );
