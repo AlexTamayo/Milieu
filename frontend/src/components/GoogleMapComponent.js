@@ -15,41 +15,45 @@ const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [markers, setMarkers] = useState([]);
   const { state } = useContext(DataContext);
-  const { eventData, businessData } = state;
+  const { eventData, businessData, selectedFilter } = state;
 
   useEffect(() => {
     const newMarkers = [];
 
-    eventData.forEach((event) => {
-      if (event.eventLocation && event.eventLocation.latitude && event.eventLocation.longitude) {
-        newMarkers.push({
-          position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
-          metadata: { topic: 'event', name: event.title, link: event.link },
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green icon for events
-          },
-        });
-      }
-    });
+    if (!selectedFilter || selectedFilter === 'events') {
+      eventData.forEach((event) => {
+        if (event.eventLocation && event.eventLocation.latitude && event.eventLocation.longitude) {
+          newMarkers.push({
+            position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
+            metadata: { topic: 'event', name: event.title, link: event.link },
+            icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green icon for events
+            },
+          });
+        }
+      });
+    }
 
-    businessData.forEach((business) => {
-      if (business.businessLocation && business.businessLocation.latitude && business.businessLocation.longitude) {
-        newMarkers.push({
-          position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
-          metadata: { topic: 'business', name: business.name, link: business.link },
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Blue icon for business
-          },
-        });
-      }
-    });
+    if (!selectedFilter || selectedFilter === 'businesses') {
+      businessData.forEach((business) => {
+        if (business.businessLocation && business.businessLocation.latitude && business.businessLocation.longitude) {
+          newMarkers.push({
+            position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
+            metadata: { topic: 'business', name: business.name, link: business.link },
+            icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Blue icon for business
+            },
+          });
+        }
+      });
+    }
 
     setMarkers(prevMarkers => [
       ...prevMarkers.filter(marker => marker.metadata && marker.metadata.topic === 'user-location'),
       ...newMarkers,
     ]);
 
-  }, [eventData, businessData]);
+  }, [eventData, businessData, selectedFilter]);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -83,7 +87,6 @@ const GoogleMapComponent = () => {
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY}>
       <GoogleMap
-        key={markers.length}
         mapContainerStyle={containerStyle}
         center={center}
         zoom={15}
@@ -99,16 +102,15 @@ const GoogleMapComponent = () => {
         }}
       >
         {markers.map((marker, index) => (
-  <Marker
-    key={index}
-    position={marker.position}
-    icon={marker.icon}
-    onClick={() => {
-      console.log(marker.metadata);
-    }}
-  />
-))}
-
+          <Marker
+            key={index}
+            position={marker.position}
+            icon={marker.icon}
+            onClick={() => {
+              console.log(marker.metadata);
+            }}
+          />
+        ))}
       </GoogleMap>
     </LoadScript>
   );
