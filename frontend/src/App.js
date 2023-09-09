@@ -31,8 +31,8 @@ function App() {
         
         < TopNavBar userDivRef={userDivRef} />
         
-        < GoogleMapComponent2 />
-        {/* < GoogleMapComponent /> */}
+        < GoogleMapComponent />
+        {/* < GoogleMapComponent2 /> */}
       </div>
   );
 }
