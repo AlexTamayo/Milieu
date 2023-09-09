@@ -114,6 +114,7 @@ function UserAddVenue() {
                   options={businessCategoryOptions}
                   value={selectedCategory}
                   onChange={handleCategoryChange}
+                  onInputChange={handleInputChange}
                   placeholder="Select a business category..."
                 />
                 {selectedCategory && (
@@ -223,6 +224,7 @@ function UserAddVenue() {
                   options={eventCategoryOptions}
                   value={selectedCategory}
                   onChange={handleCategoryChange}
+                  onInputChange={handleInputChange}
                   placeholder="Select an event category..."
                 />
                 {selectedCategory && (
