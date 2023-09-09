@@ -22,7 +22,9 @@ export const DataProvider = ({ children }) => {
     handleOnHover,      
     handleOnSelect,     
     handleOnFocus,      
-    formatResult 
+    formatResult,
+    setLoading,
+    clearLoading,
   } = useApplicationData();
 
   return (
@@ -44,7 +46,9 @@ export const DataProvider = ({ children }) => {
                                   handleOnHover,      
                                   handleOnSelect,     
                                   handleOnFocus,      
-                                  formatResult
+                                  formatResult,
+                                  setLoading,
+                                  clearLoading,
                                 }}>
       {children}
     </DataContext.Provider>

@@ -9,7 +9,10 @@ const ROUTES = {
   BUSINESS_BRANDINGS: "/businesses/brandings",
   EVENT_BRANDINGS: "/events/brandings",
   BUSINESS_CATEGORIES: "/businesses/categories",
-  EVENT_CATEGORIES: "/events/categories"
+  EVENT_CATEGORIES: "/events/categories",
+  LOGIN: "/users/login",
+  VALIDATE_TOKEN: "/users/validate-token",
+
 }
 
 const apiClient = axios.create({
@@ -18,6 +21,18 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export const loginUser = (loginData) => {
+  return apiClient.post(`${ROUTES.LOGIN}`, loginData);
+};
+
+export const validateToken = (token) => {
+  return apiClient.post(ROUTES.VALIDATE_TOKEN, {}, {
+    headers: {
+      'Authorization': token
+    }
+  });
+};
 
 
 export const getAllUsers = () => {
@@ -38,8 +53,6 @@ export const getEventCategories = () => {
   return apiClient.get(ROUTES.EVENT_CATEGORIES);
 }
 
-
-
 export const createUser = (userData) => {
   return apiClient.post(ROUTES.USERS, userData);
 };
@@ -51,7 +64,6 @@ export const createBusiness = (businessData) => {
 export const createEvent = (eventData) => {
   return apiClient.post(ROUTES.EVENTS, eventData);
 }
-
 
 export const getUserById = (userId) => {
   return apiClient.get(`${ROUTES.USERS}/${userId}`);

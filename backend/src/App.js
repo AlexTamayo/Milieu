@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const userRoutes = require("./db/routes/userRoutes"); // Import userRoutes module
-const businessRoutes = require("./db/routes/businessRoutes"); // Import businessRoutes
+const userRoutes = require("./db/routes/userRoutes");
+const businessRoutes = require("./db/routes/businessRoutes");
 const eventRoutes = require("./db/routes/eventRoutes");
 require("dotenv").config();
 

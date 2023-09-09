@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/MainContext";
+import { useAuth } from '../context/AuthContext';
 
 import '../styles/TopNavBar.scss';
 
 import logo_and_name from '../assets/logo/logo-and-name.svg'
-import profile from '../assets/temp/profile_pics_6.png'
 
 import PlusSign from './SVGs/PlusSign';
 
@@ -16,10 +16,11 @@ function TopNavBar({ userDivRef }) {
     openUserAddVenue,
     openVenueModal,
     setVenueType,
-    setUser
   } = useContext(DataContext);
 
-  const { isCopied, currentUser, userData } = state;
+  const { currentUser, isLoading } = useAuth();
+
+  const { isCopied } = state;
 
   return (
     <div className="top-nav-bar">
@@ -58,13 +59,11 @@ function TopNavBar({ userDivRef }) {
         Null
       </button>
 
-      <button
-        onClick={() => setUser(userData[0])}
-      >
-        Test User
-      </button>
-
-      {currentUser ? (
+      {isLoading ? (
+        <div className="top-nav-bar__right">
+          // Some loading animation or placeholder
+        </div>
+      ) : currentUser ? (
         <div className="top-nav-bar__right">
           <div className="right__add" onClick={openUserAddVenue}>
             <PlusSign />
@@ -74,12 +73,12 @@ function TopNavBar({ userDivRef }) {
             ref={userDivRef}
             onClick={toggleUserModal}
           >
-            <img src={profile} alt="" />
+            <img src={currentUser.profileImage} alt="" />
           </div>
         </div>
       ) : (
         <div className="top-nav-bar__right">
-          <button className="login-btn" onClick={() => openLoginModal('login')}>
+          <button className="login-btn" onClick={() => openLoginModal("login")}>
             <strong>Sign In</strong>
           </button>
         </div>
