@@ -75,6 +75,45 @@ router.post("/validate-token", async (req, res) => {
   }
 });
 
+/* LOGIN POST */
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  console.log("GET /api/users/login route hit");
+  try {
+    const { token, user } = await loginUser(email, password);
+    if (token) {
+        res.status(200).json({ token, userId: user.id });
+    } else {
+        res.status(401).json({ message: "Authentication failed." });
+    }
+  } catch (error) {
+      res.status(500).json({ message: "An error occurred.", error: error.message });
+  }
+});
+
+/* TOKEN VALIDATION */
+router.post("/validate-token", async (req, res) => {
+
+  console.log("GET /api/users/validate-token route hit");
+
+  const token = req.headers.authorization;
+
+  try {
+    const decoded = jwt.verify(token, secret);
+    const user = await User.findByPk(decoded.id);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error during token validation:", error.message);
+
+    res.status(401).json({ message: "Invalid or expired token" });
+  }
+});
+
 /* GET USER BY ID */
 router.get("/:id", async (req, res) => {
   console.log(`GET /api/users/${req.params.id} route hit`); // Logging to know the route has been hit
