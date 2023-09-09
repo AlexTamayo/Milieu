@@ -26,49 +26,49 @@ library.add(faMapPin);
 
 function App() {
   const userDivRef = useRef(null);
-  const { state } = useContext(DataContext);
-  const { eventCategoryData, businessCategoryData } = state;
-  const categoryItems = [...eventCategoryData, ...businessCategoryData];
+  // const { state } = useContext(DataContext);
+  // const { eventCategoryData, businessCategoryData } = state;
+  // const categoryItems = [...eventCategoryData, ...businessCategoryData];
   
-  const {
-    // ... other state and functions
-    handleOnSearch,
-    handleOnHover,
-    handleOnSelect,
-    handleOnFocus,
-    formatResult,
-  } = useContext(DataContext);
+  // const {
+  //   // ... other state and functions
+  //   handleOnSearch,
+  //   handleOnHover,
+  //   handleOnSelect,
+  //   handleOnFocus,
+  //   formatResult,
+  // } = useContext(DataContext);
 
-  console.log(categoryItems);
-  //Search Bar Functions.
-  const handleSearch = (string, results) => {
-    // Call the handleOnSearch function from the hook
-    handleOnSearch(string, results);
-    // Your additional logic here
-  };
+  // console.log(categoryItems);
+  // //Search Bar Functions.
+  // const handleSearch = (string, results) => {
+  //   // Call the handleOnSearch function from the hook
+  //   handleOnSearch(string, results);
+  //   // Your additional logic here
+  // };
 
-  const handleHover = (result) => {
-    // Call the handleOnHover function from the hook
-    handleOnHover(result);
-    // Your additional logic here
-  };
+  // const handleHover = (result) => {
+  //   // Call the handleOnHover function from the hook
+  //   handleOnHover(result);
+  //   // Your additional logic here
+  // };
 
-  const handleSelect = (item) => {
-    // Call the handleOnSelect function from the hook
-    handleOnSelect(item);
-    // Your additional logic here
-  };
+  // const handleSelect = (item) => {
+  //   // Call the handleOnSelect function from the hook
+  //   handleOnSelect(item);
+  //   // Your additional logic here
+  // };
 
-  const handleFocus = () => {
-    // Call the handleOnFocus function from the hook
-    handleOnFocus();
-    // Your additional logic here
-  };
+  // const handleFocus = () => {
+  //   // Call the handleOnFocus function from the hook
+  //   handleOnFocus();
+  //   // Your additional logic here
+  // };
 
-  const resultFormatter = (item) => {
-    // Call the formatResult function from the hook
-    return formatResult(item);
-  };
+  // const resultFormatter = (item) => {
+  //   // Call the formatResult function from the hook
+  //   return formatResult(item);
+  // };
 
 
   return (
@@ -78,12 +78,12 @@ function App() {
         < UserAddVenue />
         < VenueModal />
         < UserModal userDivRef={userDivRef} />
-        {/* < SearchBar /> */}
+        < SearchBar />
         
         < TopNavBar userDivRef={userDivRef} />
         
         < GoogleMapComponent2 />
-        <ReactSearchAutocomplete
+        {/* < ReactSearchAutocomplete
             items={categoryItems}
             onSearch={handleSearch}
             onHover={handleHover}
@@ -91,7 +91,7 @@ function App() {
             onFocus={handleFocus}
             autoFocus
             formatResult={resultFormatter}
-          />
+          /> */}
         {/* < GoogleMapComponent /> */}
       </div>
   );

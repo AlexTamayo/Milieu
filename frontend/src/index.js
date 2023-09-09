@@ -9,9 +9,9 @@ import { DataProvider } from './context/MainContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   < DataProvider >
-  // <React.StrictMode>
+  {/* <React.StrictMode> */}
     <App />
- // </React.StrictMode>
+ {/* </React.StrictMode> */}
  </ DataProvider >
 );
 
