@@ -25,6 +25,9 @@ const GoogleMapComponent = () => {
         newMarkers.push({
           position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
           metadata: { topic: 'event', name: event.title, link: event.link },
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green icon for events
+          },
         });
       }
     });
@@ -34,6 +37,9 @@ const GoogleMapComponent = () => {
         newMarkers.push({
           position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
           metadata: { topic: 'business', name: business.name, link: business.link },
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Blue icon for business
+          },
         });
       }
     });
@@ -93,15 +99,16 @@ const GoogleMapComponent = () => {
         }}
       >
         {markers.map((marker, index) => (
-          <Marker
-            key={index}
-            position={marker.position}
-            icon={marker.icon}
-            onClick={() => {
-              console.log(marker.metadata);
-            }}
-          />
-        ))}
+  <Marker
+    key={index}
+    position={marker.position}
+    icon={marker.icon}
+    onClick={() => {
+      console.log(marker.metadata);
+    }}
+  />
+))}
+
       </GoogleMap>
     </LoadScript>
   );
