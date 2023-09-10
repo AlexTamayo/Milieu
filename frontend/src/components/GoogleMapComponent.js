@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   GoogleMap,
   LoadScript,
   Marker,
   MarkerClusterer,
- } from '@react-google-maps/api';
+} from '@react-google-maps/api';
 import { DataContext } from '../context/MainContext';
 import mapStyles from '../styles/mapStyles.js';
 import categoryIcons from '../routes/categoryIcons';
@@ -14,14 +14,6 @@ const containerStyle = {
   width: '100%',
   height: '800px',
 };
-/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
-// const containerStyle = {
-//   width: '100%',
-//   height: '1260px',
-//   margin: 0,
-//   // height: '90%',
-// };
-
 
 const ICON_SIZE = { width: 40, height: 40 };
 
@@ -39,8 +31,7 @@ const GoogleMapComponent = () => {
     selectedSearchResult
   } = state;
 
-  const mapRef = React.useRef(null);
-
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (isGoogleMapLoaded && mapRef.current) {
@@ -77,10 +68,13 @@ const GoogleMapComponent = () => {
         });
       }
 
-      setMarkers(newMarkers);
+      setMarkers(prevMarkers => [
+        ...prevMarkers.filter(marker => marker.metadata && marker.metadata.topic === 'user-location'),
+        ...newMarkers,
+      ]);
     }
   }, [selectedFilter, eventData, businessData, isGoogleMapLoaded]);
-   // set map center to user's location
+
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -90,7 +84,6 @@ const GoogleMapComponent = () => {
         },
         error => {
           console.error('Geolocation Error:', error);
-          // set to default coordinates in case of an error
           setCenter({ lat: -3.745, lng: -38.523 });
         },
         { enableHighAccuracy: true }
@@ -100,7 +93,6 @@ const GoogleMapComponent = () => {
       setCenter({ lat: -3.745, lng: -38.523 });
     }
   }, []);
-
 
   const handleMyLocationClick = () => {
     if ("geolocation" in navigator) {
@@ -120,7 +112,6 @@ const GoogleMapComponent = () => {
       setCenter({ lat: -3.745, lng: -38.523 });
     }
   };
-
 
   return (
     <LoadScript
@@ -202,7 +193,3 @@ const GoogleMapComponent = () => {
 };
 
 export default GoogleMapComponent;
-
-
-
-
