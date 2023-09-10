@@ -9,7 +9,6 @@ function VenueModal() {
 
   const { 
     state,
-    openVenueModal,
     closeVenueModal,
     setSelectedVenue,
   } = useContext(DataContext);
@@ -18,25 +17,17 @@ function VenueModal() {
     businessData,
     eventData,
     isVenueModalOpen,
-    venueType,
     selectedVenueType,
     selectedVenueId,
   } = state;
 
-  const venueModalRef = useRef(null);
-
   const arrNum = 1;
 
-  // const currentBusiness = businessData[arrNum];
-  // const currentBusiness = businessData.find(business => business.id === arrNum);
+  const venueModalRef = useRef(null);
+
   const currentBusiness = businessData.find(business => business.id === selectedVenueId);
   
-  // const currentEvent = eventData[arrNum];
-  // const currentEvent = eventData.find(event => event.id === arrNum);
   const currentEvent = eventData.find(event => event.id === selectedVenueId);
-
-
-
 
   // Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click
   useEffect(() => {

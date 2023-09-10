@@ -9,14 +9,12 @@ export const DataProvider = ({ children }) => {
     toggleUserModal,
     openUserModal,
     closeUserModal,
-    openVenueModal,
     closeVenueModal,
     openUserAddVenue,
     closeUserAddVenue,
     handleCopy,
     openLoginModal,
     closeLoginModal,
-    setVenueType,
     handleButtonClick,
     handleOnSearch,     
     handleOnHover,      
@@ -26,7 +24,6 @@ export const DataProvider = ({ children }) => {
     setLoading,
     clearLoading,
     setSelectedVenue,
-    resetSelectedVenue,
   } = useApplicationData();
 
   return (
@@ -35,14 +32,12 @@ export const DataProvider = ({ children }) => {
                                   toggleUserModal,
                                   openUserModal,
                                   closeUserModal,
-                                  openVenueModal,
                                   closeVenueModal,
                                   openUserAddVenue,
                                   closeUserAddVenue,
                                   handleCopy,
                                   openLoginModal,
                                   closeLoginModal,
-                                  setVenueType,
                                   handleButtonClick,
                                   handleOnSearch,    
                                   handleOnHover,      
@@ -52,7 +47,6 @@ export const DataProvider = ({ children }) => {
                                   setLoading,
                                   clearLoading,
                                   setSelectedVenue,
-                                  resetSelectedVenue,
                                 }}>
       {children}
     </DataContext.Provider>

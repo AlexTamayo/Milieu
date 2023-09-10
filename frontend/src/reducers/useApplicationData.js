@@ -22,7 +22,6 @@ const actionTypes = {
   SET_COPIED: 'SET_COPIED',
   SET_LOGIN_MODAL_TYPE: 'SET_LOGIN_MODAL_TYPE',
   SET_LOGIN_MODAL_VISBILITY: 'SET_LOGIN_MODAL_VISBILITY',
-  SET_VENUE_TYPE: 'SET_VENUE_TYPE',
   SET_SELECTED_FILTER: 'SET_SELECTED_FILTER',
   SET_USER: 'SET_USER',
   SET_LOADING: "SET_LOADING",
@@ -77,9 +76,6 @@ const reducer = (state, action) => {
     case actionTypes.SET_LOGIN_MODAL_VISBILITY:
       return { ...state, isLoginModalVisible: action.payload };
 
-    case actionTypes.SET_VENUE_TYPE:
-      return { ...state, venueType: action.payload };
-
     case actionTypes.SET_SELECTED_FILTER:
       return { ...state, selectedFilter: action.payload };
 
@@ -120,8 +116,7 @@ export default function useApplication() {
     isCopied: false,
     loginModalType: null,
     isLoginModalVisible: false,
-    venueType: null,
-    selectedFilter: '',
+    selectedFilter: "",
     isLoading: true,
     searchResultCategory: {},
     selectedVenueType: null,
@@ -129,17 +124,38 @@ export default function useApplication() {
   });
 
   useEffect(() => {
-    Promise.all([getAllEvents(), getAllBusinesses(),getBusinessCategories(),getEventCategories()])
-      .then(([eventData, businessData, businessCategoryData,eventCategoryData]) => {
-        dispatch({ type: actionTypes.SET_EVENT_DATA, payload: eventData.data });
-        dispatch({
-          type: actionTypes.SET_BUSINESS_DATA,
-          payload: businessData.data,
-        });
-        dispatch({ type: actionTypes.SET_EVENT_CATEGORY_DATA, payload: eventCategoryData.data });
-        dispatch({ type: actionTypes.SET_BUSINESS_CATEGORY_DATA, payload: businessCategoryData.data });
-        dispatch({ type: actionTypes.CLEAR_LOADING });
-      })
+    Promise.all([
+      getAllEvents(),
+      getAllBusinesses(),
+      getBusinessCategories(),
+      getEventCategories(),
+    ])
+      .then(
+        ([
+          eventData,
+          businessData,
+          businessCategoryData,
+          eventCategoryData,
+        ]) => {
+          dispatch({
+            type: actionTypes.SET_EVENT_DATA,
+            payload: eventData.data,
+          });
+          dispatch({
+            type: actionTypes.SET_BUSINESS_DATA,
+            payload: businessData.data,
+          });
+          dispatch({
+            type: actionTypes.SET_EVENT_CATEGORY_DATA,
+            payload: eventCategoryData.data,
+          });
+          dispatch({
+            type: actionTypes.SET_BUSINESS_CATEGORY_DATA,
+            payload: businessCategoryData.data,
+          });
+          dispatch({ type: actionTypes.CLEAR_LOADING });
+        }
+      )
       .catch((error) => {
         console.error("Error fetching data:", error);
         dispatch({ type: actionTypes.CLEAR_LOADING });
@@ -151,13 +167,12 @@ export default function useApplication() {
   //   const intervalId = setInterval(() => {
   //     console.log('state.isUserModalOpen:', state.isUserModalOpen);
   //   }, 1000);
-  
+
   //   // Clear interval when the component unmounts
   //   return () => clearInterval(intervalId);
   // }, [state.isUserModalOpen]);
 
-
-  // User modal opening and closing logic
+  /* User modal opening and closing logic */
   const toggleUserModal = () => {
     dispatch({ type: actionTypes.TOGGLE_USER_MODAL });
   };
@@ -170,18 +185,22 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLOSE_USER_MODAL });
   };
 
-  // Venue details modal opening and closing logic
-  // Remember that I put part of the toggle logic in the nav bar.
-
-  const openVenueModal = () => {
+  /* Setting the venue from the marker */
+  /* Venue details modal opening and closing logic */
+  const setSelectedVenue = (venueType, venueId) => {
+    dispatch({
+      type: actionTypes.SET_SELECTED_VENUE,
+      payload: { venueType, venueId },
+    });
     dispatch({ type: actionTypes.OPEN_VENUE_MODAL });
   };
 
   const closeVenueModal = () => {
     dispatch({ type: actionTypes.CLOSE_VENUE_MODAL });
+    dispatch({ type: actionTypes.RESET_SELECTED_VENUE });
   };
 
-  // UserAdd modal opening and closing logic
+  /* UserAdd modal opening and closing logic */
   const openUserAddVenue = () => {
     dispatch({ type: actionTypes.OPEN_USER_ADD_VENUE });
   };
@@ -190,25 +209,28 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLOSE_USER_ADD_VENUE });
   };
 
-  // Copy to clipboard script logic
+  /* Copy to clipboard script logic */
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     dispatch({ type: actionTypes.SET_COPIED, payload: true });
-    setTimeout(() => dispatch({ type: actionTypes.SET_COPIED, payload: false }), 3000);
+    setTimeout(
+      () => dispatch({ type: actionTypes.SET_COPIED, payload: false }),
+      3000
+    );
   };
 
-  // Login/Registration modal logic
+  /* Login/Registration modal logic */
   const openLoginModal = (type) => {
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_TYPE, payload: type });
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_VISBILITY, payload: true });
   };
 
-    /* This is here for debuggin isUserModalOpen, please DON'T REMOVE */
+  /* This is here for debuggin isUserModalOpen, please DON'T REMOVE */
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
   //     console.log('isLoginModalVisible:', state.isLoginModalVisible);
   //   }, 1000);
-  
+
   //   // Clear interval when the component unmounts
   //   return () => clearInterval(intervalId);
   // }, [state.isLoginModalVisible]);
@@ -219,20 +241,16 @@ export default function useApplication() {
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_TYPE, payload: null });
   };
 
-  // Marker venue type
-  const setVenueType = (type) => {
-    dispatch({ type: actionTypes.SET_VENUE_TYPE, payload: type });
-  };
-
+  /* Sets selected filter based on the button clicked on top of the search bar */
   const handleButtonClick = (buttonType) => {
     if (state.selectedFilter === buttonType) {
-      dispatch({ type: actionTypes.SET_SELECTED_FILTER, payload: '' });
+      dispatch({ type: actionTypes.SET_SELECTED_FILTER, payload: "" });
     } else {
       dispatch({ type: actionTypes.SET_SELECTED_FILTER, payload: buttonType });
     }
   };
 
-  // Loading
+  /* Loading */
 
   const setLoading = () => {
     dispatch({ type: actionTypes.SET_LOADING });
@@ -242,72 +260,56 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLEAR_LOADING });
   };
 
-  /* Setting the venue from the marker */
-
-  const setSelectedVenue = (venueType, venueId) => {
-    console.log('This is running');
-    dispatch({
-      type: actionTypes.SET_SELECTED_VENUE,
-      payload: { venueType, venueId }
-    });
-    dispatch({ type: actionTypes.OPEN_VENUE_MODAL });
-  };
-
-  const resetSelectedVenue = () => {
-    dispatch({ type: actionTypes.RESET_SELECTED_VENUE });
-  };
-
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    console.log('handleOnSearch string', string);
-    console.log('handleOnSearch results', results);
-  }
+    console.log("handleOnSearch string", string);
+    console.log("handleOnSearch results", results);
+  };
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log('handleOnHover', result);
-  }
+    console.log("handleOnHover", result);
+  };
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log('handleOnSelect', item);
-  }
+    console.log("handleOnSelect", item);
+  };
 
   const handleOnFocus = () => {
     // console.log('Focused')
-  }
+  };
 
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ display: 'block', textAlign: 'left' }} key={item.id}>{item.name}</span>
+        <span style={{ display: "block", textAlign: "left" }} key={item.id}>
+          {item.name}
+        </span>
       </>
-    )
-  }
+    );
+  };
 
   return {
     state,
     toggleUserModal,
     openUserModal,
     closeUserModal,
-    openVenueModal,
     closeVenueModal,
     openUserAddVenue,
     closeUserAddVenue,
     handleCopy,
     openLoginModal,
     closeLoginModal,
-    setVenueType,
     handleButtonClick,
     handleOnSearch,
-    handleOnHover, 
+    handleOnHover,
     handleOnSelect,
-    handleOnFocus, 
+    handleOnFocus,
     formatResult,
     setLoading,
     clearLoading,
     setSelectedVenue,
-    resetSelectedVenue,
   };
 }
