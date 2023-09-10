@@ -2,17 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../styles/UserModal.scss';
 import { DataContext } from '../context/MainContext';
 import { useAuth } from '../context/AuthContext';
-<<<<<<< HEAD
+
 import EditBusinessModal from './EditBusinessModal';
 import EditEventModal from './EditEventModal';
 import { getBusinessesByUser, getEventsByUser } from '../routes/api';
 
-function UserModal({ userDivRef }) {
-  const { state, toggleUserModal } = useContext(DataContext);
-=======
-
 import defaultImage from '../assets/logo/logo.png'
-
 
 function UserModal({ userDivRef }) {
   const {
@@ -20,7 +15,6 @@ function UserModal({ userDivRef }) {
     closeUserModal,
   } = useContext(DataContext);
 
->>>>>>> Log in and registration adjustments.
   const { isUserModalOpen } = state;
   const { currentUser, signOut } = useAuth();
   const userModalRef = useRef(null);
@@ -67,19 +61,9 @@ function UserModal({ userDivRef }) {
 
   useEffect(() => {
     function handleClickOutside(event) {
-<<<<<<< HEAD
-      if (
-        userModalRef.current &&
-        !userModalRef.current.contains(event.target) &&
-        (!userDivRef.current ||
-          (userDivRef.current && !userDivRef.current.contains(event.target)))
-      ) {
-        toggleUserModal();
-=======
       if (userModalRef.current && !userModalRef.current.contains(event.target) && 
       (!userDivRef.current || (userDivRef.current && !userDivRef.current.contains(event.target)))) {
         closeUserModal();
->>>>>>> Log in and registration adjustments.
       }
     }
 
@@ -87,7 +71,7 @@ function UserModal({ userDivRef }) {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [userDivRef, toggleUserModal]);
+  }, [userDivRef, closeUserModal]);
 
   useEffect(() => {
     if (currentUser) {
@@ -98,19 +82,11 @@ function UserModal({ userDivRef }) {
 
   if (!isUserModalOpen || !currentUser) return null;
 
-<<<<<<< HEAD
-  return (
-    <div ref={userModalRef} className="user-modal">
-      <div className="user-modal__profile-pic">
-        <img src={currentUser.profileImage} alt={`${currentUser.firstName}'s profile`} />
-      </div>
-=======
 return (
   <div ref={userModalRef} className="user-modal">
     <div className="user-modal__profile-pic">
       <img src={currentUser.profileImage || defaultImage} alt={`${currentUser.firstName}'s profile`} />
     </div>
->>>>>>> Log in and registration adjustments.
 
       <div className="user-modal__greeting">Hi, {currentUser.firstName}!</div>
 

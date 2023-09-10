@@ -82,62 +82,6 @@ router.post("/validate-token", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-/* LOGIN POST */
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  console.log("GET /api/users/login route hit");
-  try {
-    const { token, user } = await loginUser(email, password);
-    if (token) {
-        res.status(200).json({ token, userId: user.id });
-    } else {
-        res.status(401).json({ message: "Authentication failed." });
-    }
-  } catch (error) {
-      res.status(500).json({ message: "An error occurred.", error: error.message });
-  }
-});
-
-/* TOKEN VALIDATION */
-router.post("/validate-token", async (req, res) => {
-
-  console.log("GET /api/users/validate-token route hit");
-
-  const token = req.headers.authorization;
-
-  try {
-    const decoded = jwt.verify(token, secret);
-    const user = await User.findByPk(decoded.id);
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error during token validation:", error.message);
-
-    res.status(401).json({ message: "Invalid or expired token" });
-=======
-router.get("/test/:id", async (req, res) => {
-  console.log(`GET /api/users/test/${req.params.id} route hit`); // Logging to know the route has been hit
-  try {
-    const user = await User.findByPk(req.params.id);
-    if (user) {
-      console.log("User found:", user);
-      res.status(200).json(user);
-    } else {
-      console.log("User not found");
-      res.status(404).json({ error: "User not found" });
-    }
-  } catch (error) {
-    console.log("An error occurred:", error.message);
-    res.status(400).json({ error: error.message });
->>>>>>> Log in and registration adjustments.
-  }
-});
-
 /* GET USER BY ID */
 router.get("/:id", async (req, res) => {
   console.log(`GET /api/users/${req.params.id} route hit`); // Logging to know the route has been hit

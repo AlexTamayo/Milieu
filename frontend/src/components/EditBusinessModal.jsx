@@ -81,7 +81,7 @@ function EditBusinessModal({ isOpen, onRequestClose, businesses }) {
       isOpen={isOpen}
       title="Venue Modal Business"
       onRequestClose={onRequestClose}
-      from="right"
+      from="left"
       width="400px"
     >
       <div>

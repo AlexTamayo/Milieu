@@ -60,6 +60,7 @@ const UserLogRegModal = () => {
     const lastLogin = new Date().toISOString();
     if (loginModalType === 'login') {
       loginUserLogic(loginData.email, loginData.password);
+      closeLoginModal();
     } else {
       registerUserLogic(formData, lastLogin);
       closeLoginModal();

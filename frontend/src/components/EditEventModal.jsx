@@ -66,7 +66,7 @@ function EditEventModal({ isOpen, onRequestClose, currentEvent }) {
       isOpen={isOpen}
       title="Edit Event Modal"
       onRequestClose={onRequestClose}
-      from="right"
+      from="left"
       width="400px"
     >
       <div>
