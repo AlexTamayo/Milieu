@@ -58,7 +58,6 @@ export function AuthProvider({ children }) {
           const { passwordHash, ...userWithoutPassword } = userProfile.data;
           setCurrentUser(userWithoutPassword);
           // closeLoginModal();
-          console.log('Im declared setCurrentUser');
         }
       } else {
         throw new Error('Invalid login credentials.');

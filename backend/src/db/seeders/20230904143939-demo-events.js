@@ -35,7 +35,7 @@ module.exports = {
         startTime: new Date('2023-09-20T09:00:00Z'),
         endTime: new Date('2023-09-20T17:00:00Z'),
         timeZone: 'UTC',
-        ownerId: 3, // Replace with the actual owner ID
+        ownerId: 1, // Replace with the actual owner ID
         eventCategoryId: 1, // Replace with the actual category ID
         createdAt: new Date(),
         updatedAt: new Date(),

@@ -74,7 +74,7 @@ const UserLogRegModal = () => {
     <div className="overlay">
       <div className="modal-container">
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
 
 
         <div className="modal-header">
