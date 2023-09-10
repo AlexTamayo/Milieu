@@ -26,7 +26,9 @@ const actionTypes = {
   SET_SELECTED_FILTER: 'SET_SELECTED_FILTER',
   SET_USER: 'SET_USER',
   SET_LOADING: "SET_LOADING",
-  CLEAR_LOADING: "CLEAR_LOADING"
+  CLEAR_LOADING: "CLEAR_LOADING",
+  SET_SELECTED_VENUE: 'SET_SELECTED_VENUE',
+  RESET_SELECTED_VENUE: 'RESET_SELECTED_VENUE',
 };
 
 
@@ -87,6 +89,20 @@ const reducer = (state, action) => {
     case actionTypes.CLEAR_LOADING:
       return { ...state, isLoading: false };
 
+    case actionTypes.SET_SELECTED_VENUE:
+      return {
+        ...state,
+        selectedVenueType: action.payload.venueType,
+        selectedVenueId: action.payload.venueId,
+      };
+
+    case actionTypes.RESET_SELECTED_VENUE:
+      return {
+        ...state,
+        selectedVenueType: null,
+        selectedVenueId: null,
+      };
+
     default:
       return state;
   }
@@ -108,6 +124,8 @@ export default function useApplication() {
     selectedFilter: '',
     isLoading: true,
     searchResultCategory: {},
+    selectedVenueType: null,
+    selectedVenueId: null,
   });
 
   useEffect(() => {
@@ -224,6 +242,21 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLEAR_LOADING });
   };
 
+  /* Setting the venue from the marker */
+
+  const setSelectedVenue = (venueType, venueId) => {
+    console.log('This is running');
+    dispatch({
+      type: actionTypes.SET_SELECTED_VENUE,
+      payload: { venueType, venueId }
+    });
+    dispatch({ type: actionTypes.OPEN_VENUE_MODAL });
+  };
+
+  const resetSelectedVenue = () => {
+    dispatch({ type: actionTypes.RESET_SELECTED_VENUE });
+  };
+
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
@@ -274,5 +307,7 @@ export default function useApplication() {
     formatResult,
     setLoading,
     clearLoading,
+    setSelectedVenue,
+    resetSelectedVenue,
   };
 }

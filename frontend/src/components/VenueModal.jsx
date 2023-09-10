@@ -8,17 +8,19 @@ import VenueModalEvent from './VenueModalEvent';
 function VenueModal() {
 
   const { 
+    state,
     openVenueModal,
     closeVenueModal,
-    setVenueType,
-    state
+    setSelectedVenue,
   } = useContext(DataContext);
 
   const {
     businessData,
     eventData,
     isVenueModalOpen,
-    venueType
+    venueType,
+    selectedVenueType,
+    selectedVenueId,
   } = state;
 
   const venueModalRef = useRef(null);
@@ -26,10 +28,14 @@ function VenueModal() {
   const arrNum = 1;
 
   // const currentBusiness = businessData[arrNum];
-  const currentBusiness = businessData.find(business => business.id === arrNum);
+  // const currentBusiness = businessData.find(business => business.id === arrNum);
+  const currentBusiness = businessData.find(business => business.id === selectedVenueId);
   
   // const currentEvent = eventData[arrNum];
-  const currentEvent = eventData.find(event => event.id === arrNum);
+  // const currentEvent = eventData.find(event => event.id === arrNum);
+  const currentEvent = eventData.find(event => event.id === selectedVenueId);
+
+
 
 
   // Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click
@@ -67,14 +73,14 @@ function VenueModal() {
 
   if (businessData.length < 1) return null;
 
-  if (!venueType) return null;
+  if (!selectedVenueType) return null;
 
   return (
     <div ref={venueModalRef} className="venue-modal">
 
-      {venueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
+      {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
 
-      {venueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
+      {selectedVenueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
 
     </div>
   );

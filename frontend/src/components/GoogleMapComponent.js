@@ -10,9 +10,17 @@ import mapStyles from '../styles/mapStyles.js';
 import categoryIcons from '../routes/categoryIcons';
 import venueMarkers from '../routes/venueMarkers';
 
+// const containerStyle = {
+//   width: '100%',
+//   height: '800px',
+// };
+
+/* FOR ALEX TURN, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
 const containerStyle = {
   width: '100%',
-  height: '800px',
+  height: '1260px',
+  margin: 0,
+  // height: '90%',
 };
 
 const ICON_SIZE = { width: 40, height: 40 };
@@ -21,7 +29,7 @@ const GoogleMapComponent = () => {
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [markers, setMarkers] = useState([]);
-  const { state } = useContext(DataContext);
+  const { state, setSelectedVenue } = useContext(DataContext);
   const { eventData, businessData, selectedFilter } = state;
   const mapRef = React.useRef(null);
 
@@ -143,6 +151,7 @@ const GoogleMapComponent = () => {
                   icon={marker.icon}
                   onClick={() => {
                     console.log(marker.metadata);
+                    setSelectedVenue(marker.metadata.topic, marker.metadata.id);
                   }}
                   clusterer={clusterer}
                 />

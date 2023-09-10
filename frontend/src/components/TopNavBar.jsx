@@ -61,11 +61,11 @@ function TopNavBar({ userDivRef }) {
         </div>
       </div>
 
-      <button onClick={handleBusinessClick}>Business</button>
+      {/* <button onClick={handleBusinessClick}>Business</button> */}
 
-      <button onClick={handleEventClick}>Event</button>
+      {/* <button onClick={handleEventClick}>Event</button> */}
 
-      <button onClick={handleNullClick}>Null</button>
+      {/* <button onClick={handleNullClick}>Null</button> */}
 
       {isLoading ? (
         <div className="top-nav-bar__right">
