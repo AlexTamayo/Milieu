@@ -13,13 +13,15 @@ const UserLogRegModal = () => {
     state,
     openLoginModal,
     closeLoginModal,
-    setLoading,
-    clearLoading,
   } = useContext(DataContext);
 
   const { loginModalType, isLoginModalVisible } = state;
 
-  const { setCurrentUser, currentUser } = useAuth();
+  const {
+    loginUserLogic,
+    registerUserLogic,
+    errorMessage,
+  } = useAuth();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -38,8 +40,6 @@ const UserLogRegModal = () => {
     password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (loginModalType === 'login') {
@@ -56,107 +56,15 @@ const UserLogRegModal = () => {
   };
 
   const handleModalSubmit = async (e) => {
-    
-    const lastLogin = new Date().toISOString();
     e.preventDefault();
+    const lastLogin = new Date().toISOString();
     if (loginModalType === 'login') {
-      try {
-        const response = await loginUser({
-          email: loginData.email,
-          password: loginData.password
-        });
-
-        
-        if (response.data && response.data.token) {
-          localStorage.setItem('authToken', response.data.token);
-
-          const userProfile = await getUserById(response.data.userId);
-
-          if (userProfile && userProfile.data) {
-            const { passwordHash, ...userWithoutPassword } = userProfile.data;
-            setCurrentUser(userWithoutPassword);
-          }
-
-          closeLoginModal();
-        } else {
-          throw new Error('Invalid login credentials.');
-        }
-      
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          setErrorMessage(error.response.data.message);
-        } else {
-          setErrorMessage("An error occurred during login. Please try again.");
-        }
-      }
-      
+      loginUserLogic(loginData.email, loginData.password);
     } else {
-      const createdAt = lastLogin;
-      const updatedAt = lastLogin;
-      const role = "user";
-
-      // Inside handleModalSubmit before the try block
-      if (!formData.username || !formData.email || !formData.passwordHash) {
-        setErrorMessage("Username, email, and password are required fields!");
-        return;
-      }
-
-      try {
-        
-        const response = await createUser({
-          ...formData,
-          createdAt,
-          updatedAt,
-          lastLogin,
-          role,
-        });
-
-        // After successfully creating the user, handle the received data
-        if (response.data && response.data.token) {
-          localStorage.setItem("authToken", response.data.token);
-
-          // Assuming the response also contains user details without password
-          const { passwordHash, ...userWithoutPassword } = response.data.user;
-          setCurrentUser(userWithoutPassword);
-        } else {
-          throw new Error(
-            "Registration was successful, but there was an issue logging in."
-          );
-        }
-
-        setFormData({
-          firstName: "",
-          lastName: "",
-          username: "",
-          email: "",
-          profileImage: "",
-          passwordHash: "",
-          dateOfBirth: "",
-          gender: "",
-          phoneNumber: "",
-        });
-
-        closeLoginModal();
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          setErrorMessage(error.response.data.message);
-        } else {
-          setErrorMessage("An error occurred. Please try again later.");
-          console.error(error);
-        }
-      }
+      registerUserLogic(formData, lastLogin);
+      closeLoginModal();
     }
   };
-
-  
 
   if (!isLoginModalVisible) return null;
 
