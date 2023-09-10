@@ -15,7 +15,14 @@ router.post("/", async (req, res) => {
   try {
     const newUser = await addUser(req.body);
     if (newUser) {
-      res.status(201).json(newUser);
+
+      // Generate JWT token after successfully creating the user
+      const token = jwt.sign({ id: newUser.id }, secret, { expiresIn: '24h' });
+
+      // Send the token and user details in the response
+      res.status(201).json({ token, user: newUser });
+
+      // res.status(201).json(newUser);
     } else {
       throw new Error("Unable to create user");
     }
@@ -32,45 +39,6 @@ router.get("/", async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ error: error.message });
-  }
-});
-
-/* LOGIN POST */
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  console.log("GET /api/users/login route hit");
-  try {
-    const { token, user } = await loginUser(email, password);
-    if (token) {
-        res.status(200).json({ token, userId: user.id });
-    } else {
-        res.status(401).json({ message: "Authentication failed." });
-    }
-  } catch (error) {
-      res.status(500).json({ message: "An error occurred.", error: error.message });
-  }
-});
-
-/* TOKEN VALIDATION */
-router.post("/validate-token", async (req, res) => {
-
-  console.log("GET /api/users/validate-token route hit");
-
-  const token = req.headers.authorization;
-
-  try {
-    const decoded = jwt.verify(token, secret);
-    const user = await User.findByPk(decoded.id);
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error during token validation:", error.message);
-
-    res.status(401).json({ message: "Invalid or expired token" });
   }
 });
 

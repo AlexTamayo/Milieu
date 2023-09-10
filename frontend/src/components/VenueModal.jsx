@@ -15,7 +15,6 @@ function VenueModal() {
   } = useContext(DataContext);
 
   const {
-    userData,
     businessData,
     eventData,
     isVenueModalOpen,
@@ -28,7 +27,6 @@ function VenueModal() {
 
   const currentBusiness = businessData[arrNum];
   const currentEvent = eventData[arrNum];
-  const currentUser = userData[arrNum];
 
 
   // Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click

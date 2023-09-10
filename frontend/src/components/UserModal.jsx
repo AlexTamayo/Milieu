@@ -5,11 +5,13 @@ import '../styles/UserModal.scss';
 import { DataContext  } from '../context/MainContext';
 import { useAuth } from '../context/AuthContext';
 
+import defaultImage from '../assets/logo/logo.png'
+
 
 function UserModal({ userDivRef }) {
   const {
     state ,
-    toggleUserModal,
+    closeUserModal,
   } = useContext(DataContext);
 
   const { isUserModalOpen } = state;
@@ -23,7 +25,7 @@ function UserModal({ userDivRef }) {
     function handleClickOutside(event) {
       if (userModalRef.current && !userModalRef.current.contains(event.target) && 
       (!userDivRef.current || (userDivRef.current && !userDivRef.current.contains(event.target)))) {
-        toggleUserModal();
+        closeUserModal();
       }
     }
 
@@ -40,7 +42,7 @@ function UserModal({ userDivRef }) {
 return (
   <div ref={userModalRef} className="user-modal">
     <div className="user-modal__profile-pic">
-      <img src={currentUser.profileImage} alt={`${currentUser.firstName}'s profile`} />
+      <img src={currentUser.profileImage || defaultImage} alt={`${currentUser.firstName}'s profile`} />
     </div>
 
     <div className="user-modal__greeting">Hi, {currentUser.firstName}!</div>
