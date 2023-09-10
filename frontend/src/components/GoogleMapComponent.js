@@ -26,11 +26,19 @@ const containerStyle = {
 const ICON_SIZE = { width: 40, height: 40 };
 
 const GoogleMapComponent = () => {
+  const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
-  const [markers, setMarkers] = useState([]);
+  
   const { state, setSelectedVenue } = useContext(DataContext);
-  const { eventData, businessData, selectedFilter } = state;
+
+  const {
+    eventData,
+    businessData,
+    selectedFilter,
+    selectedSearchResult
+  } = state;
+
   const mapRef = React.useRef(null);
 
   useEffect(() => {
@@ -136,7 +144,9 @@ const GoogleMapComponent = () => {
           {(clusterer) =>
             markers
               .filter((marker) => {
-                if (selectedFilter === 'events') {
+                if (selectedSearchResult !== "") {
+                  return marker.metadata.category === selectedSearchResult;
+                } else if (selectedFilter === 'events') {
                   return marker.metadata.topic === 'event';
                 } else if (selectedFilter === 'businesses') {
                   return marker.metadata.topic === 'business';

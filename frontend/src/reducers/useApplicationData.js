@@ -28,6 +28,8 @@ const actionTypes = {
   CLEAR_LOADING: "CLEAR_LOADING",
   SET_SELECTED_VENUE: 'SET_SELECTED_VENUE',
   RESET_SELECTED_VENUE: 'RESET_SELECTED_VENUE',
+  SET_SELECTED_ITEM: 'SET_SELECTED_ITEM',
+  RESET_SELECTED_ITEM: 'RESET_SELECTED_ITEM',
 };
 
 
@@ -99,6 +101,12 @@ const reducer = (state, action) => {
         selectedVenueId: null,
       };
 
+    case actionTypes.SET_SELECTED_ITEM:
+      return { ...state, selectedSearchResult: action.payload };
+
+    case actionTypes.RESET_SELECTED_ITEM:
+      return { ...state, selectedSearchResult: "" };
+
     default:
       return state;
   }
@@ -121,6 +129,7 @@ export default function useApplication() {
     searchResultCategory: {},
     selectedVenueType: null,
     selectedVenueId: null,
+    selectedSearchResult: '',
   });
 
   useEffect(() => {
@@ -261,20 +270,21 @@ export default function useApplication() {
   };
 
   const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log("handleOnSearch string", string);
-    console.log("handleOnSearch results", results);
+    // console.log("handleOnSearch string", string);
+    // console.log("handleOnSearch results", results);
+    if (string === '') {
+      dispatch({ type: actionTypes.RESET_SELECTED_ITEM });
+  }
   };
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log("handleOnHover", result);
+    // console.log("handleOnHover", result);
   };
 
   const handleOnSelect = (item) => {
-    // the item selected
-    console.log("handleOnSelect", item);
+    // console.log("handleOnSelect", item);
+    dispatch({ type: actionTypes.SET_SELECTED_ITEM, payload: item.name });
   };
 
   const handleOnFocus = () => {
