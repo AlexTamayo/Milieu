@@ -10,7 +10,7 @@
 
   top: 70px;
   left: 15px;
-  
+
   width: 560px;
   // height: 1250px;
   height: 820px;
@@ -19,7 +19,7 @@
   border-radius: 20px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
-  
+
   z-index: 9991;
 
   $scrollbar-width: 13px;
@@ -64,21 +64,21 @@
 
 .venue-modal__bagde-image {
   $badge-diameter: 100px;
-  
+
   position: absolute;
   top: calc(200px - 0.5 * $badge-diameter);
   left: 3%;
 
-  width: $badge-diameter; 
-  height: $badge-diameter; 
+  width: $badge-diameter;
+  height: $badge-diameter;
 
   .venue-badge {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    border-radius: 100%; 
+    border-radius: 100%;
     object-fit: cover;
     border: 4px solid $bg-color;
   }
@@ -139,7 +139,7 @@ hr {
 .venue-modal__title {
   display: flex;
   justify-content: start;
-  
+
   font-size: 2.5em;
   font-weight: bold;
 
@@ -170,7 +170,7 @@ hr {
   max-height: 73px;
   min-height: 73px;
   overflow: hidden;
-  
+
 
   font-size: 1.1em;
 
@@ -260,7 +260,7 @@ $container-height: 60px;
   border-radius: 100%;
   opacity: 0.5;
 
-  
+
   &:hover {
     color: $grey-3;
     background-color: $grey-1;
@@ -291,5 +291,24 @@ $container-height: 60px;
     border-width: 5px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+  }
+}
+
+.vm-container__address {
+  display: flex;
+
+  .google-maps-button {
+    margin-right: 15px; // Adjust as necessary
+    cursor: pointer; // Changes the cursor to a hand when hovering over the button
+    background: none; // Assuming you don't want a background, adjust as necessary
+    border: none; // Assuming you don't want a border, adjust as necessary
+
+    i {
+      font-size: 1.5em; // Adjust the size of the icon as necessary
+    }
+
+    &:hover {
+      color: #000; // Change color on hover, adjust as necessary
+    }
   }
 }
