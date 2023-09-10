@@ -15,7 +15,7 @@ import venueMarkers from '../routes/venueMarkers';
 //   height: '800px',
 // };
 
-/* FOR ALEX TURN, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
+/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
 const containerStyle = {
   width: '100%',
   height: '1260px',
