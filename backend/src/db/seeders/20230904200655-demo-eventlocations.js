@@ -2,8 +2,8 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert("EventLocations", [
       {
-        longitude: -123.123,
-        latitude: 49.2796,
+        longitude: -123.1449,
+        latitude: 49.2939,
         streetAddress: "145 West Pender Street",
         city: "Vancouver",
         region: "BC",
@@ -38,8 +38,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -123.1341,
-        latitude: 49.2741,
+        longitude: -123.1438,
+        latitude: 49.2744,
         streetAddress: "666 Davie Street",
         city: "Vancouver",
         region: "BC",
@@ -50,8 +50,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -123.1387,
-        latitude: 49.2765,
+        longitude: -123.1241,
+        latitude: 49.2725,
         streetAddress: "999 Burrard Street",
         city: "Vancouver",
         region: "BC",

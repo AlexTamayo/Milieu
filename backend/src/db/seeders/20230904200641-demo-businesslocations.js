@@ -2,12 +2,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert("BusinessLocations", [
       {
-        longitude: -123.1216,
-        latitude: 49.2827,
-        streetAddress: "123 Robson Street",
-        city: "Vancouver",
+        longitude: -122.990,
+        latitude: 49.225,
+        streetAddress: "5075 Kingsway",
+        city: "Burnaby",
         region: "BC",
-        postalCode: "V6B 2A7",
+        postalCode: "V5H 2E6",
         country: "Canada",
         businessId: 1,
         createdAt: new Date(),
@@ -50,8 +50,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -123.1398,
-        latitude: 49.2781,
+        longitude: -123.1347,
+        latitude: 49.2808,
         streetAddress: "1313 Alberni Street",
         city: "Vancouver",
         region: "BC",
@@ -62,8 +62,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        longitude: -114.0709,
-        latitude: 51.0486,
+        longitude: -114.0852,
+        latitude: 51.0542,
         streetAddress: "1515 8th Street SW",
         city: "Calgary",
         region: "AB",
