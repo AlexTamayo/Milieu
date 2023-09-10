@@ -9,50 +9,24 @@ import MagGlass from './SVGs/MagGlass';
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { state } = useContext(DataContext);
-  const { eventCategoryData, businessCategoryData } = state;
-  const categoryItems = [...eventCategoryData, ...businessCategoryData];
-  
   const {
-    // ... other state and functions
+    state,
     handleOnSearch,
     handleOnHover,
     handleOnSelect,
     handleOnFocus,
-    formatResult,
+    formatResult
   } = useContext(DataContext);
 
-  //Search Bar Functions.
-  const handleSearch = (string, results) => {
-    // Call the handleOnSearch function from the hook
-    handleOnSearch(string, results);
-    // Your additional logic here
-  };
-  const handleHover = (result) => {
-    // Call the handleOnHover function from the hook
-    handleOnHover(result);
-    // Your additional logic here
-  };
-  const handleSelect = (item) => {
-    // Call the handleOnSelect function from the hook
-    handleOnSelect(item);
-    // Your additional logic here
-  };
-  const handleFocus = () => {
-    // Call the handleOnFocus function from the hook
-    handleOnFocus();
-    // Your additional logic here
-  };
-  const resultFormatter = (item) => {
-    // Call the formatResult function from the hook
-    return formatResult(item);
-  };
+  const { eventCategoryData, businessCategoryData } = state;
+  
+  const categoryItems = [...eventCategoryData, ...businessCategoryData];
 
   return (
     <div className="search-complex">
-      < SearchFilters />
+      <SearchFilters />
       {/* <div className="search-box">
-        <form  className="search-box__form" onSubmit={handleSearch}>
+        <form  className="search-box__form" onSubmit={handleOnSearch}>
           <input className="search-box__input"
                 type="search"
                 name="query"
@@ -63,15 +37,15 @@ function SearchBar() {
         <button className="search-box__button" type="submit"> < MagGlass /> </button>
         </form>
       </div> */}
-              < ReactSearchAutocomplete
-            items={categoryItems}
-            onSearch={handleSearch}
-            onHover={handleHover}
-            onSelect={handleSelect}
-            onFocus={handleFocus}
-            autoFocus
-            formatResult={resultFormatter}
-          />
+      <ReactSearchAutocomplete
+        items={categoryItems}
+        onSearch={(string, results) => handleOnSearch(string, results)}
+        onHover={(result) => handleOnHover(result)}
+        onSelect={(item) => handleOnSelect(item)}
+        onFocus={() => handleOnFocus()}
+        autoFocus
+        formatResult={(item) => formatResult(item)}
+      />
     </div>
   );
 }
