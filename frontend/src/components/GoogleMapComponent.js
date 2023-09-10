@@ -34,7 +34,7 @@ const GoogleMapComponent = () => {
           if (event.eventLocation && event.eventLocation.latitude && event.eventLocation.longitude) {
             newMarkers.push({
               position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
-              metadata: { topic: 'event', name: event.title, link: event.link },
+              metadata: { topic: 'event', id: event.id , category: event.eventCategory.name, name: event.title, link: event.link },
               icon: {
                 url: categoryIcons[event.categoryName] || "http://maps.google.com/mapfiles/ms/micons/sportvenue.png",
                 scaledSize: iconSize,
@@ -49,7 +49,7 @@ const GoogleMapComponent = () => {
           if (business.businessLocation && business.businessLocation.latitude && business.businessLocation.longitude) {
             newMarkers.push({
               position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
-              metadata: { topic: 'business', name: business.name, link: business.website },
+              metadata: { topic: 'business', id: business.id , category: business.businessCategory.name, name: business.name, link: business.website },
               icon: {
                 url: categoryIcons[business.businessCategory.name] || "http://maps.google.com/mapfiles/kml/pal2/icon10.png",
                 scaledSize: iconSize,
