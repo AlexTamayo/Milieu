@@ -5,6 +5,8 @@ const API_BASE_URL = 'http://localhost:3001/api';
 const ROUTES = {
   USERS: "/users",
   BUSINESSES: "/businesses",
+  BUSINESSES_USER: "/businesses/user",
+  EVENTS_USER: "/events/user",
   EVENTS: "/events",
   BUSINESS_BRANDINGS: "/businesses/brandings",
   EVENT_BRANDINGS: "/events/brandings",
@@ -79,6 +81,13 @@ export const getUserById = (userId) => {
 
 export const getBusinessById = (businessId) => {
   return apiClient.get(`${ROUTES.BUSINESSES}/${businessId}`);
+};
+export const getBusinessesByUser = (userId) => {
+  console.log("here in the axios get  " + userId);
+  return apiClient.get(`${ROUTES.BUSINESSES_USER}/${userId}`);
+};
+export const getEventsByUser = (userId) => {
+  return apiClient.get(`${ROUTES.EVENTS_USER}/${userId}`);
 };
 
 export const getEventById = (eventId) => {

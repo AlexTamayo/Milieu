@@ -5,6 +5,7 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import { DataContext } from '../context/MainContext';
+import mapStyles from '../styles/mapStyles.js';
 
 const containerStyle = {
   width: '100%',
@@ -15,41 +16,45 @@ const GoogleMapComponent = () => {
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
   const [markers, setMarkers] = useState([]);
   const { state } = useContext(DataContext);
-  const { eventData, businessData } = state;
+  const { eventData, businessData, selectedFilter } = state;
 
   useEffect(() => {
     const newMarkers = [];
 
-    eventData.forEach((event) => {
-      if (event.eventLocation && event.eventLocation.latitude && event.eventLocation.longitude) {
-        newMarkers.push({
-          position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
-          metadata: { topic: 'event', name: event.title, link: event.link },
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green icon for events
-          },
-        });
-      }
-    });
+    if (!selectedFilter || selectedFilter === 'events') {
+      eventData.forEach((event) => {
+        if (event.eventLocation && event.eventLocation.latitude && event.eventLocation.longitude) {
+          newMarkers.push({
+            position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
+            metadata: { topic: 'event', name: event.title, link: event.link },
+            icon: {
+              url: "http://maps.google.com/mapfiles/ms/micons/sportvenue.png" // New icon for events
+            },
+          });
+        }
+      });
+    }
 
-    businessData.forEach((business) => {
-      if (business.businessLocation && business.businessLocation.latitude && business.businessLocation.longitude) {
-        newMarkers.push({
-          position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
-          metadata: { topic: 'business', name: business.name, link: business.link },
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Blue icon for business
-          },
-        });
-      }
-    });
+    if (!selectedFilter || selectedFilter === 'businesses') {
+      businessData.forEach((business) => {
+        if (business.businessLocation && business.businessLocation.latitude && business.businessLocation.longitude) {
+          newMarkers.push({
+            position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
+            metadata: { topic: 'business', name: business.name, link: business.link },
+            icon: {
+              url: "http://maps.google.com/mapfiles/kml/pal2/icon10.png" // New icon for business
+            },
+          });
+        }
+      });
+    }
 
     setMarkers(prevMarkers => [
       ...prevMarkers.filter(marker => marker.metadata && marker.metadata.topic === 'user-location'),
       ...newMarkers,
     ]);
 
-  }, [eventData, businessData]);
+  }, [eventData, businessData, selectedFilter]);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -64,7 +69,7 @@ const GoogleMapComponent = () => {
               position: { lat: latitude, lng: longitude },
               metadata: { topic: 'user-location', name: 'Current Location', link: '#' },
               icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                url: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_gray.png" // New icon for user-location
               },
             },
           ]);
@@ -83,19 +88,12 @@ const GoogleMapComponent = () => {
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_MAPSKEY}>
       <GoogleMap
-        key={markers.length}
         mapContainerStyle={containerStyle}
         center={center}
         zoom={15}
         options={{
           disableDefaultUI: true,
-          styles: [
-            {
-              featureType: "poi",
-              elementType: "labels",
-              stylers: [{ visibility: "off" }],
-            },
-          ],
+          styles: mapStyles,
         }}
       >
         {markers.map((marker, index) => (
