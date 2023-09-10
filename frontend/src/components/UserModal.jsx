@@ -7,7 +7,7 @@ import EditBusinessModal from './EditBusinessModal';
 import EditEventModal from './EditEventModal';
 import { getBusinessesByUser, getEventsByUser } from '../routes/api';
 
-import defaultImage from '../assets/logo/logo.png'
+import defaultImage from '../assets/logo/userProfile.png'
 
 function UserModal({ userDivRef }) {
   const {
@@ -38,14 +38,14 @@ function UserModal({ userDivRef }) {
     }
   };
 
-  const fetchEventsByUser = async (userId) => {
-    try {
-      const response = await getEventsByUser(userId);
-      setEvents(response.data);
-    } catch (error) {
-      console.error('Error fetching events:', error);
-    }
-  };
+  // const fetchEventsByUser = async (userId) => {
+  //   try {
+  //     const response = await getEventsByUser(userId);
+  //     setEvents(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching events:', error);
+  //   }
+  // };
 
   const openEditBusinessModal = () => {
     setSelectedModal('EditBusinessModal');
@@ -73,12 +73,12 @@ function UserModal({ userDivRef }) {
     };
   }, [userDivRef, closeUserModal]);
 
-  useEffect(() => {
-    if (currentUser) {
-      fetchBusinessesByUser(currentUser.id);
-      fetchEventsByUser(currentUser.id);
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     fetchBusinessesByUser(currentUser.id);
+  //     fetchEventsByUser(currentUser.id);
+  //   }
+  // }, [currentUser]);
 
   if (!isUserModalOpen || !currentUser) return null;
 

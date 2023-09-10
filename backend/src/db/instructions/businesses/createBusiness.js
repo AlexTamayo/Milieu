@@ -1,5 +1,4 @@
-// createBusiness.js
-const db = require('../../models'); // Import your Sequelize instance
+const db = require('../../models');
 
 async function createBusiness(data) {
   try {
@@ -40,67 +39,3 @@ async function createBusiness(data) {
 }
 
 module.exports = createBusiness;
-
-
-
-const newBusinessData = {
-  // Business data
-  name: 'Business Name',
-  description: 'Business Description',
-  status: 'Active',
-  rating: 4.5,
-  ownerId: 3,
-  businessCategoryId: 2,
-  reviewCount: 10,
-  phoneNumber: '123-456-7890',
-  email: 'business@example.com',
-  website: 'https://www.example.com',
-
-  // BusinessBranding data
-  businessBranding: {
-    logoUrl: 'logo-url',
-    bannerUrl: 'banner-url',
-    pinUrl: 'pin-url',
-  },
-
-  // BusinessCategory data
-  businessCategory: {
-    name: 'Category 6',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-
-  // SocialMedia data (if applicable)
-  socialMedia: {
-    platform: 'LinkedIn',
-    link: 'https://linkedin.com/business4',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    // Include social media data here
-  },
-
-  // BusinessLocation data (if applicable)
-  businessLocation: {
-    longitude: 113.0705, // Replace with the actual longitude
-    latitude: 50.0432,  // Replace with the actual latitude
-    streetAddress: '1200 Maple Lane',
-    city: 'Calgary',
-    region: 'AB',
-    postalCode: 'T2J 1L7',
-    country: 'Canada',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    // Include location data here
-  },
-};
-
-// Create a new business using the createBusiness function
-createBusiness(newBusinessData)
-  .then((business) => {
-    // Handle the result
-    console.log('Business created:', business);
-  })
-  .catch((error) => {
-    // Handle errors
-    console.error('Error creating business:', error);
-  });

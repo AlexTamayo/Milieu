@@ -29,8 +29,16 @@ module.exports = {
           isEmail: true
         }
       },
-      profileImage:{
-        type: Sequelize.STRING
+      profileImage: {
+        type: DataTypes.STRING(1000),
+        set(value) {
+          const pattern = /^(ftp|http|https):\/\/[^ "]+$/;
+          if (!pattern.test(value)) {
+            this.setDataValue('profileImage', null);
+          } else {
+            this.setDataValue('profileImage', value);
+          }
+        }
       },
       passwordHash: {
         type: Sequelize.STRING

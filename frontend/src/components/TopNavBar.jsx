@@ -3,7 +3,7 @@ import { useContext, useCallback } from "react";
 import { DataContext } from "../context/MainContext";
 import { useAuth } from '../context/AuthContext';
 
-import defaultImage from '../assets/logo/logo.png'
+import defaultImage from '../assets/logo/userProfile.png'
 
 import '../styles/TopNavBar.scss';
 

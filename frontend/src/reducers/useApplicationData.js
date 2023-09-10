@@ -107,6 +107,7 @@ export default function useApplication() {
     venueType: null,
     selectedFilter: '',
     isLoading: true,
+    searchResultCategory: {},
   });
 
   useEffect(() => {
@@ -184,7 +185,18 @@ export default function useApplication() {
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_VISBILITY, payload: true });
   };
 
+    /* This is here for debuggin isUserModalOpen, please DON'T REMOVE */
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     console.log('isLoginModalVisible:', state.isLoginModalVisible);
+  //   }, 1000);
+  
+  //   // Clear interval when the component unmounts
+  //   return () => clearInterval(intervalId);
+  // }, [state.isLoginModalVisible]);
+
   const closeLoginModal = () => {
+    // console.log(`running from within closeLoginModal in useAppData`);
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_VISBILITY, payload: false });
     dispatch({ type: actionTypes.SET_LOGIN_MODAL_TYPE, payload: null });
   };
@@ -212,21 +224,21 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLEAR_LOADING });
   };
 
-  //Search bar functions.
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    console.log(string, results)
+    console.log('handleOnSearch string', string);
+    console.log('handleOnSearch results', results);
   }
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result)
+    console.log('handleOnHover', result);
   }
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item)
+    console.log('handleOnSelect', item);
   }
 
   const handleOnFocus = () => {
@@ -236,8 +248,7 @@ export default function useApplication() {
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }} key={item.id}>{item.name}</span>
       </>
     )
   }
@@ -256,10 +267,10 @@ export default function useApplication() {
     closeLoginModal,
     setVenueType,
     handleButtonClick,
-    handleOnSearch,     // Add this line to access the function
-    handleOnHover,      // Add this line to access the function
-    handleOnSelect,     // Add this line to access the function
-    handleOnFocus,      // Add this line to access the function
+    handleOnSearch,
+    handleOnHover, 
+    handleOnSelect,
+    handleOnFocus, 
     formatResult,
     setLoading,
     clearLoading,

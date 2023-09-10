@@ -2,44 +2,94 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    // Define the social media data
     const socialMediaData = [
       {
         platform: 'Facebook',
         link: 'https://facebook.com/sushiyazo',
-        businessId: 1, // Replace with the actual business ID
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        platform: 'Twitter',
-        link: 'https://twitter.com/business2',
-        businessId: 2, // Replace with the actual business ID
+        businessId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         platform: 'Instagram',
-        link: 'https://instagram.com/business3',
-        businessId: 3, // Replace with the actual business ID
+        link: 'https://instagram.com/sushiyazo',
+        businessId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Twitter',
+        link: 'https://twitter.com/sushiyazo',
+        businessId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Twitter',
+        link: 'https://twitter.com/autofix_garage',
+        businessId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Instagram',
+        link: 'https://instagram.com/bella_italiano',
+        businessId: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         platform: 'LinkedIn',
-        link: 'https://linkedin.com/business4',
-        businessId: 4, // Replace with the actual business ID
+        link: 'https://linkedin.com/company/carmasters_workshop',
+        businessId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         platform: 'YouTube',
-        link: 'https://youtube.com/business5',
-        businessId: 5, // Replace with the actual business ID
+        link: 'https://youtube.com/c/thepizzeria',
+        businessId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Facebook',
+        link: 'https://facebook.com/motocare_center',
+        businessId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Instagram',
+        link: 'https://instagram.com/ocean_seafood_grill',
+        businessId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'Twitter',
+        link: 'https://twitter.com/drivethru_repairs',
+        businessId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'LinkedIn',
+        link: 'https://linkedin.com/company/bistro_delight',
+        businessId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        platform: 'YouTube',
+        link: 'https://youtube.com/c/wheels_more',
+        businessId: 10,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ];
+    
+    
 
     // Insert the social media data into the database
     await queryInterface.bulkInsert('SocialMedia', socialMediaData, {});

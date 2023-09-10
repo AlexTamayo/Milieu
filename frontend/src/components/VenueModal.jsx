@@ -23,10 +23,13 @@ function VenueModal() {
 
   const venueModalRef = useRef(null);
 
-  const arrNum = 0;
+  const arrNum = 1;
 
-  const currentBusiness = businessData[arrNum];
-  const currentEvent = eventData[arrNum];
+  // const currentBusiness = businessData[arrNum];
+  const currentBusiness = businessData.find(business => business.id === arrNum);
+  
+  // const currentEvent = eventData[arrNum];
+  const currentEvent = eventData.find(event => event.id === arrNum);
 
 
   // Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click
@@ -69,9 +72,9 @@ function VenueModal() {
   return (
     <div ref={venueModalRef} className="venue-modal">
 
-      {venueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum}/>}
+      {venueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
 
-      {venueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum}/>}
+      {venueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
 
     </div>
   );
