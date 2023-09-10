@@ -18,9 +18,13 @@ function VenueModalBusiness({ currentBusiness }) {
   };
 
   const openGoogleMaps = () => {
-    const address = addressFormatterSafe(currentBusiness?.eventLocation);
-    const encodedAddress = encodeURIComponent(address);
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    const address = addressFormatterSafe(currentBusiness?.businessLocation);
+    if (address !== "Address not available") {
+      const encodedAddress = encodeURIComponent(address.replace(/ /g, '+'));
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    } else {
+      alert("Address not available");
+    }
   };
 
   const renderedSocialMediaLinks = currentBusiness?.socialMedia?.length
