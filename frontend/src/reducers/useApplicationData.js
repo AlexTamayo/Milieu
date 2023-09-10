@@ -1,5 +1,10 @@
 import { useEffect, useReducer } from 'react';
-import { getAllEvents, getAllBusinesses, getAllUsers,getBusinessCategories,getEventCategories,getUserByEmail,getUserByUsername } from '../routes/api';
+import {
+  getAllEvents,
+  getAllBusinesses,
+  getBusinessCategories,
+  getEventCategories
+} from '../routes/api';
 
 const actionTypes = {
   SET_EVENT_DATA: 'SET_EVENT_DATA',
@@ -8,6 +13,8 @@ const actionTypes = {
   SET_BUSINESS_DATA: 'SET_BUSINESS_DATA',
   SET_USER_DATA: 'SET_USER_DATA',
   TOGGLE_USER_MODAL: 'TOGGLE_USER_MODAL',
+  OPEN_USER_MODAL: 'OPEN_USER_MODAL',
+  CLOSE_USER_MODAL: 'CLOSE_USER_MODAL',
   OPEN_VENUE_MODAL: 'OPEN_VENUE_MODAL',
   CLOSE_VENUE_MODAL: 'CLOSE_VENUE_MODAL',
   OPEN_USER_ADD_VENUE: 'OPEN_USER_ADD_VENUE',
@@ -18,7 +25,6 @@ const actionTypes = {
   SET_VENUE_TYPE: 'SET_VENUE_TYPE',
   SET_SELECTED_FILTER: 'SET_SELECTED_FILTER',
   SET_USER: 'SET_USER',
-  SIGN_OUT: 'SIGN_OUT',
   SET_LOADING: "SET_LOADING",
   CLEAR_LOADING: "CLEAR_LOADING"
 };
@@ -39,11 +45,14 @@ const reducer = (state, action) => {
     case actionTypes.SET_BUSINESS_DATA:
       return { ...state, businessData: action.payload };
 
-    case actionTypes.SET_USER_DATA:
-      return { ...state, userData: action.payload };
-
     case actionTypes.TOGGLE_USER_MODAL:
       return { ...state, isUserModalOpen: !state.isUserModalOpen };
+
+    case actionTypes.OPEN_USER_MODAL:
+      return { ...state, isUserModalOpen: true };
+
+    case actionTypes.CLOSE_USER_MODAL:
+      return { ...state, isUserModalOpen: false };
 
     case actionTypes.OPEN_VENUE_MODAL:
       return { ...state, isVenueModalOpen: true };
@@ -72,12 +81,6 @@ const reducer = (state, action) => {
     case actionTypes.SET_SELECTED_FILTER:
       return { ...state, selectedFilter: action.payload };
 
-    case actionTypes.SET_USER:
-      return { ...state, currentUser: action.payload };
-
-    case actionTypes.SIGN_OUT:
-      return { ...state, currentUser: null };
-
     case actionTypes.SET_LOADING:
       return { ...state, isLoading: true };
 
@@ -89,14 +92,12 @@ const reducer = (state, action) => {
   }
 };
 
-
 export default function useApplication() {
   const [state, dispatch] = useReducer(reducer, {
     eventData: [],
     businessData: [],
     eventCategoryData: [],
     businessCategoryData: [],
-    userData: [],
     isUserModalOpen: false,
     isVenueModalOpen: false,
     isUserAddVenueOpen: false,
@@ -105,19 +106,17 @@ export default function useApplication() {
     isLoginModalVisible: false,
     venueType: null,
     selectedFilter: '',
-    currentUser: null,
     isLoading: true,
   });
 
   useEffect(() => {
-    Promise.all([getAllEvents(), getAllBusinesses(), getAllUsers(),getBusinessCategories(),getEventCategories()])
-      .then(([eventData, businessData, userData,businessCategoryData,eventCategoryData]) => {
+    Promise.all([getAllEvents(), getAllBusinesses(),getBusinessCategories(),getEventCategories()])
+      .then(([eventData, businessData, businessCategoryData,eventCategoryData]) => {
         dispatch({ type: actionTypes.SET_EVENT_DATA, payload: eventData.data });
         dispatch({
           type: actionTypes.SET_BUSINESS_DATA,
           payload: businessData.data,
         });
-        dispatch({ type: actionTypes.SET_USER_DATA, payload: userData.data });
         dispatch({ type: actionTypes.SET_EVENT_CATEGORY_DATA, payload: eventCategoryData.data });
         dispatch({ type: actionTypes.SET_BUSINESS_CATEGORY_DATA, payload: businessCategoryData.data });
         dispatch({ type: actionTypes.CLEAR_LOADING });
@@ -128,9 +127,28 @@ export default function useApplication() {
       });
   }, []);
 
+  /* This is here for debuggin isUserModalOpen, please DON'T REMOVE */
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     console.log('state.isUserModalOpen:', state.isUserModalOpen);
+  //   }, 1000);
+  
+  //   // Clear interval when the component unmounts
+  //   return () => clearInterval(intervalId);
+  // }, [state.isUserModalOpen]);
+
+
   // User modal opening and closing logic
   const toggleUserModal = () => {
     dispatch({ type: actionTypes.TOGGLE_USER_MODAL });
+  };
+
+  const openUserModal = () => {
+    dispatch({ type: actionTypes.OPEN_USER_MODAL });
+  };
+
+  const closeUserModal = () => {
+    dispatch({ type: actionTypes.CLOSE_USER_MODAL });
   };
 
   // Venue details modal opening and closing logic
@@ -184,15 +202,6 @@ export default function useApplication() {
     }
   };
 
-  // Logged user functionality
-  const setUser = (userDetails) => {
-    dispatch({ type: actionTypes.SET_USER, payload: userDetails });
-  };
-  
-  const signOut = () => {
-    dispatch({ type: actionTypes.SIGN_OUT });
-  };
-
   // Loading
 
   const setLoading = () => {
@@ -236,6 +245,8 @@ export default function useApplication() {
   return {
     state,
     toggleUserModal,
+    openUserModal,
+    closeUserModal,
     openVenueModal,
     closeVenueModal,
     openUserAddVenue,
@@ -245,8 +256,6 @@ export default function useApplication() {
     closeLoginModal,
     setVenueType,
     handleButtonClick,
-    setUser,
-    signOut,
     handleOnSearch,     // Add this line to access the function
     handleOnHover,      // Add this line to access the function
     handleOnSelect,     // Add this line to access the function

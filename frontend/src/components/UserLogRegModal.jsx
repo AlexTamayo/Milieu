@@ -106,14 +106,27 @@ const UserLogRegModal = () => {
       }
 
       try {
-
-        await createUser({
+        
+        const response = await createUser({
           ...formData,
           createdAt,
           updatedAt,
           lastLogin,
           role,
         });
+
+        // After successfully creating the user, handle the received data
+        if (response.data && response.data.token) {
+          localStorage.setItem("authToken", response.data.token);
+
+          // Assuming the response also contains user details without password
+          const { passwordHash, ...userWithoutPassword } = response.data.user;
+          setCurrentUser(userWithoutPassword);
+        } else {
+          throw new Error(
+            "Registration was successful, but there was an issue logging in."
+          );
+        }
 
         setFormData({
           firstName: "",

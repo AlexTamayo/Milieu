@@ -18,15 +18,11 @@ async function addUser(userData) {
   } catch (error) {
     if (error.code === "23505") {
       // 23505 is the code for unique constraint violation in PostgreSQL
-      res.status(400).json({ message: "Username is already taken" });
+      throw new Error("Username is already taken");
     } else {
       console.error("Error name:", error.name);
       console.error("Error message:", error.message);
-
-      // Send the generic error message for all other errors
-      res
-        .status(500)
-        .send({ message: "Failed to add user. Please try again later." });
+      throw new Error("Failed to add user. Please try again later.");
     }
   }
 }

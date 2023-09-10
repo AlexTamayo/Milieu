@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { validateToken } from '../routes/api';
+import useApplicationData from '../reducers/useApplicationData';
 
 
 const AuthContext = createContext();
@@ -11,6 +12,8 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+
+  const { closeUserModal } = useApplicationData();
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -31,6 +34,7 @@ export function AuthProvider({ children }) {
 
   const signOut = () => {
     localStorage.removeItem('authToken');
+    closeUserModal();
     setCurrentUser(null);
   }
 
