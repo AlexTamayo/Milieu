@@ -82,32 +82,6 @@ router.post("/validate-token", async (req, res) => {
   }
 });
 
-
-
-
-/* TOKEN VALIDATION */
-router.post("/validate-token", async (req, res) => {
-
-  console.log("GET /api/users/validate-token route hit");
-
-  const token = req.headers.authorization;
-
-  try {
-    const decoded = jwt.verify(token, secret);
-    const user = await User.findByPk(decoded.id);
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error during token validation:", error.message);
-
-    res.status(401).json({ message: "Invalid or expired token" });
-  }
-});
-
 /* GET USER BY ID */
 router.get("/:id", async (req, res) => {
   console.log(`GET /api/users/${req.params.id} route hit`); // Logging to know the route has been hit
