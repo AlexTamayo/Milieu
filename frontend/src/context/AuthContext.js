@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { closeUserModal } = useApplicationData();
+  const { closeUserModal, closeLoginModal } = useApplicationData();
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -57,6 +57,8 @@ export function AuthProvider({ children }) {
         if (userProfile && userProfile.data) {
           const { passwordHash, ...userWithoutPassword } = userProfile.data;
           setCurrentUser(userWithoutPassword);
+          // closeLoginModal();
+          console.log('Im declared setCurrentUser');
         }
       } else {
         throw new Error('Invalid login credentials.');

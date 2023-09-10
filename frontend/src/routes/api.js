@@ -36,7 +36,6 @@ export const validateToken = (token) => {
   });
 };
 
-
 export const getAllUsers = () => {
   return apiClient.get(ROUTES.USERS);
 };

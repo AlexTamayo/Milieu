@@ -21,6 +21,7 @@ const UserLogRegModal = () => {
     loginUserLogic,
     registerUserLogic,
     errorMessage,
+    currentUser
   } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ const UserLogRegModal = () => {
     e.preventDefault();
     const lastLogin = new Date().toISOString();
     if (loginModalType === 'login') {
-      loginUserLogic(loginData.email, loginData.password);
+      loginUserLogic(loginData.email, loginData.password)
       closeLoginModal();
     } else {
       registerUserLogic(formData, lastLogin);

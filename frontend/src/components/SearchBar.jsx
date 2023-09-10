@@ -20,7 +20,8 @@ function SearchBar() {
 
   const { eventCategoryData, businessCategoryData } = state;
   
-  const categoryItems = [...eventCategoryData, ...businessCategoryData];
+  // const categoryItems = [...eventCategoryData, ...businessCategoryData];
+  const categoryItems = [...businessCategoryData];
 
   return (
     <div className="search-complex">
