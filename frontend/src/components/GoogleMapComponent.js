@@ -8,6 +8,7 @@ import {
 import { DataContext } from '../context/MainContext';
 import mapStyles from '../styles/mapStyles.js';
 import categoryIcons from '../routes/categoryIcons';
+import venueMarkers from '../routes/venueMarkers';
 
 const containerStyle = {
   width: '100%',
@@ -36,7 +37,7 @@ const GoogleMapComponent = () => {
               position: { lat: event.eventLocation.latitude, lng: event.eventLocation.longitude },
               metadata: { topic: 'event', id: event.id , category: event.eventCategory.name, name: event.title, link: event.link },
               icon: {
-                url: categoryIcons[event.categoryName] || "http://maps.google.com/mapfiles/ms/micons/sportvenue.png",
+                url: venueMarkers['events'] || categoryIcons[event.categoryName] || "http://maps.google.com/mapfiles/ms/micons/sportvenue.png",
                 scaledSize: iconSize,
               },
             });
@@ -51,7 +52,7 @@ const GoogleMapComponent = () => {
               position: { lat: business.businessLocation.latitude, lng: business.businessLocation.longitude },
               metadata: { topic: 'business', id: business.id , category: business.businessCategory.name, name: business.name, link: business.website },
               icon: {
-                url: categoryIcons[business.businessCategory.name] || "http://maps.google.com/mapfiles/kml/pal2/icon10.png",
+                url: venueMarkers['businesses'] ||categoryIcons[business.businessCategory.name] || "http://maps.google.com/mapfiles/kml/pal2/icon10.png",
                 scaledSize: iconSize,
               },
             });
