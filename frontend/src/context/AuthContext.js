@@ -1,6 +1,16 @@
-import React, { createContext, useState, useContext } from 'react';
-import { useEffect } from 'react';
-import { validateToken } from '../routes/api';
+import {
+  React,
+  createContext,
+  useState,
+  useContext,
+  useEffect
+} from 'react';
+import {
+  createUser,
+  loginUser,
+  getUserById,
+  validateToken
+} from '../routes/api';
 import useApplicationData from '../reducers/useApplicationData';
 
 
@@ -11,7 +21,10 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { closeUserModal } = useApplicationData();
 
@@ -32,6 +45,64 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  /* LOGIN LOGIC */
+  const loginUserLogic = async (email, password) => {
+    try {
+      const response = await loginUser({ email, password });
+
+      if (response.data && response.data.token) {
+        localStorage.setItem('authToken', response.data.token);
+        const userProfile = await getUserById(response.data.userId);
+
+        if (userProfile && userProfile.data) {
+          const { passwordHash, ...userWithoutPassword } = userProfile.data;
+          setCurrentUser(userWithoutPassword);
+        }
+      } else {
+        throw new Error('Invalid login credentials.');
+      }
+
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  /* REGISTRATION LOGIC */
+  const registerUserLogic = async (formData, lastLogin) => {
+    const createdAt = lastLogin;
+    const updatedAt = lastLogin;
+    const role = "user";
+
+    if (!formData.username || !formData.email || !formData.passwordHash) {
+      setErrorMessage("Username, email, and password are required fields!");
+      return;
+    }
+
+    try {
+      const response = await createUser({ ...formData, createdAt, updatedAt, lastLogin, role });
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        const { passwordHash, ...userWithoutPassword } = response.data.user;
+        setCurrentUser(userWithoutPassword);
+      } else {
+        throw new Error("Registration was successful, but there was an issue logging in.");
+      }
+
+    } catch (error) {
+      handleError(error);
+    }
+  };
+  
+  /* ERROR HANDLER */
+  const handleError = (error) => {
+    if (error.response && error.response.data && error.response.data.message) {
+      setErrorMessage(error.response.data.message);
+    } else {
+      setErrorMessage("An error occurred. Please try again later.");
+    }
+  };
+
   const signOut = () => {
     localStorage.removeItem('authToken');
     closeUserModal();
@@ -41,7 +112,11 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     setCurrentUser,
-    signOut
+    signOut,
+    loginUserLogic,
+    registerUserLogic,
+    errorMessage,
+    setErrorMessage
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
