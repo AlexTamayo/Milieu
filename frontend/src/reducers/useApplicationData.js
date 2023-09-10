@@ -107,6 +107,7 @@ export default function useApplication() {
     venueType: null,
     selectedFilter: '',
     isLoading: true,
+    searchResultCategory: {},
   });
 
   useEffect(() => {
@@ -226,17 +227,18 @@ export default function useApplication() {
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    console.log(string, results)
+    console.log('handleOnSearch string', string);
+    console.log('handleOnSearch results', results);
   }
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result)
+    console.log('handleOnHover', result);
   }
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item)
+    console.log('handleOnSelect', item);
   }
 
   const handleOnFocus = () => {

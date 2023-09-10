@@ -26,18 +26,6 @@ function SearchBar() {
   return (
     <div className="search-complex">
       <SearchFilters />
-      {/* <div className="search-box">
-        <form  className="search-box__form" onSubmit={handleOnSearch}>
-          <input className="search-box__input"
-                type="search"
-                name="query"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-          />
-        <button className="search-box__button" type="submit"> < MagGlass /> </button>
-        </form>
-      </div> */}
       <ReactSearchAutocomplete
         items={categoryItems}
         onSearch={(string, results) => handleOnSearch(string, results)}
