@@ -1,6 +1,6 @@
 import { useContext} from 'react';
 import { DataContext } from '../context/MainContext';
-import { addressFormatter } from '../utils/helpers';
+import { addressFormatter, formatDateTime } from '../utils/helpers';
 
 function VenueModalEvent(props) {
 
@@ -28,13 +28,6 @@ function VenueModalEvent(props) {
     "https://imgs.search.brave.com/k6E-LQWwgXbalXiTpyGoIiNRcb9Qe7nHuDEuBaPp--0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzc2Lzg5Lzc3/LzM2MF9GXzc2ODk3/NzU3X0NQc0x5VVhR/YkdNYzZ4WjlQZ05O/TmlrWDJac0hnYzlp/LmpwZw"
   ];
 
-  const formatDateTime = (dateString) => {
-    const date = new Date(dateString);
-    const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()} @ ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-    return formattedDate;
-  };
-
-
   return (
     <div>
       <div className="venue-modal__bg-image">
@@ -60,15 +53,7 @@ function VenueModalEvent(props) {
       <hr />
 
       <div className="venue-modal__description">
-        {currentEvent.description} Lorem Ipsum is simply dummy text of the
-        printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a
-        galley of type and scrambled it to make a type specimen book. It has
-        survived not only five centuries, but also the leap into electronic
-        typesetting, remaining essentially unchanged. It was popularised in the
-        1960s with the release of Letraset sheets containing Lorem Ipsum
-        passages, and more recently with desktop publishing software like Aldus
-        PageMaker including versions of Lorem Ipsum.
+        {currentEvent.description}
       </div>
 
       <hr />
