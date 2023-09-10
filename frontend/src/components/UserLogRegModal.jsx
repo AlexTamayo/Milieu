@@ -5,14 +5,13 @@ import '../styles/UserLogRegModal.scss';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
 
-import { createUser, loginUser, getUserById } from '../routes/api';
-
 
 const UserLogRegModal = () => {
   const {
     state,
     openLoginModal,
     closeLoginModal,
+    getOwnedVenuesByUser,
   } = useContext(DataContext);
 
   const { loginModalType, isLoginModalVisible } = state;
@@ -61,6 +60,7 @@ const UserLogRegModal = () => {
     const lastLogin = new Date().toISOString();
     if (loginModalType === 'login') {
       loginUserLogic(loginData.email, loginData.password)
+      getOwnedVenuesByUser(currentUser);
       closeLoginModal();
     } else {
       registerUserLogic(formData, lastLogin);

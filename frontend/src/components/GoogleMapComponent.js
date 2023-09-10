@@ -138,7 +138,7 @@ const GoogleMapComponent = () => {
           options={{
             imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
             gridSize: 50,
-            minimumClusterSize: 2,
+            minimumClusterSize: 5,
           }}
         >
           {(clusterer) =>

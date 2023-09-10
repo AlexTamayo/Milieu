@@ -24,6 +24,7 @@ export const DataProvider = ({ children }) => {
     setLoading,
     clearLoading,
     setSelectedVenue,
+    getOwnedVenuesByUser,
   } = useApplicationData();
 
   return (
@@ -47,6 +48,7 @@ export const DataProvider = ({ children }) => {
                                   setLoading,
                                   clearLoading,
                                   setSelectedVenue,
+                                  getOwnedVenuesByUser,
                                 }}>
       {children}
     </DataContext.Provider>

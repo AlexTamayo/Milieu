@@ -5,7 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 import GoogleMapComponent from './components/GoogleMapComponent';
-import GoogleMapComponent2 from './components/GoogleMapComponent2';
 
 // Temp organisation for AlexT stuff:
 import TopNavBar from './components/TopNavBar';
@@ -23,16 +22,13 @@ function App() {
   return (
 
       <div className="App">
+        < TopNavBar userDivRef={userDivRef} />
+        < UserModal userDivRef={userDivRef} />
         < UserLogRegModal />
         < UserAddVenue />
         < VenueModal />
-        < UserModal userDivRef={userDivRef} />
         < SearchBar />
-
-        < TopNavBar userDivRef={userDivRef} />
-
         < GoogleMapComponent />
-        {/* < GoogleMapComponent2 /> */}
       </div>
   );
 }

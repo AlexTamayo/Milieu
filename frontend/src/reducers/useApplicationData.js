@@ -30,6 +30,8 @@ const actionTypes = {
   RESET_SELECTED_VENUE: 'RESET_SELECTED_VENUE',
   SET_SELECTED_ITEM: 'SET_SELECTED_ITEM',
   RESET_SELECTED_ITEM: 'RESET_SELECTED_ITEM',
+  SET_OWNED_EVENTS: "SET_OWNED_EVENTS",
+  SET_OWNED_BUSINESSES: "SET_OWNED_BUSINESSES",
 };
 
 
@@ -107,6 +109,18 @@ const reducer = (state, action) => {
     case actionTypes.RESET_SELECTED_ITEM:
       return { ...state, selectedSearchResult: "" };
 
+    case actionTypes.SET_OWNED_EVENTS:
+      return {
+        ...state,
+        ownedEvents: action.payload,
+      };
+
+    case actionTypes.SET_OWNED_BUSINESSES:
+      return {
+        ...state,
+        ownedBusinesses: action.payload,
+      };
+
     default:
       return state;
   }
@@ -130,6 +144,8 @@ export default function useApplication() {
     selectedVenueType: null,
     selectedVenueId: null,
     selectedSearchResult: '',
+    ownedEvents: null,
+    ownedBusinesses: null,
   });
 
   useEffect(() => {
@@ -269,6 +285,16 @@ export default function useApplication() {
     dispatch({ type: actionTypes.CLEAR_LOADING });
   };
 
+  /* GET VENUES BY OWNED BY USER */
+  function getOwnedVenuesByUser(currentUser) {
+    const userOwnedEvents = state.eventData.filter(event => event.ownerId === currentUser.id);
+    const userOwnedBusinesses = state.businessData.filter(business => business.ownerId === currentUser.id);
+  
+    dispatch({ type: actionTypes.SET_OWNED_EVENTS, payload: userOwnedEvents });
+    dispatch({ type: actionTypes.SET_OWNED_BUSINESSES, payload: userOwnedBusinesses });
+  }
+
+  /* Search bar functions */
   const handleOnSearch = (string, results) => {
     // console.log("handleOnSearch string", string);
     // console.log("handleOnSearch results", results);
@@ -321,5 +347,6 @@ export default function useApplication() {
     setLoading,
     clearLoading,
     setSelectedVenue,
+    getOwnedVenuesByUser,
   };
 }
