@@ -241,7 +241,66 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-
+      {
+        longitude: -123.1207, //tiny_toes_daycare
+        latitude: 49.2827,
+        streetAddress: "1995 BEACH AVE #1502",
+        city: "Vancouver",
+        region: "BC",
+        postalCode: "V6G 2Y3",
+        country: "Canada",
+        businessId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        longitude: -123.1211, //tiny_toes_daycare
+        latitude: 49.2635,
+        streetAddress: "6322 CAMBIE ST #TH4",
+        city: "Vancouver",
+        region: "BC",
+        postalCode: "V5Z 0K2",
+        country: "Canada",
+        businessId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        longitude: -123.1142, //tiny_toes_daycare
+        latitude: 49.2833,
+        streetAddress: "1189 MELVILLE ST #3304",
+        city: "Vancouver",
+        region: "BC",
+        postalCode: "V6E 4T8",
+        country: "Canada",
+        businessId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        longitude: -123.1211, //tiny_toes_daycare
+        latitude: 49.2795,
+        streetAddress: "1456 W 45TH AVE #1",
+        city: "Vancouver",
+        region: "BC",
+        postalCode: "V6L 3B7",
+        country: "Canada",
+        businessId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        longitude: -123.1290, //tiny_toes_daycare
+        latitude: 49.2901,
+        streetAddress: "4101 YEW ST #209",
+        city: "Vancouver",
+        region: "BC",
+        postalCode: "V6M 2H1",
+        country: "Canada",
+        businessId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
