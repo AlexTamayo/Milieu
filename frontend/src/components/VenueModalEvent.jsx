@@ -92,6 +92,13 @@ function VenueModalEvent(props) {
         </div>
 
         <div
+          onClick={openGoogleMaps}
+          className="google-maps-button"
+        >
+          <i className="fas fa-map"></i>
+        </div>
+
+        <div
           onClick={() => handleCopy(addressFormatter(currentEvent.eventLocation))}
           className="copy-icon-button"
         >
@@ -99,12 +106,7 @@ function VenueModalEvent(props) {
         </div>
 
 
-        <div
-          onClick={openGoogleMaps}
-          className="google-maps-button"
-        >
-          <i className="fas fa-map"></i>
-        </div>
+       
       </div>
 
       {/* CLOSE BUTTON */}
