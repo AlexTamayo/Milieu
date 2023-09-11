@@ -4,6 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Businesses', [
       {
+        // 1
         name: 'Sushiyazo',
         description: `Dive into Sushiyazo's world of fresh, vibrant sushi, where traditional flavors meet modern elegance. Expert chefs, prime ingredients, and a cozy ambiance ensure every visit is a taste adventure. Discover sushi reimagined at Sushiyazo.`,
         status: 'Active',
@@ -18,6 +19,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 2
         name: 'AutoFix Garage',
         description: `Expert automotive repairs and services. From tire changes to engine overhauls, we've got you covered.`,
         status: 'Active',
@@ -32,6 +34,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 3
         name: 'Bella Italiano',
         description: `Experience authentic Italian cuisine in the heart of the city. Fresh pasta, wood-fired pizzas, and classic desserts.`,
         status: 'Active',
@@ -46,6 +49,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 4
         name: 'CarMasters Workshop',
         description: `Reliable automotive services by experienced technicians. Regular maintenance to specialized repairs.`,
         status: 'Active',
@@ -60,6 +64,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 5
         name: 'The Pizzeria',
         description: `Delicious hand-tossed pizzas with a variety of toppings. From classic Margherita to spicy pepperoni.`,
         status: 'Active',
@@ -74,6 +79,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 6
         name: 'MotoCare Center',
         description: `The go-to place for motorcycle enthusiasts. Regular maintenance, spare parts, and expert advice.`,
         status: 'Active',
@@ -88,6 +94,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 7
         name: 'Ocean Seafood Grill',
         description: `Dive into a sea of flavors with our freshly caught seafood. Grilled, fried, or steamed, it's a treat.`,
         status: 'Active',
@@ -102,6 +109,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 8
         name: 'DriveThru Repairs',
         description: `Quick and efficient car repairs while you wait. From oil changes to brake checks, drive through and we'll handle it.`,
         status: 'Active',
@@ -116,6 +124,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 9
         name: 'Bistro Delight',
         description: `A charming bistro serving a mix of classic and modern dishes. Enjoy our outdoor seating with garden views.`,
         status: 'Active',
@@ -130,6 +139,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 10
         name: 'Wheels & More',
         description: `An automotive paradise. Buy, sell, repair - we do it all. Plus, a wide range of accessories for your vehicle.`,
         status: 'Active',
@@ -144,6 +154,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 11
         name: `Keeping it Reel`,
         description: `Are you Reelin' in the Years?  Visit us before your
         weekend get-away for all your fishing and outdoor apparel!`,
@@ -159,6 +170,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 12
         name: `MathroBatics`,
         description: `Deliver exceptional mobile education in Mathematics,
         Physics and Chemistry.  Unlock your full academic potential TODAY!`,
@@ -174,6 +186,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 13
         name: `BackinBusiness Chiropractic and Massage`,
         description: `Get your business back by choosing preventative and pro-active health care TODAY!.  Get back to business by getting your back in business!`,
         status: 'Active',
@@ -188,6 +201,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 14
         name: `Quality Property Pros`,
         description: `Quality Property Pros is a trusted property maintenance business dedicated to delivering top-notch services that enhance the value and appearance of your property. With our skilled team and attention to detail, we ensure that every aspect of property upkeep, from landscaping to repairs, is carried out to the highest standards, leaving your property in pristine condition.`,
         status: 'Active',
@@ -202,6 +216,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 15
         name: `Svaadisht`,
         description: `Svaadisht is a renowned restaurant that tantalizes your taste buds with a delectable fusion of authentic flavors from across the Indian subcontinent. With a diverse menu and a commitment to culinary excellence, Svaadisht offers an unforgettable dining experience, celebrating the rich heritage of Indian cuisine.`,
         status: 'Active',
@@ -216,6 +231,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 16
         name: `Diablo Caliente`,
         description: `Diablo Caliente is a sizzling hotspot for Mexican cuisine enthusiasts, offering a fiery and flavorful journey through the vibrant world of Tex-Mex flavors. With a menu packed full of spicy delights and a lively atmosphere, Diablo Caliente is the perfect destination for those seeking an unforgettable Mexican dining experience.`,
         status: 'Active',
@@ -230,6 +246,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 17
         name: `Graydee's Garage`,
         description: `Graydee's Garage is a family-owned automotive repair and maintenance shop committed to providing top-notch services to the community for over three decades. With a team of experienced technicians and a dedication to customer satisfaction, we specialize in everything from routine oil changes to complex engine diagnostics and repairs.`,
         status: 'Active',
@@ -244,6 +261,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 18
         name: `Handy Sandy Helper`,
         description: `Handy Sandy Helper is a trusted handyman service dedicated to providing reliable home repairs and improvements. With a skilled team led by Sandy's expertise, we tackle a wide range of household projects, ensuring homeowners can enjoy a well-maintained and comfortable living environment.`,
         status: 'Active',
@@ -258,6 +276,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 
         name: `Snowmageddon Snow-Removal`,
         description: `Snowmageddon Snow-Removal is your premier winter weather solution, dedicated to swiftly and efficiently clearing snow and ice to restore accessibility and safety. Our experienced team and top-of-the-line equipment ensure that homes, businesses, and communities can weather the harshest storms with peace of mind.`,
         status: 'Active',
@@ -272,6 +291,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 
         name: `Tiny Toes Daycare`,
         description: `Tiny Toes Daycare is a nurturing and educational haven for young children, committed to providing a safe and stimulating environment for their growth and development. Our dedicated team of caregivers and teachers prioritize the well-being and early education of each child, fostering a sense of curiosity, creativity, and social interaction in a loving and caring atmosphere.`,
         status: 'Active',
@@ -286,6 +306,7 @@ module.exports = {
         updatedAt: new Date(),
       },  
       {
+        // 
         name: `Hairitage Beauty Salon`,
         description: `Hairitage Beauty Salon is a premium hair styling and beauty destination that celebrates the traditions and trends of hair care. Our expert stylists blend their passion for timeless elegance with the latest techniques to create personalized, head-turning looks for our clients.`,
         status: 'Active',
@@ -300,6 +321,7 @@ module.exports = {
         updatedAt: new Date(),
       },  
       {
+        // 
         name: `Purrfectly Groomed`,
         description: `Purrfectly Groomed is a top-tier cat grooming salon dedicated to the well-being and beauty of your feline companions. Our experienced and caring groomers provide a stress-free, spa-like experience for cats, offering a range of grooming services tailored to keep your cats happy, healthy, and looking their best.`,
         status: 'Active',
@@ -314,6 +336,7 @@ module.exports = {
         updatedAt: new Date(),
       },  
       {
+        // 
         name: `Abiding Abode Books`,
         description: `Abiding Abode Books is a cozy and inviting bookstore nestled in the heart of the community, offering a curated selection of literary treasures for all book lovers. Our warm and welcoming space is a sanctuary for readers, where you can explore a diverse range of titles, attend book clubs, and immerse yourself in the joy of storytelling.`,
         status: 'Active',
@@ -328,6 +351,7 @@ module.exports = {
         updatedAt: new Date(),
       },  
       {
+        // 
         name: `Pixel Perfect Photography`,
         description: `Pixel Perfect Photography is dedicated to capturing life's most cherished moments with precision and artistry. Our team of skilled photographers uses state-of-the-art equipment and a keen eye for detail to transform your special occasions into timeless, beautifully crafted memories. Whether it's a wedding, a family portrait, or a corporate event, we are committed to delivering stunning images that tell your unique story and preserve it for generations to come.`,
         status: 'Active',
@@ -342,6 +366,7 @@ module.exports = {
         updatedAt: new Date(),
       },  
       {
+        // 
         name: `Zenith Electric Group`,
         description: `Zenith Electric Group is a leading electrical contracting company committed to delivering cutting-edge solutions for both residential and commercial clients. With a team of highly skilled electricians and a reputation for reliability, we provide top-quality electrical installations, repairs, and maintenance services to ensure our customers' peace of mind and safety.`,
         status: 'Active',

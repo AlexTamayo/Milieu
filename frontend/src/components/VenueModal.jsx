@@ -65,11 +65,11 @@ function VenueModal() {
     }
   }, []);
 
-  if (!isVenueModalOpen) return null;
+  // if (!isVenueModalOpen) return null;
 
-  if (businessData.length < 1) return null;
-  if (eventData.length < 1) return null;
-  if (!selectedVenueType) return null;
+  // if (businessData.length < 1) return null;
+  // if (eventData.length < 1) return null;
+  // if (!selectedVenueType) return null;
 
   return (
     // <SlidingPane
@@ -80,7 +80,8 @@ function VenueModal() {
     //   width="500px"
     //   className="venue-modal"
     // >
-    <div ref={venueModalRef} className="venue-modal">
+    // <div ref={venueModalRef} className="venue-modal">
+    <div ref={venueModalRef} className={`venue-modal ${isVenueModalOpen ? 'active' : ''}`}>
 
       {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
 
