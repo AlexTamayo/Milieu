@@ -95,6 +95,22 @@ export function AuthProvider({ children }) {
       handleError(error);
     }
   };
+
+  /* REMOVE ENTITY FROM CURRENT USER */
+  function removeEntityFromCurrentUser(id, type) {
+    if (type === 'business') {
+        setCurrentUser(prevState => ({
+            ...prevState,
+            businesses: prevState.businesses.filter(business => business.id !== id)
+        }));
+    } else if (type === 'event') {
+        setCurrentUser(prevState => ({
+            ...prevState,
+            events: prevState.events.filter(event => event.id !== id)
+        }));
+    }
+}
+
   
   /* ERROR HANDLER */
   const handleError = (error) => {
@@ -117,6 +133,7 @@ export function AuthProvider({ children }) {
     signOut,
     loginUserLogic,
     registerUserLogic,
+    removeEntityFromCurrentUser,
     errorMessage,
     setErrorMessage
   };

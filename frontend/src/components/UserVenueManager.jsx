@@ -5,12 +5,23 @@ import { useAuth } from '../context/AuthContext';
 
 function UserVenueManager() {
 
-  const { state, closeVenueManagerModal, openUserAddVenue } = useContext(DataContext);
+  const {
+    state,
+    closeVenueManagerModal,
+    openUserAddVenue,
+    deleteEntityById
+  } = useContext(DataContext);
+
   const { isVenueManagerModalOpen } = state;
-  const { currentUser } = useAuth();
+  const { currentUser, removeEntityFromCurrentUser } = useAuth();
 
   if(!currentUser) return null
   if(!isVenueManagerModalOpen) return null;
+
+  const handleDelete = (id, type) => {
+      deleteEntityById(id, type);
+      removeEntityFromCurrentUser(id, type);
+};
 
   const renderVenueList = (venues, type) => {
     if (venues && venues.length) {
@@ -18,7 +29,7 @@ function UserVenueManager() {
         <div className="venue-item" key={venue.id}>
           <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
           <button className="edit-btn">Edit</button>
-          <button className="delete-btn">Delete</button>
+          <button className="delete-btn" onClick={() => handleDelete(venue.id, type)}>Delete</button>
         </div>
       ));
     } else {

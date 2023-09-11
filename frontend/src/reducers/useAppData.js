@@ -8,6 +8,7 @@ import {
 
 import { actionTypes } from './actionTypes';
 import { reducer } from './reducer';
+import { databaseFunctions } from './databaseFunctions';
 import { modalFunctions } from './modalFunctions';
 import { otherFunctions } from './otherFunctions';
 
@@ -70,14 +71,18 @@ export default function useApplication() {
         dispatch({ type: actionTypes.CLEAR_LOADING });
       });
   }, []);
+  
+  const databaseFuncs = databaseFunctions(dispatch, state);
 
   const modalFuncs = modalFunctions(dispatch, state);
 
   const otherFuncs = otherFunctions(dispatch, state);
+  
 
 
   return {
     state,
+    ...databaseFuncs,
     ...modalFuncs,
     ...otherFuncs,
   };
