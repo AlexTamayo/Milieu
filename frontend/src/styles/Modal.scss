@@ -1,0 +1,45 @@
+/* Styling for the main modal window */
+.modal {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 80%;  /* Adjust width as per your requirement */
+  max-width: 300px;  /* You can adjust this value if needed */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* This centers the modal horizontally and vertically */
+  z-index: 10;  /* This will ensure the modal is layered on top of the Venue Manager */
+}
+
+/* Modal close button styles */
+.modal-close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Styling for the modal title */
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal content */
+.modal-content {
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal actions */
+.modal-actions {
+  display: flex;
+  justify-content: center; /* Aligns items horizontally in the center */
+  gap: 10px;
+  margin-top: 20px;  /* Adds a bit of space above the buttons */
+}

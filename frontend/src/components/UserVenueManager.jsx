@@ -2,6 +2,8 @@ import '../styles/UserVenueManager.scss';
 import { useContext } from 'react';
 import { DataContext } from '../context/MainContext';
 import { useAuth } from '../context/AuthContext';
+import { useConfirmationModal } from '../hooks/useConfirmationModal'
+import Modal from './Modal'; 
 
 function UserVenueManager() {
 
@@ -15,13 +17,26 @@ function UserVenueManager() {
   const { isVenueManagerModalOpen } = state;
   const { currentUser, removeEntityFromCurrentUser } = useAuth();
 
-  if(!currentUser) return null
-  if(!isVenueManagerModalOpen) return null;
-
   const handleDelete = (id, type) => {
-      deleteEntityById(id, type);
-      removeEntityFromCurrentUser(id, type);
-};
+    deleteEntityById(id, type);
+    removeEntityFromCurrentUser(id, type);
+  };
+
+  const {
+    showConfirmationModal,
+    openConfirmationModal,
+    confirmDelete,
+    cancelDelete,
+  } = useConfirmationModal(handleDelete);
+
+  const confirmationContent = <p>Are you sure you want to <strong>delete</strong> this venue?</p>;
+
+  const confirmationActions = (
+    <div>
+      <button onClick={confirmDelete}>Confirm</button>
+      <button onClick={cancelDelete}>Cancel</button>
+    </div>
+  );
 
   const renderVenueList = (venues, type) => {
     if (venues && venues.length) {
@@ -29,7 +44,7 @@ function UserVenueManager() {
         <div className="venue-item" key={venue.id}>
           <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
           <button className="edit-btn">Edit</button>
-          <button className="delete-btn" onClick={() => handleDelete(venue.id, type)}>Delete</button>
+          <button className="delete-btn" onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
         </div>
       ));
     } else {
@@ -40,6 +55,9 @@ function UserVenueManager() {
       );
     }
   };
+
+  if(!currentUser) return null
+  if(!isVenueManagerModalOpen) return null;
 
   return (
     <div className="modal-overlay">
@@ -57,6 +75,13 @@ function UserVenueManager() {
           {renderVenueList(currentUser.events, 'event')}
         </div>
       </div>
+      <Modal 
+        isOpen={showConfirmationModal}
+        title="Confirmation"
+        content={confirmationContent}
+        actions={confirmationActions}
+        onClose={cancelDelete}
+      />
     </div>
   );
 }
