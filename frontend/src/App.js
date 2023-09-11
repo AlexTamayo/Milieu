@@ -22,14 +22,17 @@ function App() {
 
   return (
 
-      <div className="App">
-        < UserLogRegModal />
-        < UserAddVenue />
-        < VenueModal />
-        < SearchBar />
-        < GoogleMapComponent />
-      </div>
-  );
+    <div className="App">
+      < TopNavBar userDivRef={userDivRef} />
+      < UserModal userDivRef={userDivRef} />
+      < UserVenueManager />
+      < UserLogRegModal />
+      < UserAddVenue />
+      < VenueModal />
+      < SearchBar />
+      < GoogleMapComponent />
+    </div>
+);
 }
 
 export default App;
