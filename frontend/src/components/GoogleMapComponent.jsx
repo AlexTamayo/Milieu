@@ -107,6 +107,8 @@ const GoogleMapComponent = () => {
   };
 
 
+
+
   const handleMyLocationClick = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -203,10 +205,11 @@ const GoogleMapComponent = () => {
             backgroundImage: 'url(//maps.gstatic.com/tactile/mylocation/mylocation-sprite-2x.png)',
             backgroundSize: 'cover'
           }}></div>
-          <div className='zoom-controls'>
-  <button onClick={handleZoomIn}>+</button>
-  <button onClick={handleZoomOut}>-</button>
-</div>
+        </div>
+
+        <div className='zoom-controls'>
+          <button onClick={handleZoomIn}>+</button>
+          <button onClick={handleZoomOut}>-</button>
         </div>
       </GoogleMap>
     </LoadScript>
