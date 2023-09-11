@@ -2,15 +2,16 @@
 
 .venue-modal {
   display: flex;
-  flex-direction: column;
 
   // position: fixed;
   position: absolute;
   // top: 60px;
   // left: 8px;
 
+
   top: 56px;
   left: -2px;
+  // left: 10px;
   bottom: 0;
 
   width: 450px;
@@ -30,9 +31,21 @@
 
   transform: translateX(-100%);
   transition: transform 0.5s ease-out;
-
+  
   &.active {
     transform: translateX(0);
+  }
+
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 87%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    transform: translate(-34px, 1px);
   }
 
   // Scrollbar styles
@@ -40,8 +53,8 @@
     display: flex;
     width: $scrollbar-width;
     height: 50px;
-
   }
+
 
   &::-webkit-scrollbar-track {
     border-radius: $scrollbar-width;
@@ -77,6 +90,7 @@
     height: 100%;
     object-fit: cover;
   }
+
 }
 
 .venue-modal__bagde-image {
@@ -121,7 +135,7 @@
   font-size: 2.6em;
   color: $grey-3;
 
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
 
   transition: background-color 0.15s;
 
@@ -157,14 +171,37 @@ hr {
   display: flex;
   justify-content: start;
 
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: bold;
 
   margin-top: 60px;
   margin-left: 15px;
 
   color: $grey-3;
+
+  width: 83%;
+
+  // background-color: magenta;
 }
+
+.venue-modal__category {
+  display: flex;
+  justify-content: start;
+
+  margin-left: 15px;
+
+  color: $grey-3;
+
+  width: 83%;
+
+  // background-color: magenta;
+  
+  &::before {
+    content: "@";
+  }
+
+}
+
 
 .venue-modal__rating {
   display: flex;
@@ -255,6 +292,18 @@ $container-height: 60px;
   }
 }
 
+.vm-right__social-media {
+  a {
+    color: $grey-3;
+    text-decoration: none;
+
+    &:hover {
+      color: $milieu-blue;
+      text-decoration: underline;
+    }
+  }
+}
+
 .copy-icon-button {
   background: none;
   border: none;
@@ -311,21 +360,21 @@ $container-height: 60px;
   }
 }
 
-.vm-container__address {
-  display: flex;
+// .vm-container__address {
+//   display: flex;
 
-  .google-maps-button {
-    margin-right: 15px; // Adjust as necessary
-    cursor: pointer; // Changes the cursor to a hand when hovering over the button
-    background: none; // Assuming you don't want a background, adjust as necessary
-    border: none; // Assuming you don't want a border, adjust as necessary
+//   .google-maps-button {
+//     margin-right: 15px; // Adjust as necessary
+//     cursor: pointer; // Changes the cursor to a hand when hovering over the button
+//     background: none; // Assuming you don't want a background, adjust as necessary
+//     border: none; // Assuming you don't want a border, adjust as necessary
 
-    i {
-      font-size: 1.5em; // Adjust the size of the icon as necessary
-    }
+//     i {
+//       font-size: 1.5em; // Adjust the size of the icon as necessary
+//     }
 
-    &:hover {
-      color: #000; // Change color on hover, adjust as necessary
-    }
-  }
-}
+//     &:hover {
+//       color: #000; // Change color on hover, adjust as necessary
+//     }
+//   }
+// }

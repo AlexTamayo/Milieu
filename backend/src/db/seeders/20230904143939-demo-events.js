@@ -4,6 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const eventsData = [
       {
+        // 1
         title: 'Community Picnic Day 1',
         description: 'Join us for a fun-filled community picnic at Central Park!',
         status: 'Active',
@@ -16,6 +17,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 2
         title: 'Cultural Festival Opening',
         description: 'Celebrate the diverse cultures of our city at the Cultural Festival opening ceremony.',
         status: 'Active',
@@ -28,6 +30,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 3
         title: 'Community Picnic Day 2',
         description: 'Another day of community bonding, games, and delicious food!',
         status: 'Active',
@@ -40,6 +43,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 4
         title: 'Cultural Music Night',
         description: 'Experience the soulful rhythms of different cultures tonight.',
         status: 'Active',
@@ -52,6 +56,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 5
         title: 'Community Sports Day',
         description: 'Take part in friendly sports competitions at the community picnic.',
         status: 'Active',
@@ -64,6 +69,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 6
         title: 'Cultural Food Fair',
         description: 'Taste delicacies from various cultures at our food stalls.',
         status: 'Active',
@@ -76,6 +82,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 7
         title: 'Picnic Talent Show',
         description: 'Showcase your skills at our community talent show!',
         status: 'Active',
@@ -88,6 +95,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 8
         title: 'Cultural Dance Evening',
         description: 'Dance to the vibrant beats of various cultural performances.',
         status: 'Active',
@@ -100,6 +108,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 9
         title: 'Community Art and Craft',
         description: 'Discover the artistry within you at our community art and craft session.',
         status: 'Active',
@@ -112,6 +121,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        // 10
         title: 'Cultural Costume Parade',
         description: 'Marvel at the traditional attire from different cultures in our parade.',
         status: 'Active',

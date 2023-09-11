@@ -63,80 +63,83 @@ function VenueModalBusiness({ currentBusiness }) {
         <img src={currentBusiness.businessBranding.logoUrl} alt="Venue badge" className="venue-badge" />
       </div>
 
-      {/* NAME */}
-      <div className="venue-modal__title">{currentBusiness.name}</div>
+      <div className='venue-modal__text-container'>
 
-      {/* CATEGORY */}
-      <div className="venue-modal__category">{currentBusiness.businessCategory.name}</div>
+        {/* NAME */}
+        <div className="venue-modal__title">{currentBusiness.name}</div>
 
-      {/* RATING */}
-      <div className="venue-modal__rating">
-        {currentBusiness.rating} / 5 rating ({currentBusiness.reviewCount})
-      </div>
+        {/* CATEGORY */}
+        <div className="venue-modal__category">{currentBusiness.businessCategory.name}</div>
 
-      <hr />
-
-      {/* DESCRIPTION */}
-      <div className="venue-modal__description">
-        {currentBusiness.description}
-      </div>
-
-      <hr />
-
-      {/* ADDRESS */}
-      <div className="vm-container__address">
-        <div className="vm-left__address">
-          <i className="fas fa-map-marker-alt"></i>
+        {/* RATING */}
+        <div className="venue-modal__rating">
+          {currentBusiness.rating} / 5 rating ({currentBusiness.reviewCount})
         </div>
-        <div className="vm-right__address">
-          {addressFormatterSafe(currentBusiness.businessLocation)}
-        </div>
-        <div onClick={() => handleCopy(addressFormatterSafe(currentBusiness.businessLocation))} className="copy-icon-button">
-          <i className="fas fa-copy"></i>
-        </div>
-        <div onClick={openGoogleMaps} className="google-maps-button">
-          <i className="fas fa-map"></i>
-        </div>
-      </div>
 
-      {/* OPERATING HOURS */}
-      {/* <div className="vm-container__operating-hours">
+        <hr />
+
+        {/* DESCRIPTION */}
+        <div className="venue-modal__description">
+          {currentBusiness.description}
+        </div>
+
+        <hr />
+
+        {/* ADDRESS */}
+        <div className="vm-container__address">
+          <div className="vm-left__address">
+            <i className="fas fa-map-marker-alt"></i>
+          </div>
+          <div className="vm-right__address">
+            {addressFormatterSafe(currentBusiness.businessLocation)}
+          </div>
+          <div onClick={() => handleCopy(addressFormatterSafe(currentBusiness.businessLocation))} className="copy-icon-button">
+            <i className="fas fa-copy"></i>
+          </div>
+          <div onClick={openGoogleMaps} className="google-maps-button">
+            <i className="fas fa-map"></i>
+          </div>
+        </div>
+
+        {/* OPERATING HOURS */}
+        {/* <div className="vm-container__operating-hours">
         <div className="vm-left__operating-hours">
           <i className="fas fa-clock"></i>
         </div>
         <div className="vm-right__operating-hours">Thursday 11h - 19h</div>
       </div> */}
 
-       {/* WEBSITE */}
-      <div className="vm-container__website">
-        <div className="vm-left__website">
-          <i className="fas fa-globe"></i>
+        {/* WEBSITE */}
+        <div className="vm-container__website">
+          <div className="vm-left__website">
+            <i className="fas fa-globe"></i>
+          </div>
+          <div className="vm-right__website">
+            <a href={currentBusiness.website} target="_blank" rel="noopener noreferrer">
+              {formatURL(currentBusiness.website)}
+            </a>
+          </div>
+          <div onClick={() => handleCopy(currentBusiness.website)} className="copy-icon-button">
+            <i className="fas fa-copy"></i>
+          </div>
         </div>
-        <div className="vm-right__website">
-          <a href={currentBusiness.website} target="_blank" rel="noopener noreferrer">
-            {formatURL(currentBusiness.website)}
-          </a>
-        </div>
-        <div onClick={() => handleCopy(currentBusiness.website)} className="copy-icon-button">
-          <i className="fas fa-copy"></i>
-        </div>
-      </div>
 
-      {/* PHONE NUMBER */}
-      <div className="vm-container__phoneNumber">
-        <div className="vm-left__phoneNumber">
-          <i className="fas fa-phone"></i>
+        {/* PHONE NUMBER */}
+        <div className="vm-container__phoneNumber">
+          <div className="vm-left__phoneNumber">
+            <i className="fas fa-phone"></i>
+          </div>
+          <div className="vm-right__phoneNumber">
+            {formatPhoneNumber(currentBusiness.phoneNumber)}
+          </div>
+          <div onClick={() => handleCopy(extractNumbers(currentBusiness.phoneNumber))} className="copy-icon-button">
+            <i className="fas fa-copy"></i>
+          </div>
         </div>
-        <div className="vm-right__phoneNumber">
-          {formatPhoneNumber(currentBusiness.phoneNumber)}
-        </div>
-        <div onClick={() => handleCopy(extractNumbers(currentBusiness.phoneNumber))} className="copy-icon-button">
-          <i className="fas fa-copy"></i>
-        </div>
-      </div>
 
-      {/* SOCIAL MEDIA */}
-      {renderedSocialMediaLinks}
+        {/* SOCIAL MEDIA */}
+        {renderedSocialMediaLinks}
+      </div>
 
       {/* CLOSE BUTTON */}
       <button className="venue-modal__close-button" onClick={closeVenueModal}>
