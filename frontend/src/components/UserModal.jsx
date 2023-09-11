@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import {
+  React,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef
+} from 'react';
 import '../styles/UserModal.scss';
 import { DataContext } from '../context/MainContext';
 import { useAuth } from '../context/AuthContext';
@@ -8,12 +14,12 @@ import defaultImage from '../assets/logo/userProfile.png'
 function UserModal({ userDivRef }) {
 
   const {
-    state ,
+    state,
     closeUserModal,
-    getOwnedVenuesByUser,
+    openVenueManagerModal,
   } = useContext(DataContext);
 
-  const { isUserModalOpen, ownedEvents, ownedBusinesses } = state;
+  const { isUserModalOpen } = state;
 
   const { currentUser, signOut } = useAuth();
 
@@ -21,8 +27,8 @@ function UserModal({ userDivRef }) {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (userModalRef.current && !userModalRef.current.contains(event.target) && 
-      (!userDivRef.current || (userDivRef.current && !userDivRef.current.contains(event.target)))) {
+      if (userModalRef.current && !userModalRef.current.contains(event.target) &&
+        (!userDivRef.current || (userDivRef.current && !userDivRef.current.contains(event.target)))) {
         closeUserModal();
       }
     }
@@ -33,31 +39,28 @@ function UserModal({ userDivRef }) {
     };
   }, [userDivRef, closeUserModal]);
 
+  const handleSignOutClick = useCallback(() => {
+    signOut();
+  }, [signOut]);
 
   if (!isUserModalOpen || !currentUser) return null;
 
-return (
-  <div ref={userModalRef} className="user-modal">
-    <div className="user-modal__profile-pic">
-      <img src={currentUser.profileImage || defaultImage} alt={`${currentUser.firstName}'s profile`} />
-    </div>
+  return (
+    <div ref={userModalRef} className="user-modal">
+      <div className="user-modal__profile-pic">
+        <img src={currentUser.profileImage || defaultImage} alt={`${currentUser.firstName}'s profile`} />
+      </div>
 
       <div className="user-modal__greeting">Hi, {currentUser.firstName}!</div>
 
       <div className="user-modal__username">@{currentUser.username}</div>
 
-      <div>
+      <div onClick={openVenueManagerModal}>
         Venues
       </div>
 
-      <button onClick={() => {
-        getOwnedVenuesByUser(currentUser);
-        console.log(ownedEvents);
-        console.log(ownedBusinesses);
-        }}>activate</button>
-
       <div className="user-modal__options">
-        <button onClick={signOut} className="user-modal__signout-btn">
+        <button onClick={handleSignOutClick} className="user-modal__signout-btn">
           Sign Out
         </button>
       </div>

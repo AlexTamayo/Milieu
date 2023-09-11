@@ -11,7 +11,7 @@ import {
   getUserById,
   validateToken
 } from '../routes/api';
-import useApplicationData from '../reducers/useApplicationData';
+import useAppData from '../reducers/useAppData';
 
 
 const AuthContext = createContext();
@@ -26,19 +26,21 @@ export function AuthProvider({ children }) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { closeUserModal, closeLoginModal } = useApplicationData();
+  const { closeUserModal } = useAppData();
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
   
     if (token) {
-      // Here, make an API call to validate the token and get the user's data
-      // If valid, update your user state to reflect that the user is logged in
   
-      validateToken(token).then(user => {
+      validateToken(token).then(async (validationResponse) => {
+        const userProfile = await getUserById(validationResponse.data.id);
 
-        const { passwordHash, ...userWithoutPassword } = user.data;
-        setCurrentUser(userWithoutPassword);
+        if (userProfile && userProfile.data) {
+          const { passwordHash, ...userWithoutPassword } = userProfile.data;
+          
+          setCurrentUser(userWithoutPassword);
+        }
       }).catch(error => {
         localStorage.removeItem('authToken');
       });
@@ -57,7 +59,6 @@ export function AuthProvider({ children }) {
         if (userProfile && userProfile.data) {
           const { passwordHash, ...userWithoutPassword } = userProfile.data;
           setCurrentUser(userWithoutPassword);
-          // closeLoginModal();
         }
       } else {
         throw new Error('Invalid login credentials.');
