@@ -14,7 +14,6 @@ import UserModal from './components/UserModal';
 import VenueModal from './components/VenueModal';
 import UserAddVenue from './components/UserAddVenue';
 import UserLogRegModal from './components/UserLogRegModal';
-import TestComponent from './components/TestComponent';
 
 library.add(faMapPin);
 
