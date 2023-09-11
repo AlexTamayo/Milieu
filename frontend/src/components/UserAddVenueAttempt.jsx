@@ -1,4 +1,12 @@
 //frontend/src/components/UserAddVenue.jsx
+
+//this is an attempt to create a hook to help userAddVenue.jsx
+// not working yet
+
+
+
+
+
 import React, { useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
