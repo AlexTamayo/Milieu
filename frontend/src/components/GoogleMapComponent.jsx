@@ -90,6 +90,23 @@ const GoogleMapComponent = () => {
     }
   }, []);
 
+  const handleZoomIn = () => {
+    if (mapRef.current) {
+      const googleMapInstance = mapRef.current.state.map;
+      const currentZoom = googleMapInstance.getZoom();
+      googleMapInstance.setZoom(currentZoom + 1);
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (mapRef.current) {
+      const googleMapInstance = mapRef.current.state.map;
+      const currentZoom = googleMapInstance.getZoom();
+      googleMapInstance.setZoom(currentZoom - 1);
+    }
+  };
+
+
   const handleMyLocationClick = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -108,6 +125,8 @@ const GoogleMapComponent = () => {
       setCenter({ lat: -3.745, lng: -38.523 });
     }
   };
+
+
 
   return (
     <div className='map-container'>
@@ -184,6 +203,10 @@ const GoogleMapComponent = () => {
             backgroundImage: 'url(//maps.gstatic.com/tactile/mylocation/mylocation-sprite-2x.png)',
             backgroundSize: 'cover'
           }}></div>
+          <div className='zoom-controls'>
+  <button onClick={handleZoomIn}>+</button>
+  <button onClick={handleZoomOut}>-</button>
+</div>
         </div>
       </GoogleMap>
     </LoadScript>

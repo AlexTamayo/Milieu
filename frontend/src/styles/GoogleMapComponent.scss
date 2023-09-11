@@ -22,3 +22,33 @@
 // .map-container > div:nth-child(2) {
 //   // background-color: magenta;
 // }
+
+.zoom-controls {
+  position: absolute;
+  bottom: 50px; /* Adjusted positioning to avoid overlapping with my location button */
+  right: 5px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000; /* Ensures it stays on top of other elements */
+
+  button {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    outline: none; /* Removes the blue outline on button click */
+
+    &:first-child {
+      border-bottom: 1px solid #ccc; /* Adds a separator between the buttons */
+    }
+
+    &:hover {
+      background: #f0f0f0; /* Adds a subtle hover effect */
+    }
+  }
+}
