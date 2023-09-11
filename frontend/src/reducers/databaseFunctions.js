@@ -7,7 +7,7 @@ export const databaseFunctions = (dispatch, state) => {
 const deleteBusiness = async (businessId) => {
   try {
     const response = await deleteBusinessById(businessId);
-    if (response && response.status === 200) {
+    if (response.status === 200||response.status === 204) {
       dispatch({
         type: actionTypes.SET_BUSINESS_DATA,
         payload: state.businessData.filter(business => business.id !== businessId)
@@ -31,17 +31,20 @@ const deleteBusiness = async (businessId) => {
 const createABusiness = async (data) => {
   try {
     const response = await createBusiness(data);
-    if (response && response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
       dispatch({
         type: actionTypes.SET_BUSINESS_DATA,
         payload: [...state.businessData, response.data]
       });
+      console.log('Business added successfully:', response.data);
       return { success: true };
+    } else if (response.status === 400) {
+      // Handle specific error cases (e.g., validation errors)
+      console.error('Business creation failed due to validation errors:', response.data);
+      return { success: false, error: "Validation error" };
     } else {
-      dispatch({
-        type: actionTypes.CREATE_ENTITY_FAILURE,
-        payload: { error: "Creation failed." }
-      });
+      // Handle other error cases
+      console.error('Business creation failed with status code:', response.status);
       return { success: false, error: "Creation failed." };
     }
   } catch (error) {
@@ -49,14 +52,17 @@ const createABusiness = async (data) => {
       type: actionTypes.CREATE_ENTITY_FAILURE,
       payload: { error: error.message }
     });
+    console.error('Error creating business:', error);
     return { success: false, error: error.message };
   }
 };
 
+
+
 const createAnEvent = async (data) => {
   try {
     const response = await createEvent(data);
-    if (response && response.status === 200) {
+    if (response.status === 200||response.status === 201) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: [...state.eventData, response.data]
@@ -83,7 +89,7 @@ const createAnEvent = async (data) => {
 const deleteEvent = async (eventId) => {
   try {
     const response = await deleteEventById(eventId);
-    if (response && response.status === 200) {
+    if (response.status === 200||response.status === 204) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: state.eventData.filter(event => event.id !== eventId)
