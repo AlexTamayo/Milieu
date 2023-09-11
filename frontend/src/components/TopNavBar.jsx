@@ -19,6 +19,10 @@ function TopNavBar({ userDivRef }) {
 
   const { currentUser } = useAuth();
 
+  const navigateToHome = () => {
+    window.location.href = '/';
+  };
+
   const { isCopied, isLoading, isUserModalOpen } = state;
 
   const handleLoginClick = useCallback(() => {
@@ -35,7 +39,7 @@ function TopNavBar({ userDivRef }) {
       {isCopied && <div className="copied-message">Copied to clipboard</div>}
 
       <div className="top-nav-bar__left">
-        <div className="left__logo">
+      <div className="left__logo" onClick={navigateToHome}>
           <img src={logo_and_name} alt="Logo and Name" />
         </div>
       </div>
