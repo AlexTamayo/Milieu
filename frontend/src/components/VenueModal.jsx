@@ -2,8 +2,13 @@ import { useContext, useEffect, useRef } from 'react';
 import '../styles/VenueModal.scss';
 
 import { DataContext } from '../context/MainContext';
+
 import VenueModalBusiness from './VenueModalBusiness';
+// import EditBusinessModal from './EditBusinessModal';
 import VenueModalEvent from './VenueModalEvent';
+// import EditEventModal from './EditEventModal';
+
+import SlidingPane from 'react-sliding-pane';
 
 function VenueModal() {
 
@@ -29,7 +34,7 @@ function VenueModal() {
   
   const currentEvent = eventData.find(event => event.id === selectedVenueId);
 
-  // Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click
+  /* Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click */
   useEffect(() => {
     let startX = 0;
     let startY = 0;
@@ -67,13 +72,22 @@ function VenueModal() {
   if (!selectedVenueType) return null;
 
   return (
-    <div ref={venueModalRef} className="venue-modal">
+    <SlidingPane
+      isOpen={isVenueModalOpen}
+      // title="Venue Modal Business"
+      // onRequestClose={onRequestClose}
+      from="left"
+      width="500px"
+      className="venue-modal"
+    >
+    {/* <div ref={venueModalRef} className="venue-modal"> */}
 
       {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
 
       {selectedVenueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
 
-    </div>
+    {/* </div> */}
+    </SlidingPane>
   );
 }
 

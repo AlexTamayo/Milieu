@@ -1,23 +1,44 @@
-import React, { useState, useContext } from 'react';
+//frontend/src/components/UserAddVenue.jsx
+
+//this is an attempt to create a hook to help userAddVenue.jsx
+// not working yet
+
+
+
+
+
+import React, { useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
+import useAutocomplete from '../hooks/useAutocomplete';
+
 
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
   const { state, closeUserAddVenue } = useContext(DataContext);
-
   const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
-
+  const [userAddVenueType, setUserAddVenueType] = useState('business');
+  const [formData, setFormData] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const { currentUser, signOut } = useAuth();
-  
-  const [ userAddVenueType, setUserAddVenueType] = useState('business');
-  const [ selectedCategory, setSelectedCategory] = useState(null);
-  const [ businessCategoryId, setBusinessCategoryId] = useState(null);
-  const [ eventCategoryId, setEventCategoryId] = useState(null);
-  const [ formData, setFormData] = useState({});
+  const [businessCategoryId, setBusinessCategoryId] = useState(null);
+  const [eventCategoryId, setEventCategoryId] = useState(null);
+  const streetAddressRef = useRef(null);
+  const cityRef = useRef(null);
+  const regionRef = useRef(null);
+  const postalCodeRef = useRef(null);
+  const countryRef = useRef(null);
+
+  const { streetAddress, city, region, postalCode, country, businessLocation, eventLocation } = useAutocomplete({
+    streetAddressRef,
+    cityRef,
+    regionRef,
+    postalCodeRef,
+    countryRef,
+  });
 
   const eventCategoryOptions = eventCategoryData.map((category) => ({
     value: category.id,
@@ -278,33 +299,43 @@ function UserAddVenue() {
               </div>
 
               <div className="location-section">
-                <h4>Location</h4>
-                <input
-                  name="streetAddress"
-                  placeholder="Street Address"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="city"
-                  placeholder="City"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="region"
-                  placeholder="Region"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="postalCode"
-                  placeholder="Postal Code"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="country"
-                  placeholder="Country"
-                  onChange={handleInputChange}
-                />
-              </div>
+  <h4>Location</h4>
+  <input
+    ref={streetAddressRef}
+    name="streetAddress"
+    value={streetAddress || ''}
+    placeholder="Street Address"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={cityRef}
+    name="city"
+    value={city || ''}
+    placeholder="City"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={regionRef}
+    name="region"
+    value={region || ''}
+    placeholder="Region"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={postalCodeRef}
+    name="postalCode"
+    value={postalCode || ''}
+    placeholder="Postal Code"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={countryRef}
+    name="country"
+    value={country || ''}
+    placeholder="Country"
+    onChange={handleInputChange}
+  />
+</div>
 
               <button onClick={handleSubmit}>Add Business</button>
             </>
@@ -373,33 +404,43 @@ function UserAddVenue() {
               </div>
 
               <div className="location-section">
-                <h4>Location</h4>
-                <input
-                  name="streetAddress"
-                  placeholder="Street Address"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="city"
-                  placeholder="City"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="region"
-                  placeholder="Region"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="postalCode"
-                  placeholder="Postal Code"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="country"
-                  placeholder="Country"
-                  onChange={handleInputChange}
-                />
-              </div>
+  <h4>Location</h4>
+  <input
+    ref={streetAddressRef}
+    name="streetAddress"
+    value={streetAddress || ''}
+    placeholder="Street Address"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={cityRef}
+    name="city"
+    value={city || ''}
+    placeholder="City"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={regionRef}
+    name="region"
+    value={region || ''}
+    placeholder="Region"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={postalCodeRef}
+    name="postalCode"
+    value={postalCode || ''}
+    placeholder="Postal Code"
+    onChange={handleInputChange}
+  />
+  <input
+    ref={countryRef}
+    name="country"
+    value={country || ''}
+    placeholder="Country"
+    onChange={handleInputChange}
+  />
+</div>
 
               <button onClick={handleSubmit}>Add Event</button>
             </>

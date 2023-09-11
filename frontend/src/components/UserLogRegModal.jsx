@@ -5,17 +5,17 @@ import '../styles/UserLogRegModal.scss';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
 
-import { createUser, loginUser, getUserById } from '../routes/api';
-
 
 const UserLogRegModal = () => {
+
   const {
     state,
     openLoginModal,
     closeLoginModal,
+    getOwnedVenuesByUser,
   } = useContext(DataContext);
 
-  const { loginModalType, isLoginModalVisible } = state;
+  const { loginModalType, isLoginRegModalOpen } = state;
 
   const {
     loginUserLogic,
@@ -61,14 +61,24 @@ const UserLogRegModal = () => {
     const lastLogin = new Date().toISOString();
     if (loginModalType === 'login') {
       loginUserLogic(loginData.email, loginData.password)
-      closeLoginModal();
+      .then(() => {
+        closeLoginModal();
+      })
+      .catch(error => {
+        console.error(error);
+      });
     } else {
-      registerUserLogic(formData, lastLogin);
-      closeLoginModal();
+      registerUserLogic(formData, lastLogin)
+      .then(() => {
+        closeLoginModal();
+      })
+      .catch(error => {
+        console.error(error);
+      });
     }
   };
 
-  if (!isLoginModalVisible) return null;
+  if (!isLoginRegModalOpen) return null;
 
   return (
     <div className="overlay">

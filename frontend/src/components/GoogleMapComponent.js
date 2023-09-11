@@ -1,5 +1,4 @@
-// frontend/src/components/GoogleMapComponent.js
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   GoogleMap,
   LoadScript,
@@ -11,12 +10,6 @@ import mapStyles from '../styles/mapStyles.js';
 import categoryIcons from '../routes/categoryIcons';
 import venueMarkers from '../routes/venueMarkers';
 
-const containerStyle = {
-  width: '100%',
-  height: '800px',
-};
-
-// /* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
 // const containerStyle = {
 //   width: '100%',
 //   height: '1260px',
@@ -24,13 +17,21 @@ const containerStyle = {
 //   // height: '90%',
 // };
 
+/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
+const containerStyle = {
+  width: '100%',
+  height: '1260px',
+  margin: 0,
+  // height: '90%',
+};
+
 const ICON_SIZE = { width: 40, height: 40 };
 
 const GoogleMapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
-  
+
   const { state, setSelectedVenue } = useContext(DataContext);
 
   const {
@@ -40,7 +41,7 @@ const GoogleMapComponent = () => {
     selectedSearchResult
   } = state;
 
-  const mapRef = React.useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (isGoogleMapLoaded && mapRef.current) {
@@ -85,27 +86,11 @@ const GoogleMapComponent = () => {
   }, [selectedFilter, eventData, businessData, isGoogleMapLoaded]);
 
   useEffect(() => {
-    if (isGoogleMapLoaded && "geolocation" in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
           const { latitude, longitude } = position.coords;
           setCenter({ lat: latitude, lng: longitude });
-
-          if (mapRef.current) {
-            const iconSize = new window.google.maps.Size(ICON_SIZE.width, ICON_SIZE.height);
-
-            setMarkers(prevMarkers => [
-              ...prevMarkers.filter(marker => marker.metadata && marker.metadata.topic !== 'user-location'),
-              {
-                position: { lat: latitude, lng: longitude },
-                metadata: { topic: 'user-location', name: 'Current Location', link: '#' },
-                icon: {
-                  url: process.env.PUBLIC_URL + "/icons/you-are-here-icon.png",
-                  scaledSize: iconSize,
-                },
-              },
-            ]);
-          }
         },
         error => {
           console.error('Geolocation Error:', error);
@@ -117,7 +102,26 @@ const GoogleMapComponent = () => {
       console.log("Geolocation not supported");
       setCenter({ lat: -3.745, lng: -38.523 });
     }
-  }, [isGoogleMapLoaded]);
+  }, []);
+
+  const handleMyLocationClick = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          setCenter({ lat: latitude, lng: longitude });
+        },
+        error => {
+          console.error('Geolocation Error:', error);
+          setCenter({ lat: -3.745, lng: -38.523 });
+        },
+        { enableHighAccuracy: true }
+      );
+    } else {
+      console.log("Geolocation not supported");
+      setCenter({ lat: -3.745, lng: -38.523 });
+    }
+  };
 
   return (
     <LoadScript
@@ -169,6 +173,30 @@ const GoogleMapComponent = () => {
               ))
           }
         </MarkerClusterer>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '40px',
+            right: '40px',
+            background: '#fff',
+            borderRadius: '50%',
+            padding: '10px',
+            cursor: 'pointer',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onClick={handleMyLocationClick}
+          title="My Location"
+        >
+          <div style={{
+            width: '18px',
+            height: '18px',
+            backgroundImage: 'url(//maps.gstatic.com/tactile/mylocation/mylocation-sprite-2x.png)',
+            backgroundSize: 'cover'
+          }}></div>
+        </div>
       </GoogleMap>
     </LoadScript>
   );
