@@ -59,31 +59,31 @@ function UserAddVenue() {
       }));
     }
   };
-  
+
   const handleSubmit = async () => {
     try {
       formData.ownerId = currentUser.id;
-  
+
       let response;
       if (userAddVenueType === 'business') {
         // Set the appropriate category ID in formData
         console.log('businessCategoryId ' + businessCategoryId);
         formData.businessCategoryId = businessCategoryId;
-  
+
         // Create the businessBranding object
         formData.businessBranding = {
           logoUrl: formData.logoImageUrl,
           bannerUrl: formData.bannerImageUrl,
           pinUrl: formData.pinImageUrl,
         };
-  
+
         // Create the businessCategory object
         formData.businessCategory = {
           name: selectedCategory.label, // Assuming you want to use the selected category label
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-  
+
         // Create the socialMedia object (if applicable)
         if (formData.twitterLink || formData.facebookLink) {
           formData.socialMedia = {
@@ -95,7 +95,7 @@ function UserAddVenue() {
             updatedAt: new Date(),
           };
         }
-  
+
         // Create the businessLocation object (if applicable)
         formData.businessLocation = {
           longitude: 100, // Replace with the actual longitude
@@ -108,7 +108,7 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-  
+
         console.log(formData);
         // Submit the formData to the endpoint for adding a business
         response = await axios.post(
@@ -118,21 +118,21 @@ function UserAddVenue() {
       } else if (userAddVenueType === 'event') {
         // Set the appropriate category ID in formData
         formData.eventCategoryId = eventCategoryId;
-  
+
         // Create the eventBranding object
         formData.eventBranding = {
           bannerUrl: formData.bannerImageUrl,
           badgeUrl: formData.badgeImageUrl,
           pinUrl: formData.pinImageUrl,
         };
-  
+
         // Create the eventCategory object
         formData.eventCategory = {
           name: selectedCategory.label, // Assuming you want to use the selected category label
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-  
+
         // Create the eventLocation object (if applicable)
         formData.eventLocation = {
           longitude: 100, // Replace with the actual longitude
@@ -145,7 +145,7 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-  
+
         // Submit the formData to the endpoint for adding an event
         response = await axios.post(
           'http://localhost:3001/api/events',
@@ -164,8 +164,8 @@ function UserAddVenue() {
       );
     }
   };
-  
-  
+
+
 
   if (!isUserAddVenueOpen) return null;
 
@@ -191,7 +191,7 @@ function UserAddVenue() {
           </button>
         </div>
 
-        
+
 
 
         {userAddVenueType === "business" ? (
@@ -222,7 +222,7 @@ function UserAddVenue() {
                 placeholder="Website"
                 onChange={handleInputChange}
               />
-              
+
               <div>
                 <h5>Select an Business Category:</h5>
                 <Select
@@ -237,9 +237,9 @@ function UserAddVenue() {
                     <h4>Selected Category:</h4>
                     <p>{selectedCategory.label}</p>
                   </div>
-                )}  
+                )}
               </div>
-            
+
 
               <div className="branding-section">
                 <h4>Branding</h4>
@@ -347,7 +347,7 @@ function UserAddVenue() {
                     <h4>Selected Category:</h4>
                     <p>{selectedCategory.label}</p>
                   </div>
-                )}  
+                )}
               </div>
 
               <div className="branding-section">

@@ -12,7 +12,7 @@ import { FaLinkedin, FaBusinessTime, FaCar, FaUsers } from 'react-icons/fa';
 import { lightModeStyles, darkModeStyles } from './MapStyles';
 
 const containerStyle = {
-  width: '100%',
+  width: '100%',  
   height: '1260px',
   margin: 0,
   // height: '90%',
