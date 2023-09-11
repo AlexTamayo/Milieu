@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
@@ -18,6 +18,26 @@ function UserAddVenue() {
   const [ businessCategoryId, setBusinessCategoryId] = useState(null);
   const [ eventCategoryId, setEventCategoryId] = useState(null);
   const [ formData, setFormData] = useState({});
+
+  //////////////////////////////////////////goelocation
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => console.log(error)
+      );
+    }
+  }, []);
+
+
+  //////////////////////////////////////////goelocation
 
   const eventCategoryOptions = eventCategoryData.map((category) => ({
     value: category.id,
@@ -52,10 +72,40 @@ function UserAddVenue() {
       }
     }
   };
+  const getLatLngFromAddress = async (address) => {
+    try {
+      const response = await axios.get('https://api.geoapify.com/v1/geocode/search', {
+        params: {
+          text: address,
+          apiKey: '53e4b25a9fb549748178257ed9fa4529',
+        },
+      });
+      const location = response.data.features[0].geometry.coordinates;
+      return {
+        latitude: location[1],
+        longitude: location[0],
+      };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const handleInputChange = (e) => {
+
+  const handleInputChange = async (e) => {
     if (e && e.target && e.target.name) {
       const { name, value } = e.target;
+
+      if (name === 'streetAddress') {
+        const location = await getLatLngFromAddress(value);
+        if (location) {
+          setFormData((prevState) => ({
+            ...prevState,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          }));
+        }
+      }
+
       setFormData((prevState) => ({
         ...prevState,
         [name]: value,
@@ -101,8 +151,8 @@ function UserAddVenue() {
 
         // Create the businessLocation object (if applicable)
         formData.businessLocation = {
-          longitude: -113.997280, // Replace with the actual longitude
-          latitude: 50.856270, // Replace with the actual latitude
+          longitude: formData.longitude || userLocation.longitude,
+          latitude: formData.latitude || userLocation.latitude,
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
@@ -136,8 +186,8 @@ function UserAddVenue() {
 
         // Create the eventLocation object (if applicable)
         formData.eventLocation = {
-          longitude: 100, // Replace with the actual longitude
-          latitude: 50, // Replace with the actual latitude
+          longitude: formData.longitude || userLocation.longitude, // updated lines
+          latitude: formData.latitude || userLocation.latitude, // updated lines
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
