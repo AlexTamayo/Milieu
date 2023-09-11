@@ -29,11 +29,7 @@ function App() {
         < VenueModal />
         < UserModal userDivRef={userDivRef} />
         < SearchBar />
-
-        < TopNavBar userDivRef={userDivRef} />
-
         < GoogleMapComponent />
-        <TestComponent/>
         {/* < GoogleMapComponent2 /> */}
       </div>
   );
