@@ -17,6 +17,8 @@ const GoogleMapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
   const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
+  const [selectedMarkerIndex, setSelectedMarkerIndex] = useState(null);
+
 
   const { state, setSelectedVenue } = useContext(DataContext);
 
@@ -172,10 +174,16 @@ const GoogleMapComponent = () => {
                 <Marker
                   key={index}
                   position={marker.position}
-                  icon={marker.icon}
+                  icon={{
+                    ...marker.icon,
+                    url: index === selectedMarkerIndex
+      ? 'http://localhost:3000/logo.png'
+      : marker.icon.url
+                  }}
                   onClick={() => {
                     console.log(marker.metadata);
                     setSelectedVenue(marker.metadata.topic, marker.metadata.id);
+                    setSelectedMarkerIndex(index);  // Update the selected marker index
                   }}
                   clusterer={clusterer}
                 />
