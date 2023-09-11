@@ -20,9 +20,7 @@ function UserModal({ userDivRef }) {
   } = useContext(DataContext);
 
   const { isUserModalOpen } = state;
-
   const { currentUser, signOut } = useAuth();
-
   const userModalRef = useRef(null);
 
   useEffect(() => {
@@ -55,8 +53,8 @@ function UserModal({ userDivRef }) {
 
       <div className="user-modal__username">@{currentUser.username}</div>
 
-      <div onClick={openVenueManagerModal}>
-        Venues
+      <div className="user-modal__my-venues" onClick={openVenueManagerModal}>
+        My Venues
       </div>
 
       <div className="user-modal__options">

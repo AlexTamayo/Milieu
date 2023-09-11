@@ -19,6 +19,23 @@
   margin-bottom: 20px;
 }
 
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+
+.empty-content {
+  color: #888;
+  border: 1px dashed #aaa;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
 .user-venue-modal {
   width: 80%; // You can adjust the width based on your preference
   max-width: 600px; // Set a max-width to avoid the modal being too large on bigger screens

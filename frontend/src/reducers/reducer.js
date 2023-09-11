@@ -14,8 +14,23 @@ export const reducer = (state, action) => {
     case actionTypes.SET_BUSINESS_DATA:
       return { ...state, businessData: action.payload };
 
-    case actionTypes.TOGGLE_USER_MODAL:
-      return { ...state, isUserModalOpen: !state.isUserModalOpen };
+      case actionTypes.TOGGLE_USER_MODAL:
+        // If the modal is currently closed (thus, about to be opened), close other modals first.
+        if (!state.isUserModalOpen) {
+          const newState = {
+            ...state,
+            isUserModalOpen: true,
+            isVenueModalOpen: false,
+            isUserAddVenueOpen: false,
+            isLoginRegModalOpen: false,
+            isVenueManagerModalOpen: false,
+            // add other modals to close similarly
+          };
+          return newState;
+        } 
+        
+        // If the modal is currently open, just close it.
+        return { ...state, isUserModalOpen: false };
 
     case actionTypes.OPEN_USER_MODAL:
       return { ...state, isUserModalOpen: true };
@@ -79,16 +94,16 @@ export const reducer = (state, action) => {
     case actionTypes.CLOSE_VENUE_MANAGER_MODAL:
       return { ...state, isVenueManagerModalOpen: false };
 
-      case actionTypes.TOGGLE_ONLY_MODAL:
-  return {
-    ...state,
-    isUserModalOpen: action.modalName === 'isUserModalOpen',
-    isVenueModalOpen: action.modalName === 'isVenueModalOpen',
-    isUserAddVenueOpen: action.modalName === 'isUserAddVenueOpen',
-    isLoginRegModalOpen: action.modalName === 'isLoginRegModalOpen',
-    isVenueManagerModalOpen: action.modalName === 'isVenueManagerModalOpen',
-    // add other modals similarly
-  };
+    case actionTypes.TOGGLE_ONLY_MODAL:
+      return {
+        ...state,
+        isUserModalOpen: action.modalName === "isUserModalOpen",
+        isVenueModalOpen: action.modalName === "isVenueModalOpen",
+        isUserAddVenueOpen: action.modalName === "isUserAddVenueOpen",
+        isLoginRegModalOpen: action.modalName === "isLoginRegModalOpen",
+        isVenueManagerModalOpen: action.modalName === "isVenueManagerModalOpen",
+        // add other modals similarly
+      };
 
     default:
       return state;

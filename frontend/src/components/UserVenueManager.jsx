@@ -1,29 +1,49 @@
 import '../styles/UserVenueManager.scss';
 import { useContext } from 'react';
 import { DataContext } from '../context/MainContext';
+import { useAuth } from '../context/AuthContext';
 
 function UserVenueManager() {
 
-  const { state } = useContext(DataContext);
+  const { state, closeVenueManagerModal, openUserAddVenue } = useContext(DataContext);
+  const { isVenueManagerModalOpen } = state;
+  const { currentUser } = useAuth();
 
-  const {
-    isVenueManagerModalOpen
-  } = state;
-
+  if(!currentUser) return null
   if(!isVenueManagerModalOpen) return null;
+
+  const renderVenueList = (venues, type) => {
+    if (venues && venues.length) {
+      return venues.map(venue => (
+        <div className="venue-item" key={venue.id}>
+          <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
+          <button className="edit-btn">Edit</button>
+          <button className="delete-btn">Delete</button>
+        </div>
+      ));
+    } else {
+      return (
+        <div className="empty-content" onClick={openUserAddVenue}>
+          {`Add your first ${type}`}
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="modal-overlay">
       <div className="user-venue-modal">
-        <button className="close-btn" onClick={() => {/* Logic to close modal goes here */}}>&times;</button>
+        <button className="close-btn" onClick={closeVenueManagerModal}>&times;</button>
         <h2 className="modal-title">Venues Manager</h2>
+
+        <h3 className="section-title">Business Section</h3>
         <div className="business-section">
-          {/* Content for businesses goes here */}
-          Business Section
+          {renderVenueList(currentUser.businesses, 'business')}
         </div>
+
+        <h3 className="section-title">Event Section</h3>
         <div className="event-section">
-          {/* Content for events goes here */}
-          Event Section
+          {renderVenueList(currentUser.events, 'event')}
         </div>
       </div>
     </div>

@@ -20,9 +20,24 @@ export const modalFunctions = (dispatch, state) => {
   //   return () => clearInterval(intervalId);
   // }, [state.isUserModalOpen]);
 
+  // const toggleUserModal = () => {
+  //   dispatch({ type: actionTypes.TOGGLE_USER_MODAL });
+  // };
+
   const toggleUserModal = () => {
+    if (state.isUserModalOpen) {
+      // console.log("User modal is currently open.");
+      // console.log('state.isUserModalOpen', state.isUserModalOpen);
+    } 
+    
+    if (!state.isUserModalOpen) {
+      // console.log("User modal is currently closed.");
+      // console.log('state.isUserModalOpen', state.isUserModalOpen);
+    }
+
     dispatch({ type: actionTypes.TOGGLE_USER_MODAL });
   };
+  
 
   const openUserModal = () => {
     toggleOnlyModal("isUserModalOpen");
