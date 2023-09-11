@@ -68,7 +68,7 @@ function VenueModal() {
   if (!isVenueModalOpen) return null;
 
   if (businessData.length < 1) return null;
-
+  if (eventData.length < 1) return null;
   if (!selectedVenueType) return null;
 
   return (

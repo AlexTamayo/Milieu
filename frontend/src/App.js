@@ -23,9 +23,6 @@ function App() {
   return (
 
       <div className="App">
-        < TopNavBar userDivRef={userDivRef} />
-        < UserModal userDivRef={userDivRef} />
-        < UserVenueManager />
         < UserLogRegModal />
         < UserAddVenue />
         < VenueModal />
