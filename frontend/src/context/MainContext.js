@@ -1,53 +1,13 @@
 import { createContext } from 'react';
-import useApplicationData from '../reducers/useApplicationData';
+import useAppData from '../reducers/useAppData';
 
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const {
-    state,
-    toggleUserModal,
-    openUserModal,
-    closeUserModal,
-    closeVenueModal,
-    openUserAddVenue,
-    closeUserAddVenue,
-    handleCopy,
-    openLoginModal,
-    closeLoginModal,
-    handleButtonClick,
-    handleOnSearch,     
-    handleOnHover,      
-    handleOnSelect,     
-    handleOnFocus,      
-    formatResult,
-    setLoading,
-    clearLoading,
-    setSelectedVenue,
-  } = useApplicationData();
+  const applicationData = useAppData();
 
   return (
-    <DataContext.Provider value={{ 
-                                  state,
-                                  toggleUserModal,
-                                  openUserModal,
-                                  closeUserModal,
-                                  closeVenueModal,
-                                  openUserAddVenue,
-                                  closeUserAddVenue,
-                                  handleCopy,
-                                  openLoginModal,
-                                  closeLoginModal,
-                                  handleButtonClick,
-                                  handleOnSearch,    
-                                  handleOnHover,      
-                                  handleOnSelect,     
-                                  handleOnFocus,      
-                                  formatResult,
-                                  setLoading,
-                                  clearLoading,
-                                  setSelectedVenue,
-                                }}>
+    <DataContext.Provider value={{ ...applicationData }}>
       {children}
     </DataContext.Provider>
   );

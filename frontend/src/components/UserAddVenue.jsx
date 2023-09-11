@@ -8,13 +8,16 @@ import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
   const { state, closeUserAddVenue } = useContext(DataContext);
+
   const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
-  const [userAddVenueType, setUserAddVenueType] = useState('business');
-  const [formData, setFormData] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const { currentUser, signOut } = useAuth();
-  const [businessCategoryId, setBusinessCategoryId] = useState(null);
-  const [eventCategoryId, setEventCategoryId] = useState(null);
+  
+  const [ userAddVenueType, setUserAddVenueType] = useState('business');
+  const [ selectedCategory, setSelectedCategory] = useState(null);
+  const [ businessCategoryId, setBusinessCategoryId] = useState(null);
+  const [ eventCategoryId, setEventCategoryId] = useState(null);
+  const [ formData, setFormData] = useState({});
 
   const eventCategoryOptions = eventCategoryData.map((category) => ({
     value: category.id,
