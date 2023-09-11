@@ -12,7 +12,7 @@ function UserAddVenue() {
   const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
 
   const { currentUser, signOut } = useAuth();
-  
+
   const [ userAddVenueType, setUserAddVenueType] = useState('business');
   const [ selectedCategory, setSelectedCategory] = useState(null);
   const [ businessCategoryId, setBusinessCategoryId] = useState(null);
@@ -101,8 +101,8 @@ function UserAddVenue() {
 
         // Create the businessLocation object (if applicable)
         formData.businessLocation = {
-          longitude: 100, // Replace with the actual longitude
-          latitude: 50, // Replace with the actual latitude
+          longitude: -113.997280, // Replace with the actual longitude
+          latitude: 50.856270, // Replace with the actual latitude
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,

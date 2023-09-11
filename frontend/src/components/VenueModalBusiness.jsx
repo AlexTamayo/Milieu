@@ -40,7 +40,7 @@ function VenueModalBusiness({ currentBusiness }) {
               rel="noopener noreferrer"
               className={`social-media__link social-media__link--${media.platform.toLowerCase()}`}
             >
-              {formatURL(media.link)}
+               {media.link ? formatURL(media.link) : "URL not available"}
             </a>
           </div>
           <div onClick={() => handleCopy(media.link)} className="copy-icon-button">
@@ -115,9 +115,9 @@ function VenueModalBusiness({ currentBusiness }) {
             <i className="fas fa-globe"></i>
           </div>
           <div className="vm-right__website">
-            <a href={currentBusiness.website} target="_blank" rel="noopener noreferrer">
-              {formatURL(currentBusiness.website)}
-            </a>
+          <a href={currentBusiness.website} target="_blank" rel="noopener noreferrer">
+          {currentBusiness.website ? formatURL(currentBusiness.website) : "Website not available"} {/* Updated line */}
+        </a>
           </div>
           <div onClick={() => handleCopy(currentBusiness.website)} className="copy-icon-button">
             <i className="fas fa-copy"></i>
