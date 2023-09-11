@@ -7,24 +7,180 @@
 
   flex-direction: column;
 
-  position: fixed;
+  position: absolute;
 
-  top: 53px;
-  right: 20px;
+  top: 62px;
+  right: 27px;
 
-  border: 1px solid $grey-1;
+  border: 1.5px solid $grey-1;
 
-  background: $bg-color;
-  padding: 20px;
-  border-radius: 8px;
+  box-shadow: 2px 7px 10px rgba($grey-3,0.2);
 
-  width: 180px;
-  height: 270px;
+  // background: $bg-color;
+  background: #f9fbff;
+  border-radius: 35px;
+
+  width: 320px;
+  height: 315px;
 
   overflow: auto;
 
-  z-index: 9992;
+  z-index: 9985;
+
+
+
+  &__close-btn {
+    position: absolute;
+
+    top: 8px;
+    right: 25px;
+
+    $size: 40px;
+
+    height: $size;
+    width: $size;
+
+    border-radius: 100%;
+
+    font-size: 25pt;
+
+    // background-color: magenta;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s linear;
+
+    &:hover {
+      background-color: rgba($grey-2, 0.15);
+    }
+
+    &::before {
+      content: "\00D7"; /* Unicode for &times; */
+      position: absolute;
+      top: -7.5px;
+      right: 8px;
+      color: $grey-2;
+    }
+
+  }
+
+
+  &__profile-pic {
+
+    margin-top: -10px;
+    margin-bottom: 0px;
+
+
+    display: flex;
+    border-radius: 100%;
+    overflow: hidden;
+    // margin-bottom: 10px;
+    
+    img {
+      width: 100px;
+    }
+
+  }
+
+  &__greeting {
+
+
+    overflow: hidden;
+
+    margin: 4px;
+    font-size: 17pt;
+    color: $grey-3;
+
+    max-width: 90%;
+  }
+
+
+
+  &__username {
+    // font-weight: bold;
+    color: $grey-2;
+
+    margin-bottom: 9px;
+  }
+
+  &__my-venues {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $myvenues-colour: $milieu-cyan;
+
+    color: $myvenues-colour;
+    background-color: rgba($myvenues-colour, 0.1);
+    font-weight: bold;
+    font-size: 15pt;
+
+    $height-radius: 45px;
+    
+    margin: 4px;
+    height: $height-radius;
+    width: 250px;
+    border-radius: $height-radius;
+    border: 1px solid rgba($myvenues-colour, 0.2);
+
+    cursor: pointer;
+
+    transition: all 0.25s linear;
+
+    &:hover {
+
+      color: white;
+      background-color: rgba($myvenues-colour, 1);
+
+      border: 1px solid rgba(white, 1);
+
+    }
+  }
+
+
+  &__signout {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $signout-colour: $milieu-red;
+
+    color: $signout-colour;
+    background-color: rgba($signout-colour, 0.1);
+    font-weight: bold;
+    font-size: 12pt;
+    
+    $height-radius: 37px;
+    
+    margin: 4px;
+    height: $height-radius;
+    width: 152px;
+    border-radius: $height-radius;
+    border: 1px solid rgba($signout-colour, 0.2);
+
+
+    cursor: pointer;
+
+    transition: all 0.25s linear;
+
+    &:hover {
+
+      color: white;
+      background-color: rgba($signout-colour, 1);
+
+      border: 1px solid rgba(white, 1);
+
+    }
+  }
+
+
+
+
+
 }
+
+
 
 .user-modal-close {
   position: absolute;

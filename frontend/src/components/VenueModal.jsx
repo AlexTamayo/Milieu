@@ -4,7 +4,7 @@ import '../styles/VenueModal.scss';
 import { DataContext } from '../context/MainContext';
 
 import VenueModalBusiness from './VenueModalBusiness';
-// import EditBusinessModal from './EditBusinessModal';
+import EditBusinessModal from './EditBusinessModal';
 import VenueModalEvent from './VenueModalEvent';
 // import EditEventModal from './EditEventModal';
 
@@ -72,22 +72,22 @@ function VenueModal() {
   if (!selectedVenueType) return null;
 
   return (
-    <SlidingPane
-      isOpen={isVenueModalOpen}
-      // title="Venue Modal Business"
-      // onRequestClose={onRequestClose}
-      from="left"
-      width="500px"
-      className="venue-modal"
-    >
-    {/* <div ref={venueModalRef} className="venue-modal"> */}
+    // <SlidingPane
+    //   isOpen={isVenueModalOpen}
+    //   // title="Venue Modal Business"
+    //   // onRequestClose={onRequestClose}
+    //   from="left"
+    //   width="500px"
+    //   className="venue-modal"
+    // >
+    <div ref={venueModalRef} className="venue-modal">
 
       {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
 
       {selectedVenueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
 
-    {/* </div> */}
-    </SlidingPane>
+      {/* </SlidingPane> */}
+    </div>
   );
 }
 

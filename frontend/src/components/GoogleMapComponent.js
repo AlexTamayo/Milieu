@@ -10,19 +10,18 @@ import mapStyles from '../styles/mapStyles.js';
 import categoryIcons from '../routes/categoryIcons';
 import venueMarkers from '../routes/venueMarkers';
 
-const containerStyle = {
-  width: '100%',
-  height: '800px',
-};
-
-/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
 // const containerStyle = {
 //   width: '100%',
-//   height: '1260px',
-//   margin: 0,
-//   // height: '90%',
+//   height: '800px',
 // };
 
+/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
+const containerStyle = {
+  width: '100%',
+  height: '1260px',
+  margin: 0,
+  // height: '90%',
+};
 
 const ICON_SIZE = { width: 40, height: 40 };
 

@@ -45,6 +45,8 @@ function UserModal({ userDivRef }) {
 
   return (
     <div ref={userModalRef} className="user-modal">
+      <div className="user-modal__close-btn" onClick={closeUserModal}></div>
+
       <div className="user-modal__profile-pic">
         <img src={currentUser.profileImage || defaultImage} alt={`${currentUser.firstName}'s profile`} />
       </div>
@@ -57,10 +59,10 @@ function UserModal({ userDivRef }) {
         My Venues
       </div>
 
-      <div className="user-modal__options">
-        <button onClick={handleSignOutClick} className="user-modal__signout-btn">
+      <div className="user-modal__signout">
+        <div onClick={handleSignOutClick} className="signout-inner">
           Sign Out
-        </button>
+        </div>
       </div>
 
     </div>
