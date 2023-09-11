@@ -27,15 +27,18 @@
 }
 
 .modal-container {
-  position: relative;
-  background: #f4f6fb;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.7); // This line sets a semi-transparent background
+  // background: #f4f6fb; // Comment or remove this line to allow the backdrop filter to be visible
   border-radius: 35px;
   box-shadow: 2px 7px 10px rgba($grey-3, 0.2);
   border: 1.5px solid $grey-1;
   width: 320px;
   padding: 20px;
   overflow-x: hidden; // Prevent lateral scroll
+  position: relative; // Maintain this to position inner elements relative to this container
 }
+
 
 .modal-header {
   position: relative;
@@ -43,10 +46,11 @@
 
   .close-btn {
     position: absolute;
-    top: -20px; // Adjust this to place the button a bit higher
+    top: -20px; // Adjust position
     right: 10px;
     font-size: 25pt;
     background-color: transparent;
+    border-radius: 35px;
     border: none;
     cursor: pointer;
     color: black; // Set a color that is more visible, adjust as necessary
@@ -63,22 +67,25 @@
 }
 
 .input-field {
+  background-color: #e0e0e0;
+  box-shadow: 14px 14px 28px #c4c4c4, -14px -14px 28px #ffffff;
   width: calc(100% - 20px); // Adjusted width
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  border: 1px solid $grey-2;
   font-size: 16px;
   box-sizing: border-box; // Ensure padding and border are included in width
 }
 
+
 .submit-btn {
+  perspective: 1000px;
   width: calc(100% - 20px); // Adjusted width
   padding: 10px;
   margin: 10px; // Added margin for spacing
   background-color: $milieu-cyan;
   border: none;
-  border-radius: 5px;
+  border-radius: 35px;
   font-size: 16px;
   color: white;
   cursor: pointer;
@@ -87,14 +94,21 @@
 
   &:hover {
     background-color: darken($milieu-cyan, 10%);
-  }
+    transform: scale(1.05);
+}
+}
+
+.input-field::placeholder {
+  color: #a1a1a1; // A subtle color for placeholder text
+  font-style: italic; // An italic style for placeholder
 }
 
 .dropdown-field {
   width: 294px;
-  padding: 2px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 4px;
-  border: 3px solid #d6d6d6;
+  border: 1.5px solid #d6d6d6;
   background-color: #f4f6fb;
   color: #585858;
   font-size: 17px;
