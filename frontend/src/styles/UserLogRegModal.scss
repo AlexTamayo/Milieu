@@ -1,24 +1,125 @@
 @import '_variables.scss';
 
 .overlay {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.7); /* Black with a bit of transparency */
+  background-color: rgba(0,0,0,0.7);
   display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  z-index: 9981; /* Make sure it sits on top of other content */
+  justify-content: center;
+  align-items: center;
+  z-index: 9981;
+  animation: fadeIn 0.3s forwards;
+  transform-origin: top right;
+}
 
-  caret-color: $grey-3;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-container {
-  width: 300px;
+  position: relative;
+  background: #f4f6fb;
+  border-radius: 35px;
+  box-shadow: 2px 7px 10px rgba($grey-3, 0.2);
+  border: 1.5px solid $grey-1;
+  width: 320px;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* A subtle shadow for depth */
+  overflow-x: hidden; // Prevent lateral scroll
+}
+
+.modal-header {
+  position: relative;
+  padding-bottom: 10px;
+
+  .close-btn {
+    position: absolute;
+    top: -20px; // Adjust this to place the button a bit higher
+    right: 10px;
+    font-size: 25pt;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: black; // Set a color that is more visible, adjust as necessary
+
+    &:hover {
+      background-color: rgba($grey-2, 0.15);
+    }
+
+    // &::before {
+    //   content: "\00D7";
+    //   color: inherit; // This will make the 'X' the same color as specified in the color property above
+    // }
+  }
+}
+
+.input-field {
+  width: calc(100% - 20px); // Adjusted width
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid $grey-2;
+  font-size: 16px;
+  box-sizing: border-box; // Ensure padding and border are included in width
+}
+
+.submit-btn {
+  width: calc(100% - 20px); // Adjusted width
+  padding: 10px;
+  margin: 10px; // Added margin for spacing
+  background-color: $milieu-cyan;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s linear;
+  box-sizing: border-box; // Ensure padding and border are included in width
+
+  &:hover {
+    background-color: darken($milieu-cyan, 10%);
+  }
+}
+
+.dropdown-field {
+  width: 294px;
+  padding: 2px;
+  border-radius: 4px;
+  border: 3px solid #d6d6d6;
+  background-color: #f4f6fb;
+  color: #585858;
+  font-size: 17px;
+
+  &:focus {
+    outline: none;
+    border-color: $milieu-cyan; // Highlight border color when focused
+  }
+
+  option {
+    padding: 10px;
+  }
+}
+
+
+.register-link-container {
+  text-align: center;
+  margin: 10px; // Added margin for spacing
+
+  a {
+    color: $milieu-red;
+    text-decoration: underline;
+
+    &:hover {
+      color: darken($milieu-red, 10%);
+    }
+  }
 }
