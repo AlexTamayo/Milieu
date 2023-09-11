@@ -23,10 +23,11 @@ function App() {
   return (
 
       <div className="App">
+        < TopNavBar userDivRef={userDivRef} />
+        < UserModal userDivRef={userDivRef} />
         < UserLogRegModal />
         < UserAddVenue />
         < VenueModal />
-        < UserModal userDivRef={userDivRef} />
         < SearchBar />
         < GoogleMapComponent />
         {/* < GoogleMapComponent2 /> */}
