@@ -1,5 +1,5 @@
 import { actionTypes } from "./actionTypes";
-import { deleteBusinessById, deleteEventById } from '../routes/api';
+import { deleteBusinessById, deleteEventById,createBusiness,createEvent } from '../routes/api';
 
 export const databaseFunctions = (dispatch, state) => {
 
@@ -23,6 +23,55 @@ const deleteBusiness = async (businessId) => {
   } catch (error) {
     dispatch({
       type: actionTypes.DELETE_ENTITY_FAILURE,
+      payload: { error: error.message }
+    });
+    return { success: false, error: error.message };
+  }
+};
+const createABusiness = async (data) => {
+  try {
+    const response = await createBusiness(data);
+    if (response && response.status === 200) {
+      dispatch({
+        type: actionTypes.SET_BUSINESS_DATA,
+        payload: [...state.businessData, response.data]
+      });
+      return { success: true };
+    } else {
+      dispatch({
+        type: actionTypes.CREATE_ENTITY_FAILURE,
+        payload: { error: "Creation failed." }
+      });
+      return { success: false, error: "Creation failed." };
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.CREATE_ENTITY_FAILURE,
+      payload: { error: error.message }
+    });
+    return { success: false, error: error.message };
+  }
+};
+
+const createAnEvent = async (data) => {
+  try {
+    const response = await createEvent(data);
+    if (response && response.status === 200) {
+      dispatch({
+        type: actionTypes.SET_EVENT_DATA,
+        payload: [...state.eventData, response.data]
+      });
+      return { success: true };
+    } else {
+      dispatch({
+        type: actionTypes.CREATE_ENTITY_FAILURE,
+        payload: { error: "Deletion failed." }
+      });
+      return { success: false, error: "Deletion failed." };
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.CREATE_ENTITY_FAILURE,
       payload: { error: error.message }
     });
     return { success: false, error: error.message };
@@ -81,5 +130,8 @@ const deleteEntityById = async (entityId, entityType) => {
     deleteEntityById,
     deleteBusiness,
     deleteEvent,
+    createABusiness,
+    createAnEvent
+
   }
 }

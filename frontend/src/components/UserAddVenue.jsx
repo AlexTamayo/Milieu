@@ -7,7 +7,7 @@ import { DataContext } from '../context/MainContext';
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
-  const { state, closeUserAddVenue } = useContext(DataContext);
+  const { state, closeUserAddVenue,createABusiness,createAnEvent } = useContext(DataContext);
 
   const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
 
@@ -114,10 +114,8 @@ function UserAddVenue() {
 
         console.log(formData);
         // Submit the formData to the endpoint for adding a business
-        response = await axios.post(
-          'http://localhost:3001/api/businesses',
-          formData
-        );
+        createABusiness(formData);
+        ///////////WE NEED TO NOW ADD A MARKER HERE
       } else if (userAddVenueType === 'event') {
         // Set the appropriate category ID in formData
         formData.eventCategoryId = eventCategoryId;
@@ -148,22 +146,14 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-
         // Submit the formData to the endpoint for adding an event
-        response = await axios.post(
-          'http://localhost:3001/api/events',
-          formData
-        );
+        createAnEvent(formData);
+        ///////////WE NEED TO NOW ADD A MARKER HERE
       }
-      console.log(
-        `${userAddVenueType.charAt(0).toUpperCase() + userAddVenueType.slice(1)} added:`,
-        response.data
-      );
       closeUserAddVenue(); // Close the modal after a successful submission
     } catch (error) {
       console.error(
-        `There was an error submitting the ${userAddVenueType}:`,
-        error.response ? error.response.data : error.message
+        `There was an error submitting the ${userAddVenueType}:`
       );
     }
   };
