@@ -80,23 +80,38 @@ function UserAddVenue() {
           apiKey: '53e4b25a9fb549748178257ed9fa4529',
         },
       });
-      const location = response.data.features[0].geometry.coordinates;
-      return {
-        latitude: location[1],
-        longitude: location[0],
-      };
+      const location = response.data.features[0]?.geometry.coordinates;
+      if(location) {
+        return {
+          latitude: location[1],
+          longitude: location[0],
+        };
+      } else {
+        console.error("No location data found in API response");
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
 
+
   const handleInputChange = async (e) => {
     if (e && e.target && e.target.name) {
       const { name, value } = e.target;
 
-      if (name === 'streetAddress') {
-        const location = await getLatLngFromAddress(value);
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+
+      if (name === 'streetAddress' || name === 'city' || name === 'region' || name === 'country') {
+        const updatedFormData = {
+          ...formData,
+          [name]: value,
+        };
+        const fullAddress = `${updatedFormData.streetAddress || ''}, ${updatedFormData.city || ''}, ${updatedFormData.region || ''}, ${updatedFormData.country || ''}`;
+        const location = await getLatLngFromAddress(fullAddress);
         if (location) {
           setFormData((prevState) => ({
             ...prevState,
@@ -105,13 +120,9 @@ function UserAddVenue() {
           }));
         }
       }
-
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
     }
   };
+
 
   const handleSubmit = async () => {
     try {
