@@ -7,21 +7,9 @@ import {
 } from '@react-google-maps/api';
 import { DataContext } from '../context/MainContext';
 import mapStyles from '../styles/mapStyles.js';
+import '../styles/GoogleMapComponent.scss';
 import categoryIcons from '../routes/categoryIcons';
 import venueMarkers from '../routes/venueMarkers';
-
-// const containerStyle = {
-//   width: '100%',
-//   height: '800px',
-// };
-
-/* FOR ALEXT, COMMENT OUT IF YOU HAVE VISIBILITY PROBLEMS */
-const containerStyle = {
-  width: '100%',
-  height: '1260px',
-  margin: 0,
-  // height: '90%',
-};
 
 const ICON_SIZE = { width: 40, height: 40 };
 
@@ -122,13 +110,15 @@ const GoogleMapComponent = () => {
   };
 
   return (
+    <div className='map-container'>
+
     <LoadScript
       googleMapsApiKey={process.env.REACT_APP_MAPSKEY}
       onLoad={() => setIsGoogleMapLoaded(true)}
     >
       <GoogleMap
         ref={mapRef}
-        mapContainerStyle={containerStyle}
+        // mapContainerStyle={containerStyle}
         center={center}
         zoom={15}
         options={{
@@ -197,6 +187,8 @@ const GoogleMapComponent = () => {
         </div>
       </GoogleMap>
     </LoadScript>
+
+    </div>
   );
 };
 

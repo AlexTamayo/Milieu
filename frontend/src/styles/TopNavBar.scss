@@ -5,12 +5,15 @@
   display: flex;
   position: absolute;
   width: 100%;
+  min-width: 350px;
   background-color: $bg-color;
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
   border-bottom: 1px solid $grey-1;
   height: 3.5em;
+
+
   z-index: 9982;
   
 }
