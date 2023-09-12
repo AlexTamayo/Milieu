@@ -3,7 +3,7 @@ import { DataContext } from '../context/MainContext';
 import {
   addressFormatter,
   formatDateTime,
-  openGoogleMaps,
+  // openGoogleMaps,
 } from '../utils/helpers';
 
 function VenueModalEvent({ currentEvent }) {
@@ -12,6 +12,12 @@ function VenueModalEvent({ currentEvent }) {
     closeVenueModal,
     handleCopy
   } = useContext(DataContext);
+
+  const openGoogleMaps = () => {
+    const address = addressFormatter(currentEvent.eventLocation);
+    const encodedAddress = encodeURIComponent(address);
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+  };
 
   return (
     <div>

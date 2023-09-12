@@ -17,6 +17,10 @@
     return `${location.streetAddress}, ${location.city}, ${location.region} ${location.postalCode}`
   }
 
+  // const addressFormatterSafe = (location) => {
+  //   return location && location.streetAddress ? addressFormatter(location) : "Address not available";
+  // };
+
   export function addressFormatterSafe(location) {
     return location && location.streetAddress ? addressFormatter(location) : "Address not available";
   };
@@ -42,14 +46,17 @@
 
 
   /* vvv OTHER FUNCTIONS vvv */
-  export function openGoogleMaps (venue, type) {
+  export function openGoogleMaps(venue, type) {
 
     let address;
   
     if (type === 'event') {
-      address = addressFormatterSafe(venue.eventLocation);
+      address = addressFormatter(venue.eventLocation);
     } else if (type === 'business') {
-      address = addressFormatterSafe(venue.businessLocation);
+      console.log('venue', venue);
+      console.log('venue.businessLocation', venue.businessLocation);
+      
+      address = addressFormatter(venue.businessLocation);
     }
 
     if (!address || address === "Address not available") {
@@ -60,3 +67,61 @@
     const encodedAddress = encodeURIComponent(address.replace(/ /g, '+'));
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
   };
+
+/* 
+
+  const openGoogleMaps = () => {
+    const address = addressFormatterSafe(currentBusiness.businessLocation);
+    if (address !== "Address not available") {
+      const encodedAddress = encodeURIComponent(address.replace(/ /g, '+'));
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    } else {
+      alert("Address not available");
+    }
+  };
+
+  const openGoogleMaps = () => {
+    const address = addressFormatter(currentEvent.eventLocation);
+    const encodedAddress = encodeURIComponent(address);
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+  };
+
+
+ */
+  export function transformStructure(inputData) {
+    const outputData = {
+        name: inputData.name,
+        description: inputData.description,
+        phoneNumber: inputData.phoneNumber,
+        email: inputData.email,
+        website: inputData.website,
+        ownerId: inputData.ownerId,
+        businessCategoryId: inputData.businessCategoryId,
+        businessBranding: {
+            logoUrl: inputData.businessBranding.logoUrl,
+            bannerUrl: inputData.businessBranding.bannerUrl,
+            pinUrl: inputData.businessBranding.pinUrl,
+            // The rest of the properties will be filled out once created on the backend
+        },
+        businessCategory: {
+            name: inputData.businessCategory.name,
+            // The rest of the properties will be filled out once created on the backend
+        },
+        socialMedia: [{
+            platform: inputData.socialMedia.platform,
+            link: inputData.socialMedia.link,
+            // The rest of the properties will be filled out once created on the backend
+        }],
+        businessLocation: {
+            longitude: inputData.longitude,
+            latitude: inputData.latitude,
+            streetAddress: inputData.streetAddress,
+            city: inputData.city,
+            region: inputData.region,
+            postalCode: inputData.postalCode,
+            country: inputData.country,
+            // The rest of the properties will be filled out once created on the backend
+        }
+    };
+    return outputData;
+}

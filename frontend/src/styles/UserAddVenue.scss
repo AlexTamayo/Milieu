@@ -19,6 +19,7 @@
 
 .user-add-venue-modal {
   display: flex;
+  position: relative;
 
   flex-direction: column;
 
@@ -70,8 +71,8 @@
 
 .user-add-venue-modal__circle-close-btn {
 
-  top: 950px;
-  right: 370px;
+  top: 660px;
+  right: 42px;
   
   cursor: pointer;
   

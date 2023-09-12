@@ -27,12 +27,35 @@ function UserEditVenue() {
       selectedVenueId,
     } = state;
 
-
     const [formData, setFormData] = useState({});
 
     const currentBusiness = businessData.find(business => business.id === selectedVenueId);
   
     const currentEvent = eventData.find(event => event.id === selectedVenueId);
+
+
+    const [businessFormData, setBusinessFormData] = useState({
+      name: "",
+      description: "",
+      phoneNumber: "",
+      email: "",
+      website: "",
+      businessCategoryId: "",
+      businessBranding: {
+          logoUrl: "",
+          bannerUrl: "",
+          pinUrl: "",
+          businessId: "",
+      },
+      socialMedia: [],
+    });
+
+
+    const [eventFormData, setEventFormData] = useState({
+
+    });
+
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -93,6 +116,7 @@ function UserEditVenue() {
           // Business form fields
           <>
             <input
+
               name="name"
               placeholder="Name"
               onChange={handleInputChange}

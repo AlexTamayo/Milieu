@@ -3,11 +3,11 @@ import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
+import {
+  transformStructure,
+} from '../utils/helpers';
 
 import '../styles/UserAddVenue.scss';
-
-
-
 
 function UserAddVenue() {
   const { state, closeUserAddVenue, createABusiness, createAnEvent } = useContext(DataContext);
@@ -15,7 +15,7 @@ function UserAddVenue() {
   const { isUserAddVenueOpen, eventCategoryData,businessCategoryData,eventData,
     businessData} = state;
 
-  const { currentUser, signOut } = useAuth();
+  const { currentUser, addEntityToCurrentUser } = useAuth();
 
   const [userAddVenueType, setUserAddVenueType] = useState('business');
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -135,8 +135,8 @@ function UserAddVenue() {
 
         // Create the businessBranding object
         formData.businessBranding = {
-          logoUrl: formData.logoImageUrl,
-          bannerUrl: formData.bannerImageUrl,
+          logoUrl: formData.logoUrl,
+          bannerUrl: formData.bannerUrl,
           pinUrl: formData.pinImageUrl,
         };
 
@@ -171,7 +171,11 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
+
+        // const formData = transformStructure(formData);
         createABusiness(formData).then((result) => {
+          addEntityToCurrentUser("business", formData);
+          
           if (result.success) {
             console.log('Business created successfully!');
             // Optionally, you can add code here to handle success
@@ -188,8 +192,8 @@ function UserAddVenue() {
 
         // Create the eventBranding object
         formData.eventBranding = {
-          bannerUrl: formData.bannerImageUrl,
-          badgeUrl: formData.badgeImageUrl,
+          bannerUrl: formData.bannerUrl,
+          logoUrl: formData.logoUrl,
           pinUrl: formData.pinImageUrl,
         };
 
@@ -213,7 +217,10 @@ function UserAddVenue() {
           updatedAt: new Date(),
         };
         // Submit the formData to the endpoint for adding an event
-        createAnEvent(formData);
+        createAnEvent(formData)
+          .then(() => {
+            addEntityToCurrentUser("event", formData);
+          });
         
         ///////////WE NEED TO NOW ADD A MARKER HERE
       }
@@ -296,12 +303,12 @@ function UserAddVenue() {
             <div className="branding-section">
               <h4>Branding</h4>
               <input
-                name="bannerImageUrl"
+                name="bannerUrl"
                 placeholder="Banner Image URL"
                 onChange={handleInputChange}
               />
               <input
-                name="badgeImageUrl"
+                name="logoUrl"
                 placeholder="Badge Image URL"
                 onChange={handleInputChange}
               />
@@ -405,12 +412,12 @@ function UserAddVenue() {
             <div className="branding-section">
               <h4>Branding</h4>
               <input
-                name="bannerImageUrl"
+                name="bannerUrl"
                 placeholder="Banner Image URL"
                 onChange={handleInputChange}
               />
               <input
-                name="badgeImageUrl"
+                name="logoUrl"
                 placeholder="Badge Image URL"
                 onChange={handleInputChange}
               />

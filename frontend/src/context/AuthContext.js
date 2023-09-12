@@ -21,7 +21,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-
   const [currentUser, setCurrentUser] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,21 +28,22 @@ export function AuthProvider({ children }) {
   const { closeUserModal } = useAppData();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-  
-    if (token) {
-  
-      validateToken(token).then(async (validationResponse) => {
-        const userProfile = await getUserById(validationResponse.data.id);
+    const token = localStorage.getItem("authToken");
 
-        if (userProfile && userProfile.data) {
-          const { passwordHash, ...userWithoutPassword } = userProfile.data;
-          
-          setCurrentUser(userWithoutPassword);
-        }
-      }).catch(error => {
-        localStorage.removeItem('authToken');
-      });
+    if (token) {
+      validateToken(token)
+        .then(async (validationResponse) => {
+          const userProfile = await getUserById(validationResponse.data.id);
+
+          if (userProfile && userProfile.data) {
+            const { passwordHash, ...userWithoutPassword } = userProfile.data;
+
+            setCurrentUser(userWithoutPassword);
+          }
+        })
+        .catch((error) => {
+          localStorage.removeItem("authToken");
+        });
     }
   }, []);
 
@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
       const response = await loginUser({ email, password });
 
       if (response.data && response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem("authToken", response.data.token);
         const userProfile = await getUserById(response.data.userId);
 
         if (userProfile && userProfile.data) {
@@ -61,9 +61,8 @@ export function AuthProvider({ children }) {
           setCurrentUser(userWithoutPassword);
         }
       } else {
-        throw new Error('Invalid login credentials.');
+        throw new Error("Invalid login credentials.");
       }
-
     } catch (error) {
       handleError(error);
     }
@@ -81,37 +80,60 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const response = await createUser({ ...formData, createdAt, updatedAt, lastLogin, role });
+      const response = await createUser({
+        ...formData,
+        createdAt,
+        updatedAt,
+        lastLogin,
+        role,
+      });
 
       if (response.data && response.data.token) {
         localStorage.setItem("authToken", response.data.token);
         const { passwordHash, ...userWithoutPassword } = response.data.user;
         setCurrentUser(userWithoutPassword);
       } else {
-        throw new Error("Registration was successful, but there was an issue logging in.");
+        throw new Error(
+          "Registration was successful, but there was an issue logging in."
+        );
       }
-
     } catch (error) {
       handleError(error);
     }
   };
 
+  /* ADD ENTITY TO CURRENT USER */
+  function addEntityToCurrentUser(type, data) {
+    if (type === "business") {
+      setCurrentUser((prevState) => ({
+        ...prevState,
+        businesses: [...prevState.businesses, data],
+      }));
+    } else if (type === "event") {
+      setCurrentUser((prevState) => ({
+        ...prevState,
+        events: [...prevState.events, data],
+      }));
+    }
+  }
+
   /* REMOVE ENTITY FROM CURRENT USER */
   function removeEntityFromCurrentUser(id, type) {
-    if (type === 'business') {
-        setCurrentUser(prevState => ({
-            ...prevState,
-            businesses: prevState.businesses.filter(business => business.id !== id)
-        }));
-    } else if (type === 'event') {
-        setCurrentUser(prevState => ({
-            ...prevState,
-            events: prevState.events.filter(event => event.id !== id)
-        }));
+    if (type === "business") {
+      setCurrentUser((prevState) => ({
+        ...prevState,
+        businesses: prevState.businesses.filter(
+          (business) => business.id !== id
+        ),
+      }));
+    } else if (type === "event") {
+      setCurrentUser((prevState) => ({
+        ...prevState,
+        events: prevState.events.filter((event) => event.id !== id),
+      }));
     }
-}
+  }
 
-  
   /* ERROR HANDLER */
   const handleError = (error) => {
     if (error.response && error.response.data && error.response.data.message) {
@@ -122,10 +144,10 @@ export function AuthProvider({ children }) {
   };
 
   const signOut = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     closeUserModal();
     setCurrentUser(null);
-  }
+  };
 
   const value = {
     currentUser,
@@ -133,9 +155,10 @@ export function AuthProvider({ children }) {
     signOut,
     loginUserLogic,
     registerUserLogic,
+    addEntityToCurrentUser,
     removeEntityFromCurrentUser,
     errorMessage,
-    setErrorMessage
+    setErrorMessage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

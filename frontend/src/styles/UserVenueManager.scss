@@ -37,6 +37,7 @@
 }
 
 .user-venue-manager-modal {
+  position: relative;
   width: 80%; // You can adjust the width based on your preference
   max-width: 600px; // Set a max-width to avoid the modal being too large on bigger screens
   background-color: $bg-color;
@@ -57,8 +58,8 @@
 
 .user-venue-manager-modal__circle-close-btn {
 
-  top: 450px;
-  right: 370px;
+  top: 11px;
+  right: 23px;
   
   cursor: pointer;
   
