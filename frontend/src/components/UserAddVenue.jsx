@@ -3,24 +3,49 @@ import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
-
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
-  const { state, closeUserAddVenue,createABusiness,createAnEvent } = useContext(DataContext);
-
+  const { state, closeUserAddVenue, createABusiness, createAnEvent } = useContext(DataContext);
   const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
-
   const { currentUser, signOut } = useAuth();
 
-  const [ userAddVenueType, setUserAddVenueType] = useState('business');
-  const [ selectedCategory, setSelectedCategory] = useState(null);
-  const [ businessCategoryId, setBusinessCategoryId] = useState(null);
-  const [ eventCategoryId, setEventCategoryId] = useState(null);
-  const [ formData, setFormData] = useState({});
+  const [userAddVenueType, setUserAddVenueType] = useState('business');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [businessCategoryId, setBusinessCategoryId] = useState(null);
+  const [eventCategoryId, setEventCategoryId] = useState(null);
+  const [formData, setFormData] = useState({});
 
-  //////////////////////////////////////////goelocation
   const [userLocation, setUserLocation] = useState(null);
+  const [fullAddress, setFullAddress] = useState('');
+
+  useEffect(() => {
+    console.log("formData has changed", formData);
+  }, [formData]);
+
+  useEffect(() => {
+    console.log("Address parts have changed, constructing full address", formData);
+    const address = `${formData.streetAddress || ''}, ${formData.city || ''}, ${formData.region || ''}, ${formData.country || ''}`;
+    setFullAddress(address);
+  }, [formData.streetAddress, formData.city, formData.region, formData.country]);
+
+  useEffect(() => {
+    console.log("Full address has changed, fetching lat long", fullAddress);
+    const fetchLatLng = async () => {
+      const location = await getLatLngFromAddress(fullAddress);
+      console.log("Fetched location:", location);
+      if (location) {
+        setFormData((prevState) => {
+          console.log("Previous formData state before updating lat and long:", prevState);
+          const newState = { ...prevState, latitude: location.latitude, longitude: location.longitude };
+          console.log("New formData state after updating lat and long:", newState);
+          return newState;
+        });
+      }
+    };
+
+    fetchLatLng();
+  }, [fullAddress]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -36,9 +61,6 @@ function UserAddVenue() {
     }
   }, []);
 
-
-  //////////////////////////////////////////goelocation
-
   const eventCategoryOptions = eventCategoryData.map((category) => ({
     value: category.id,
     label: category.name,
@@ -52,36 +74,36 @@ function UserAddVenue() {
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
 
-    // Extract the appropriate category ID based on userAddVenueType
     if (userAddVenueType === 'business') {
       if (selectedOption) {
         const categoryId = selectedOption.value;
         console.log('categoryId' + categoryId);
         setBusinessCategoryId(categoryId);
-        setEventCategoryId(null); // Reset eventCategoryId
+        setEventCategoryId(null);
       } else {
-        setBusinessCategoryId(null); // Reset businessCategoryId
+        setBusinessCategoryId(null);
       }
     } else if (userAddVenueType === 'event') {
       if (selectedOption) {
         const categoryId = selectedOption.value;
         setEventCategoryId(categoryId);
-        setBusinessCategoryId(null); // Reset businessCategoryId
+        setBusinessCategoryId(null);
       } else {
-        setEventCategoryId(null); // Reset eventCategoryId
+        setEventCategoryId(null);
       }
     }
   };
+
   const getLatLngFromAddress = async (address) => {
     try {
       const response = await axios.get('https://api.geoapify.com/v1/geocode/search', {
         params: {
           text: address,
-          apiKey: '53e4b25a9fb549748178257ed9fa4529',
+          apiKey: process.env.REACT_APP_API_KEY,
         },
       });
       const location = response.data.features[0]?.geometry.coordinates;
-      if(location) {
+      if (location) {
         return {
           latitude: location[1],
           longitude: location[0],
@@ -94,35 +116,18 @@ function UserAddVenue() {
     }
   };
 
-
-
-  const handleInputChange = async (e) => {
+  const handleInputChange = (e) => {
+    console.log('Input change event:', e);
     if (e && e.target && e.target.name) {
       const { name, value } = e.target;
-
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-
-      if (name === 'streetAddress' || name === 'city' || name === 'region' || name === 'country') {
-        const updatedFormData = {
-          ...formData,
-          [name]: value,
-        };
-        const fullAddress = `${updatedFormData.streetAddress || ''}, ${updatedFormData.city || ''}, ${updatedFormData.region || ''}, ${updatedFormData.country || ''}`;
-        const location = await getLatLngFromAddress(fullAddress);
-        if (location) {
-          setFormData((prevState) => ({
-            ...prevState,
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }));
-        }
-      }
+      setFormData((prevState) => {
+        console.log('Previous formData state:', prevState);
+        const newState = { ...prevState, [name]: value };
+        console.log('New formData state:', newState);
+        return newState;
+      });
     }
   };
-
 
   const handleSubmit = async () => {
     try {
@@ -130,28 +135,22 @@ function UserAddVenue() {
 
       let response;
       if (userAddVenueType === 'business') {
-        // Set the appropriate category ID in formData
         console.log('businessCategoryId ' + businessCategoryId);
         formData.businessCategoryId = businessCategoryId;
-
-        // Create the businessBranding object
         formData.businessBranding = {
           logoUrl: formData.logoImageUrl,
           bannerUrl: formData.bannerImageUrl,
           pinUrl: formData.pinImageUrl,
         };
-
-        // Create the businessCategory object
         formData.businessCategory = {
-          name: selectedCategory.label, // Assuming you want to use the selected category label
+          name: selectedCategory.label,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
 
-        // Create the socialMedia object (if applicable)
         if (formData.twitterLink || formData.facebookLink) {
           formData.socialMedia = {
-            platform: 'Twitter and Facebook', // Customize this as needed
+            platform: 'Twitter and Facebook',
             link: `${formData.twitterLink ? formData.twitterLink : ''} ${
               formData.facebookLink ? formData.facebookLink : ''
             }`,
@@ -160,7 +159,6 @@ function UserAddVenue() {
           };
         }
 
-        // Create the businessLocation object (if applicable)
         formData.businessLocation = {
           longitude: formData.longitude || userLocation.longitude,
           latitude: formData.latitude || userLocation.latitude,
@@ -174,39 +172,28 @@ function UserAddVenue() {
         };
 
         console.log(formData);
-        // Submit the formData to the endpoint for adding a business
         createABusiness(formData).then((result) => {
           if (result.success) {
             console.log('Business created successfully!');
-            // Optionally, you can add code here to handle success
           } else {
             console.error('Business creation failed:', result.error);
-            // Optionally, you can add code here to handle failure
           }
         });
-        ///////////WE NEED TO NOW ADD A MARKER HERE
       } else if (userAddVenueType === 'event') {
-        // Set the appropriate category ID in formData
         formData.eventCategoryId = eventCategoryId;
-
-        // Create the eventBranding object
         formData.eventBranding = {
           bannerUrl: formData.bannerImageUrl,
           badgeUrl: formData.badgeImageUrl,
           pinUrl: formData.pinImageUrl,
         };
-
-        // Create the eventCategory object
         formData.eventCategory = {
-          name: selectedCategory.label, // Assuming you want to use the selected category label
+          name: selectedCategory.label,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-
-        // Create the eventLocation object (if applicable)
         formData.eventLocation = {
-          longitude: formData.longitude || userLocation.longitude, // updated lines
-          latitude: formData.latitude || userLocation.latitude, // updated lines
+          longitude: formData.longitude || userLocation.longitude,
+          latitude: formData.latitude || userLocation.latitude,
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
@@ -215,21 +202,20 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-        // Submit the formData to the endpoint for adding an event
+
         createAnEvent(formData);
-        ///////////WE NEED TO NOW ADD A MARKER HERE
       }
-      closeUserAddVenue(); // Close the modal after a successful submission
+      closeUserAddVenue();
     } catch (error) {
       console.error(
-        `There was an error submitting the ${userAddVenueType}:`
+        `There was an error submitting the ${userAddVenueType}:`,
+        error
       );
     }
   };
 
-
-
   if (!isUserAddVenueOpen) return null;
+
 
   return (
     <div className="modal-overlay">
