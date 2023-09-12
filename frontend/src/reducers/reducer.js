@@ -23,7 +23,8 @@ export const reducer = (state, action) => {
         isUserAddVenueOpen: action.modalName === "isUserAddVenueOpen",
         isLoginRegModalOpen: action.modalName === "isLoginRegModalOpen",
         isVenueManagerModalOpen: action.modalName === "isVenueManagerModalOpen",
-        isUserEditVenueModalOpen: action.modalName === "isUserEditVenueModalOpen",
+        isUserEditVenueModalOpen:
+          action.modalName === "isUserEditVenueModalOpen",
         // add other modals similarly
       };
 
@@ -74,6 +75,20 @@ export const reducer = (state, action) => {
 
     case actionTypes.CLOSE_USER_EDIT_VENUE_MODAL:
       return { ...state, isUserEditVenueModalOpen: false };
+
+    case actionTypes.SET_SELECTED_VENUE_FOR_EDIT:
+      return {
+        ...state,
+        selectedVenueId: action.payload.id,
+        selectedVenueType: action.payload.type,
+      };
+
+    case actionTypes.RESET_SELECTED_VENUE_FOR_EDIT:
+      return {
+        ...state,
+        selectedVenueId: null,
+        selectedVenueType: null,
+      };
 
     case actionTypes.OPEN_USER_ADD_VENUE:
       return { ...state, isUserAddVenueOpen: true };

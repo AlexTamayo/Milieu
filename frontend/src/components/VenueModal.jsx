@@ -19,6 +19,8 @@ function VenueModal() {
     isVenueModalOpen,
     selectedVenueType,
     selectedVenueId,
+    isUserEditVenueModalOpen,
+    isVenueManagerModalOpen,
   } = state;
 
   const venueModalRef = useRef(null);
@@ -58,6 +60,8 @@ function VenueModal() {
     }
   }, []);
 
+
+  if (isUserEditVenueModalOpen || isVenueManagerModalOpen) return null
 
   return (
     <div ref={venueModalRef} className={`venue-modal ${isVenueModalOpen ? 'active' : ''}`}>

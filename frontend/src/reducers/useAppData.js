@@ -18,6 +18,7 @@ export default function useApplication() {
     businessData: [],
     eventCategoryData: [],
     businessCategoryData: [],
+
     isUserModalOpen: false,
     isVenueModalOpen: false,
     loginModalType: null,
@@ -25,6 +26,7 @@ export default function useApplication() {
     isVenueManagerModalOpen: false,
     isUserEditVenueModalOpen: false,
     isUserAddVenueOpen: false,
+    
     isCopied: false,
     selectedFilter: "",
     isLoading: true,

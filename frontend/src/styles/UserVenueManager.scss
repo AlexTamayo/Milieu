@@ -39,7 +39,7 @@
 .user-venue-manager-modal {
   width: 80%; // You can adjust the width based on your preference
   max-width: 600px; // Set a max-width to avoid the modal being too large on bigger screens
-  background-color: #fff;
+  background-color: $bg-color;
   padding: 20px;
   border-radius: 8px; // Rounded corners
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // A subtle shadow for depth

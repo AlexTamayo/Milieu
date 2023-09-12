@@ -46,7 +46,10 @@ function UserVenueManager() {
       return venues.map(venue => (
         <div className="venue-item" key={venue.id}>
           <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
-          <button className="edit-btn" onClick={openUserEditVenueModal}>Edit</button>
+
+          {/* <button className="edit-btn" onClick={openUserEditVenueModal}>Edit</button> */}
+          <button className="edit-btn" onClick={() => openUserEditVenueModal(venue.id, type)}>Edit</button>
+
           <button className="delete-btn" onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
         </div>
       ));
