@@ -7,7 +7,7 @@ export const databaseFunctions = (dispatch, state) => {
 const deleteBusiness = async (businessId) => {
   try {
     const response = await deleteBusinessById(businessId);
-    if (response.status === 200||response.status === 204) {
+    if (response && response.status === 200) {
       dispatch({
         type: actionTypes.SET_BUSINESS_DATA,
         payload: state.businessData.filter(business => business.id !== businessId)
@@ -28,6 +28,7 @@ const deleteBusiness = async (businessId) => {
     return { success: false, error: error.message };
   }
 };
+///////
 const createABusiness = async (data) => {
   try {
     const response = await createBusiness(data);
@@ -57,12 +58,10 @@ const createABusiness = async (data) => {
   }
 };
 
-
-
 const createAnEvent = async (data) => {
   try {
     const response = await createEvent(data);
-    if (response.status === 200||response.status === 201) {
+    if (response && response.status === 200) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: [...state.eventData, response.data]
@@ -89,7 +88,7 @@ const createAnEvent = async (data) => {
 const deleteEvent = async (eventId) => {
   try {
     const response = await deleteEventById(eventId);
-    if (response.status === 200||response.status === 204) {
+    if (response && response.status === 200) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: state.eventData.filter(event => event.id !== eventId)
