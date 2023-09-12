@@ -29,7 +29,7 @@ function VenueModalBusiness({ currentBusiness }) {
     }
   };
 
-  const renderedSocialMediaLinks = currentBusiness.socialMedia.length
+  const renderedSocialMediaLinks = currentBusiness.socialMedia?.length
     ? currentBusiness.socialMedia.map((media) => (
         <div key={media.id} className="vm-container__social-media">
           <div className="vm-left__social-media">
@@ -101,7 +101,7 @@ function VenueModalBusiness({ currentBusiness }) {
           <div onClick={() => handleCopy(addressFormatterSafe(currentBusiness.businessLocation))} className="copy-icon-button">
             <i className="fas fa-copy"></i>
           </div>
-         
+
         </div>
 
         {/* OPERATING HOURS */}
