@@ -196,8 +196,25 @@ function UserAddVenue() {
         };
 
         // const formData = transformStructure(formData);
-        createABusiness(formData).then((result) => {
-          addEntityToCurrentUser("business", formData);
+        const submitFormData = {
+          name: formData.name,
+          description: formData.description,
+          status: 'active',
+          rating: 0,
+          reviewCount: 0,
+          phoneNumber: formData.phoneNumber,
+          email: formData.email,
+          website: formData.website,
+          ownerId: currentUser.id,
+          businessCategoryId: formData.businessCategoryId,
+          businessLocation: formData.businessLocation,
+          businessCategory: formData.businessCategory,
+          businessBranding: formData.businessBranding,
+
+        };
+        console.log(submitFormData);
+        createABusiness(submitFormData).then((result) => {
+           //addEntityToCurrentUser("business", submitFormData);
 
           if (result.success) {
             console.log('Business created successfully!');
