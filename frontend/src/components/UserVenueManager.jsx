@@ -11,7 +11,8 @@ function UserVenueManager() {
     state,
     closeVenueManagerModal,
     openUserAddVenue,
-    deleteEntityById
+    deleteEntityById,
+    openUserEditVenueModal,
   } = useContext(DataContext);
 
   const { isVenueManagerModalOpen } = state;
@@ -22,6 +23,7 @@ function UserVenueManager() {
     removeEntityFromCurrentUser(id, type);
   };
 
+  /* CONFIRMATION MODAL */
   const {
     showConfirmationModal,
     openConfirmationModal,
@@ -38,12 +40,13 @@ function UserVenueManager() {
     </div>
   );
 
+  /* RENDERS LIST OF VENUES USER OWNS */
   const renderVenueList = (venues, type) => {
     if (venues && venues.length) {
       return venues.map(venue => (
         <div className="venue-item" key={venue.id}>
           <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
-          <button className="edit-btn">Edit</button>
+          <button className="edit-btn" onClick={openUserEditVenueModal}>Edit</button>
           <button className="delete-btn" onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
         </div>
       ));
@@ -61,8 +64,18 @@ function UserVenueManager() {
 
   return (
     <div className="modal-overlay">
-      <div className="user-venue-modal">
-        <button className="close-btn" onClick={closeVenueManagerModal}>&times;</button>
+      <div className="user-venue-manager-modal">
+
+        {/* <button className="close-btn" onClick={closeVenueManagerModal}>&times;</button> */}
+
+        {/* CLOSE BUTTON */}
+        <div
+          className="user-venue-manager-modal__circle-close-btn"
+          onClick={closeVenueManagerModal}
+        >
+          {/* &times; */}
+        </div>
+        
         <h2 className="modal-title">Venues Manager</h2>
 
         <h3 className="section-title">Business Section</h3>

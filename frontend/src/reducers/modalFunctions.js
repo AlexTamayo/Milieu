@@ -106,6 +106,24 @@ export const modalFunctions = (dispatch, state) => {
     dispatch({ type: actionTypes.CLOSE_VENUE_MANAGER_MODAL });
   };
 
+  /* USER EDIT VENUE FUNCTIONS */
+
+  const openUserEditVenueModal = () => {
+    toggleOnlyModal("isUserEditVenueModalOpen");
+    // dispatch({
+    //   type: actionTypes.SET_SELECTED_VENUE,
+    //   payload: { venueType, venueId },
+    // });
+    dispatch({ type: actionTypes.OPEN_USER_EDIT_VENUE_MODAL });
+  };
+
+  const closeUserEditVenueModal = () => {
+    toggleOnlyModal("isVenueManagerModalOpen");
+    dispatch({ type: actionTypes.CLOSE_USER_EDIT_VENUE_MODAL });
+    // dispatch({ type: actionTypes.RESET_SELECTED_VENUE });
+  };
+
+
   return {
     toggleUserModal,
     openUserModal,
@@ -118,5 +136,7 @@ export const modalFunctions = (dispatch, state) => {
     closeLoginModal,
     openVenueManagerModal,
     closeVenueManagerModal,
+    openUserEditVenueModal,
+    closeUserEditVenueModal,
   };
 }

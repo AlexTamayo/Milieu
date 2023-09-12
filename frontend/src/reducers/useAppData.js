@@ -20,17 +20,18 @@ export default function useApplication() {
     businessCategoryData: [],
     isUserModalOpen: false,
     isVenueModalOpen: false,
-    isUserAddVenueOpen: false,
-    isCopied: false,
     loginModalType: null,
     isLoginRegModalOpen: false,
+    isVenueManagerModalOpen: false,
+    isUserEditVenueModalOpen: false,
+    isUserAddVenueOpen: false,
+    isCopied: false,
     selectedFilter: "",
     isLoading: true,
     searchResultCategory: {},
     selectedVenueType: null,
     selectedVenueId: null,
     selectedSearchResult: '',
-    isVenueManagerModalOpen: false,
   });
 
   useEffect(() => {

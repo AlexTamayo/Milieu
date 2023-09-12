@@ -6,9 +6,24 @@ import { DataContext } from '../context/MainContext';
 import '../styles/UserAddVenue.scss';
 
 function UserEditVenue() {
-    const { isUserEditVenueOpen, closeUserEditVenue } = useContext(DataContext);
+    const {
+      state,
+      closeUserEditVenueModal
+    } = useContext(DataContext);
+
+    const {
+      businessData,
+      eventData,
+      isUserEditVenueModalOpen,
+      selectedVenueType,
+      selectedVenueId,
+    } = state;
+
     const [venueType, setVenueType] = useState('business');
     const [formData, setFormData] = useState({});
+
+    // openUserEditVenueModal
+    // closeUserEditVenueModal
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -33,7 +48,7 @@ function UserEditVenue() {
               );
           }
           console.log(`${venueType.charAt(0).toUpperCase() + venueType.slice(1)} added:`, response.data);
-          closeUserEditVenue(); // Close the modal after a successful submission
+          closeUserEditVenueModal(); // Close the modal after a successful submission
       } catch (error) {
           console.error(
               `There was an error submitting the ${venueType}:`,
@@ -49,7 +64,7 @@ function UserEditVenue() {
   ];
   
 
-    // if (!isUserEditVenueOpen) return null;
+    if (!isUserEditVenueModalOpen) return null;
 
     return (
       <div className="modal-overlay">
@@ -60,7 +75,7 @@ function UserEditVenue() {
             className="user-add-venue-modal__circle-close-btn"
             onClick={() => {
               setVenueType("business");
-              closeUserEditVenue();
+              closeUserEditVenueModal();
             }}
           >
             {/* &times; */}

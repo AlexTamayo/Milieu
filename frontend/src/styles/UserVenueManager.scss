@@ -36,7 +36,7 @@
   }
 }
 
-.user-venue-modal {
+.user-venue-manager-modal {
   width: 80%; // You can adjust the width based on your preference
   max-width: 600px; // Set a max-width to avoid the modal being too large on bigger screens
   background-color: #fff;
@@ -52,5 +52,33 @@
 
   .business-section {
     margin-bottom: 20px; // Spacing between the two sections
+  }
+}
+
+.user-venue-manager-modal__circle-close-btn {
+
+  top: 450px;
+  right: 370px;
+  
+  cursor: pointer;
+  
+  $close-button-dimensions: 50px;
+
+  height: $close-button-dimensions;
+  width: $close-button-dimensions;
+
+  // background-color: magenta;
+
+
+  // background-color: rgba(white, 0.3);
+
+  // &:hover {
+  //   // background-color: rgba(white, 0.6);
+  // }
+
+  &::before {
+    top: -2px;
+    right: 13px;
+    font-size: 25pt;
   }
 }
