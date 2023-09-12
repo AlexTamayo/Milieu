@@ -175,7 +175,15 @@ function UserAddVenue() {
 
         console.log(formData);
         // Submit the formData to the endpoint for adding a business
-        createABusiness(formData);
+        createABusiness(formData).then((result) => {
+          if (result.success) {
+            console.log('Business created successfully!');
+            // Optionally, you can add code here to handle success
+          } else {
+            console.error('Business creation failed:', result.error);
+            // Optionally, you can add code here to handle failure
+          }
+        });
         ///////////WE NEED TO NOW ADD A MARKER HERE
       } else if (userAddVenueType === 'event') {
         // Set the appropriate category ID in formData
@@ -283,7 +291,6 @@ function UserAddVenue() {
                   options={businessCategoryOptions}
                   value={selectedCategory}
                   onChange={handleCategoryChange}
-                  onInputChange={handleInputChange}
                   placeholder="Select a business category..."
                 />
                 {selectedCategory && (
@@ -393,7 +400,6 @@ function UserAddVenue() {
                   options={eventCategoryOptions}
                   value={selectedCategory}
                   onChange={handleCategoryChange}
-                  onInputChange={handleInputChange}
                   placeholder="Select an event category..."
                 />
                 {selectedCategory && (
