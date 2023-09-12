@@ -27,11 +27,9 @@ function TopNavBar({ userDivRef }) {
 
   const handleLoginClick = useCallback(() => {
     openLoginModal("login");
-    // openLoginModal("");
   }, [openLoginModal]);
 
   const handleUserModalClick = useCallback(() => {
-    // isUserModalOpen ? closeUserModal() : openUserModal();
     toggleUserModal()
   }, []);
 

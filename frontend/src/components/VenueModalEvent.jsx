@@ -1,42 +1,26 @@
 import { useContext } from 'react';
 import { DataContext } from '../context/MainContext';
-import { addressFormatter, formatDateTime } from '../utils/helpers';
+import {
+  addressFormatter,
+  formatDateTime,
+  openGoogleMaps,
+} from '../utils/helpers';
 
-function VenueModalEvent(props) {
-  const {
-    currentEvent,
-    arrNum
-  } = props;
+function VenueModalEvent({ currentEvent }) {
 
   const {
     closeVenueModal,
     handleCopy
   } = useContext(DataContext);
 
-  const openGoogleMaps = () => {
-    const address = addressFormatter(currentEvent.eventLocation);
-    const encodedAddress = encodeURIComponent(address);
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
-  };
-
   return (
     <div>
 
       {/* BACKGROUND IMAGE */}
       <div className="venue-modal__bg-image">
-        {/* <img src={bgImageUrl[arrNum]} alt="Venue background" /> */}
 
         <img src={currentEvent.eventBranding.bannerUrl} alt="Venue background" />
       </div>
-
-      {/* BADGE IMAGE */}
-      {/* <div className="venue-modal__bagde-image">
-        <img
-          src={badgeImageUrl[arrNum]}
-          alt="Venue badge"
-          className="venue-badge"
-        />
-      </div> */}
 
       {/* NAME */}
       <div className="venue-modal__title">{currentEvent.title}</div>

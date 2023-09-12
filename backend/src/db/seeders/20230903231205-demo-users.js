@@ -26,7 +26,7 @@ module.exports = {
           username: "doncella",
           firstName: "Monica",
           lastName: "Doncella",
-          email: "doncella@example.com",
+          email: "m@d.com",
           passwordHash:
             "$2b$10$Juztc.vgxjTmQ5csNsbO7OYo5Gh.ibYyKGGDo.mYk3dQhoZRnpNVG",
           dateOfBirth: "1996-01-15",
@@ -44,7 +44,7 @@ module.exports = {
           username: "jSmith",
           firstName: "Jane",
           lastName: "Smith",
-          email: "jsmith@example.com",
+          email: "j@s.com",
           passwordHash:
             "$2b$10$Juztc.vgxjTmQ5csNsbO7OYo5Gh.ibYyKGGDo.mYk3dQhoZRnpNVG",
           profileImage:
@@ -62,7 +62,7 @@ module.exports = {
           username: "aj",
           firstName: "Alice",
           lastName: "Johnson",
-          email: "aj@example.com",
+          email: "a@j.com",
           passwordHash:
             "$2b$10$Juztc.vgxjTmQ5csNsbO7OYo5Gh.ibYyKGGDo.mYk3dQhoZRnpNVG",
           profileImage:

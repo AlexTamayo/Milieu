@@ -12,6 +12,7 @@ import SearchBar from './components/SearchBar';
 import UserModal from './components/UserModal';
 import VenueModal from './components/VenueModal';
 import UserAddVenue from './components/UserAddVenue';
+import UserEditVenue from './components/UserEditVenue';
 import UserLogRegModal from './components/UserLogRegModal';
 import UserVenueManager from './components/UserVenueManager';
 

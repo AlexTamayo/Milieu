@@ -4,8 +4,6 @@ import SearchFilters from './SearchFilters';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { DataContext } from "../context/MainContext";
 
-import MagGlass from './SVGs/MagGlass';
-
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -21,7 +19,6 @@ function SearchBar() {
   const { eventCategoryData, businessCategoryData } = state;
   
   const categoryItems = [...eventCategoryData, ...businessCategoryData];
-  // const categoryItems = [...businessCategoryData];
 
   return (
     <div className="search-complex">

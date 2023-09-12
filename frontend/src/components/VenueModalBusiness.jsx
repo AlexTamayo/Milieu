@@ -4,7 +4,8 @@ import {
   formatPhoneNumber,
   formatURL,
   extractNumbers,
-  addressFormatter
+  openGoogleMaps,
+  addressFormatterSafe,
 } from '../utils/helpers';
 
 function VenueModalBusiness({ currentBusiness }) {
@@ -12,20 +13,6 @@ function VenueModalBusiness({ currentBusiness }) {
     closeVenueModal,
     handleCopy,
   } = useContext(DataContext);
-
-  const addressFormatterSafe = (location) => {
-    return location && location.streetAddress ? addressFormatter(location) : "Address not available";
-  };
-
-  const openGoogleMaps = () => {
-    const address = addressFormatterSafe(currentBusiness.businessLocation);
-    if (address !== "Address not available") {
-      const encodedAddress = encodeURIComponent(address.replace(/ /g, '+'));
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
-    } else {
-      alert("Address not available");
-    }
-  };
 
   const renderedSocialMediaLinks = currentBusiness.socialMedia.length
     ? currentBusiness.socialMedia.map((media) => (
