@@ -27,6 +27,7 @@ function TopNavBar({ userDivRef }) {
 
   const handleLoginClick = useCallback(() => {
     openLoginModal("login");
+    // openLoginModal("");
   }, [openLoginModal]);
 
   const handleUserModalClick = useCallback(() => {
@@ -63,9 +64,9 @@ function TopNavBar({ userDivRef }) {
         </div>
       ) : (
         <div className="top-nav-bar__right">
-          <button className="login-btn" onClick={handleLoginClick}>
-            <strong>Sign In</strong>
-          </button>
+          <div className="right__signin" onClick={handleLoginClick}>
+            {/* Sign In */}
+          </div>
         </div>
       )}
     </div>

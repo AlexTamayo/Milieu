@@ -48,9 +48,7 @@
 
 
 
-  &__close-btn {
-    position: absolute;
-
+  &__circle-close-btn {
     top: 8px;
     right: 25px;
 
@@ -59,26 +57,10 @@
     height: $size;
     width: $size;
 
-    border-radius: 100%;
-
-    font-size: 25pt;
-
-    // background-color: magenta;
-
-    cursor: pointer;
-
-    transition: background-color 0.1s linear;
-
-    &:hover {
-      background-color: rgba($grey-2, 0.15);
-    }
-
     &::before {
-      content: "\00D7"; /* Unicode for &times; */
-      position: absolute;
       top: -7.5px;
       right: 8px;
-      color: $grey-2;
+      font-size: 25pt;
     }
 
   }
@@ -156,7 +138,6 @@
     }
   }
 
-
   &__signout {
 
     display: flex;
@@ -193,18 +174,4 @@
     }
   }
 
-
-
-
-
-}
-
-
-
-.user-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: white;
-  background-color: red;
 }

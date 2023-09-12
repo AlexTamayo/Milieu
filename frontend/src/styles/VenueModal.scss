@@ -40,12 +40,13 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 87%;
+    width: 98%;
 
     margin-left: auto;
     margin-right: auto;
 
-    transform: translate(-34px, 1px);
+    transform: translateX(3px);
+
   }
 
   // Scrollbar styles
@@ -58,9 +59,10 @@
 
   &::-webkit-scrollbar-track {
     border-radius: $scrollbar-width;
-    // background-color: rgba(255, 255, 255, 0);
     background-color: rgba(211, 211, 211, 0.25);
     width: 1px;
+
+    transition: all 1s;
     
 
     &:hover {
@@ -70,9 +72,8 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: $scrollbar-width;
-    // background-color: rgba(255, 255, 255, 0);
     background-color: rgba(167, 167, 167, 0.5);
-    width: 1px;
+
 
     &:hover {
       background-color: rgba(167, 167, 167, 1);
@@ -115,32 +116,31 @@
   }
 }
 
-.venue-modal__close-button {
-  $close-button-dimensions: 50px;
-
-  position: absolute;
+.venue-modal__circle-close-btn {
+  
   top: 10px;
   right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  
   cursor: pointer;
-  outline: none;
-
-  border-radius: 100%;
+  
+  $close-button-dimensions: 50px;
 
   height: $close-button-dimensions;
   width: $close-button-dimensions;
 
-  font-size: 2.6em;
-  color: $grey-3;
+  // background-color: magenta;
 
-  background-color: rgba(255, 255, 255, 0.3);
 
-  transition: background-color 0.15s;
+  background-color: rgba(white, 0.3);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(white, 0.6);
+  }
+
+  &::before {
+    top: -2px;
+    right: 13px;
+    font-size: 25pt;
   }
 }
 
@@ -169,7 +169,7 @@ hr {
 
 .venue-modal__title {
   display: flex;
-  justify-content: start;
+  text-align: left;
 
   font-size: 2em;
   font-weight: bold;
@@ -181,20 +181,19 @@ hr {
 
   width: 83%;
 
-  // background-color: magenta;
+  
 }
 
 .venue-modal__category {
   display: flex;
-  justify-content: start;
 
   margin-left: 15px;
+  margin-bottom: 10px;
 
   color: $grey-3;
 
   width: 83%;
 
-  // background-color: magenta;
   
   &::before {
     content: "@";
@@ -216,22 +215,18 @@ hr {
 }
 
 .venue-modal__description {
-  display: flex;
-  justify-content: start;
+  text-align: left;
 
-  max-width: 485px;
-  min-width: 485px;
-  max-height: 73px;
-  min-height: 73px;
+  width: 88%;
   overflow: hidden;
 
-
-  font-size: 1.1em;
+  font-size: 1em;
 
   margin-top: 10px;
   margin-left: 20px;
 
   color: $grey-3;
+
 }
 
 $container-height: 60px;
@@ -243,11 +238,13 @@ $container-height: 60px;
   align-items: center;
   flex-direction: row;
 
-  font-size: 1.05em;
+  font-size: 1em;
 
   height: $container-height;
 
   color: $grey-3;
+
+  width: 95%;
 
 }
 
@@ -271,11 +268,11 @@ $container-height: 60px;
 [class^="vm-right__"] {
 
   display: flex;
-  justify-content: start;
+  text-align: left;
 
-  font-size: 1.05em;
+  font-size: 1em;
 
-  margin-left: 28px;
+  margin-left: 15px;
 
   color: $grey-3;
 
@@ -287,6 +284,7 @@ $container-height: 60px;
     text-decoration: none;
 
     &:hover {
+      color: $milieu-orange;
       text-decoration: underline;
     }
   }
@@ -308,7 +306,7 @@ $container-height: 60px;
   background: none;
   border: none;
   cursor: pointer;
-  margin-right: 50px;
+  margin-right: 4px;
   margin-left: auto;
   color: $grey-1;
   padding: 0;
@@ -326,10 +324,44 @@ $container-height: 60px;
   border-radius: 100%;
   opacity: 0.5;
 
+  // background-color: fuchsia;
+
 
   &:hover {
-    color: $grey-3;
-    background-color: $grey-1;
+    color: $bg-color;
+    opacity: 0.9;
+    background-color: $milieu-yellow;
+  }
+}
+
+.google-maps-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 2px;
+  margin-left: auto;
+  color: $grey-1;
+  padding: 0;
+  font-size: 1em;
+
+  $ratio: $container-height - 20px;
+
+  width: $ratio;
+  height: $ratio;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100%;
+  opacity: 0.5;
+
+  // background-color: green;
+
+  &:hover {
+    color: $bg-color;
+    opacity: 0.9;
+    background-color: $milieu-green;
   }
 }
 
@@ -339,42 +371,56 @@ $container-height: 60px;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba($milieu-pink, 0.8);
   color: white;
   padding: 15px 20px;
   border-radius: 10px;
   font-size: 14px;
+  font-weight: bold;
   z-index: 10000;
   transition: opacity 0.5s ease-in-out;
 
-  &:before,
-  &:after {
-    content: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
-  }
+  // &:before,
+  // &:after {
+  //   content: none;
+  //   position: absolute;
+  //   top: 100%;
+  //   left: 50%;
+  //   margin-left: -5px;
+  //   border-width: 5px;
+  //   border-style: solid;
+  //   border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+  // }
 }
 
-// .vm-container__address {
+// .vm-center__time {
 //   display: flex;
-
-//   .google-maps-button {
-//     margin-right: 15px; // Adjust as necessary
-//     cursor: pointer; // Changes the cursor to a hand when hovering over the button
-//     background: none; // Assuming you don't want a background, adjust as necessary
-//     border: none; // Assuming you don't want a border, adjust as necessary
-
-//     i {
-//       font-size: 1.5em; // Adjust the size of the icon as necessary
-//     }
-
-//     &:hover {
-//       color: #000; // Change color on hover, adjust as necessary
-//     }
-//   }
+//   flex-direction: column;
 // }
+
+.vm-container__time {
+  display: flex;
+  flex-direction: row !important;
+  height: 90px;
+  align-items: center;
+
+}
+
+[class*="__time"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.vm-left__time {
+  margin-left: 20px;
+}
+
+.vm-center__time {
+  margin-left: 15px;
+  text-align: left;
+}
+
+[class^="vm-time-"]  {
+  margin-top: 7px;
+  margin-bottom: 9px;
+}

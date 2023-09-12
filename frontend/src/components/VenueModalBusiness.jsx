@@ -93,12 +93,13 @@ function VenueModalBusiness({ currentBusiness }) {
           <div className="vm-right__address">
             {addressFormatterSafe(currentBusiness.businessLocation)}
           </div>
-          <div onClick={() => handleCopy(addressFormatterSafe(currentBusiness.businessLocation))} className="copy-icon-button">
-            <i className="fas fa-copy"></i>
-          </div>
           <div onClick={openGoogleMaps} className="google-maps-button">
             <i className="fas fa-map"></i>
           </div>
+          <div onClick={() => handleCopy(addressFormatterSafe(currentBusiness.businessLocation))} className="copy-icon-button">
+            <i className="fas fa-copy"></i>
+          </div>
+         
         </div>
 
         {/* OPERATING HOURS */}
@@ -142,9 +143,9 @@ function VenueModalBusiness({ currentBusiness }) {
       </div>
 
       {/* CLOSE BUTTON */}
-      <button className="venue-modal__close-button" onClick={closeVenueModal}>
-        &times;
-      </button>
+      <div className="venue-modal__circle-close-btn" onClick={closeVenueModal}>
+        {/* &times; */}
+      </div>
     </div>
   );
 }

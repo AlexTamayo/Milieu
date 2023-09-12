@@ -1,12 +1,13 @@
 @import '_variables.scss';
 
-.overlay {
-  position: fixed;
+.user-log-reg-overlay {
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(black,0.5);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,125 +16,322 @@
   transform-origin: top right;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
-.modal-container {
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.7); // This line sets a semi-transparent background
-  // background: #f4f6fb; // Comment or remove this line to allow the backdrop filter to be visible
-  border-radius: 35px;
-  box-shadow: 2px 7px 10px rgba($grey-3, 0.2);
-  border: 1.5px solid $grey-1;
-  width: 320px;
-  padding: 20px;
-  overflow-x: hidden; // Prevent lateral scroll
-  position: relative; // Maintain this to position inner elements relative to this container
-}
+.user-log-reg-modal-container {
 
-
-.modal-header {
   position: relative;
-  padding-bottom: 10px;
+  
+  display: flex;
+  flex-direction: column;
 
-  .close-btn {
-    position: absolute;
-    top: -20px; // Adjust position
+  background-color: $bg-color;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+  transition: all 0.2s ease;
+
+  &.login {
+
+    width: 330px;
+    height: 370px;
+    padding: 20px;
+
+  }
+
+  &.registration {
+  
+    width: 340px;
+    height: 500px;
+    padding: 20px;
+
+  }
+
+}
+
+.user-log-reg-modal__circle-close-btn {
+  $eye-size: 40px;
+
+  top: 10px;
+  right: 10px;
+
+  height: $eye-size;
+  width: $eye-size;
+
+  // background-color: magenta;
+
+  &::before {
+    font-size: 22pt;
+    top: -4px;
     right: 10px;
-    font-size: 25pt;
-    background-color: transparent;
-    border-radius: 35px;
-    border: none;
+  }
+}
+
+/* LOGIN */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  margin-top: 40px;
+  // margin-bottom: 20px;
+
+  height: 95%;
+
+  // background-color: magenta;
+
+  &__logo {
+    // background-color: magenta;
+
+    width: 70%;
+
+    margin-left: -16px;
+
+    margin-bottom: 28px;
+  }
+
+  $input-width: 240px;
+  &__email,
+  &__password {
+    padding-left: 10px;
+
+    margin-top: 0px;
+    margin-bottom: 16px;
+
+    height: 32px;
+    width: $input-width;
+
+    caret-color: $grey-3;
+    color: $grey-3;
+
+    outline-color: $outline-blue;
+
+    border-radius: 8px;
+
+    border: 1px solid $grey-1;
+
+    // background-color: magenta;
+  }
+
+  $eye-size: 25px;
+  &__password {
+    padding-right: $eye-size;
+    width: calc($input-width - $eye-size) ;
+    // background-color: magenta;
+  }
+
+  &__eye-icon {
+    position: absolute;
+    right: 61px;
+    top: 207px;
     cursor: pointer;
-    color: black; // Set a color that is more visible, adjust as necessary
 
-    &:hover {
-      background-color: rgba($grey-2, 0.15);
-    }
+    color: $grey-2;
 
-    // &::before {
-    //   content: "\00D7";
-    //   color: inherit; // This will make the 'X' the same color as specified in the color property above
-    // }
-  }
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.input-field {
-  background-color: #e0e0e0;
-  box-shadow: 14px 14px 28px #c4c4c4, -14px -14px 28px #ffffff;
-  width: calc(100% - 20px); // Adjusted width
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box; // Ensure padding and border are included in width
-}
+    height: $eye-size;
+    width: $eye-size;
 
-
-.submit-btn {
-  perspective: 1000px;
-  width: calc(100% - 20px); // Adjusted width
-  padding: 10px;
-  margin: 10px; // Added margin for spacing
-  background-color: $milieu-cyan;
-  border: none;
-  border-radius: 35px;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.25s linear;
-  box-sizing: border-box; // Ensure padding and border are included in width
-
-  &:hover {
-    background-color: darken($milieu-cyan, 10%);
-    transform: scale(1.05);
-}
-}
-
-.input-field::placeholder {
-  color: #a1a1a1; // A subtle color for placeholder text
-  font-style: italic; // An italic style for placeholder
-}
-
-.dropdown-field {
-  width: 294px;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 4px;
-  border: 1.5px solid #d6d6d6;
-  background-color: #f4f6fb;
-  color: #585858;
-  font-size: 17px;
-
-  &:focus {
-    outline: none;
-    border-color: $milieu-cyan; // Highlight border color when focused
-  }
-
-  option {
-    padding: 10px;
-  }
-}
-
-
-.register-link-container {
-  text-align: center;
-  margin: 10px; // Added margin for spacing
-
-  a {
-    color: $milieu-red;
-    text-decoration: underline;
-
-    &:hover {
-      color: darken($milieu-red, 10%);
+    &:hover{
+      color: $grey-3;
     }
   }
+
+  &__button {
+    // background-color: magenta;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 40px;
+    width: 205px;
+
+    border-radius: 20px;
+    $button-color: $milieu-green;
+    
+    border: 1px solid rgba($button-color, 1);
+    
+    background-color: rgba($button-color, 0.7);
+
+    cursor: pointer;
+
+    &::before {
+      content: "Log in";
+      position: relative;
+      top: 0px;
+      font-weight: bold;
+      color: $bg-color;
+    }
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($button-color, 1);
+      // background-color: saturate( $button-color, 25%);
+      // filter: brightness(110%);
+    }
+  }
+
+
+  &__register-link {
+    color: $grey-3;
+
+    margin-top: 20px;
+
+    font-size: 12pt;
+
+    a {
+      color: $milieu-pink;
+      text-decoration: none;
+  
+      &:hover {
+        // color: $milieu-blue;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+/* REGISTRATION */
+
+.registration-form {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+  // margin-bottom: 20px;
+
+  height: 95%;
+
+  // background-color: magenta;
+
+  $input-width: 240px;
+
+  &__first-name,
+  &__last-name,
+  &__username,
+  &__email,
+  &__profileImage,
+  &__password,
+  &__birth,
+  &__dropdown-field,
+  &__phone-number {
+    padding-left: 10px;
+
+    margin-top: 0px;
+    margin-bottom: 10px;
+
+    height: 28px;
+    width: $input-width;
+
+    caret-color: $grey-3;
+    color: $grey-3;
+
+    outline-color: $outline-blue;
+
+    border-radius: 8px;
+
+    border: 1px solid $grey-1;
+
+    // background-color: magenta;
+  }
+
+  $eye-size: 25px;
+  &__password {
+    padding-right: $eye-size;
+    width: calc($input-width - $eye-size) ;
+    // background-color: magenta;
+  }
+
+  &__eye-icon {
+    position: absolute;
+    right: 66px;
+    top: 256px;
+    cursor: pointer;
+
+    color: $grey-2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: $eye-size;
+    width: $eye-size;
+
+    &:hover{
+      color: $grey-3;
+    }
+  }
+
+  &__button {
+    // background-color: magenta;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 40px;
+    width: 205px;
+
+    border-radius: 20px;
+    $button-color: $milieu-orange;
+    
+    border: 1px solid rgba($button-color, 1);
+    
+    background-color: rgba($button-color, 0.7);
+
+    cursor: pointer;
+
+    &::before {
+      content: "Register";
+      position: relative;
+      top: 0px;
+      font-weight: bold;
+      color: $bg-color;
+      font-size: 12pt;
+    }
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($button-color, 1);
+      // background-color: saturate( $button-color, 25%);
+      // filter: brightness(110%);
+    }
+  }
+
+
+  &__signin-link {
+    color: $grey-3;
+
+    margin-top: 8px;
+
+    font-size: 11pt;
+
+    a {
+      color: $milieu-cyan;
+      text-decoration: none;
+  
+      &:hover {
+        // color: $milieu-blue;
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+
 }
