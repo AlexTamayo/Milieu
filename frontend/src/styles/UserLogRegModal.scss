@@ -1,24 +1,336 @@
 @import '_variables.scss';
 
-.overlay {
+.user-log-reg-overlay {
   position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.7); /* Black with a bit of transparency */
+  background-color: rgba(black,0.5);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
   z-index: 9981; /* Make sure it sits on top of other content */
 
-  caret-color: $grey-3;
 }
 
-.modal-container {
-  width: 300px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* A subtle shadow for depth */
+
+.user-log-reg-modal-container {
+
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
+
+  background-color: $bg-color;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+  transition: all 0.2s ease;
+
+  &.login {
+
+    width: 330px;
+    height: 370px;
+    padding: 20px;
+
+  }
+
+  &.registration {
+  
+    width: 340px;
+    height: 500px;
+    padding: 20px;
+
+  }
+
+}
+
+.user-log-reg-modal__circle-close-btn {
+  $eye-size: 40px;
+
+  top: 10px;
+  right: 10px;
+
+  height: $eye-size;
+  width: $eye-size;
+
+  // background-color: magenta;
+
+  &::before {
+    font-size: 22pt;
+    top: -4px;
+    right: 10px;
+  }
+}
+
+/* LOGIN */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  margin-top: 40px;
+  // margin-bottom: 20px;
+
+  height: 95%;
+
+  // background-color: magenta;
+
+  &__logo {
+    // background-color: magenta;
+
+    width: 70%;
+
+    margin-left: -16px;
+
+    margin-bottom: 28px;
+  }
+
+  $input-width: 240px;
+  &__email,
+  &__password {
+    padding-left: 10px;
+
+    margin-top: 0px;
+    margin-bottom: 16px;
+
+    height: 32px;
+    width: $input-width;
+
+    caret-color: $grey-3;
+    color: $grey-3;
+
+    outline-color: $outline-blue;
+
+    border-radius: 8px;
+
+    border: 1px solid $grey-1;
+
+    // background-color: magenta;
+  }
+
+  $eye-size: 25px;
+  &__password {
+    padding-right: $eye-size;
+    width: calc($input-width - $eye-size) ;
+    // background-color: magenta;
+  }
+
+  &__eye-icon {
+    position: absolute;
+    right: 61px;
+    top: 207px;
+    cursor: pointer;
+
+    color: $grey-2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: $eye-size;
+    width: $eye-size;
+
+    &:hover{
+      color: $grey-3;
+    }
+  }
+
+  &__button {
+    // background-color: magenta;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 40px;
+    width: 205px;
+
+    border-radius: 20px;
+    $button-color: $milieu-green;
+    
+    border: 1px solid rgba($button-color, 1);
+    
+    background-color: rgba($button-color, 0.7);
+
+    cursor: pointer;
+
+    &::before {
+      content: "Log in";
+      position: relative;
+      top: 0px;
+      font-weight: bold;
+      color: $bg-color;
+    }
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($button-color, 1);
+      // background-color: saturate( $button-color, 25%);
+      // filter: brightness(110%);
+    }
+  }
+
+
+  &__register-link {
+    color: $grey-3;
+
+    margin-top: 20px;
+
+    font-size: 12pt;
+
+    a {
+      color: $milieu-pink;
+      text-decoration: none;
+  
+      &:hover {
+        // color: $milieu-blue;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+/* REGISTRATION */
+
+.registration-form {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+  // margin-bottom: 20px;
+
+  height: 95%;
+
+  // background-color: magenta;
+
+  $input-width: 240px;
+
+  &__first-name,
+  &__last-name,
+  &__username,
+  &__email,
+  &__profileImage,
+  &__password,
+  &__birth,
+  &__dropdown-field,
+  &__phone-number {
+    padding-left: 10px;
+
+    margin-top: 0px;
+    margin-bottom: 10px;
+
+    height: 28px;
+    width: $input-width;
+
+    caret-color: $grey-3;
+    color: $grey-3;
+
+    outline-color: $outline-blue;
+
+    border-radius: 8px;
+
+    border: 1px solid $grey-1;
+
+    // background-color: magenta;
+  }
+
+  $eye-size: 25px;
+  &__password {
+    padding-right: $eye-size;
+    width: calc($input-width - $eye-size) ;
+    // background-color: magenta;
+  }
+
+  &__eye-icon {
+    position: absolute;
+    right: 66px;
+    top: 256px;
+    cursor: pointer;
+
+    color: $grey-2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: $eye-size;
+    width: $eye-size;
+
+    &:hover{
+      color: $grey-3;
+    }
+  }
+
+  &__button {
+    // background-color: magenta;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 40px;
+    width: 205px;
+
+    border-radius: 20px;
+    $button-color: $milieu-orange;
+    
+    border: 1px solid rgba($button-color, 1);
+    
+    background-color: rgba($button-color, 0.7);
+
+    cursor: pointer;
+
+    &::before {
+      content: "Register";
+      position: relative;
+      top: 0px;
+      font-weight: bold;
+      color: $bg-color;
+      font-size: 12pt;
+    }
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba($button-color, 1);
+      // background-color: saturate( $button-color, 25%);
+      // filter: brightness(110%);
+    }
+  }
+
+
+  &__signin-link {
+    color: $grey-3;
+
+    margin-top: 8px;
+
+    font-size: 11pt;
+
+    a {
+      color: $milieu-cyan;
+      text-decoration: none;
+  
+      &:hover {
+        // color: $milieu-blue;
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+
 }

@@ -76,20 +76,30 @@
   width: $dimension ;
   margin-right: 20px;
 
+  background-color: transparent;
+  // background-color: magenta;
+
+  overflow: hidden;
+  border-radius: 100%;
+
   cursor: pointer;
 
+  // $time: 0.25s;
+  $time: 0.25s ease;
+
+  transition: background-color $time ;
+  
   path {
-    fill: $grey-1;
+    fill: $grey-2;
+    transition: fill $time;
   }
 
-
   &:hover {
-    background-color: $grey-1;
-    overflow: hidden;
-    border-radius: 100%;
+    // background-color: $grey-1;
+    background-color: $milieu-orange;
 
     path {
-      fill: white;
+      fill: $bg-color;
     }
   }
 
@@ -106,7 +116,7 @@
 
   background-color: $milieu-cyan;
 
-  border-radius: 15px;
+  border-radius: 11px;
 
   cursor: pointer;
 

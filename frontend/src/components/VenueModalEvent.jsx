@@ -110,12 +110,12 @@ function VenueModalEvent(props) {
       </div>
 
       {/* CLOSE BUTTON */}
-      <button
-        className="venue-modal__close-button"
+      <div
+        className="venue-modal__circle-close-btn"
         onClick={closeVenueModal}
       >
-        &times;
-      </button>
+        {/* &times; */}
+      </div>
     </div>
   );
 }

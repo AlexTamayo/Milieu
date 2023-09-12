@@ -116,32 +116,31 @@
   }
 }
 
-.venue-modal__close-button {
-  $close-button-dimensions: 50px;
-
-  position: absolute;
+.venue-modal__circle-close-btn {
+  
   top: 10px;
   right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  
   cursor: pointer;
-  outline: none;
-
-  border-radius: 100%;
+  
+  $close-button-dimensions: 50px;
 
   height: $close-button-dimensions;
   width: $close-button-dimensions;
 
-  font-size: 2.6em;
-  color: $grey-3;
+  // background-color: magenta;
 
-  background-color: rgba(255, 255, 255, 0.3);
 
-  transition: background-color 0.15s;
+  background-color: rgba(white, 0.3);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(white, 0.6);
+  }
+
+  &::before {
+    top: -2px;
+    right: 13px;
+    font-size: 25pt;
   }
 }
 

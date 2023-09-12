@@ -143,9 +143,9 @@ function VenueModalBusiness({ currentBusiness }) {
       </div>
 
       {/* CLOSE BUTTON */}
-      <button className="venue-modal__close-button" onClick={closeVenueModal}>
-        &times;
-      </button>
+      <div className="venue-modal__circle-close-btn" onClick={closeVenueModal}>
+        {/* &times; */}
+      </div>
     </div>
   );
 }
