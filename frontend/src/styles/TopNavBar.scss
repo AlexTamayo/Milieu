@@ -76,21 +76,62 @@
   width: $dimension ;
   margin-right: 20px;
 
+  background-color: transparent;
+  // background-color: magenta;
+
+  overflow: hidden;
+  border-radius: 100%;
+
   cursor: pointer;
 
+  // $time: 0.25s;
+  $time: 0.25s ease;
+
+  transition: background-color $time ;
+  
   path {
-    fill: $grey-1;
+    fill: $grey-2;
+    transition: fill $time;
   }
 
-
   &:hover {
-    background-color: $grey-1;
-    overflow: hidden;
-    border-radius: 100%;
+    // background-color: $grey-1;
+    background-color: $milieu-orange;
 
     path {
-      fill: white;
+      fill: $bg-color;
     }
   }
 
+}
+
+.right__signin {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  height: 40px;
+  width: 100px;
+
+  background-color: $milieu-cyan;
+
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  &::before {
+    content: "Sign In";
+    position: absolute;
+    transform: translateY(-2px);
+    color: white;
+    font-weight: bold;
+  }
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: saturate( $milieu-cyan, 100%);
+    filter: brightness(115%);
+  }
 }

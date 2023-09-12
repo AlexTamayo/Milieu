@@ -4,18 +4,13 @@ import '../styles/VenueModal.scss';
 import { DataContext } from '../context/MainContext';
 
 import VenueModalBusiness from './VenueModalBusiness';
-import EditBusinessModal from './EditBusinessModal';
 import VenueModalEvent from './VenueModalEvent';
-// import EditEventModal from './EditEventModal';
-
-import SlidingPane from 'react-sliding-pane';
 
 function VenueModal() {
 
   const { 
     state,
     closeVenueModal,
-    setSelectedVenue,
   } = useContext(DataContext);
 
   const {
@@ -24,9 +19,9 @@ function VenueModal() {
     isVenueModalOpen,
     selectedVenueType,
     selectedVenueId,
+    isUserEditVenueModalOpen,
+    isVenueManagerModalOpen,
   } = state;
-
-  const arrNum = 1;
 
   const venueModalRef = useRef(null);
 
@@ -48,7 +43,7 @@ function VenueModal() {
         const endX = event.clientX;
         const endY = event.clientY;
 
-        const threshold = 3; // pixels
+        const threshold = 3;
         if (Math.abs(startX - endX) <= threshold && Math.abs(startY - endY) <= threshold) {
             if (venueModalRef.current && !venueModalRef.current.contains(event.target)) {
                 closeVenueModal();
@@ -65,29 +60,16 @@ function VenueModal() {
     }
   }, []);
 
-  // if (!isVenueModalOpen) return null;
 
-  // if (businessData.length < 1) return null;
-  // if (eventData.length < 1) return null;
-  // if (!selectedVenueType) return null;
+  if (isUserEditVenueModalOpen || isVenueManagerModalOpen) return null
 
   return (
-    // <SlidingPane
-    //   isOpen={isVenueModalOpen}
-    //   // title="Venue Modal Business"
-    //   // onRequestClose={onRequestClose}
-    //   from="left"
-    //   width="500px"
-    //   className="venue-modal"
-    // >
-    // <div ref={venueModalRef} className="venue-modal">
     <div ref={venueModalRef} className={`venue-modal ${isVenueModalOpen ? 'active' : ''}`}>
 
-      {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} arrNum={arrNum - 1 }/>}
+      {selectedVenueType === 'business' && < VenueModalBusiness currentBusiness={currentBusiness} />}
 
-      {selectedVenueType === 'event' && < VenueModalEvent currentEvent={currentEvent} arrNum={arrNum - 1}/>}
+      {selectedVenueType === 'event' && < VenueModalEvent currentEvent={currentEvent} />}
 
-      {/* </SlidingPane> */}
     </div>
   );
 }

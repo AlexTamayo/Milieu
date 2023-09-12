@@ -1,7 +1,6 @@
 import { actionTypes } from './actionTypes';
 
 export const modalFunctions = (dispatch, state) => {
-
   /* TOGGLE ONLY MODAL */
   /* This function closes all the other modal that are opened when a new modal is opened */
   const toggleOnlyModal = (modalName) => {
@@ -28,8 +27,8 @@ export const modalFunctions = (dispatch, state) => {
     if (state.isUserModalOpen) {
       // console.log("User modal is currently open.");
       // console.log('state.isUserModalOpen', state.isUserModalOpen);
-    } 
-    
+    }
+
     if (!state.isUserModalOpen) {
       // console.log("User modal is currently closed.");
       // console.log('state.isUserModalOpen', state.isUserModalOpen);
@@ -37,7 +36,6 @@ export const modalFunctions = (dispatch, state) => {
 
     dispatch({ type: actionTypes.TOGGLE_USER_MODAL });
   };
-  
 
   const openUserModal = () => {
     toggleOnlyModal("isUserModalOpen");
@@ -106,6 +104,23 @@ export const modalFunctions = (dispatch, state) => {
     dispatch({ type: actionTypes.CLOSE_VENUE_MANAGER_MODAL });
   };
 
+  /* USER EDIT VENUE FUNCTIONS */
+
+  const openUserEditVenueModal = (id, type) => {
+    toggleOnlyModal("isUserEditVenueModalOpen");
+    dispatch({
+      type: actionTypes.SET_SELECTED_VENUE_FOR_EDIT,
+      payload: { id, type },
+    });
+    dispatch({ type: actionTypes.OPEN_USER_EDIT_VENUE_MODAL });
+  };
+
+  const closeUserEditVenueModal = () => {
+    toggleOnlyModal("isVenueManagerModalOpen");
+    dispatch({ type: actionTypes.CLOSE_USER_EDIT_VENUE_MODAL });
+    dispatch({ type: actionTypes.RESET_SELECTED_VENUE_FOR_EDIT });
+  };
+
   return {
     toggleUserModal,
     openUserModal,
@@ -118,5 +133,7 @@ export const modalFunctions = (dispatch, state) => {
     closeLoginModal,
     openVenueManagerModal,
     closeVenueManagerModal,
+    openUserEditVenueModal,
+    closeUserEditVenueModal,
   };
 }

@@ -1,3 +1,4 @@
+import { faL } from '@fortawesome/free-solid-svg-icons';
 import { actionTypes } from './actionTypes';
 
 export const reducer = (state, action) => {
@@ -14,6 +15,19 @@ export const reducer = (state, action) => {
     case actionTypes.SET_BUSINESS_DATA:
       return { ...state, businessData: action.payload };
 
+    case actionTypes.TOGGLE_ONLY_MODAL:
+      return {
+        ...state,
+        isUserModalOpen: action.modalName === "isUserModalOpen",
+        isVenueModalOpen: action.modalName === "isVenueModalOpen",
+        isUserAddVenueOpen: action.modalName === "isUserAddVenueOpen",
+        isLoginRegModalOpen: action.modalName === "isLoginRegModalOpen",
+        isVenueManagerModalOpen: action.modalName === "isVenueManagerModalOpen",
+        isUserEditVenueModalOpen:
+          action.modalName === "isUserEditVenueModalOpen",
+        // add other modals similarly
+      };
+
     case actionTypes.TOGGLE_USER_MODAL:
       // If the modal is currently closed (thus, about to be opened), close other modals first.
       if (!state.isUserModalOpen) {
@@ -24,11 +38,11 @@ export const reducer = (state, action) => {
           isUserAddVenueOpen: false,
           isLoginRegModalOpen: false,
           isVenueManagerModalOpen: false,
+          isUserEditVenueModalOpen: false,
           // add other modals to close similarly
         };
         return newState;
       }
-
       // If the modal is currently open, just close it.
       return { ...state, isUserModalOpen: false };
 
@@ -44,6 +58,38 @@ export const reducer = (state, action) => {
     case actionTypes.CLOSE_VENUE_MODAL:
       return { ...state, isVenueModalOpen: false };
 
+    case actionTypes.SET_LOGIN_MODAL_TYPE:
+      return { ...state, loginModalType: action.payload };
+
+    case actionTypes.SET_LOGIN_MODAL_VISBILITY:
+      return { ...state, isLoginRegModalOpen: action.payload };
+
+    case actionTypes.OPEN_VENUE_MANAGER_MODAL:
+      return { ...state, isVenueManagerModalOpen: true };
+
+    case actionTypes.CLOSE_VENUE_MANAGER_MODAL:
+      return { ...state, isVenueManagerModalOpen: false };
+
+    case actionTypes.OPEN_USER_EDIT_VENUE_MODAL:
+      return { ...state, isUserEditVenueModalOpen: true };
+
+    case actionTypes.CLOSE_USER_EDIT_VENUE_MODAL:
+      return { ...state, isUserEditVenueModalOpen: false };
+
+    case actionTypes.SET_SELECTED_VENUE_FOR_EDIT:
+      return {
+        ...state,
+        selectedVenueId: action.payload.id,
+        selectedVenueType: action.payload.type,
+      };
+
+    case actionTypes.RESET_SELECTED_VENUE_FOR_EDIT:
+      return {
+        ...state,
+        selectedVenueId: null,
+        selectedVenueType: null,
+      };
+
     case actionTypes.OPEN_USER_ADD_VENUE:
       return { ...state, isUserAddVenueOpen: true };
 
@@ -52,12 +98,6 @@ export const reducer = (state, action) => {
 
     case actionTypes.SET_COPIED:
       return { ...state, isCopied: action.payload };
-
-    case actionTypes.SET_LOGIN_MODAL_TYPE:
-      return { ...state, loginModalType: action.payload };
-
-    case actionTypes.SET_LOGIN_MODAL_VISBILITY:
-      return { ...state, isLoginRegModalOpen: action.payload };
 
     case actionTypes.SET_SELECTED_FILTER:
       return { ...state, selectedFilter: action.payload };
@@ -87,23 +127,6 @@ export const reducer = (state, action) => {
 
     case actionTypes.RESET_SELECTED_ITEM:
       return { ...state, selectedSearchResult: "" };
-
-    case actionTypes.OPEN_VENUE_MANAGER_MODAL:
-      return { ...state, isVenueManagerModalOpen: true };
-
-    case actionTypes.CLOSE_VENUE_MANAGER_MODAL:
-      return { ...state, isVenueManagerModalOpen: false };
-
-    case actionTypes.TOGGLE_ONLY_MODAL:
-      return {
-        ...state,
-        isUserModalOpen: action.modalName === "isUserModalOpen",
-        isVenueModalOpen: action.modalName === "isVenueModalOpen",
-        isUserAddVenueOpen: action.modalName === "isUserAddVenueOpen",
-        isLoginRegModalOpen: action.modalName === "isLoginRegModalOpen",
-        isVenueManagerModalOpen: action.modalName === "isVenueManagerModalOpen",
-        // add other modals similarly
-      };
 
     case actionTypes.DELETE_BUSINESS_BY_ID:
       return {

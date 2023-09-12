@@ -1,3 +1,6 @@
+@import './styles/variables';
+
+
 .App {
   text-align: center;
   caret-color: transparent;
@@ -12,4 +15,27 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+[class*="circle-close-btn"] {
+  display: flex;
+  position: absolute;
+
+  border-radius: 100%;
+
+  cursor: pointer;
+
+  transition: all 0.1s linear;
+
+  &:hover {
+    background-color: rgba($grey-2, 0.2);
+  }
+
+  &::before {
+    content: "\00D7"; /* Unicode for &times; */
+    position: absolute;
+    color: $grey-2;
+    // font-weight: bold;
+    
+  }
 }

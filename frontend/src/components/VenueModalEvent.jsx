@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { DataContext } from '../context/MainContext';
-import { addressFormatter, formatDateTime } from '../utils/helpers';
+import {
+  addressFormatter,
+  formatDateTime,
+  // openGoogleMaps,
+} from '../utils/helpers';
 
-function VenueModalEvent(props) {
-  const {
-    currentEvent,
-    arrNum
-  } = props;
+function VenueModalEvent({ currentEvent }) {
 
   const {
     closeVenueModal,
@@ -24,19 +24,9 @@ function VenueModalEvent(props) {
 
       {/* BACKGROUND IMAGE */}
       <div className="venue-modal__bg-image">
-        {/* <img src={bgImageUrl[arrNum]} alt="Venue background" /> */}
 
         <img src={currentEvent.eventBranding.bannerUrl} alt="Venue background" />
       </div>
-
-      {/* BADGE IMAGE */}
-      {/* <div className="venue-modal__bagde-image">
-        <img
-          src={badgeImageUrl[arrNum]}
-          alt="Venue badge"
-          className="venue-badge"
-        />
-      </div> */}
 
       {/* NAME */}
       <div className="venue-modal__title">{currentEvent.title}</div>
@@ -92,6 +82,13 @@ function VenueModalEvent(props) {
         </div>
 
         <div
+          onClick={openGoogleMaps}
+          className="google-maps-button"
+        >
+          <i className="fas fa-map"></i>
+        </div>
+
+        <div
           onClick={() => handleCopy(addressFormatter(currentEvent.eventLocation))}
           className="copy-icon-button"
         >
@@ -99,21 +96,16 @@ function VenueModalEvent(props) {
         </div>
 
 
-        <div
-          onClick={openGoogleMaps}
-          className="google-maps-button"
-        >
-          <i className="fas fa-map"></i>
-        </div>
+       
       </div>
 
       {/* CLOSE BUTTON */}
-      <button
-        className="venue-modal__close-button"
+      <div
+        className="venue-modal__circle-close-btn"
         onClick={closeVenueModal}
       >
-        &times;
-      </button>
+        {/* &times; */}
+      </div>
     </div>
   );
 }

@@ -13,10 +13,12 @@ import venueMarkers from '../routes/venueMarkers';
 
 const ICON_SIZE = { width: 40, height: 40 };
 
+/* Filipe, I changed the default location to Calgary DT. I think it's better if it defaults to a place with markers and in Canada. */
+
 const GoogleMapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
-  const [center, setCenter] = useState({ lat: -3.745, lng: -38.523 });
+  const [center, setCenter] = useState({ lat: 51.04841472292545, lng: -114.06940332777324 });
   const [selectedMarkerIndex, setSelectedMarkerIndex] = useState(null);
 
 
@@ -73,6 +75,7 @@ const GoogleMapComponent = () => {
     }
   }, [selectedFilter, eventData, businessData, isGoogleMapLoaded]);
 
+
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -82,13 +85,13 @@ const GoogleMapComponent = () => {
         },
         error => {
           console.error('Geolocation Error:', error);
-          setCenter({ lat: -3.745, lng: -38.523 });
+          setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
         },
         { enableHighAccuracy: true }
       );
     } else {
       console.log("Geolocation not supported");
-      setCenter({ lat: -3.745, lng: -38.523 });
+      setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
     }
   }, []);
 
@@ -120,13 +123,13 @@ const GoogleMapComponent = () => {
         },
         error => {
           console.error('Geolocation Error:', error);
-          setCenter({ lat: -3.745, lng: -38.523 });
+          setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
         },
         { enableHighAccuracy: true }
       );
     } else {
       console.log("Geolocation not supported");
-      setCenter({ lat: -3.745, lng: -38.523 });
+      setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
     }
   };
 

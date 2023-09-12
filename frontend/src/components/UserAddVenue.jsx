@@ -3,12 +3,19 @@ import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
+import {
+  transformStructure,
+} from '../utils/helpers';
+
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
   const { state, closeUserAddVenue, createABusiness, createAnEvent } = useContext(DataContext);
-  const { isUserAddVenueOpen, eventCategoryData, businessCategoryData } = state;
-  const { currentUser, signOut } = useAuth();
+
+  const { isUserAddVenueOpen, eventCategoryData,businessCategoryData,eventData,
+    businessData} = state;
+
+  const { currentUser, addEntityToCurrentUser } = useAuth();
 
   const [userAddVenueType, setUserAddVenueType] = useState('business');
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -16,6 +23,7 @@ function UserAddVenue() {
   const [eventCategoryId, setEventCategoryId] = useState(null);
   const [formData, setFormData] = useState({});
 
+  //////////////////////////////////////////goelocation
   const [userLocation, setUserLocation] = useState(null);
   const [fullAddress, setFullAddress] = useState('');
 
@@ -61,6 +69,8 @@ function UserAddVenue() {
     }
   }, []);
 
+  //////////////////////////////////////////geolocation
+
   const eventCategoryOptions = eventCategoryData.map((category) => ({
     value: category.id,
     label: category.name,
@@ -73,11 +83,9 @@ function UserAddVenue() {
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
-
     if (userAddVenueType === 'business') {
       if (selectedOption) {
         const categoryId = selectedOption.value;
-        console.log('categoryId' + categoryId);
         setBusinessCategoryId(categoryId);
         setEventCategoryId(null);
       } else {
@@ -92,6 +100,7 @@ function UserAddVenue() {
         setEventCategoryId(null);
       }
     }
+
   };
 
   const getLatLngFromAddress = async (address) => {
@@ -109,25 +118,40 @@ function UserAddVenue() {
           longitude: location[0],
         };
       } else {
-        console.error("No location data found in API response");
+        console.error('No location data found in API response');
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleInputChange = (e) => {
-    console.log('Input change event:', e);
+  const handleInputChange = async (e) => {
     if (e && e.target && e.target.name) {
       const { name, value } = e.target;
-      setFormData((prevState) => {
-        console.log('Previous formData state:', prevState);
-        const newState = { ...prevState, [name]: value };
-        console.log('New formData state:', newState);
-        return newState;
-      });
+
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+
+      if (name === 'streetAddress' || name === 'city' || name === 'region' || name === 'country') {
+        const updatedFormData = {
+          ...formData,
+          [name]: value,
+        };
+        const fullAddress = `${updatedFormData.streetAddress || ''}, ${updatedFormData.city || ''}, ${updatedFormData.region || ''}, ${updatedFormData.country || ''}`;
+        const location = await getLatLngFromAddress(fullAddress);
+        if (location) {
+          setFormData((prevState) => ({
+            ...prevState,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          }));
+        }
+      }
     }
   };
+
 
   const handleSubmit = async () => {
     try {
@@ -138,8 +162,8 @@ function UserAddVenue() {
         console.log('businessCategoryId ' + businessCategoryId);
         formData.businessCategoryId = businessCategoryId;
         formData.businessBranding = {
-          logoUrl: formData.logoImageUrl,
-          bannerUrl: formData.bannerImageUrl,
+          logoUrl: formData.logoUrl,
+          bannerUrl: formData.bannerUrl,
           pinUrl: formData.pinImageUrl,
         };
         formData.businessCategory = {
@@ -171,19 +195,23 @@ function UserAddVenue() {
           updatedAt: new Date(),
         };
 
-        console.log(formData);
+        // const formData = transformStructure(formData);
         createABusiness(formData).then((result) => {
+          addEntityToCurrentUser("business", formData);
+
           if (result.success) {
             console.log('Business created successfully!');
           } else {
             console.error('Business creation failed:', result.error);
           }
         });
+
+        ///////////WE NEED TO NOW ADD A MARKER HERE
       } else if (userAddVenueType === 'event') {
         formData.eventCategoryId = eventCategoryId;
         formData.eventBranding = {
-          bannerUrl: formData.bannerImageUrl,
-          badgeUrl: formData.badgeImageUrl,
+          bannerUrl: formData.bannerUrl,
+          logoUrl: formData.logoUrl,
           pinUrl: formData.pinImageUrl,
         };
         formData.eventCategory = {
@@ -202,18 +230,21 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
+        // Submit the formData to the endpoint for adding an event
+        createAnEvent(formData)
+          .then(() => {
+            addEntityToCurrentUser("event", formData);
+          });
 
-        createAnEvent(formData);
+        ///////////WE NEED TO NOW ADD A MARKER HERE
       }
       closeUserAddVenue();
     } catch (error) {
-      console.error(
-        `There was an error submitting the ${userAddVenueType}:`,
-        error
-      );
+      console.error(`There was an error submitting the ${userAddVenueType}:`);
     }
   };
 
+  // console.log(`userAddVenueType ` + userAddVenueType);  // <---------------------| This is the line printing
   if (!isUserAddVenueOpen) return null;
 
 
@@ -238,216 +269,212 @@ function UserAddVenue() {
             Event
           </button>
         </div>
+        {userAddVenueType === 'business' ? (
+          // Business form fields
+          <>
+            <input
+              name="name"
+              placeholder="Name"
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              onChange={handleInputChange}
+            />
+            <input
+              name="phoneNumber"
+              placeholder="Phone Number"
+              onChange={handleInputChange}
+            />
+            <input
+              name="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+            />
+            <input
+              name="website"
+              placeholder="Website"
+              onChange={handleInputChange}
+            />
 
+            <div>
+              <h5>Select a Business Category:</h5>
+              <Select
+                options={businessCategoryOptions}
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                placeholder="Select a business category..."
+                isSearchable
+              />
+              {selectedCategory && (
+                <div>
+                  <h4>Selected Category:</h4>
+                  <p>{selectedCategory.label}</p>
+                </div>
+              )}
+            </div>
 
-
-
-        {userAddVenueType === "business" ? (
-            // Business form fields
-            <>
+            <div className="branding-section">
+              <h4>Branding</h4>
               <input
-                name="name"
-                placeholder="Name"
-                onChange={handleInputChange}
-              />
-              <textarea
-                name="description"
-                placeholder="Description"
+                name="bannerUrl"
+                placeholder="Banner Image URL"
                 onChange={handleInputChange}
               />
               <input
-                name="phoneNumber"
-                placeholder="Phone Number"
+                name="logoUrl"
+                placeholder="Badge Image URL"
                 onChange={handleInputChange}
               />
               <input
-                name="email"
-                placeholder="Email"
+                name="pinImageUrl"
+                placeholder="Pin Image URL"
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="social-media-section">
+              <h4>Social Media</h4>
+              <input
+                name="twitterLink"
+                placeholder="Twitter Profile URL"
                 onChange={handleInputChange}
               />
               <input
-                name="website"
-                placeholder="Website"
+                name="facebookLink"
+                placeholder="Facebook Profile URL"
                 onChange={handleInputChange}
               />
+            </div>
 
-              <div>
-                <h5>Select an Business Category:</h5>
-                <Select
-                  options={businessCategoryOptions}
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                  placeholder="Select a business category..."
-                />
-                {selectedCategory && (
-                  <div>
-                    <h4>Selected Category:</h4>
-                    <p>{selectedCategory.label}</p>
-                  </div>
-                )}
-              </div>
-
-
-              <div className="branding-section">
-                <h4>Branding</h4>
-                <input
-                  name="bannerImageUrl"
-                  placeholder="Banner Image URL"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="badgeImageUrl"
-                  placeholder="Badge Image URL"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="pinImageUrl"
-                  placeholder="Pin Image URL"
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="social-media-section">
-                <h4>Social Media</h4>
-                <input
-                  name="twitterLink"
-                  placeholder="Twitter Profile URL"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="facebookLink"
-                  placeholder="Facebook Profile URL"
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="location-section">
-                <h4>Location</h4>
-                <input
-                  name="streetAddress"
-                  placeholder="Street Address"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="city"
-                  placeholder="City"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="region"
-                  placeholder="Region"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="postalCode"
-                  placeholder="Postal Code"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="country"
-                  placeholder="Country"
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <button onClick={handleSubmit}>Add Business</button>
-            </>
-          ) : (
-            // Event form fields
-            <>
+            <div className="location-section">
+              <h4>Location</h4>
               <input
-                name="title"
-                placeholder="Title"
+                name="streetAddress"
+                placeholder="Street Address"
                 onChange={handleInputChange}
               />
-              <textarea
-                name="description"
-                placeholder="Description"
-                onChange={handleInputChange}
-              />
-
               <input
-                type="datetime-local"
-                name="startTime"
-                placeholder="Start Date & Time"
+                name="city"
+                placeholder="City"
                 onChange={handleInputChange}
               />
-
               <input
-                type="datetime-local"
-                name="endTime"
-                placeholder="End Date & Time"
+                name="region"
+                placeholder="Region"
                 onChange={handleInputChange}
               />
+              <input
+                name="postalCode"
+                placeholder="Postal Code"
+                onChange={handleInputChange}
+              />
+              <input
+                name="country"
+                placeholder="Country"
+                onChange={handleInputChange}
+              />
+            </div>
 
-              <div>
-                <h5>Select an Event Category:</h5>
-                <Select
-                  options={eventCategoryOptions}
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                  placeholder="Select an event category..."
-                />
-                {selectedCategory && (
-                  <div>
-                    <h4>Selected Category:</h4>
-                    <p>{selectedCategory.label}</p>
-                  </div>
-                )}
-              </div>
+            <button onClick={handleSubmit}>Add Business</button>
+          </>
+        ) : (
+          // Event form fields
+          <>
+            <input
+              name="title"
+              placeholder="Title"
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              onChange={handleInputChange}
+            />
 
-              <div className="branding-section">
-                <h4>Branding</h4>
-                <input
-                  name="bannerImageUrl"
-                  placeholder="Banner Image URL"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="badgeImageUrl"
-                  placeholder="Badge Image URL"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="pinImageUrl"
-                  placeholder="Pin Image URL"
-                  onChange={handleInputChange}
-                />
-              </div>
+            <input
+              type="datetime-local"
+              name="startTime"
+              placeholder="Start Date & Time"
+              onChange={handleInputChange}
+            />
 
-              <div className="location-section">
-                <h4>Location</h4>
-                <input
-                  name="streetAddress"
-                  placeholder="Street Address"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="city"
-                  placeholder="City"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="region"
-                  placeholder="Region"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="postalCode"
-                  placeholder="Postal Code"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="country"
-                  placeholder="Country"
-                  onChange={handleInputChange}
-                />
-              </div>
+            <input
+              type="datetime-local"
+              name="endTime"
+              placeholder="End Date & Time"
+              onChange={handleInputChange}
+            />
 
-              <button onClick={handleSubmit}>Add Event</button>
-            </>
-          )}
+            <div>
+              <h5>Select an Event Category:</h5>
+              <Select
+                options={eventCategoryOptions}
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                placeholder="Select an event category..."
+                isSearchable
+              />
+              {selectedCategory && (
+                <div>
+                  <h4>Selected Category:</h4>
+                  <p>{selectedCategory.label}</p>
+                </div>
+              )}
+            </div>
 
+            <div className="branding-section">
+              <h4>Branding</h4>
+              <input
+                name="bannerUrl"
+                placeholder="Banner Image URL"
+                onChange={handleInputChange}
+              />
+              <input
+                name="logoUrl"
+                placeholder="Badge Image URL"
+                onChange={handleInputChange}
+              />
+              <input
+                name="pinImageUrl"
+                placeholder="Pin Image URL"
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="location-section">
+              <h4>Location</h4>
+              <input
+                name="streetAddress"
+                placeholder="Street Address"
+                onChange={handleInputChange}
+              />
+              <input
+                name="city"
+                placeholder="City"
+                onChange={handleInputChange}
+              />
+              <input
+                name="region"
+                placeholder="Region"
+                onChange={handleInputChange}
+              />
+              <input
+                name="postalCode"
+                placeholder="Postal Code"
+                onChange={handleInputChange}
+              />
+              <input
+                name="country"
+                placeholder="Country"
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <button onClick={handleSubmit}>Add Event</button>
+          </>
+        )}
 
         <button
           onClick={() => {
@@ -463,3 +490,5 @@ function UserAddVenue() {
 }
 
 export default UserAddVenue;
+
+
