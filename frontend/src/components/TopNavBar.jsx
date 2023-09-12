@@ -47,7 +47,7 @@ function TopNavBar({ userDivRef }) {
 
       {isLoading ? (
         <div className="top-nav-bar__right">
-          // ................ \\
+          // ....... \\
         </div>
       ) : currentUser ? (
         <div className="top-nav-bar__right">
