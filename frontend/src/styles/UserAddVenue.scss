@@ -60,3 +60,32 @@
         margin-top: 10px;
     }
 }
+
+
+.user-add-venue-modal__circle-close-btn {
+
+  top: 950px;
+  right: 370px;
+  
+  cursor: pointer;
+  
+  $close-button-dimensions: 50px;
+
+  height: $close-button-dimensions;
+  width: $close-button-dimensions;
+
+  // background-color: magenta;
+
+
+  // background-color: rgba(white, 0.3);
+
+  // &:hover {
+  //   // background-color: rgba(white, 0.6);
+  // }
+
+  &::before {
+    top: -2px;
+    right: 13px;
+    font-size: 25pt;
+  }
+}

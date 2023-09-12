@@ -61,7 +61,6 @@ export const getEventCategories = () => {
   return apiClient.get(ROUTES.EVENT_CATEGORIES);
 }
 
-
 export const createUser = (userData) => {
   return apiClient.post(ROUTES.USERS, userData);
 };

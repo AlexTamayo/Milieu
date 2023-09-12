@@ -63,7 +63,7 @@ const createAnEvent = async (data) => {
 const deleteBusiness = async (businessId) => {
   try {
     const response = await deleteBusinessById(businessId);
-    if (response && response.status === 200) {
+    if (response && response.status === 200 || response.status === 204) {
       dispatch({
         type: actionTypes.SET_BUSINESS_DATA,
         payload: state.businessData.filter(business => business.id !== businessId)
@@ -90,7 +90,7 @@ const deleteBusiness = async (businessId) => {
 const deleteEvent = async (eventId) => {
   try {
     const response = await deleteEventById(eventId);
-    if (response && response.status === 200) {
+    if (response && response.status === 200 || response.status === 204) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: state.eventData.filter(event => event.id !== eventId)

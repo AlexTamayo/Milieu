@@ -223,7 +223,7 @@ function UserAddVenue() {
     }
   };
 
-  console.log(`userAddVenueType ` + userAddVenueType);
+  console.log(`userAddVenueType ` + userAddVenueType);  // <---------------------| This is the line printing
   if (!isUserAddVenueOpen) return null;
 
   return (

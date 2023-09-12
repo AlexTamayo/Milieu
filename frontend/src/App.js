@@ -29,6 +29,7 @@ function App() {
       < UserVenueManager />
       < UserLogRegModal />
       < UserAddVenue />
+      < UserEditVenue />
       < VenueModal />
       < SearchBar />
       < GoogleMapComponent />
