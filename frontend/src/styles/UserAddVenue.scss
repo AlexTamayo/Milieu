@@ -1,8 +1,8 @@
 @import '_variables.scss';
 
 // $text-colour: $grey-1;
-$text-colour: $grey-3;
-$placeholder-colour: #a9a9a9;
+$text-colour: #393939;
+$placeholder-colour: #717171;
 
 .modal-overlay {
   position: fixed;
@@ -32,10 +32,23 @@ $placeholder-colour: #a9a9a9;
   padding: 20px;
   border-radius: 30px;
 
-  width: 540px;
-  height: 720px;
-  
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+  width: 540px;
+
+  
+
+  &.business {
+    height: 720px;
+    transition: height 0.05s linear;
+    
+  }
+
+  &.event {
+    height: 560px;
+    transition: height 0.2s ease-out;
+  }
+  
 
   &__grl-container {
 
@@ -189,6 +202,77 @@ $placeholder-colour: #a9a9a9;
 
 }
 
+.event-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 90%;
+
+  margin-top: 10px;
+
+  justify-content: center;
+
+  &__title,
+  &__description,
+  &__startTime,
+  &__endTime,
+  &__website,
+  &__category {
+
+    color: $text-colour;
+
+    caret-color: $text-colour;
+
+    &::placeholder {
+      color: $placeholder-colour;
+    }
+  
+    width: 85%;
+    height: 20px;
+  
+    padding-left: 10px;
+    
+    margin: 2pt;
+  
+    border-radius: 8px;
+  
+    outline-color: $outline-blue;
+  
+    border: 1px solid $grey-1;
+  }
+
+  &__startTime,
+  &__endTime {
+
+    &::-webkit-datetime-edit-fields-wrapper {
+      color: $text-colour;
+    }
+
+    &::-webkit-datetime-edit-text {
+
+      color: $text-colour;
+    }
+
+  }
+  
+
+  &__description {
+
+    height: 40px;
+    resize: none;
+    overflow-y: auto;
+  }
+
+  &__category {
+    color: $text-colour;
+
+    width: 88%;
+
+  }
+
+}
+
 .branding-section,
 .social-media-section,
 .location-section {
@@ -201,7 +285,7 @@ $placeholder-colour: #a9a9a9;
     width: 100%;
 
     h4 {
-      color: $text-colour;
+      color: $grey-2;
 
       display: flex;
       justify-content: center;
@@ -250,42 +334,84 @@ $placeholder-colour: #a9a9a9;
   }
 }
 
-.business-submit-btn {
+.submit-btn {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  $myvenues-colour: $milieu-red;
-
-  background-color: rgba($myvenues-colour, 0.1);
-  color: $myvenues-colour;
-  border: 1px solid rgba($myvenues-colour, 0.2);
-
-  height: 40px;
+  height: 41px;
   width: 240px;
 
   border-radius: 20px;
 
   margin-top: 11px;
 
-  &::before{
-    content: "Add Business";
-  }
+  outline-color: $outline-blue;
+
+  $font-size: 12pt;
 
   cursor: pointer;
 
-  transition: all 0.2s linear;
+  &.business {
+    $btn-colour: $milieu-red;
 
-  // background-color: magenta;
+    background-color: rgba($btn-colour, 0.1);
+    color: $btn-colour;
+    border: 1px solid rgba($btn-colour, 0.2);
 
-  &:hover {
+    &::before{
+      content: "Add Business";
+      font-size: $font-size;
+    }
 
-    color: white;
-    background-color: rgba($myvenues-colour, 1);
+    $transition-timing: 0.2s linear;
+    
+    transition: 
+      color $transition-timing,
+      border $transition-timing,
+      background-color $transition-timing;
 
-    border: 1px solid rgba(white, 1);
+    &:hover {
+  
+      color: white;
+      background-color: rgba($btn-colour, 1);
+  
+      border: 1px solid rgba(white, 1);
+  
+    }
 
   }
+
+  &.event {
+    $btn-colour: $milieu-blue;
+
+    background-color: rgba($btn-colour, 0.1);
+    color: $btn-colour;
+    border: 1px solid rgba($btn-colour, 0.2);
+
+    &::before{
+      content: "Add Event";
+      font-size: $font-size;
+    }
+
+    $transition-timing: 0.2s linear;
+    
+    transition: 
+      color $transition-timing,
+      border $transition-timing,
+      background-color $transition-timing;
+
+    &:hover {
+  
+      color: white;
+      background-color: rgba($btn-colour, 1);
+  
+      border: 1px solid rgba(white, 1);
+  
+    }
+
+  }
+
 }
 
 
@@ -316,3 +442,7 @@ $placeholder-colour: #a9a9a9;
     font-size: 25pt;
   }
 }
+
+
+
+

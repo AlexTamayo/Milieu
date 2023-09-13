@@ -261,6 +261,7 @@ function UserAddVenue() {
 
         ///////////WE NEED TO NOW ADD A MARKER HERE
       }
+      setUserAddVenueType('business');
       closeUserAddVenue();
     } catch (error) {
       console.error(`There was an error submitting the ${userAddVenueType}:`);
@@ -273,7 +274,7 @@ function UserAddVenue() {
 
   return (
     <div className="modal-overlay">
-      <div className="user-add-venue-modal">
+      <div className={`user-add-venue-modal ${userAddVenueType === "business" ? "business" : "event"}`}>
 
         {/* CLOSE BUTTON */}
         <div
@@ -423,36 +424,41 @@ function UserAddVenue() {
                 />
               </div>
 
-              <div
-                className='business-submit-btn'
+              <button
+                className='submit-btn business'
                 onClick={handleSubmit}>
                 {/* Add Business */}
-              </div>
+              </button>
+
             </div>
           ) : (
             // Event form fields
-            <>
+            <div className='event-add'>
               <input
+                className="event-add__title"
                 name="title"
                 placeholder="Title"
                 onChange={handleInputChange}
               />
               <textarea
+                className="event-add__description"
                 name="description"
                 placeholder="Description"
                 onChange={handleInputChange}
               />
 
               <input
-                type="datetime-local"
+                className="event-add__startTime"
                 name="startTime"
+                type="datetime-local"
                 placeholder="Start Date & Time"
                 onChange={handleInputChange}
               />
 
               <input
-                type="datetime-local"
+                className="event-add__endTime"
                 name="endTime"
+                type="datetime-local"
                 placeholder="End Date & Time"
                 onChange={handleInputChange}
               />
@@ -469,6 +475,7 @@ function UserAddVenue() {
               </div> */}
 
                 <select
+                  className='event-add__category'
                   value={selectedCategory?.value || ""}
                   onChange={e => handleCategoryChange({ value: e.target.value, label: e.target.options[e.target.selectedIndex].text })}>
 
@@ -528,19 +535,15 @@ function UserAddVenue() {
                 />
               </div>
 
-              <button onClick={handleSubmit}>Add Event</button>
-            </>
+              
+              <button
+                className='submit-btn event'
+                onClick={handleSubmit}>
+                {/* Add Event */}
+              </button>
+
+            </div>
           )}
-
-          {/* <button
-            onClick={() => {
-              setUserAddVenueType('business');
-              closeUserAddVenue();
-            }}
-          >
-            Close
-          </button> */}
-
 
         </div>
       </div>
