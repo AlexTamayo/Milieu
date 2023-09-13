@@ -1,5 +1,9 @@
 @import '_variables.scss';
 
+// $text-colour: $grey-1;
+$text-colour: $grey-3;
+$placeholder-colour: #a9a9a9;
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -21,58 +25,274 @@
   display: flex;
   position: relative;
 
-  flex-direction: column;
+  justify-content: center;
 
   background-color: $bg-color;
+
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 30px;
 
-  width: 615px;
-  // max-width: 500px;
+  width: 540px;
+  height: 720px;
+  
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
-  height: 700px;
+  &__grl-container {
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    margin-bottom: 0px;
+    margin-top: 0px;
 
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Shadow for the modal */
+    width: 100%;
+
+    // outline-color: $outline-blue;
+  }
+
 }
 
-.venue-type-toggle button {
-  margin-right: 10px;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  background-color: #e0e0e0; /* Gray background */
-  border-radius: 3px;
-  transition: background-color 0.3s;
+.venue-type-toggle { 
+  display: flex;
+
+  justify-content: space-evenly;
+  align-items: center;
+  
+  width: 235px;
+  height: 50px;
+
+  caret-color: transparent;
+
+
+  $transition-timing:  0.3s ease; 
+
+  &__business{
+
+    $btn-colour: $milieu-red;
+    $opacity-active: 1.0;
+    $opacity-hover: 1.0;
+
+    &::before{
+      content: "Business";
+    }
+
+    transition: background-color $transition-timing;
+
+    &.active{
+      background-color: rgba($btn-colour, $opacity-active);
+    }
+
+    &:hover{
+      background-color: rgba($btn-colour, $opacity-hover);
+    }
+  }
+
+  &__event{
+
+    $btn-colour: $milieu-blue;
+    $opacity-active: 1.0;
+    $opacity-hover: 1.0;
+
+    &::before{
+      content: "Event";
+    }
+    
+    transition: background-color $transition-timing;
+
+    &.active{
+      background-color: rgba($btn-colour, $opacity-active);
+    }
+
+    &:hover{
+      background-color: rgba($btn-colour, $opacity-hover);
+    }
+  }
+ 
+
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid $grey-1;
+    color: white;
+
+    cursor: pointer;
+    border-radius: 30px;
+
+    height: 35px;
+    width: 90px;
+
+    background-color: $grey-2;
+
+  }
+
+ 
 }
 
-.venue-type-toggle button:hover {
-  background-color: #d0d0d0; /* Darker gray on hover */
+
+.business-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 90%;
+
+  margin-top: 10px;
+
+  justify-content: center;
+
+  &__name,
+  &__description,
+  &__phone-number,
+  &__email,
+  &__website,
+  &__category {
+
+    color: $text-colour;
+
+    caret-color: $text-colour;
+
+    &::placeholder {
+      color: $placeholder-colour;
+    }
+  
+    width: 85%;
+    height: 20px;
+  
+    padding-left: 10px;
+    
+    margin: 2pt;
+  
+    border-radius: 8px;
+  
+    outline-color: $outline-blue;
+  
+    border: 1px solid $grey-1;
+  }
+  
+
+  &__description {
+
+    height: 40px;
+    resize: none;
+    overflow-y: auto;
+  }
+
+  &__category {
+    color: $text-colour;
+
+    width: 88%;
+
+  }
+
 }
 
 .branding-section,
+.social-media-section,
 .location-section {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
 
     h4 {
-        margin-top: 0;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 5px;
+      color: $text-colour;
+
+      display: flex;
+      justify-content: center;
+      
+      width: 200px;
+
+      margin-top: 0;
+      padding-bottom: 5px;
+
+      border-bottom: 1px solid #ccc;
+
+      margin-bottom: 7px;
     }
 
     input {
-        margin-top: 10px;
+      color: $text-colour;
+
+      &::placeholder {
+        color: $placeholder-colour;
+      }
+
+      border-radius: 8px;
+
+      outline-color: $outline-blue;
+    
+      border: 1px solid $grey-1;
+
+      width: 85%;
+      height: 20px;
+    
+      padding-left: 10px;
+      
+      margin: 2pt;
+
+      border-radius: 8px;
+    
+      outline-color: $outline-blue;
+    
+      border: 1px solid $grey-1;
     }
+
+    &:not(.branding-section) {
+      input {
+          text-align: center;
+      }
+  }
+}
+
+.business-submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  $myvenues-colour: $milieu-red;
+
+  background-color: rgba($myvenues-colour, 0.1);
+  color: $myvenues-colour;
+  border: 1px solid rgba($myvenues-colour, 0.2);
+
+  height: 40px;
+  width: 240px;
+
+  border-radius: 20px;
+
+  margin-top: 11px;
+
+  &::before{
+    content: "Add Business";
+  }
+
+  cursor: pointer;
+
+  transition: all 0.2s linear;
+
+  // background-color: magenta;
+
+  &:hover {
+
+    color: white;
+    background-color: rgba($myvenues-colour, 1);
+
+    border: 1px solid rgba(white, 1);
+
+  }
 }
 
 
 .user-add-venue-modal__circle-close-btn {
 
-  top: 660px;
-  right: 42px;
+  top: 14px;
+  right: 19px;
   
   cursor: pointer;
   

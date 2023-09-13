@@ -1,4 +1,29 @@
-const mapStyles = [
+/* 
+https://developers.google.com/maps/documentation/javascript/style-reference
+*/
+
+const labelsTextOnFeatureTypes = [
+  "administrative.country",
+  "administrative.locality",
+  "administrative.province",
+  "road",
+];
+
+const labelsTextOnStyles = {
+  elementType: "labels.text",
+  stylers: [
+    {
+      visibility: "on"
+    }
+  ]
+};
+
+const labelsTextOn = labelsTextOnFeatureTypes.map(featureType => ({
+  featureType: featureType,
+  ...labelsTextOnStyles
+}));
+
+const clearner = [
   {
     featureType: "all",
     elementType: "labels",
@@ -7,42 +32,79 @@ const mapStyles = [
         visibility: "off"
       }
     ]
-  },
+  }
+];
+
+const individualFeatures = [
+
+/*
+water
+
+landscape.man_made
+
+landscape.natural.landcover
+poi.park
+
+road.arterial
+road.highway
+
+road.local NOT SHOW
+
+transit
+
+*/
+
   {
-    featureType: "road",
-    elementType: "labels.text",
-    stylers: [
-      {
-        visibility: "on",
-        color: "#878787"
-      }
-    ]
-  },
-  {
-    featureType: "administrative.locality",
-    elementType: "labels.text",
-    stylers: [
-      {
-        visibility: "on",
-        color: "#878787"
-      }
-    ]
-  },
-  {
-    featureType: "landscape",
+    featureType: "water",
     elementType: "all",
     stylers: [
       {
-        color: "#f9f5ed"
-      }
-    ]
+        color: "#45b9ff",
+      },
+    ],
+  },
+  {
+    featureType: "landscape.man_made",
+    elementType: "all",
+    stylers: [
+      {
+        color: "#E9EEF6",
+      },
+    ],
+  },
+  {
+    featureType: "landscape.natural.landcover",
+    elementType: "all",
+    stylers: [
+      {
+        color: "#b2eab7",
+      },
+    ],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "all",
+    stylers: [
+      {
+        color: "#b2eab7",
+      },
+    ],
+  },
+  {
+    featureType: "poi.business",
+    elementType: "all",
+    stylers: [
+      {
+        color: "#b2eab7",
+      },
+    ],
   },
   {
     featureType: "road.highway",
-    elementType: "all",
+    elementType: "geometry.fill",
     stylers: [
       {
-        color: "#f5f5f5"
+        color: "#f9f9f9"
       }
     ]
   },
@@ -55,15 +117,18 @@ const mapStyles = [
       }
     ]
   },
-  {
-    featureType: "water",
-    elementType: "all",
-    stylers: [
-      {
-        color: "#aee0f4"
-      }
-    ]
-  }
+  // {
+  //   featureType: "road.local",
+  //   elementType: "all",
+  //   stylers: [
+  //     {
+  //       color: "#e8fdff" 
+  //     }
+  //   ]
+  // }
 ];
+
+
+const mapStyles = [ ...clearner, ...individualFeatures, ...labelsTextOn ];
 
 export default mapStyles;

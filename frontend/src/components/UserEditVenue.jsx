@@ -32,8 +32,8 @@ function UserEditVenue() {
   
     const currentEvent = eventData.find(event => event.id === selectedVenueId);
 
-    console.log( 'currentBusiness', currentBusiness );
-    console.log( 'currentEvent', currentEvent );
+    // console.log( 'currentBusiness', currentBusiness );
+    // console.log( 'currentEvent', currentEvent );
     
     const [businessFormData, setBusinessFormData] = useState({
       ...currentBusiness
@@ -64,14 +64,8 @@ function UserEditVenue() {
       let data;
   
       if (selectedVenueType === "business") {
-
-        // updateBusinessById(businessId, businessData)
-        // endpoint = `http://localhost:3001/api/businesses/${selectedVenueId}`;
-        // data = businessFormData;
         updateBusinessById(selectedVenueId, businessFormData);
       } else {
-        // endpoint = `http://localhost:3001/api/events/${selectedVenueId}`;
-        // data = eventFormData;
         updateEventById(selectedVenueId, eventFormData);
       }
   
