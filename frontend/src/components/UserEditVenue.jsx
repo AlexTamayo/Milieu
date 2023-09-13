@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import { React, useState, useContext } from 'react';
+import { updateBusinessById, updateEventById } from '../routes/api';
 import axios from 'axios';
 
 import { DataContext } from '../context/MainContext';
@@ -8,8 +9,6 @@ import '../styles/UserAddVenue.scss';
 import {
   formatDateForInput,
 } from '../utils/helpers';
-
-
 
 function UserEditVenue() {
     const {
@@ -33,61 +32,61 @@ function UserEditVenue() {
   
     const currentEvent = eventData.find(event => event.id === selectedVenueId);
 
-
+    console.log( 'currentBusiness', currentBusiness );
+    console.log( 'currentEvent', currentEvent );
+    
     const [businessFormData, setBusinessFormData] = useState({
-      name: "",
-      description: "",
-      phoneNumber: "",
-      email: "",
-      website: "",
-      businessCategoryId: "",
-      businessBranding: {
-          logoUrl: "",
-          bannerUrl: "",
-          pinUrl: "",
-          businessId: "",
-      },
-      socialMedia: [],
+      ...currentBusiness
     });
-
 
     const [eventFormData, setEventFormData] = useState({
-
+      ...currentEvent
     });
-
 
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
+      const { name, value } = e.target;
+      if (selectedVenueType === "business") {
+        setBusinessFormData(prevData => ({
+          ...prevData,
+          [name]: value
         }));
+      } else if (selectedVenueType === "event") {
+        setEventFormData(prevData => ({
+          ...prevData,
+          [name]: value
+        }));
+      }
     };
 
     const handleSubmit = async () => {
-      // try {
-      //     let response;
-      //     if (venueType === "business") {
-      //         response = await axios.post(
-      //             "http://localhost:3001/api/businesses",
-      //             formData
-      //         );
-      //     } else if (venueType === "event") {
-      //         response = await axios.post(
-      //             "http://localhost:3001/api/events", // Assuming the endpoint for events is this, you can replace with the actual one
-      //             formData
-      //         );
-      //     }
-      //     console.log(`${venueType.charAt(0).toUpperCase() + venueType.slice(1)} added:`, response.data);
-      //     // closeUserEditVenueModal(); // Close the modal after a successful submission
-      // } catch (error) {
-      //     console.error(
-      //         `There was an error submitting the ${venueType}:`,
-      //         error.response ? error.response.data : error.message
-      //     );
-      // }
-  };
+      let endpoint;
+      let data;
+  
+      if (selectedVenueType === "business") {
+
+        // updateBusinessById(businessId, businessData)
+        // endpoint = `http://localhost:3001/api/businesses/${selectedVenueId}`;
+        // data = businessFormData;
+        updateBusinessById(selectedVenueId, businessFormData);
+      } else {
+        // endpoint = `http://localhost:3001/api/events/${selectedVenueId}`;
+        // data = eventFormData;
+        updateEventById(selectedVenueId, eventFormData);
+      }
+  
+      try {
+        const response = await axios.put(endpoint, data);
+        console.log(`${selectedVenueType.charAt(0).toUpperCase() + selectedVenueType.slice(1)} updated:`, response.data);
+      } catch (error) {
+        console.error(
+          `Error updating the ${selectedVenueType}:`,
+          error.response ? error.response.data : error.message
+        );
+      }
+  
+      closeUserEditVenueModal();
+    };
 
 
   if (!isUserEditVenueModalOpen) return null;
@@ -119,29 +118,34 @@ function UserEditVenue() {
 
               name="name"
               placeholder="Name"
+              value={businessFormData.name}
               onChange={handleInputChange}
               defaultValue={currentBusiness.name}
             />
             <textarea
               name="description"
               placeholder="Description"
+              value={businessFormData.description}
               onChange={handleInputChange}
               defaultValue={currentBusiness.description}
             />
             <input
               name="phoneNumber"
+              value={businessFormData.phoneNumber}
               placeholder="Phone Number"
               onChange={handleInputChange}
               defaultValue={currentBusiness.phoneNumber}
             />
             <input
               name="email"
+              value={businessFormData.email}
               placeholder="Email"
               onChange={handleInputChange}
               defaultValue={currentBusiness.email}
             />
             <input
               name="website"
+              value={businessFormData.website}
               placeholder="Website"
               onChange={handleInputChange}
               defaultValue={currentBusiness.website}
@@ -150,7 +154,7 @@ function UserEditVenue() {
             <select
               name="businessCategoryId"
               onChange={handleInputChange}
-              value={currentBusiness.businessCategory.id}
+              defaultValue={currentBusiness.businessCategory.id}
             >
               <option value="">Select a category...</option>
               {businessCategoryData.map((category) => (

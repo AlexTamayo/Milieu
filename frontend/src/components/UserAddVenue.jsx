@@ -3,17 +3,23 @@ import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
-import {
-  transformStructure,
-} from '../utils/helpers';
-
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
-  const { state, closeUserAddVenue, createABusiness, createAnEvent } = useContext(DataContext);
+  const {
+    state,
+    closeUserAddVenue,
+    createABusiness,
+    createAnEvent
+  } = useContext(DataContext);
 
-  const { isUserAddVenueOpen, eventCategoryData,businessCategoryData,eventData,
-    businessData} = state;
+  const {
+    isUserAddVenueOpen,
+    eventCategoryData,
+    businessCategoryData,
+    eventData,
+    businessData
+  } = state;
 
   const { currentUser, addEntityToCurrentUser } = useAuth();
 
