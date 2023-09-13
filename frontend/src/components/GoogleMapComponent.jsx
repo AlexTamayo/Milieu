@@ -18,7 +18,7 @@ const ICON_SIZE = { width: 40, height: 40 };
 const GoogleMapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
-  const [center, setCenter] = useState({ lat: 51.04841472292545, lng: -114.06940332777324 });
+  const [center, setCenter] = useState({ lat: 49.290527, lng: -123.108300 });
   const [selectedMarkerIndex, setSelectedMarkerIndex] = useState(null);
 
 
@@ -77,22 +77,22 @@ const GoogleMapComponent = () => {
 
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude });
-        },
-        error => {
-          console.error('Geolocation Error:', error);
-          setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
-        },
-        { enableHighAccuracy: true }
-      );
-    } else {
-      console.log("Geolocation not supported");
-      setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
-    }
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     position => {
+    //       const { latitude, longitude } = position.coords;
+    //       setCenter({ lat: latitude, lng: longitude });
+    //     },
+    //     error => {
+    //       console.error('Geolocation Error:', error);
+    //       setCenter({ lat: 49.290527, lng: -123.108300 });
+    //     },
+    //     { enableHighAccuracy: true }
+    //   );
+    // } else {
+    //   console.log("Geolocation not supported");
+    //   setCenter({ lat: 49.290527, lng: -123.108300 });
+    // }
   }, []);
 
   const handleZoomIn = () => {
@@ -123,13 +123,13 @@ const GoogleMapComponent = () => {
         },
         error => {
           console.error('Geolocation Error:', error);
-          setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
+          setCenter({ lat: 49.290527, lng: -123.108300 });
         },
         { enableHighAccuracy: true }
       );
     } else {
       console.log("Geolocation not supported");
-      setCenter({ lat: 51.04841472292545, lng: -114.06940332777324 });
+      setCenter({ lat: 49.290527, lng: -123.108300 });
     }
   };
 
@@ -146,7 +146,7 @@ const GoogleMapComponent = () => {
         ref={mapRef}
         // mapContainerStyle={containerStyle}
         center={center}
-        zoom={15}
+        zoom={13}
         options={{
           disableDefaultUI: true,
           styles: mapStyles,
