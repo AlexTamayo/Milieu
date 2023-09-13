@@ -1,12 +1,12 @@
-'use strict';
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Define the business category data
     const businessCategoryData = [
-      { name: 'Restaurant', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Automotive', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Health and Wellness', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Restaurant', createdAt: new Date(), updatedAt: new Date() },//1
+      { name: 'Automotive', createdAt: new Date(), updatedAt: new Date() },//2
+      { name: 'Health and Wellness', createdAt: new Date(), updatedAt: new Date() },//3
       { name: 'Massage/Chiropractor', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Dentist', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Tutoring', createdAt: new Date(), updatedAt: new Date() },
@@ -17,7 +17,7 @@ module.exports = {
       { name: 'Construction', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Labour', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Plumbing', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Roofing', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Roofing', createdAt: new Date(), updatedAt: new Date() },//15
       { name: 'Carpentry', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Landscaping', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Cleaning Services', createdAt: new Date(), updatedAt: new Date() },
@@ -35,11 +35,11 @@ module.exports = {
       { name: 'Event Planning', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Real Estate', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Home Inspection', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Legal Services', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Legal Services', createdAt: new Date(), updatedAt: new Date() },//35
       { name: 'Financial Services', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Insurance', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Travel Agency', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Education', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Education', createdAt: new Date(), updatedAt: new Date() },//
       { name: 'Martial Arts', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Music Lessons', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Art Gallery', createdAt: new Date(), updatedAt: new Date() },
@@ -47,10 +47,10 @@ module.exports = {
       { name: 'Bookstore', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Jewelry Store', createdAt: new Date(), updatedAt: new Date() },
     ];
-    
-      
+
+
       // You can continue adding more categories to the list above
-      
+
 
     // Insert the business category data into the database
     await queryInterface.bulkInsert('BusinessCategories', businessCategoryData, {});

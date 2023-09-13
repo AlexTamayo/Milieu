@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         logoUrl: 'logo.jpg',
-        bannerUrl: 'https://th.bing.com/th/id/OIP.YJ4xI-O72M5MK73b46IkGwHaE7?pid=ImgDet&rs=1',
+        bannerUrl: 'https://media.istockphoto.com/id/471559271/photo/asheville-busker.jpg?s=612x612&w=0&k=20&c=LD8W-Q-ORuyddSgXYLO9oC3e6jUZFmjZAd3Ri0p9uww=',
         pinUrl: 'pin.jpg',
         eventId: 3,
         createdAt: new Date(),
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         logoUrl: 'logo.jpg',
-        bannerUrl: 'https://www.potsdam.edu/sites/default/files/styles/optimized/public/images/news/Drumming_bottom.jpg?itok=MKZPX9zl',
+        bannerUrl: 'https://i.natgeofe.com/k/3519980b-ba58-456d-b691-2ed516c223e0/clean-it-up-textimage_3x2.jpg',
         pinUrl: 'pin.jpg',
         eventId: 4,
         createdAt: new Date(),
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         logoUrl: 'logo.jpg',
-        bannerUrl: 'https://westlibertyiowa.com/wp-content/uploads/2021/07/talent1.jpeg',
+        bannerUrl: 'https://cdn.shopify.com/s/files/1/0074/6402/6227/files/mother-daughter-playdate-friends.jpg?v=1688611886',
         pinUrl: 'pin.jpg',
         eventId: 7,
         createdAt: new Date(),
@@ -62,7 +62,7 @@ module.exports = {
       },
       {
         logoUrl: 'logo.jpg',
-        bannerUrl: 'https://yrofthemonkey.com/wp-content/uploads/2016/08/pavan-gupta-93706-unsplash.jpg',
+        bannerUrl: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/at%2Fliving%2F2022-06%2Fyard%20sales%2Fyard_sale',
         pinUrl: 'pin.jpg',
         eventId: 8,
         createdAt: new Date(),
@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         logoUrl: 'logo.jpg',
-        bannerUrl: 'https://i.pinimg.com/originals/de/5d/2c/de5d2c52fbcebf4b4b561a709242b0d8.jpg',
+        bannerUrl: 'https://midias.agazeta.com.br/2020/02/21/bloco-de-carnaval-193003.jpg',
         pinUrl: 'pin.jpg',
         eventId: 9,
         createdAt: new Date(),

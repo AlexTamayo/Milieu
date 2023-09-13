@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -21,8 +21,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        logoUrl: 'https://i.pinimg.com/originals/81/1e/20/811e2061d6e72fe01ac9e2f22af87fc2.jpg',
-        bannerUrl: 'https://monkeyandmekitchenadventures.com/wp-content/uploads/2019/08/Italian-Fresh-Tomato-Basil-Pasta_13.jpg',
+        logoUrl: 'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/06/18095156/tutoring-tree.png',
+        bannerUrl: 'https://images.theconversation.com/files/489239/original/file-20221011-11-b2kzti.jpg?ixlib=rb-1.1.0&rect=0%2C27%2C3639%2C2395&q=45&auto=format&w=926&fit=clip',
         pinUrl: 'https://i.pinimg.com/originals/81/1e/20/811e2061d6e72fe01ac9e2f22af87fc2.jpg',
         businessId: 3,
         createdAt: new Date(),
@@ -37,8 +37,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        logoUrl: 'https://is4-ssl.mzstatic.com/image/thumb/Purple124/v4/3e/ed/f3/3eedf338-849c-9029-a0aa-fd7ed0274b89/AppIcon-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1920x1080bb-80.png',
-        bannerUrl: 'https://th.bing.com/th/id/R.30a0a46c90e538186eec5bfeff88f5db?rik=Z0JvDbxUdMc96w&riu=http%3a%2f%2fi.imgur.com%2f0PzvezB.jpg&ehk=8jreDaPKcTTBiKeHzpP7Z8dX8ztm9HAatZVlZD0ufJs%3d&risl=&pid=ImgRaw&r=0',
+        logoUrl: 'https://images-platform.99static.com//rbGsG0nAT5f0dwt_Bdzk6p4CB5o=/83x140:745x802/fit-in/500x500/99designs-contests-attachments/129/129640/attachment_129640097',
+        bannerUrl: 'https://torontolife.com/wp-content/uploads/2020/10/PASTAFOREVER10-803x603-1603386640.jpg',
         pinUrl: 'https://is4-ssl.mzstatic.com/image/thumb/Purple124/v4/3e/ed/f3/3eedf338-849c-9029-a0aa-fd7ed0274b89/AppIcon-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1920x1080bb-80.png',
         businessId: 5,
         createdAt: new Date(),
@@ -53,8 +53,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        logoUrl: 'https://as2.ftcdn.net/v2/jpg/06/11/54/93/1000_F_611549323_5YKIrvB4Tbqp6iZLaIrQwI3tK16N3OLT.jpg',
-        bannerUrl: 'https://th.bing.com/th/id/R.0f377a187efd9d3f1311b998ad6bc6ac?rik=DlEW4V%2bs5J2%2bbA&pid=ImgRaw&r=0',
+        logoUrl: 'https://s3.amazonaws.com/cdn.designcrowd.com/blog/34-Pet-Sitting-Logos-for-Animal-Caretakers/pet-sitting-logo-by-larry-sickmann-dribbble.png',
+        bannerUrl: 'https://www.care.com/c/wp-content/uploads/sites/2/2022/02/GettyImages-1291799682-1-e1643946346704-1623x1080.jpg.optimal.jpg',
         pinUrl: 'https://as2.ftcdn.net/v2/jpg/06/11/54/93/1000_F_611549323_5YKIrvB4Tbqp6iZLaIrQwI3tK16N3OLT.jpg',
         businessId: 7,
         createdAt: new Date(),
@@ -125,8 +125,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLrv-UMFJQqkRVbox7PfzpmXb6R4H9Y_RCbQ&usqp=CAU',
-        bannerUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5G72XAAqH7DTVctpJ_QCYkeI5eTpQzMIc4w&usqp=CAU',
+        logoUrl: 'https://static.vecteezy.com/system/resources/previews/022/035/783/original/finance-illustration-logo-accounting-hand-on-a-calculator-behind-it-is-a-document-and-a-bill-bottom-of-the-inscription-accounting-vector.jpg',
+        bannerUrl: 'https://kohlerfinancial.com/wp-content/uploads/2019/06/tax-accountant-at-05-02-016_0.jpg',
         pinUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLrv-UMFJQqkRVbox7PfzpmXb6R4H9Y_RCbQ&usqp=CAU',
         businessId: 16,
         createdAt: new Date(),
@@ -141,7 +141,7 @@ module.exports = {
         updatedAt: new Date(),
       },
 
-    
+
       {
         logoUrl: 'https://th.bing.com/th/id/R.61610a598d5333b03a3a3f04bbb0aab9?rik=xMeiEF0LkBDk6Q&pid=ImgRaw&r=0',
         bannerUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6tha0C_FA4RoshNWPcbPbuLyb4engTwYOcQ&usqp=CAU',
@@ -158,7 +158,7 @@ module.exports = {
         businessId: 19,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }, 
+      },
       {
         logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz9RH402KAtxeb9ggNfUlOATArd9_nF2GHvw&usqp=CAU',
         bannerUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTahPUmTGxjNP057IClOnJf46ku9Aiz9jnqaw&usqp=CAU',
@@ -201,7 +201,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        logoUrl: 'https://thumbs.dreamstime.com/b/electric-repair-electrician-logo-design-concept-vector-icon-template-combination-safety-guard-shield-symbol-shock-199157128.jpg',  
+        logoUrl: 'https://thumbs.dreamstime.com/b/electric-repair-electrician-logo-design-concept-vector-icon-template-combination-safety-guard-shield-symbol-shock-199157128.jpg',
         bannerUrl: 'https://d2zhlgis9acwvp.cloudfront.net/images/uploaded/electricians.jpg',
         pinUrl: 'https://thumbs.dreamstime.com/b/electric-repair-electrician-logo-design-concept-vector-icon-template-combination-safety-guard-shield-symbol-shock-199157128.jpg',
         businessId: 25,
