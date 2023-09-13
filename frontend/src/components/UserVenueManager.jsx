@@ -13,6 +13,7 @@ function UserVenueManager() {
     openUserAddVenue,
     deleteEntityById,
     openUserEditVenueModal,
+    setSelectedVenue,
   } = useContext(DataContext);
 
   const { isVenueManagerModalOpen } = state;
@@ -44,12 +45,18 @@ function UserVenueManager() {
   const renderVenueList = (venues, type) => {
     if (venues && venues.length) {
       return venues.map(venue => (
-        <div className="venue-item" key={venue.id}>
-          <span className="venue-name">{type === 'business' ? venue.name : venue.title}</span>
+        <div className={`venue-item ${type}`} key={venue.id}>
+          {/* setSelectedVenue = (venueType, venueId) */}
+          <span onClick={() => {
+            setSelectedVenue(type, venue.id);
+            closeVenueManagerModal();
+            }} className={`venue-name ${type}`}>
+            {type === 'business' ? venue.name : venue.title}
+          </span>
 
           {/* <button className="edit-btn" onClick={() => openUserEditVenueModal(venue.id, type)}>Edit</button> */}
 
-          <button className="delete-btn" onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
+          <button className={`delete-btn ${type}`} onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
         </div>
       ));
     } else {
@@ -80,13 +87,13 @@ function UserVenueManager() {
         
         <h2 className="modal-title">Venues Manager</h2>
 
-        <h3 className="section-title">Business Section</h3>
-        <div className="business-section">
+        <h3 className="section-title business">Business Section</h3>
+        <div className="section business">
           {renderVenueList(currentUser.businesses, 'business')}
         </div>
 
-        <h3 className="section-title">Event Section</h3>
-        <div className="event-section">
+        <h3 className="section-title event">Event Section</h3>
+        <div className="section event">
           {renderVenueList(currentUser.events, 'event')}
         </div>
       </div>

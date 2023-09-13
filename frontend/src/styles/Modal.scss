@@ -1,45 +1,96 @@
-/* Styling for the main modal window */
+@import '_variables.scss';
+
 .modal {
-  background-color: #ffffff;
+  background-color: $bg-color;
   padding: 20px;
-  width: 80%;  /* Adjust width as per your requirement */
-  max-width: 300px;  /* You can adjust this value if needed */
-  border-radius: 10px;
+  width: 80%;
+  max-width: 450px;
+  border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  /* This centers the modal horizontally and vertically */
-  z-index: 10;  /* This will ensure the modal is layered on top of the Venue Manager */
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Modal close button styles */
-.modal-close-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
+.modal__circle-close-btn{
+  top: 11px;
+  right: 23px;
+  
   cursor: pointer;
-  color: #333;
+  
+  $close-button-dimensions: 50px;
+
+  height: $close-button-dimensions;
+  width: $close-button-dimensions;
+
+  &::before {
+    top: -2px;
+    right: 13px;
+    font-size: 25pt;
+  }
 }
+
 
 /* Styling for the modal title */
 .modal-title {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* Styling for the modal content */
 .modal-content {
-  margin-bottom: 20px;
+  font-size: 15pt;
 }
 
 /* Styling for the modal actions */
 .modal-actions {
   display: flex;
-  justify-content: center; /* Aligns items horizontally in the center */
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 50px;
+
+  width: 300px;
   gap: 10px;
-  margin-top: 20px;  /* Adds a bit of space above the buttons */
+
+  & button {
+
+    height: 40px;
+
+    width: 110px;
+
+    border-radius: 20px;
+
+    border: 1px solid $grey-2;
+
+    background-color: rgba($grey-3, 0.05);
+
+    font-size: 12pt;
+
+    &:first-child{
+      // CONFIRM
+      &:hover {
+        color: white;
+        background-color: rgba($milieu-red, 0.7);
+        border: 1px solid rgba($milieu-red, 0.1);
+      }
+      
+      margin-right: 40px;
+    }
+    &:last-child{
+      // CANCEL
+
+      &:hover {
+        color: white;
+        background-color: rgba($milieu-blue, 0.7);
+        border: 1px solid rgba($milieu-blue, 0.1);
+      }
+    }
+  }
 }

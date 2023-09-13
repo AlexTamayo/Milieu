@@ -6,7 +6,7 @@ function Modal({ isOpen, title, content, actions, onClose }) {
 
   return (
     <div className="modal">
-      <button className="modal-close-btn" onClick={onClose}>&times;</button>
+      <div className="modal__circle-close-btn" onClick={onClose}>{/* &times; */}</div>
       {title && <h2 className="modal-title">{title}</h2>}
       <div className="modal-content">{content}</div>
       {actions && <div className="modal-actions">{actions}</div>}
