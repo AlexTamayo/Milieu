@@ -301,7 +301,7 @@ module.exports = {
         email: 'TinyToesDayCare@example.com',
         website: 'https://www.TinyToesDaycare.com',
         ownerId: 15,
-        businessCategoryId: 1,
+        businessCategoryId: 7,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
