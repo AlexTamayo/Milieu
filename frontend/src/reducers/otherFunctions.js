@@ -22,6 +22,17 @@ export const otherFunctions = (dispatch, state) => {
     }
   };
 
+  /* SELECTED MAP MARKER */
+
+  const setSelectedMarkerIndex = (index) => {
+    dispatch({ type: actionTypes.SET_MARKER_INDEX, payload: index });
+  };
+
+  const clearSelectedMarkerIndex = () => {
+    dispatch({ type: actionTypes.RESET_MARKER_INDEX });
+  };
+
+
   /* LOADING */
 
   const setLoading = () => {
@@ -75,5 +86,7 @@ export const otherFunctions = (dispatch, state) => {
     handleOnSelect,
     handleOnFocus,
     formatResult,
+    setSelectedMarkerIndex,
+    clearSelectedMarkerIndex,
   };
 };

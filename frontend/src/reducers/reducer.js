@@ -144,6 +144,12 @@ export const reducer = (state, action) => {
         ),
       };
 
+    case actionTypes.SET_MARKER_INDEX:
+      return { ...state, selectedMarkerIndex: action.payload };
+
+    case actionTypes.RESET_MARKER_INDEX:
+      return { ...state, selectedMarkerIndex: null };
+
     default:
       return state;
   }

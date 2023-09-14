@@ -9,8 +9,9 @@ import {
 function VenueModalEvent({ currentEvent }) {
 
   const {
+    handleCopy,
     closeVenueModal,
-    handleCopy
+    clearSelectedMarkerIndex,
   } = useContext(DataContext);
 
   const openGoogleMaps = () => {
@@ -102,7 +103,10 @@ function VenueModalEvent({ currentEvent }) {
       {/* CLOSE BUTTON */}
       <div
         className="venue-modal__circle-close-btn"
-        onClick={closeVenueModal}
+        onClick={() => {
+          closeVenueModal();
+          clearSelectedMarkerIndex();
+        }}
       >
         {/* &times; */}
       </div>

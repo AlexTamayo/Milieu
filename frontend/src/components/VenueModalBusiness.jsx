@@ -10,9 +10,11 @@ import {
 } from '../utils/helpers';
 
 function VenueModalBusiness({ currentBusiness }) {
+
   const {
-    closeVenueModal,
     handleCopy,
+    closeVenueModal,
+    clearSelectedMarkerIndex,
   } = useContext(DataContext);
 
   const addressFormatterSafe = (location) => {
@@ -145,7 +147,12 @@ function VenueModalBusiness({ currentBusiness }) {
       </div>
 
       {/* CLOSE BUTTON */}
-      <div className="venue-modal__circle-close-btn" onClick={closeVenueModal}>
+      <div className="venue-modal__circle-close-btn"
+             onClick={() => {
+              closeVenueModal();
+              clearSelectedMarkerIndex();
+            }}
+      >
         {/* &times; */}
       </div>
     </div>

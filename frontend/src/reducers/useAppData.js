@@ -34,6 +34,7 @@ export default function useApplication() {
     selectedVenueType: null,
     selectedVenueId: null,
     selectedSearchResult: '',
+    selectedMarkerIndex: null,
   });
 
   useEffect(() => {

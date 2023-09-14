@@ -19,16 +19,19 @@ const GoogleMapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [isGoogleMapLoaded, setIsGoogleMapLoaded] = useState(false);
   const [center, setCenter] = useState({ lat: 49.290527, lng: -123.108300 });
-  const [selectedMarkerIndex, setSelectedMarkerIndex] = useState(null);
 
-
-  const { state, setSelectedVenue } = useContext(DataContext);
+  const {
+    state,
+    setSelectedVenue,
+    setSelectedMarkerIndex,
+  } = useContext(DataContext);
 
   const {
     eventData,
     businessData,
     selectedFilter,
-    selectedSearchResult
+    selectedSearchResult,
+    selectedMarkerIndex
   } = state;
 
   const mapRef = useRef(null);
@@ -184,9 +187,9 @@ const GoogleMapComponent = () => {
                       : marker.icon.url
                   }}
                   onClick={() => {
-                    console.log(marker.metadata);
+                    // console.log(marker.metadata);
                     setSelectedVenue(marker.metadata.topic, marker.metadata.id);
-                    setSelectedMarkerIndex(index);  // Update the selected marker index
+                    setSelectedMarkerIndex(index);
                   }}
                   clusterer={clusterer}
                 />

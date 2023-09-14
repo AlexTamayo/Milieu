@@ -11,6 +11,7 @@ function VenueModal() {
   const { 
     state,
     closeVenueModal,
+    clearSelectedMarkerIndex,
   } = useContext(DataContext);
 
   const {
@@ -47,7 +48,8 @@ function VenueModal() {
         const threshold = 3;
         if (Math.abs(startX - endX) <= threshold && Math.abs(startY - endY) <= threshold) {
             if (venueModalRef.current && !venueModalRef.current.contains(event.target)) {
-                closeVenueModal();
+              clearSelectedMarkerIndex();
+              closeVenueModal();
             }
         }
     }
