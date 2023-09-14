@@ -190,8 +190,10 @@ function UserAddVenue() {
         }
 
         formData.businessLocation = {
-          longitude: formData.longitude || userLocation.longitude,
-          latitude: formData.latitude || userLocation.latitude,
+          // longitude: formData.longitude || userLocation.longitude,
+          // latitude: formData.latitude || userLocation.latitude,
+          longitude: -123.097307,
+          latitude: 49.280630,
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
@@ -243,8 +245,10 @@ function UserAddVenue() {
           updatedAt: new Date(),
         };
         formData.eventLocation = {
-          longitude: formData.longitude || userLocation.longitude,
-          latitude: formData.latitude || userLocation.latitude,
+          // longitude: formData.longitude || userLocation.longitude,
+          // latitude: formData.latitude || userLocation.latitude,
+          longitude: -123.093837,
+          latitude: 49.276768,
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
@@ -267,8 +271,15 @@ function UserAddVenue() {
       console.error(`There was an error submitting the ${userAddVenueType}:`);
     }
   };
+useEffect(() => {
+    console.log('business');
+    console.log(businessData);
+    console.log('user');
+    console.log(currentUser);
+    console.log('event');
+    console.log(eventData);
+  }, [businessData],[eventData] );
 
-  // console.log(`userAddVenueType ` + userAddVenueType);  // <---------------------| This is the line printing
   if (!isUserAddVenueOpen) return null;
 
 
@@ -535,7 +546,7 @@ function UserAddVenue() {
                 />
               </div>
 
-              
+
               <button
                 className='submit-btn event'
                 onClick={handleSubmit}>

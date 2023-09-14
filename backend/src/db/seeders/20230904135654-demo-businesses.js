@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -35,16 +35,16 @@ module.exports = {
       },
       {
         // 3
-        name: 'Bella Italiano',
-        description: `Experience authentic Italian cuisine in the heart of the city. Fresh pasta, wood-fired pizzas, and classic desserts.`,
+        name: 'WhizKid Home Tutor',
+        description: `WhizKid Home Tutor is your go-to service for personalized, one-on-one tutoring right in the comfort of your home. I am a experienced tutor specialized in a wide range of subjects, from mathematics to science, and languages. I cater to all age groups and educational levels, focusing on enhancing understanding and improving academic performance. My pricing is flexible, with packages starting at $30 per hour, ensuring quality education doesn't have to be expensive. Senior students and group tutoring discounts are available.`,
         status: 'Active',
         rating: 4.6,
         reviewCount: 250,
         phoneNumber: '604-888-7777',
-        email: 'bella@example.com',
-        website: 'https://www.bellaitaliano.com',
+        email: 'info@WhizKidHomeTutors.com',
+        website: 'www.WhizKidHomeTutors.com',
         ownerId: 1,
-        businessCategoryId: 1,
+        businessCategoryId: 39,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -65,14 +65,14 @@ module.exports = {
       },
       {
         // 5
-        name: 'The Pizzeria',
-        description: `Delicious hand-tossed pizzas with a variety of toppings. From classic Margherita to spicy pepperoni.`,
+        name: 'A`mano Home Made Pasta',
+        description: `At A'mano, we bring the rich tradition of home-made pasta right to your doorstep. Our passion is to create the freshest, most flavorful pasta using only the finest ingredients. Our menu offers a range of handcrafted pasta varieties, from classic spaghetti to gourmet stuffed pasta. We also offer special prices for bulk orders and events. Enjoy the taste of authentic, hand-made pasta, with prices starting at just $15 for a hearty portion that serves 2-3 people.`,
         status: 'Active',
-        rating: 4.1,
+        rating: 4.9,
         reviewCount: 97,
         phoneNumber: '778-111-2222',
-        email: 'pizzeria@example.com',
-        website: 'https://www.thepizzeria.com',
+        email: 'orders@A`mano.com',
+        website: 'www.A`mano.com',
         ownerId: 1,
         businessCategoryId: 1,
         createdAt: new Date(),
@@ -95,16 +95,16 @@ module.exports = {
       },
       {
         // 7
-        name: 'Ocean Seafood Grill',
-        description: `Dive into a sea of flavors with our freshly caught seafood. Grilled, fried, or steamed, it's a treat.`,
+        name: 'Pawperfect Pet Sitting',
+        description: `Pawfect Pet Sitting is your friendly neighborhood pet care service, providing loving and attentive care for your furry friends when you can't be there. I'm super dedicated to ensuring your pets receive the highest level of comfort and attention, offering services ranging from daily walks to overnight stays.`,
         status: 'Active',
-        rating: 4.5,
+        rating: 4.7,
         reviewCount: 134,
-        phoneNumber: '587-666-5555',
-        email: 'oceangrill@example.com',
-        website: 'https://www.oceangrill.com',
+        phoneNumber: '778-123-4567',
+        email: 'info@PawfectPetSitting.com',
+        website: 'www.PawfectPetSitting.com',
         ownerId: 5,
-        businessCategoryId: 1,
+        businessCategoryId: 21,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -232,16 +232,16 @@ module.exports = {
       },
       {
         // 16
-        name: `Diablo Caliente`,
-        description: `Diablo Caliente is a sizzling hotspot for Mexican cuisine enthusiasts, offering a fiery and flavorful journey through the vibrant world of Tex-Mex flavors. With a menu packed full of spicy delights and a lively atmosphere, Diablo Caliente is the perfect destination for those seeking an unforgettable Mexican dining experience.`,
+        name: `SeniorSavvy Tax Services`,
+        description: "SeniorSavvy Tax Services specializes in providing straightforward and affordable tax preparation solutions for seniors. With years of experience, I am dedicated to helping you navigate the tax season with ease. Our services include personal tax consultations, efficient preparation, and timely filing of tax returns. We pride ourselves on our transparent pricing: Simple tax filings for seniors start at just $50, offering peace of mind without breaking the bank.",
         status: 'Active',
-        rating: 3.5,
+        rating: 4.8,
         reviewCount: 29,
         phoneNumber: '604-664-0110',
-        email: 'diablocaliente@example.com',
-        website: 'https://www.DiabloCaliente.com',
+        email: 'info@SeniorSavvyTaxServices.com',
+        website: 'www.SeniorSavvyTaxServices.com"',
         ownerId: 11,
-        businessCategoryId: 1,
+        businessCategoryId: 35,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -276,7 +276,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        // 
+        //
         name: `Snowmageddon Snow-Removal`,
         description: `Snowmageddon Snow-Removal is your premier winter weather solution, dedicated to swiftly and efficiently clearing snow and ice to restore accessibility and safety. Our experienced team and top-of-the-line equipment ensure that homes, businesses, and communities can weather the harshest storms with peace of mind.`,
         status: 'Active',
@@ -291,7 +291,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        // 
+        //
         name: `Tiny Toes Daycare`,
         description: `Tiny Toes Daycare is a nurturing and educational haven for young children, committed to providing a safe and stimulating environment for their growth and development. Our dedicated team of caregivers and teachers prioritize the well-being and early education of each child, fostering a sense of curiosity, creativity, and social interaction in a loving and caring atmosphere.`,
         status: 'Active',
@@ -304,9 +304,9 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
       {
-        // 
+        //
         name: `Hairitage Beauty Salon`,
         description: `Hairitage Beauty Salon is a premium hair styling and beauty destination that celebrates the traditions and trends of hair care. Our expert stylists blend their passion for timeless elegance with the latest techniques to create personalized, head-turning looks for our clients.`,
         status: 'Active',
@@ -319,9 +319,9 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
       {
-        // 
+        //
         name: `Purrfectly Groomed`,
         description: `Purrfectly Groomed is a top-tier cat grooming salon dedicated to the well-being and beauty of your feline companions. Our experienced and caring groomers provide a stress-free, spa-like experience for cats, offering a range of grooming services tailored to keep your cats happy, healthy, and looking their best.`,
         status: 'Active',
@@ -334,9 +334,9 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
       {
-        // 
+        //
         name: `Abiding Abode Books`,
         description: `Abiding Abode Books is a cozy and inviting bookstore nestled in the heart of the community, offering a curated selection of literary treasures for all book lovers. Our warm and welcoming space is a sanctuary for readers, where you can explore a diverse range of titles, attend book clubs, and immerse yourself in the joy of storytelling.`,
         status: 'Active',
@@ -349,9 +349,9 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
       {
-        // 
+        //
         name: `Pixel Perfect Photography`,
         description: `Pixel Perfect Photography is dedicated to capturing life's most cherished moments with precision and artistry. Our team of skilled photographers uses state-of-the-art equipment and a keen eye for detail to transform your special occasions into timeless, beautifully crafted memories. Whether it's a wedding, a family portrait, or a corporate event, we are committed to delivering stunning images that tell your unique story and preserve it for generations to come.`,
         status: 'Active',
@@ -364,9 +364,9 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
       {
-        // 
+        //
         name: `Zenith Electric Group`,
         description: `Zenith Electric Group is a leading electrical contracting company committed to delivering cutting-edge solutions for both residential and commercial clients. With a team of highly skilled electricians and a reputation for reliability, we provide top-quality electrical installations, repairs, and maintenance services to ensure our customers' peace of mind and safety.`,
         status: 'Active',
@@ -379,7 +379,7 @@ module.exports = {
         businessCategoryId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },  
+      },
 
     ]);
 

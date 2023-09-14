@@ -57,11 +57,11 @@ module.exports = {
       { name: 'Community 5K Run', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Local Photography Exhibition', createdAt: new Date(), updatedAt: new Date() },
     ];
-    
+
     // You can continue adding more community events to the list above
-    
-    
-    
+
+
+
 
     // Insert the event categories into the database
     await queryInterface.bulkInsert('EventCategories', eventCategoriesData, {});
