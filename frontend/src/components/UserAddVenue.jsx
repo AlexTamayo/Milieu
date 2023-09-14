@@ -45,8 +45,6 @@ function UserAddVenue() {
   // const lonMin = -122.96169874415739;  
   // const lonMax = -123.01427145140427;
 
-
-
   //////////////////////////////////////////goelocation
   const [userLocation, setUserLocation] = useState(null);
   const [fullAddress, setFullAddress] = useState('');

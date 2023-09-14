@@ -180,8 +180,8 @@ const GoogleMapComponent = () => {
                   icon={{
                     ...marker.icon,
                     url: index === selectedMarkerIndex
-      ? 'http://localhost:3000/logo.png'
-      : marker.icon.url
+                      ? 'http://localhost:3000/logo.png'
+                      : marker.icon.url
                   }}
                   onClick={() => {
                     console.log(marker.metadata);
