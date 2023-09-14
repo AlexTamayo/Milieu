@@ -1,6 +1,7 @@
 import { actionTypes } from './actionTypes';
 
 export const modalFunctions = (dispatch, state) => {
+  
   /* TOGGLE ONLY MODAL */
   /* This function closes all the other modal that are opened when a new modal is opened */
   const toggleOnlyModal = (modalName) => {

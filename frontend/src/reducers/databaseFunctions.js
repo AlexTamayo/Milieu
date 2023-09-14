@@ -37,7 +37,7 @@ const createABusiness = async (data) => {
 const createAnEvent = async (data) => {
   try {
     const response = await createEvent(data);
-    if (response && response.status === 200) {
+    if (response && response.status === 200 || response.status === 201) {
       dispatch({
         type: actionTypes.SET_EVENT_DATA,
         payload: [...state.eventData, response.data]

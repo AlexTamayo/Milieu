@@ -1,5 +1,6 @@
 import '../styles/UserVenueManager.scss';
 import { useContext } from 'react';
+import { useEffect } from 'react';
 import { DataContext } from '../context/MainContext';
 import { useAuth } from '../context/AuthContext';
 import { useConfirmationModal } from '../hooks/useConfirmationModal'
@@ -14,14 +15,34 @@ function UserVenueManager() {
     deleteEntityById,
     openUserEditVenueModal,
     setSelectedVenue,
+    closeVenueModal,
   } = useContext(DataContext);
 
-  const { isVenueManagerModalOpen } = state;
+  const {
+    isVenueManagerModalOpen,
+    businessData,
+    eventData,
+  } = state;
   const { currentUser, removeEntityFromCurrentUser } = useAuth();
 
+  /* DOING THIS HERE TO SAVE TIME, BUT IDEALLY THIS SHOULD BE IN THE REDUCER */
+
+  let ownedByCurrentUserBusinesses = [];
+  let ownedByCurrentUserEvents = [];
+
+  
+  if(currentUser) {
+
+    ownedByCurrentUserBusinesses = businessData.filter((business) => business.ownerId === currentUser.id);
+    ownedByCurrentUserEvents = eventData.filter((event) => event.ownerId === currentUser.id);
+  }
+
+
+
   const handleDelete = (id, type) => {
+    closeVenueModal();
     deleteEntityById(id, type);
-    removeEntityFromCurrentUser(id, type);
+    // removeEntityFromCurrentUser(id, type);
   };
 
   /* CONFIRMATION MODAL */
@@ -89,12 +110,14 @@ function UserVenueManager() {
 
         <h3 className="section-title business">Business Section</h3>
         <div className="section business">
-          {renderVenueList(currentUser.businesses, 'business')}
+          {/* {renderVenueList(currentUser.businesses, 'business')} */}
+          {renderVenueList(ownedByCurrentUserBusinesses, 'business')}
         </div>
 
         <h3 className="section-title event">Event Section</h3>
         <div className="section event">
-          {renderVenueList(currentUser.events, 'event')}
+          {/* {renderVenueList(currentUser.events, 'event')} */}
+          {renderVenueList(ownedByCurrentUserEvents, 'event')}
         </div>
       </div>
       <Modal 

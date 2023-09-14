@@ -256,7 +256,7 @@ function UserAddVenue() {
         // Submit the formData to the endpoint for adding an event
         createAnEvent(formData)
           .then(() => {
-            addEntityToCurrentUser("event", formData);
+            // addEntityToCurrentUser("event", formData);
           });
 
         ///////////WE NEED TO NOW ADD A MARKER HERE
