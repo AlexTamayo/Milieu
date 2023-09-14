@@ -74,15 +74,13 @@ function UserVenueManager() {
             }} className={`venue-name ${type}`}>
             {type === 'business' ? venue.name : venue.title}
           </span>
-
           {/* <button className="edit-btn" onClick={() => openUserEditVenueModal(venue.id, type)}>Edit</button> */}
-
           <button className={`delete-btn ${type}`} onClick={() => openConfirmationModal(venue.id, type)}>Delete</button>
         </div>
       ));
     } else {
       return (
-        <div className="empty-content" onClick={openUserAddVenue}>
+        <div className={`empty-content ${type}`} onClick={openUserAddVenue}>
           {`Add your first ${type}`}
         </div>
       );

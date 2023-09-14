@@ -177,6 +177,11 @@ const GoogleMapComponent = () => {
                 }
               })
               .map((marker, index) => (
+                // Create global state to be used here of an object
+                // contaning the association between index and its
+                // respective venue. That way the marker can markerd
+                // as selected when the venue window is opened from
+                // other places
                 <Marker
                   key={index}
                   position={marker.position}
@@ -188,6 +193,7 @@ const GoogleMapComponent = () => {
                   }}
                   onClick={() => {
                     // console.log(marker.metadata);
+                    // console.log('index', index);
                     setSelectedVenue(marker.metadata.topic, marker.metadata.id);
                     setSelectedMarkerIndex(index);
                   }}

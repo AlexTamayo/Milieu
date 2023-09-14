@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import {
+  React,
+  useState,
+  useContext,
+  useEffect
+} from 'react';
+
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
@@ -6,6 +12,7 @@ import { randomInRange } from '../utils/helpers';
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
+
   const {
     state,
     closeUserAddVenue,
@@ -23,11 +30,11 @@ function UserAddVenue() {
 
   const { currentUser, addEntityToCurrentUser } = useAuth();
 
-  const [userAddVenueType, setUserAddVenueType] = useState('business');
+  const [formData, setFormData] = useState({});
+  const [eventCategoryId, setEventCategoryId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [businessCategoryId, setBusinessCategoryId] = useState(null);
-  const [eventCategoryId, setEventCategoryId] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [userAddVenueType, setUserAddVenueType] = useState('business');
 
 
   /* DT VANCOUVER */
@@ -294,14 +301,15 @@ function UserAddVenue() {
       console.error(`There was an error submitting the ${userAddVenueType}:`);
     }
   };
-useEffect(() => {
-    console.log('business');
-    console.log(businessData);
-    console.log('user');
-    console.log(currentUser);
-    console.log('event');
-    console.log(eventData);
-  }, [businessData],[eventData] );
+  
+// useEffect(() => {
+//     console.log('business');
+//     console.log(businessData);
+//     console.log('user');
+//     console.log(currentUser);
+//     console.log('event');
+//     console.log(eventData);
+//   }, [businessData],[eventData] );
 
   if (!isUserAddVenueOpen) return null;
 
