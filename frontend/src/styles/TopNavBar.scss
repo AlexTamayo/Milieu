@@ -54,7 +54,6 @@
   img {
     $image-dimensions: 40px;
 
-    // transform: scale(1.2);
     transform: translate( 0, 2px) scale(1.1);
     height: 40px;
     min-width: $image-dimensions;
@@ -62,6 +61,8 @@
 
     min-height: $image-dimensions;
     max-height: $image-dimensions;
+
+    object-fit: cover;
   }
 
 }

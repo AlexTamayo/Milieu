@@ -164,6 +164,8 @@
 
     cursor: pointer;
 
+    outline-color: $outline-blue;
+
     &::before {
       content: "Log in";
       position: relative;
@@ -192,6 +194,8 @@
     a {
       color: $milieu-pink;
       text-decoration: none;
+
+      outline-color: $outline-blue;
   
       &:hover {
         // color: $milieu-blue;
@@ -297,6 +301,8 @@
 
     cursor: pointer;
 
+    outline-color: $outline-blue;
+
     &::before {
       content: "Register";
       position: relative;
@@ -323,9 +329,13 @@
 
     font-size: 11pt;
 
+    
+
     a {
       color: $milieu-cyan;
       text-decoration: none;
+
+      outline-color: $outline-blue;
   
       &:hover {
         // color: $milieu-blue;
