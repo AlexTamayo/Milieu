@@ -31,35 +31,35 @@ function VenueModal() {
   const currentEvent = eventData.find(event => event.id === selectedVenueId);
 
   /* Functions that detects if it's just a simple click or if it's a click and drag and closes modal if it's a simple click */
-  // useEffect(() => {
-  //   let startX = 0;
-  //   let startY = 0;
+  useEffect(() => {
+    let startX = 0;
+    let startY = 0;
 
-  //   const handleMouseDown = (event) => {
-  //       startX = event.clientX;
-  //       startY = event.clientY;
-  //   }
+    const handleMouseDown = (event) => {
+        startX = event.clientX;
+        startY = event.clientY;
+    }
 
-  //   const handleMouseUp = (event) => {
-  //       const endX = event.clientX;
-  //       const endY = event.clientY;
+    const handleMouseUp = (event) => {
+        const endX = event.clientX;
+        const endY = event.clientY;
 
-  //       const threshold = 3;
-  //       if (Math.abs(startX - endX) <= threshold && Math.abs(startY - endY) <= threshold) {
-  //           if (venueModalRef.current && !venueModalRef.current.contains(event.target)) {
-  //               closeVenueModal();
-  //           }
-  //       }
-  //   }
+        const threshold = 3;
+        if (Math.abs(startX - endX) <= threshold && Math.abs(startY - endY) <= threshold) {
+            if (venueModalRef.current && !venueModalRef.current.contains(event.target)) {
+                closeVenueModal();
+            }
+        }
+    }
 
-  //   document.addEventListener('mousedown', handleMouseDown);
-  //   document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
 
-  //   return () => {
-  //       document.removeEventListener('mousedown', handleMouseDown);
-  //       document.removeEventListener('mouseup', handleMouseUp);
-  //   }
-  // }, []);
+    return () => {
+        document.removeEventListener('mousedown', handleMouseDown);
+        document.removeEventListener('mouseup', handleMouseUp);
+    }
+  }, []);
 
 
   if ( isUserEditVenueModalOpen || isVenueManagerModalOpen || isUserAddVenueOpen ) return null

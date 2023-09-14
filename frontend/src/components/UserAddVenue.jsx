@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import Select from 'react-select';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../context/MainContext';
+import { randomInRange } from '../utils/helpers';
 import '../styles/UserAddVenue.scss';
 
 function UserAddVenue() {
@@ -28,6 +28,24 @@ function UserAddVenue() {
   const [businessCategoryId, setBusinessCategoryId] = useState(null);
   const [eventCategoryId, setEventCategoryId] = useState(null);
   const [formData, setFormData] = useState({});
+
+
+  /* DT VANCOUVER */
+  const latMin = 49.27465912343192;
+  const latMax = 49.28790114948432;
+
+  const lonMin = -123.11361865120182;  
+  const lonMax = -123.13370243578393;
+
+
+  // /* SOUTH BURNABY  */
+  // const latMin = 49.20361489600479;
+  // const latMax = 49.23302965677253;
+
+  // const lonMin = -122.96169874415739;  
+  // const lonMax = -123.01427145140427;
+
+
 
   //////////////////////////////////////////goelocation
   const [userLocation, setUserLocation] = useState(null);
@@ -192,8 +210,10 @@ function UserAddVenue() {
         formData.businessLocation = {
           // longitude: formData.longitude || userLocation.longitude,
           // latitude: formData.latitude || userLocation.latitude,
-          longitude: -123.097307,
-          latitude: 49.280630,
+          // longitude: -123.097307,
+          // latitude: 49.280630,
+          longitude: randomInRange(lonMin, lonMax),
+          latitude: randomInRange(latMin, latMax),
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
@@ -202,6 +222,9 @@ function UserAddVenue() {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
+
+
+        
 
         // const formData = transformStructure(formData);
         const submitFormData = {
@@ -247,8 +270,10 @@ function UserAddVenue() {
         formData.eventLocation = {
           // longitude: formData.longitude || userLocation.longitude,
           // latitude: formData.latitude || userLocation.latitude,
-          longitude: -123.093837,
-          latitude: 49.276768,
+          // longitude: -123.093837,
+          // latitude: 49.276768,
+          longitude: randomInRange(lonMin, lonMax),
+          latitude: randomInRange(latMin, latMax),
           streetAddress: formData.streetAddress,
           city: formData.city,
           region: formData.region,
