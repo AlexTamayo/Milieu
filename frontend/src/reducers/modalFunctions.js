@@ -72,6 +72,10 @@ export const modalFunctions = (dispatch, state) => {
     dispatch({ type: actionTypes.CLOSE_USER_ADD_VENUE });
   };
 
+  const setUserAddVenueType = (type) => {
+    dispatch({ type: actionTypes.SET_USER_ADD_VENUE_TYPE, payload: type });
+  };
+
   /* LOG-IN/REGISTRATION MODAL */
   const openLoginModal = (type) => {
     toggleOnlyModal("isLoginRegModalOpen");
@@ -130,6 +134,7 @@ export const modalFunctions = (dispatch, state) => {
     closeVenueModal,
     openUserAddVenue,
     closeUserAddVenue,
+    setUserAddVenueType,
     openLoginModal,
     closeLoginModal,
     openVenueManagerModal,

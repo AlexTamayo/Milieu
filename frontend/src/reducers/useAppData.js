@@ -26,6 +26,7 @@ export default function useApplication() {
     isVenueManagerModalOpen: false,
     isUserEditVenueModalOpen: false,
     isUserAddVenueOpen: false,
+    userAddVenueType: 'business',
     
     isCopied: false,
     selectedFilter: "",

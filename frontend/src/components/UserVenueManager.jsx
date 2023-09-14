@@ -10,20 +10,25 @@ function UserVenueManager() {
 
   const {
     state,
-    closeVenueManagerModal,
+    closeVenueModal,
     openUserAddVenue,
     deleteEntityById,
-    openUserEditVenueModal,
     setSelectedVenue,
-    closeVenueModal,
+    setUserAddVenueType,
+    closeVenueManagerModal,
+    openUserEditVenueModal,
   } = useContext(DataContext);
 
   const {
-    isVenueManagerModalOpen,
-    businessData,
     eventData,
+    businessData,
+    isVenueManagerModalOpen,
   } = state;
-  const { currentUser, removeEntityFromCurrentUser } = useAuth();
+
+  const {
+    currentUser,
+    removeEntityFromCurrentUser
+  } = useAuth();
 
   /* DOING THIS HERE TO SAVE TIME, BUT IDEALLY THIS SHOULD BE IN THE REDUCER */
 
@@ -80,7 +85,12 @@ function UserVenueManager() {
       ));
     } else {
       return (
-        <div className={`empty-content ${type}`} onClick={openUserAddVenue}>
+        <div className={`empty-content ${type}`}
+        onClick={() => {
+          setUserAddVenueType(type);
+          openUserAddVenue();
+        }}
+          >
           {`Add your first ${type}`}
         </div>
       );

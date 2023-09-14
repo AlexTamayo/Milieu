@@ -95,6 +95,9 @@ export const reducer = (state, action) => {
 
     case actionTypes.CLOSE_USER_ADD_VENUE:
       return { ...state, isUserAddVenueOpen: false };
+      
+    case actionTypes.SET_USER_ADD_VENUE_TYPE:
+      return { ...state, userAddVenueType: action.payload };
 
     case actionTypes.SET_COPIED:
       return { ...state, isCopied: action.payload };

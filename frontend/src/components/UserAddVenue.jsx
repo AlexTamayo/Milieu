@@ -15,17 +15,19 @@ function UserAddVenue() {
 
   const {
     state,
-    closeUserAddVenue,
+    createAnEvent,
     createABusiness,
-    createAnEvent
+    closeUserAddVenue,
+    setUserAddVenueType,
   } = useContext(DataContext);
 
   const {
-    isUserAddVenueOpen,
-    eventCategoryData,
-    businessCategoryData,
     eventData,
-    businessData
+    businessData,
+    userAddVenueType,
+    eventCategoryData,
+    isUserAddVenueOpen,
+    businessCategoryData,
   } = state;
 
   const { currentUser, addEntityToCurrentUser } = useAuth();
@@ -34,7 +36,7 @@ function UserAddVenue() {
   const [eventCategoryId, setEventCategoryId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [businessCategoryId, setBusinessCategoryId] = useState(null);
-  const [userAddVenueType, setUserAddVenueType] = useState('business');
+  // const [userAddVenueType, setUserAddVenueType] = useState('business');
 
 
   /* DT VANCOUVER */
