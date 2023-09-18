@@ -37,12 +37,14 @@ https://github.com/AlexTamayo/Milieu/assets/128196275/05926bfe-d823-409a-b41b-c5
 1. Navigate to the `frontend` folder.
 2. Run `npm install` to install all necessary dependencies.
 3. Obtain a Google Map API key and set up your `.env` file with the following configurations:
-4. 
+
+
 REACT_APP_MAPSKEY='your Google Map API key'
 REACT_APP_API_BASE_URL=http://localhost:3001/api/
 REACT_APP_API_KEY='your geoapify API key'
 
-5. Start the client with `npm start`. The frontend client will run on port 3000 and connect to the database server, rendering the Milieu app in your browser.
+
+4. Start the client with `npm start`. The frontend client will run on port 3000 and connect to the database server, rendering the Milieu app in your browser.
 
 ## Backend Setup 🖥️
 
@@ -59,6 +61,7 @@ DB_USER=development
 DB_PASS=development
 DB_NAME=milieu
 DB_HOST=localhost
+
 
 5. Seed the database by running `npm run db:reset` in the `backend` directory.
 6. Start the server with `npm start`. The backend will run on port 3001.
