@@ -1,5 +1,4 @@
-# Milieu ![logo](https://github.com/AlexTamayo/Milieu/assets/128196275/c6cccf64-1760-4eab-b26c-27f5d000e37e)
-
+# Milieu 
 Milieu is a comprehensive community interaction app that serves as a bridge between small businesses, sole proprietors, and community members. It offers an intuitive and interactive map tool to help users discover and engage with the businesses and events around them. Built with a robust Sequelize backend and a responsive React frontend, it promises a seamless user experience.
 
 ## Table of Contents
