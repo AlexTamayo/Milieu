@@ -9,7 +9,7 @@ module.exports = {
       { name: 'Farmers Market', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Local Art Exhibition', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Neighborhood Cleanup', createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Charity Run/Walk', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Hiking', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Food Drive', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Block Party', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Craft Fair', createdAt: new Date(), updatedAt: new Date() },

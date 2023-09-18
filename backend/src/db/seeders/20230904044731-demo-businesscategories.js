@@ -55,7 +55,7 @@ module.exports = {
       // 25
       { name: 'Baby sitter', createdAt: new Date(), updatedAt: new Date() },
       // 26
-      { name: 'Tailoring', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Personal Trainer', createdAt: new Date(), updatedAt: new Date() },
       // 27
       { name: 'Photography', createdAt: new Date(), updatedAt: new Date() },
       // 28
